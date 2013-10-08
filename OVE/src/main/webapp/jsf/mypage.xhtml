@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/template.xhtml">
+            <ui:define name="content"> 
+                <div id="container" style="overflow:hidden">  
+                    <div id="inner" style="overflow:">
+                <div style="float:left">
+                    <h:form prependId="false">  
+                    <p:growl id="msgs" />  
+                     <p:panel header="About Me" style="width: 250px">  
+                       <h:panelGrid columns="2" columnClasses="column" cellpadding="5">  
+                        <h:outputText value="Name: " />  
+                           <p:inplace id="name">  
+                               <p:inputText value="Gustav Dahl" disabled="true" />  
+                     </p:inplace>
+                         <h:outputText value="Username: " />  
+                           <p:inplace id="userName">  
+                               <p:inputText value="#{loggingBean.username} "/>  
+                     </p:inplace>
+                        <h:outputText value="email" />
+                        <p:inplace id="email">
+                            <p:inputText value="Gustav@ove.se" />
+                        </p:inplace>
+                        <h:outputText value="pnumber" />
+                        <p:inplace id="pnumber">
+                            <p:inputText value="9201131811" />
+                        </p:inplace>
+                         <h:outputText value="age" />
+                        <p:inplace id="age">
+                            <p:inputText value="21" />
+                        </p:inplace>
+                  </h:panelGrid>  
+                </p:panel>  
+            </h:form>
+                </div>
+                        <div style="float:left;margin-left: 40em ">
+                       
+                            <h1>Profil Pic</h1>
+                            <h:graphicImage url="#{resource['img:tut.jpg']}" />   
+                            <h:form enctype="multipart/form-data">  
+  
+                                <p:messages showDetail="true"/>  
+  
+                                <p:fileUpload value="#{fileUploadController.file}" mode="simple"/>  
+  
+                                 <p:commandButton value="Submit" ajax="false"  
+                                        actionListener="#{fileUploadController.upload}"/>  
+  
+                            </h:form>  
+                        
+
+
+                </div>
+                    </div>
+                </div>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

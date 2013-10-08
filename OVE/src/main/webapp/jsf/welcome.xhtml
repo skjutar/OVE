@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+     <f:view contentType="text/html">
+        <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="normalize.css"  />
+        <h:outputStylesheet library="css" name="layout.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <title>Ove-project</title>
+        </h:head>
+        <h:body>
+            <header>
+                
+            </header>
+                
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="200"  resizable="false" closable="false" collapsible="false">
+                    <div  style="margin-left: 2em" > 
+
+                        <h3>Chalmers Study Project</h3>
+
+                </div>
+                </p:layoutUnit>
+                
+                <p:layoutUnit position="center" >
+                        
+                             <div align="center">
+                                 <h1>Welcome!</h1>
+                                 <h1>This is a bla bla bla bla</h1>
+                                 <h:graphicImage url="#{resource['img:tut.jpg']}" />                      
+                            </div>
+    
+ 
+                <h:button id="hiddenButton" outcome="home"  style="display:none" class="button"/>
+                </p:layoutUnit>
+                <p:layoutUnit position="south" size="20" resizable="false" closable="false" collapsible="false">
+                    This is a footer
+                </p:layoutUnit>
+                
+                
+                
+                <p:layoutUnit position="east" size="200" resizable="false" closable="false" collapsible="false">
+                    <h:form id="login"> 
+                        <h:outputLink id="loginLink" value="javascript:void(0)" onclick="dlg.show()" title="login" >   
+                          <p:commandButton value="Login"  type="button" />  
+                        </h:outputLink>  
+                        
+                        
+                        <p:growl id="growl" showDetail="true" life="3000" />  
+  
+                         <p:dialog  id="dialog" header="Login" widgetVar="dlg" resizable="false">  
+  
+                            <h:panelGrid columns="2"   cellpadding="5" >  
+                                <h:outputLabel for="username" value="Username:" />  
+                                 <p:inputText value="#{loggingBean.username}"   
+                                id="username" required="true" label="username" />             
+                                <h:outputLabel for="password" value="Password:"/>  
+                               <h:inputSecret value="#{loggingBean.password}"   
+                               id="password" required="true" label="password" />  
+              
+                     <f:facet name="footer">  
+                          <p:commandButton id="loginButton" value="Login" update="growl"   
+                          actionListener="#{loggingBean.login}"   
+                          accesskey="" oncomplete="handleLoginRequest(xhr, status, args)"/>                 
+                     </f:facet>  
+                               
+        </h:panelGrid>           
+    </p:dialog>  
+</h:form>
+
+                    <h:form id="apply"> 
+                        <h:outputLink id="applyLink" value="javascript:void(0)" onclick="applydlg.show()" title="login" >   
+                          <p:commandButton value="Apply"  type="button" />  
+                        </h:outputLink>  
+                        
+                        
+                        <p:growl id="growl" showDetail="true" life="3000" />  
+  
+                         <p:dialog  id="dialog" header="Apply" widgetVar="applydlg" resizable="false">  
+  
+                            <h:panelGrid columns="2"   cellpadding="5" >  
+                                <h:outputLabel for="username" value="Username:" />  
+                                 <p:inputText value=""   
+                                id="username" required="true" label="username" />             
+                                <h:outputLabel for="password" value="Password:"/>  
+                               <h:inputSecret value="TODO"   
+                               id="password" required="true" label="password" />
+                               <h:outputLabel for="forName" value="Forname:"/>  
+                               <h:inputSecret value="TODO"   
+                               id="forname" required="true" label="Forname" />
+                               <h:outputLabel for="lastName" value="Lastname:"/>  
+                               <h:inputSecret value="TODO"   
+                               id="lastname" required="true" label="Lastname" />
+                               <h:outputLabel for="email" value="Email:"/>  
+                               <h:inputSecret value="TODO"   
+                               id="email" required="true" label="Email" />
+              
+                     <f:facet name="footer">  
+                          <p:commandButton id="applyButton" value="Apply" update="growl"   
+                          actionListener="TODO"   
+                          accesskey="" oncomplete="handleLoginRequest(xhr, status, args)"/>                 
+                     </f:facet>  
+                               
+        </h:panelGrid>           
+    </p:dialog>  
+</h:form>
+                    
+                    
+</p:layoutUnit>
+</p:layout>
+            
+        </h:body>        
+     </f:view>
+<script type="text/javascript">  
+    function handleLoginRequest(xhr, status, args) {  
+        if(args.validationFailed || !args.loggedIn) {  
+            dlg.jq.effect("shake", { times:5 }, 100);  
+        }   
+        else if(args.loggedIn){  
+            dlg.hide();            
+            $('#loginLink').fadeOut();  
+            setTimeout(function() {
+        $('#hiddenButton').click();
+            }, 2000);
+        }  
+    }  
+</script>  
+</html>

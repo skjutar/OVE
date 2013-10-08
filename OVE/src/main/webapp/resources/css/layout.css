@@ -1,0 +1,61 @@
+/* 
+    Document   : layout
+    Author     : hajo
+    Description: This is all layout NO style
+*/
+
+body { 
+    /* Over all width */
+   /* display: block;*/
+    width: 100em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav ul{
+  padding: 0 0 0 0;  
+  border: none;
+  text-align: left;
+  
+
+  
+}
+
+
+
+.menu ul li {
+    /* Make menu horizontal */
+    display: inline;  
+    border:none;
+
+}
+
+menu ul ul {
+    display: none;
+}
+
+menu ul li:hover > ul {
+    display: block;
+}
+
+.submenu ul li {
+    /* Make submenu horizontal */
+    display: inline;
+    border:none;
+}
+
+fieldset label{
+    /* Make input form vertical */
+   /* display: block;*/
+    border:none;
+}
+
+.menubar.ui-menubar {
+    
+   position: relative;
+}
+
+.menubar .ui-menu-list {
+    display: inline-block;
+}
+

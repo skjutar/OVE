@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+    
+    <application>
+	  <message-bundle>
+	  	<!-- If customizing messages -->
+	  </message-bundle>
+     </application>
+    <!-- Main menu on all pages -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id> 
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/jsf/home.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>MyPage</from-outcome>
+            <to-view-id>/jsf/mypage.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Schools</from-outcome>
+            <to-view-id>/jsf/schools/schools.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Tutors</from-outcome>
+            <to-view-id>/jsf/tutors/tutors.xhtml</to-view-id>
+        </navigation-case>
+               
+        <navigation-case>
+            <from-outcome>Admin</from-outcome>
+            <to-view-id>/jsf/admin.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+</faces-config>
