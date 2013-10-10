@@ -28,19 +28,19 @@ and open the template in the editor.
                      </p:inplace>
                          <h:outputText value="Username: " />  
                            <p:inplace id="userName">  
-                               <p:inputText value="#{loggingBean.username} "/>  
+                               <p:inputText value="#{accountBean.username} "/>  
                      </p:inplace>
                         <h:outputText value="email" />
                         <p:inplace id="email">
-                            <p:inputText value="Gustav@ove.se" />
+                            <p:inputText value="#{accountBean.emailAdress} " />
                         </p:inplace>
                         <h:outputText value="pnumber" />
                         <p:inplace id="pnumber">
-                            <p:inputText value="9201131811" />
+                            <p:inputText value="#{accountBean.idNumber} " />
                         </p:inplace>
-                         <h:outputText value="age" />
-                        <p:inplace id="age">
-                            <p:inputText value="21" />
+                         <h:outputText value="tele" />
+                        <p:inplace id="tel">
+                            <p:inputText value="#{accountBean.telephoneNumber} " />
                         </p:inplace>
                   </h:panelGrid>  
                 </p:panel>  

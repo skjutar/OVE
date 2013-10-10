@@ -7,6 +7,8 @@ package com.mycompany.ove_model;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 /**
  * A class representing a School.
@@ -16,12 +18,17 @@ import javax.persistence.Entity;
  * @author lisastenberg
  */
 @Entity
-public class School {
+public class School extends AbstractEntity {
     
     private String name;
     private String address;
+    @ManyToMany
     private List<Person> contactPersons;
+    @OneToOne
     private Schedule schedule;
+
+    public School() {
+    }
 
     public School(String name, String address) {
         this.name = name;

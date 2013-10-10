@@ -4,6 +4,7 @@
  */
 package com.mycompany.ove_model;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
@@ -18,28 +19,31 @@ import javax.persistence.Entity;
  * @author lisastenberg
  */
 @Entity
-public class Session {
+public class Session extends AbstractEntity {
     
-    private GregorianCalendar startTime;
-    private GregorianCalendar endTime;
+    //private GregorianCalendar startTime;
+    //private GregorianCalendar endTime;
     private int nbrOfStudents;
     private List<Worker> tutors;
     private String notation;
 
+    public Session() {
+    }
+
     public Session(GregorianCalendar startTime, GregorianCalendar endTime, int nbrOfStudents, List<Worker> tutors) {
-        this.startTime = startTime;
-        this.endTime = endTime;
+        //this.startTime = startTime;
+        //this.endTime = endTime;
         this.nbrOfStudents = nbrOfStudents;
         this.tutors = tutors;
     }
 
-    public GregorianCalendar getStartTime() {
-        return startTime;
-    }
+  //  public GregorianCalendar getStartTime() {
+   //     return startTime;
+   // }
 
-    public GregorianCalendar getEndTime() {
-        return endTime;
-    }
+    //public GregorianCalendar getEndTime() {
+    //    return endTime;
+    //}
 
     public int getNbrOfStudents() {
         return nbrOfStudents;
@@ -54,11 +58,11 @@ public class Session {
     }
 
     public void setStartTime(GregorianCalendar startTime) {
-        this.startTime = startTime;
+       // this.startTime = startTime;
     }
 
     public void setEndTime(GregorianCalendar endTime) {
-        this.endTime = endTime;
+      //  this.endTime = endTime;
     }
 
     public void setNbrOfStudents(int nbrOfStudents) {
@@ -76,9 +80,9 @@ public class Session {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.startTime);
-        hash = 53 * hash + Objects.hashCode(this.endTime);
-        hash = 53 * hash + Objects.hashCode(this.tutors);
+       // hash = 53 * hash + Objects.hashCode(this.startTime);
+       // hash = 53 * hash + Objects.hashCode(this.endTime);
+       // hash = 53 * hash + Objects.hashCode(this.tutors);
         return hash;
     }
 
@@ -91,15 +95,15 @@ public class Session {
             return false;
         }
         final Session other = (Session) obj;
-        if (!Objects.equals(this.startTime, other.startTime)) {
-            return false;
-        }
-        if (!Objects.equals(this.endTime, other.endTime)) {
-            return false;
-        }
-        if (!Objects.equals(this.tutors, other.tutors)) {
-            return false;
-        }
-        return true;
+       // if (!Objects.equals(this.startTime, other.startTime)) {
+        //    return false;
+       // }
+       // if (!Objects.equals(this.endTime, other.endTime)) {
+        //    return false;
+       // }
+       // if (!Objects.equals(this.tutors, other.tutors)) {
+        //    return false;
+       // }
+       return true;
     }
 }

@@ -14,13 +14,16 @@ import javax.persistence.Entity;
  * @author lisastenberg
  */
 @Entity
-public class Person {
+public class Person extends AbstractEntity {
 
     private int idNumber;
     private String name;
     private String mail;
     private String phoneNbr;
     private String address;
+
+    public Person() {
+    }
     
     public Person(int idNumber, String name, String mail, String phoneNbr, String address) {
         this.idNumber = idNumber;

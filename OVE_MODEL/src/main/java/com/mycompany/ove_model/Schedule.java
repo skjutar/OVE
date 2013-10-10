@@ -7,14 +7,21 @@ package com.mycompany.ove_model;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  * A class representing a schedule, which is several sessions for a specific school. 
  * 
  * @author lisastenberg
  */
-public class Schedule {
+@Entity
+public class Schedule extends AbstractEntity{
     
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
     private List<Session> sessions;
 
     public Schedule() {

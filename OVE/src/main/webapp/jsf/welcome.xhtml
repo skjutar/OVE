@@ -63,15 +63,15 @@ and open the template in the editor.
   
                             <h:panelGrid columns="2"   cellpadding="5" >  
                                 <h:outputLabel for="username" value="Username:" />  
-                                 <p:inputText value="#{loggingBean.username}"   
+                                 <p:inputText value="#{accountBean.username}"   
                                 id="username" required="true" label="username" />             
                                 <h:outputLabel for="password" value="Password:"/>  
-                               <h:inputSecret value="#{loggingBean.password}"   
+                               <h:inputSecret value="#{accountBean.password}"   
                                id="password" required="true" label="password" />  
               
                      <f:facet name="footer">  
                           <p:commandButton id="loginButton" value="Login" update="growl"   
-                          actionListener="#{loggingBean.login}"   
+                          actionListener="#{accountBean.login}"   
                           accesskey="" oncomplete="handleLoginRequest(xhr, status, args)"/>                 
                      </f:facet>  
                                
@@ -91,25 +91,32 @@ and open the template in the editor.
   
                             <h:panelGrid columns="2"   cellpadding="5" >  
                                 <h:outputLabel for="username" value="Username:" />  
-                                 <p:inputText value=""   
+                                <p:inputText value="#{createAccountBean.username}"   
                                 id="username" required="true" label="username" />             
                                 <h:outputLabel for="password" value="Password:"/>  
-                               <h:inputSecret value="TODO"   
+                                <h:inputSecret value="#{createAccountBean.password}"   
                                id="password" required="true" label="password" />
-                               <h:outputLabel for="forName" value="Forname:"/>  
-                               <h:inputSecret value="TODO"   
-                               id="forname" required="true" label="Forname" />
-                               <h:outputLabel for="lastName" value="Lastname:"/>  
-                               <h:inputSecret value="TODO"   
-                               id="lastname" required="true" label="Lastname" />
+                               <h:outputLabel for="forName" value="name:"/>  
+                               <h:inputSecret value="#{createAccountBean.name}"   
+                               id="name" required="true" label="Name:" />
+                               <h:outputLabel for="idNumber" value="ID number:" />  
+                               <p:inputText value="#{createAccountBean.idNumber}"   
+                                id="idNumber" required="true" label="idNumber" /> 
                                <h:outputLabel for="email" value="Email:"/>  
-                               <h:inputSecret value="TODO"   
+                               <h:inputSecret value="#{createAccountBean.emailAdress}"   
                                id="email" required="true" label="Email" />
+                               <h:outputLabel for="telephoneNumber" value="Tele:"/>  
+                               <h:inputSecret value="#{createAccountBean.telephoneNumber}"   
+                               id="telephoneNumber" required="true" label="Tele" />
+                               <h:outputLabel for="adress" value="Adress:"/>  
+                               <h:inputSecret value="#{createAccountBean.adress}"   
+                               id="adress" required="true" label="Adress" />
+                               
               
                      <f:facet name="footer">  
                           <p:commandButton id="applyButton" value="Apply" update="growl"   
-                          actionListener="TODO"   
-                          accesskey="" oncomplete="handleLoginRequest(xhr, status, args)"/>                 
+                                           actionListener="#{createAccountBean.create}"    
+                          accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
                      </f:facet>  
                                
         </h:panelGrid>           
@@ -128,12 +135,19 @@ and open the template in the editor.
             dlg.jq.effect("shake", { times:5 }, 100);  
         }   
         else if(args.loggedIn){  
-            dlg.hide();            
+            dlg.hide();   
             $('#loginLink').fadeOut();  
             setTimeout(function() {
         $('#hiddenButton').click();
             }, 2000);
         }  
     }  
+    
+    function handleCreateRequest(xhr, status, args) {
+    if(args.created) {
+        applydlg.hide();  
+        $('#applyLink').fadeOut();
+    }
+    }
 </script>  
 </html>
