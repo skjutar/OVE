@@ -5,8 +5,12 @@
 package com.mycompany.ove_model;
 
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  * A class representing a User. 
@@ -16,13 +20,16 @@ import javax.persistence.OneToOne;
  * @author lisastenberg
  */
 @Entity
-public class User {
-    @OneToOne
+public class Account extends AbstractEntity {
+    @OneToOne (cascade = CascadeType.ALL)
     private Person person;
     private String userName;
     private String passWord;
+
+    public Account() {
+    }
     
-    public User(Person person, String userName, String passWord) {
+    public Account(Person person, String userName, String passWord) {
         this.person = person;
         this.userName = userName;
         this.passWord = passWord;
@@ -67,7 +74,7 @@ public class User {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final User other = (User) obj;
+        final Account other = (Account) obj;
         if (!Objects.equals(this.userName, other.userName)) {
             return false;
         }
