@@ -67,6 +67,24 @@ and open the template in the editor.
                     </div>
                 </div>
                 
+                 
+                <p:carousel id="basicCarousel" value="#{carouselBean.carsSmall}" var="car" itemStyleClass="carItem">  
+                    <f:facet name="header">  
+                            Cars  
+                    </f:facet>  
+                        <h:panelGrid columns="1" style="width:100%" cellpadding="5">  
+                            <strong> Name of month</strong>
+                            <h:outputText value="No. sessions: #{car.model}" />  
+          
+                            <h:outputText value="Total hours: #{car.year}" />  
+          
+                            <h:outputText value="Total salary: #{car.color}" />  
+                        </h:panelGrid>  
+                        <f:facet name="footer">  
+                     
+                             </f:facet>  
+                </p:carousel>
+                
             </ui:define>
         </ui:composition>
     </h:body>
