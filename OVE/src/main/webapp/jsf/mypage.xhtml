@@ -49,22 +49,27 @@ and open the template in the editor.
                         <div style="float:left;margin-left: 40em ">
                        
                             <h1>Profil Pic</h1>
-                            <h:graphicImage url="#{resource['img:tut.jpg']}" />   
+                            <h:graphicImage url="#{fileUpload.file}"/>
+ 
+  
+                
                             <h:form enctype="multipart/form-data">  
   
-                                <p:messages showDetail="true"/>  
+                            <p:messages showDetail="true"/>  
   
-                                <p:fileUpload value="#{fileUploadController.file}" mode="simple"/>  
+                            <p:fileUpload value="#{fileUpload.file}" mode="simple" sizeLimit="3145728"
+                                    allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                             invalidSizeMessage="Maximum file size allowed: 3 MB"
+                             auto="true"
+                             />  
   
-                                 <p:commandButton value="Submit" ajax="false"  
-                                        actionListener="#{fileUploadController.upload}"/>  
+                             <p:commandButton value="Submit" ajax="false"  
+                                              accesskey="" actionListener="#{fileUpload.upload()}"/>  
   
-                            </h:form>  
-                        
-
-
+                    </h:form>  
+  
+                        </div>
                 </div>
-                    </div>
                 </div>
                 
             </ui:define>
