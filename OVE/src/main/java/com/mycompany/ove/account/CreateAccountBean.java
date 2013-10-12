@@ -2,18 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove.gui;
+package com.mycompany.ove.account;
 
-import com.mycompany.ove_model.Account;
-import com.mycompany.ove_model.Model;
-import com.mycompany.ove_model.ModelFactory;
-import com.mycompany.ove_model.Person;
-import javax.ejb.Stateless;
+import com.mycompany.ove.model.UserRegistry;
+import com.mycompany.ove.model.Account;
+import com.mycompany.ove.model.Model;
+import com.mycompany.ove.model.ModelFactory;
+import com.mycompany.ove.model.Person;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
@@ -25,6 +25,9 @@ import org.primefaces.context.RequestContext;
 @Named("createAccountBean")
 public class CreateAccountBean {
 
+   @EJB
+   private UserRegistry reg;
+    
    private String username;
    
    private String password;
@@ -39,7 +42,7 @@ public class CreateAccountBean {
    
    private String emailAdress;
    
-   private Model model;
+   //private Model model;
    
 
     /**
@@ -128,11 +131,11 @@ public class CreateAccountBean {
    
    public void create(ActionEvent event)
    {
-       model = ModelFactory.getModel("OVE_model_pu");
+       //model = ModelFactory.getModel("OVE_model_pu");
        RequestContext context = RequestContext.getCurrentInstance(); 
        FacesMessage msg = null;
        boolean created = false; 
-       if(!model.getUserRegistry().getByName(username).isEmpty())
+       if(!reg.getByName(username).isEmpty())
        {
            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");  
        }       
@@ -141,7 +144,8 @@ public class CreateAccountBean {
             created=true;
             Person p = new Person(idNumber, name, emailAdress, telephoneNumber, adress);
             Account a = new Account(p, username, password);
-            model.getUserRegistry().add(a);
+            reg.add(a);
+            //model.getUserRegistry().add(a);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "Account created");
        }
        

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="database_pu" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>jdbc/OVE_model</jta-data-source>
+    <class>com.mycompany.ove_model.Person</class>
+    <class>com.mycompany.ove.model.School</class>
+    <class>com.mycompany.ove.model.Session</class>
+    <class>com.mycompany.ove.model.Account</class>
+    <class>com.mycompany.ove.model.Schedule</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+    </properties>
+  </persistence-unit>  
+</persistence>
+
+

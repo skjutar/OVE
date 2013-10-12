@@ -2,17 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove.gui;
+package com.mycompany.ove.account;
 
 
-import com.mycompany.ove_model.Account;
-import com.mycompany.ove_model.Model;
-import com.mycompany.ove_model.ModelFactory;
-import com.mycompany.ove_model.Person;
-import com.mycompany.ove_model.UserRegistry;
+import com.mycompany.ove.model.Account;
+import com.mycompany.ove.model.Model;
+import com.mycompany.ove.model.ModelFactory;
+import com.mycompany.ove.model.Person;
+import com.mycompany.ove.model.UserRegistry;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -23,21 +24,24 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 /**
- *
+ * Holds all info about the inlogged person. Handles login request.
  * @author kristofferskjutar
  */
 
-@Named("accountBean")
+@Named("loginBean")
 @SessionScoped
-public class AccountBean implements Serializable{
-  
-    private String username;  
+public class LoginBean implements Serializable{
+    
+   @EJB
+   private UserRegistry reg;
+   
+   private String username;  
       
-    private String password;  
+   private String password;  
     
-    private Model model = ModelFactory.getModel("OVE_model_pu");
+   //private Model model = ModelFactory.getModel("OVE_model_pu");
     
-    private int idNumber;
+   private int idNumber;
    
    private String name;
    
@@ -47,7 +51,10 @@ public class AccountBean implements Serializable{
    
    private String emailAdress;
    
-      
+   
+     
+   
+   
     public String getUsername() {  
         return username;  
     }  
@@ -66,11 +73,9 @@ public class AccountBean implements Serializable{
    
     
     public void login(ActionEvent actionEvent) {  
-        //model = ModelFactory.getModel("OVE_pu");
         RequestContext context = RequestContext.getCurrentInstance();  
         FacesMessage msg = null;  
         boolean loggedIn = false;  
-        UserRegistry reg = getModel().getUserRegistry();
         Account a =  reg.getAccount(username, password);
         
         if(a!=null){
@@ -82,6 +87,7 @@ public class AccountBean implements Serializable{
                 setTelephoneNumber(p.getPhoneNbr());
                 setIdNumber(p.getIdNumber());
                 setName(p.getName());
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", username);
             }
         
         else{  
@@ -93,19 +99,9 @@ public class AccountBean implements Serializable{
         context.addCallbackParam("loggedIn", loggedIn);  
     }  
 
-    /**
-     * @return the model
-     */
-    public Model getModel() {
-        return model;
-    }
-
-    /**
-     * @param model the model to set
-     */
-    public void setModel(Model model) {
-        this.model = model;
-    }
+   
+    
+    
 
     /**
      * @return the idNumber
