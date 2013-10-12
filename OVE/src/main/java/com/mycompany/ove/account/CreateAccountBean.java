@@ -18,7 +18,7 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 /**
- *
+ * Runned when a user creates an account
  * @author kristofferskjutar
  */
 @RequestScoped

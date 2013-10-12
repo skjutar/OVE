@@ -12,7 +12,7 @@ import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Checks if the user tries to reach inlogged pages when not logged in
  * @author kristofferskjutar
  */
 public class AuthorizationListener implements PhaseListener {
