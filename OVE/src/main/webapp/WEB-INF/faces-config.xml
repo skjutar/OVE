@@ -39,4 +39,8 @@
         </navigation-case>
     </navigation-rule>
     
+    <lifecycle>
+<phase-listener>com.mycompany.ove.account.AuthorizationListener</phase-listener>
+</lifecycle>
+    
 </faces-config>

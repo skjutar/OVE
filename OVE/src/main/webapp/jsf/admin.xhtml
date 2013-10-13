@@ -37,10 +37,16 @@ and open the template in the editor.
         <p:inputText/>
         
         <h:outputLabel for="time" value="Time"/>
-        <p:inputText/>
+        <p:inputText size="60" value="#{scheduleBean.event.startDate}"/>
         
+        <h:outputLabel for="students" value="Number of Students"/>
+        <p:inputText size="60" value="22"/>
+         
         <h:outputLabel for="comments" value="Comments"/>
-        <p:inputTextarea rows="10" cols="50" value="#{scheduleBean.event}"/>
+        <p:inputTextarea rows="10" cols="60" value=""/>
+        
+        
+        
         </h:panelGrid>  
     </p:dialog>  
   

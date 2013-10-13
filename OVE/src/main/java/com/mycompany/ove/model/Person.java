@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove_model;
+package com.mycompany.ove.model;
 
 import javax.persistence.Entity;
 

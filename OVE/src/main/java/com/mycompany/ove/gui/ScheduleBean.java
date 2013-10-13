@@ -4,9 +4,13 @@
  */
 package com.mycompany.ove.gui;
 
+import com.mycompany.ove.model.Session;
+import com.mycompany.ove.model.Worker;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -30,18 +34,37 @@ import org.primefaces.model.ScheduleModel;
 public class ScheduleBean implements Serializable
 {
     private ScheduleModel eventModel;  
+    private List<Session> sessionList;
+    private List<Worker> workerList;
+    private int numberOfStudents;
+    private String notation;
+    private int startTime,endTime;
       
     //Overide this to handle events,   comments and time 
     private ScheduleEvent event = new DefaultScheduleEvent();
     
     public ScheduleBean() {  
+        //Get a list of sessions from somewhere 
+        sessionList = new ArrayList<Session>();
+        workerList = new ArrayList<Worker>();
         eventModel = new DefaultScheduleModel();  
+      //  createSessions(sessionList);
         eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));  
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));  
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));  
-        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));  
+        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm())); 
+        
     }  
-      
+    private void createSession(ArrayList<Session> sessionList)
+    {
+        for(Session s: sessionList)
+        {
+            //Used getters that i need to get from Session
+            //takes eventName, startCalendar and endCalendar time
+     //       eventModel.addEvent(new DefaultScheduleEvent(s.getName(), s.getStartTime(),s.getEndTime()));
+            //Add method to add other info to the event that+s not created in the constructor
+        }
+    }
     public Date getRandomDate(Date base) {  
         Calendar date = Calendar.getInstance();  
         date.setTime(base);  
@@ -64,7 +87,6 @@ public class ScheduleBean implements Serializable
     private Calendar today() {  
         Calendar calendar = Calendar.getInstance();  
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);  
-  
         return calendar;  
     }  
       
@@ -154,7 +176,7 @@ public class ScheduleBean implements Serializable
           
         event = new DefaultScheduleEvent();  
     }  
-      
+      //Trycker event dialogen
     public void onEventSelect(SelectEvent selectEvent) {  
         event = (ScheduleEvent) selectEvent.getObject();  
     }  

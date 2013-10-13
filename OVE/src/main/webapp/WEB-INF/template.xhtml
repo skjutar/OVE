@@ -29,21 +29,10 @@ and open the template in the editor.
                     <div align="center">
                     <h:graphicImage url="#{resource['img:banner.jpg']}" />
                     <h:form> 
-                        <p:menubar styleClass="menubar" >
+                        <p:menubar styleClass="menubar" model="#{menuBean.model}" >
 
-                            <p:menuitem value="MyPage" outcome="MyPage"/>
-                        <p:submenu label="Schools">
-                            <p:menuitem value="School 1"  />
-                            <p:menuitem value="School 2"  />
-                            <p:menuitem value="School 2" />
-                            <p:menuitem value="School 4"  />
-                        </p:submenu>
-                        <p:menuitem value="Tutors"/>
-                        <p:menuitem value="Admin" outcome="Admin" />
-                        
-                        <f:facet name="options"> 
-                         <p:commandButton style="margin-left: 200px" type="button" value="Logout" icon="ui-icon-extlink" />  
-                         </f:facet> 
+                           
+        
                     </p:menubar>
                     </h:form>
                 <ui:insert name="content">Put default content here, if any.</ui:insert>
@@ -68,4 +57,6 @@ and open the template in the editor.
       
             
     </f:view>
+    
+    
 </html>
