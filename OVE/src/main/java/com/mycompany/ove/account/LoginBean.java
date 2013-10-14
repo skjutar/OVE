@@ -78,7 +78,7 @@ public class LoginBean implements Serializable{
         boolean loggedIn = false;  
         Account a =  reg.getAccount(username, password);
         
-        if(a!=null){
+        if(a!=null){ //in database?
                 loggedIn = true; 
                 msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);  
                 Person p = a.getPerson();
@@ -98,6 +98,14 @@ public class LoginBean implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, msg);  
         context.addCallbackParam("loggedIn", loggedIn);  
     }  
+    
+    public void logout()
+    {      
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();   
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        String outcome = "Logout"; 
+        facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, outcome);        
+    }
 
    
     
