@@ -17,7 +17,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id> 
         <navigation-case>
-            <from-outcome>home</from-outcome>
+            <from-outcome>Home</from-outcome>
             <to-view-id>/jsf/home.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
@@ -36,6 +36,12 @@
         <navigation-case>
             <from-outcome>Admin</from-outcome>
             <to-view-id>/jsf/admin.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>Logout</from-outcome>
+            <to-view-id>/jsf/welcome.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
     </navigation-rule>
     
