@@ -41,7 +41,7 @@ public class LoginBean implements Serializable{
     
    //private Model model = ModelFactory.getModel("OVE_model_pu");
     
-   private int idNumber;
+   private Long idNumber;
    
    private String name;
    
@@ -106,14 +106,14 @@ public class LoginBean implements Serializable{
     /**
      * @return the idNumber
      */
-    public int getIdNumber() {
+    public Long getIdNumber() {
         return idNumber;
     }
 
     /**
      * @param idNumber the idNumber to set
      */
-    public void setIdNumber(int idNumber) {
+    public void setIdNumber(Long idNumber) {
         this.idNumber = idNumber;
     }
 
