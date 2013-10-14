@@ -50,17 +50,20 @@ and open the template in the editor.
   
     <p:separator />  
   
-    <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg').show()" />  
+    <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg').show()" />
+    <p:button id="addTutor" value ="Add Tutor" onclick="" />
   
     <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
-        <h:panelGrid columns="2" id="display">  
+        <h:panelGrid columns="1" id="display">  
+            
+            <h:outputText value="Tutor:" /><h:outputText id="selectedNumber" value="#{tutorBean.selectedTutor}" />  
             <!--
-            <h:outputText value="Value 1:" /><h:outputText id="selectedNumber" value="#{buttonBean.number}" />  
-  
             <h:outputText value="Value 2:" /><h:outputText id="selectedPlayer" value="#{autoCompleteBean.selectedPlayer1}" />  
             -->
         </h:panelGrid>  
     </p:dialog>  
+    
+    
   
     </h:form>  
     </ui:define>

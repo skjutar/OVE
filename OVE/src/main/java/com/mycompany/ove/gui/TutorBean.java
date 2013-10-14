@@ -20,6 +20,7 @@ import javax.inject.Named;
 public class TutorBean implements Serializable{
     
     List<Worker> tutors;
+    private Worker selectedTutor;
     
     public TutorBean() {
         tutors = new LinkedList();
@@ -29,9 +30,13 @@ public class TutorBean implements Serializable{
         tutors.add(new Worker(9001015052L, "Gustav", "gustav@mail.se", "0707777779", "Chalmers"));
         tutors.add(new Worker(9001015053L, "Kristoffer", "kristoffer@mail.se", "0707777776", "Chalmers"));
     }
+
+    public Worker getSelectedTutor() {
+        return selectedTutor;
+    }
     
-    public Worker selectedTutor() {
-        return null;
+    public void setSelectedTutor(Worker tutor) {
+        selectedTutor = tutor;
     }
     
     public List<Worker> getTutors() {

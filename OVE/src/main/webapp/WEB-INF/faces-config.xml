@@ -30,7 +30,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>Tutors</from-outcome>
-            <to-view-id>/jsf/tutors/tutors.xhtml</to-view-id>
+            <to-view-id>/jsf/tutor/tutors.xhtml</to-view-id>
         </navigation-case>
                
         <navigation-case>
@@ -38,6 +38,22 @@
             <to-view-id>/jsf/admin.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/jsf/products/tutors.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>add</from-outcome>
+            <to-view-id>/jsf/products/addTutor.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule> 
+    
+    <navigation-rule>
+        <from-view-id>/jsf/products/addTutor.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>add</from-outcome>
+            <to-view-id>/jsf/products/tutors.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule> 
     
     <lifecycle>
 <phase-listener>com.mycompany.ove.account.AuthorizationListener</phase-listener>

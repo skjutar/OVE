@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>Tutors</title>
+    </head>
+    <body>
+        <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="content"> 
+        <h:form id="form">  
+  
+    <p:panel id="panel" header="New Tutor" style="margin-bottom:10px;">  
+        <p:messages id="messages" />  
+        <h:panelGrid columns="3">  
+            <h:outputLabel for="name" value="Name: *" />  
+            <p:inputText id="name"   
+                         value="#{addTutorBean.name}" required="true" label="Name">  
+                <f:validateLength minimum="2" />  
+            </p:inputText>  
+            <p:message for="name" />  
+  
+            <h:outputLabel for="mail" value="Mail: *" />  
+            <p:inputText id="mail"   
+                         value="#{addTutorBean.mail}" required="true" label="Mail">  
+            </p:inputText>  
+            <p:message for="mail" />  
+            
+            <h:outputLabel for="phoneNbr" value="Phone number: *" />  
+            <p:inputText id="name"   
+                         value="#{addTutorBean.phoneNbr}" required="true" label="phoneNbr">  
+            </p:inputText>  
+            <!--<p:message for="name" />  -->
+            
+            <h:outputLabel for="address" value="Address" />  
+            <p:inputText id="name"   
+                         value="#{addTutorBean.address}" required="true" label="Address">  
+            </p:inputText>  
+            
+            <h:outputLabel for="salary" value="Salary" />  
+            <p:inputText id="salary"   
+                         value="#{addTutorBean.salary}" required="true" label="Salary">  
+            </p:inputText>  
+
+        </h:panelGrid>  
+    </p:panel>  
+  
+    <p:commandButton value="Add" update="panel,display" id="ajax"  
+             actionListener="#{addTutorBean.addTutor}" styleClass="ui-priority-primary"/>  
+  
+    <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg').show()" />
+    <p:button id="cancel" value ="Cancel" onclick="" />
+  
+    <p:dialog header="Tutor added" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
+        <h:panelGrid columns="1" id="display">  
+            
+            <h:outputText value="Tutor added: " /><h:outputText id="tutorAdded" value="#{addTutorBean.name}" />  
+        </h:panelGrid>  
+    </p:dialog>  
+    
+    
+  
+    </h:form>  
+    </ui:define>
+    </ui:composition>
+    </body>
+</html>

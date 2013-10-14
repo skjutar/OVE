@@ -46,4 +46,14 @@ public class TutorRegistry extends AbstractDAO<Person, Long>{
         }
         return found;
     }
+    
+    public Worker getTutor(Long id){
+        List <Worker> list =  em.createQuery("select t from Worker t WHERE "
+                + "t.id = '" + id + "'")
+        .getResultList();
+        if(list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 }
