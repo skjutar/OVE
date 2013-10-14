@@ -27,32 +27,25 @@ and open the template in the editor.
                          <p:dialog  id="dialog" header="Add New School" widgetVar="addschooldlg" resizable="false">  
   
                             <h:panelGrid columns="2"   cellpadding="5" >  
-                                <h:outputLabel for="username" value="Username:" />  
-                                <p:inputText value="#{createAccountBean.username}"   
-                                id="username" required="true" label="username" />             
-                                <h:outputLabel for="password" value="Password:"/>  
-                                <h:inputSecret value="#{createAccountBean.password}"   
-                               id="password" required="true" label="password" />
-                               <h:outputLabel for="forName" value="name:"/>  
-                               <h:inputText value="#{createAccountBean.name}"   
-                               id="name" required="true" label="Name:" />
-                               <h:outputLabel for="idNumber" value="ID number:" />  
-                               <p:inputText value="#{createAccountBean.idNumber}"   
-                                id="idNumber" required="true" label="idNumber" /> 
-                               <h:outputLabel for="email" value="Email:"/>  
-                               <h:inputText value="#{createAccountBean.emailAdress}"   
-                               id="email" required="true" label="Email" />
-                               <h:outputLabel for="telephoneNumber" value="Tele:"/>  
-                               <h:inputText value="#{createAccountBean.telephoneNumber}"   
-                               id="telephoneNumber" required="true" label="Tele" />
-                               <h:outputLabel for="adress" value="Adress:"/>  
-                               <h:inputText value="#{createAccountBean.adress}"   
-                               id="adress" required="true" label="Adress" />
+                                <h:outputLabel for="name" value="School name:" />  
+                                <p:inputText value="#{createSchoolBean.name}"   
+                                id="name" required="true" label="Name" /> 
+                                
+                                <h:outputLabel for="address" value="Adress:"/>  
+                                <h:inputText value="#{createSchoolBean.address}"   
+                               id="address" required="true" label="Address" />
+                                
+                               <h:outputLabel for="zip" value="Zip Code:"/>  
+                               <h:inputText value="#{createSchoolBean.zip}"   
+                               id="zip" required="true" label="Zip" />
                                
+                               <h:outputLabel for="city" value="City:" />  
+                               <p:inputText value="#{createSchoolBean.city}"   
+                                id="city" required="true" label="City" /> 
               
                      <f:facet name="footer">  
                           <p:commandButton id="addButton" value="Add School" update="growl"   
-                                           actionListener="#{createAccountBean.create}"    
+                                           actionListener="#{createSchoolBean.create}"    
                           accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
                      </f:facet>  
                                
@@ -64,4 +57,14 @@ and open the template in the editor.
             </ui:define>
         </ui:composition>
     </h:body>
+    <script type="text/javascript">  
+  
+    function handleCreateRequest(xhr, status, args) {
+        console.log("Made it into function in schools.xhtml.")
+    if(args.created) {
+        addschooldlg.hide();  
+        $('#addschoolLink').fadeOut();
+    }
+    }
+</script>  
 </html>

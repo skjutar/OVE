@@ -23,6 +23,8 @@ public class School extends AbstractEntity {
     
     private String name;
     private String address;
+    private int zip;
+    private String city;
     @ManyToMany
     private List<Person> contactPersons;
     @OneToOne (cascade = CascadeType.ALL)
@@ -31,9 +33,11 @@ public class School extends AbstractEntity {
     public School() {
     }
 
-    public School(String name, String address) {
+    public School(String name, String address, int zip, String city) {
         this.name = name;
         this.address = address;
+        this.zip = zip;
+        this.city = city;
     }
 
     public School(String name, String address, List<Person> contactPersons) {
@@ -49,6 +53,14 @@ public class School extends AbstractEntity {
     public String getAddress() {
         return address;
     }
+    
+    public int getZip(){
+        return zip;
+    }
+    
+    public String getCity(){
+        return city;
+    }
 
     public List<Person> getContactPersons() {
         return contactPersons;
@@ -62,6 +74,14 @@ public class School extends AbstractEntity {
         this.name = name;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setZip(int  zip) {
+        this.zip = zip;
+    }
+    
     public void setAddress(String address) {
         this.address = address;
     }
