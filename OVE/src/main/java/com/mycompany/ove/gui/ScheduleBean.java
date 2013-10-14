@@ -36,8 +36,8 @@ import org.primefaces.model.ScheduleModel;
 @SessionScoped
 public class ScheduleBean implements Serializable
 {
-    @EJB
-    private SchoolRegistry reg;
+  //  @EJB
+ //   private SchoolRegistry reg;
     
     private ScheduleModel eventModel;  
     private List<School> schoolList;
@@ -56,34 +56,32 @@ public class ScheduleBean implements Serializable
         sessionList = new ArrayList<Session>();
         workerList = new ArrayList<Worker>();
         eventModel = new DefaultScheduleModel();  
-        schoolList =  reg.getRange(0, reg.getCount());
-        createSessions(schoolList);
+    //    schoolList =  reg.getRange(0, reg.getCount());
+ //       createSessions(schoolList);
        
-       //
-     //  for(School s: schoolList)
-      // {
-        //   s.getSchedule().getSessions().
-      // }
      //  schoolList.  //     eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));  
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));  
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));  
         eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm())); 
         
     }  
-    private void createSessions(List<School> schoolList)
+ /*  private void createSessions(List<School> schoolList)
     {
         //list of schools
         for(School forSchool: schoolList)
-       {    //school.schedule.session
+       {    
+           //Sessions for this school
          sessionList =  forSchool.getSchedule().getSessions();
          //List of sessions
          for(Session forSession: sessionList)
-         {
-     //        eventModel.addEvent(new DefaultScheduleEvewnt(forSchool.getName(),forSession.));
+         {      //Create an new event for this session
+             eventModel.addEvent(new DefaultScheduleEvewnt(forSchool.getName(),forSession.getStartTime()
+                     ,forSession.getEndTime()));
+                     forSession
          }
          
        }
-    }
+    } */
     public Date getRandomDate(Date base) {  
         Calendar date = Calendar.getInstance();  
         date.setTime(base);  
