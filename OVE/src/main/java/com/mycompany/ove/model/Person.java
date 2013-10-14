@@ -16,7 +16,7 @@ import javax.persistence.Entity;
 @Entity
 public class Person extends AbstractEntity {
 
-    private int idNumber;
+    private Long idNumber;
     private String name;
     private String mail;
     private String phoneNbr;
@@ -25,7 +25,7 @@ public class Person extends AbstractEntity {
     public Person() {
     }
     
-    public Person(int idNumber, String name, String mail, String phoneNbr, String address) {
+    public Person(Long idNumber, String name, String mail, String phoneNbr, String address) {
         this.idNumber = idNumber;
         this.name = name;
         this.mail = mail;
@@ -33,7 +33,7 @@ public class Person extends AbstractEntity {
         this.address = address;
     }
 
-    public int getIdNumber() {
+    public Long getIdNumber() {
         return idNumber;
     }
 
@@ -53,7 +53,7 @@ public class Person extends AbstractEntity {
         return address;
     }
     
-    public void setIdNumber(int idNumber) {
+    public void setIdNumber(Long idNumber) {
         this.idNumber = idNumber;
     }
 
@@ -76,7 +76,7 @@ public class Person extends AbstractEntity {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + this.idNumber;
+        hash = (int)(59 * hash + this.idNumber);
         return hash;
     }
     
