@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>CLP Schools</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/template.xhtml">
+            <ui:define name="content"> 
+
+                                    <h:form id="addnewschool"> 
+                        <h:outputLink id="addschoolLink" value="javascript:void(0)" onclick="addschooldlg.show()" title="login" >   
+                          <p:commandButton value="Add New School"  type="button" />  
+                        </h:outputLink>  
+                        
+                        
+                        <p:growl id="growl" showDetail="true" life="3000" />  
+  
+                         <p:dialog  id="dialog" header="Add New School" widgetVar="addschooldlg" resizable="false">  
+  
+                            <h:panelGrid columns="2"   cellpadding="5" >  
+                                <h:outputLabel for="username" value="Username:" />  
+                                <p:inputText value="#{createAccountBean.username}"   
+                                id="username" required="true" label="username" />             
+                                <h:outputLabel for="password" value="Password:"/>  
+                                <h:inputSecret value="#{createAccountBean.password}"   
+                               id="password" required="true" label="password" />
+                               <h:outputLabel for="forName" value="name:"/>  
+                               <h:inputText value="#{createAccountBean.name}"   
+                               id="name" required="true" label="Name:" />
+                               <h:outputLabel for="idNumber" value="ID number:" />  
+                               <p:inputText value="#{createAccountBean.idNumber}"   
+                                id="idNumber" required="true" label="idNumber" /> 
+                               <h:outputLabel for="email" value="Email:"/>  
+                               <h:inputText value="#{createAccountBean.emailAdress}"   
+                               id="email" required="true" label="Email" />
+                               <h:outputLabel for="telephoneNumber" value="Tele:"/>  
+                               <h:inputText value="#{createAccountBean.telephoneNumber}"   
+                               id="telephoneNumber" required="true" label="Tele" />
+                               <h:outputLabel for="adress" value="Adress:"/>  
+                               <h:inputText value="#{createAccountBean.adress}"   
+                               id="adress" required="true" label="Adress" />
+                               
+              
+                     <f:facet name="footer">  
+                          <p:commandButton id="addButton" value="Add School" update="growl"   
+                                           actionListener="#{createAccountBean.create}"    
+                          accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
+                     </f:facet>  
+                               
+        </h:panelGrid>           
+    </p:dialog>  
+</h:form>
+                
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
