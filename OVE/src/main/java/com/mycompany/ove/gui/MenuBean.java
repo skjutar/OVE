@@ -36,14 +36,20 @@ public class MenuBean {
         menuItem.setId("MyPage");
         model.addMenuItem(menuItem);
         
-        Submenu submenu = new Submenu();
-        submenu.setLabel("Scools");
+        //Submenu submenu = new Submenu();
+        //submenu.setLabel("Scools");
+        //menuItem = new MenuItem();
+        //menuItem.setValue("School1");
+        //menuItem.setId("School1");
+        //submenu.getChildren().add(menuItem);
+        //model.addSubmenu(menuItem);
+
         menuItem = new MenuItem();
-        menuItem.setValue("School1");
-        menuItem.setId("School1");
-        submenu.getChildren().add(menuItem);
+        menuItem.setValue("Schools");
+        menuItem.setOutcome("Schools");
+        menuItem.setId("Schools");
+        model.addMenuItem(menuItem);
         
-        model.addSubmenu(submenu);
         
         menuItem = new MenuItem();
         menuItem.setValue("Tutors");
