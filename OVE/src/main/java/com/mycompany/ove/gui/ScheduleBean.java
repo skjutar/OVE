@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -30,7 +31,7 @@ import org.primefaces.model.ScheduleModel;
  * @author Gustav
  */
 @Named("scheduleBean")
-@SessionScoped
+@RequestScoped
 public class ScheduleBean implements Serializable
 {
     private ScheduleModel eventModel;  
