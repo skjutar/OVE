@@ -9,6 +9,7 @@ import com.mycompany.ove.model.Account;
 import com.mycompany.ove.model.Model;
 import com.mycompany.ove.model.ModelFactory;
 import com.mycompany.ove.model.Person;
+import com.mycompany.ove.model.SchoolRegistry;
 import com.mycompany.ove.model.UserRegistry;
 import java.io.Serializable;
 import java.util.List;
@@ -34,6 +35,9 @@ public class LoginBean implements Serializable{
     
    @EJB
    private UserRegistry reg;
+   
+   @EJB
+    private SchoolRegistry sreg;
    
    private String username;  
       

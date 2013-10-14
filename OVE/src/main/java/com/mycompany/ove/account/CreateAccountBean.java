@@ -6,8 +6,7 @@ package com.mycompany.ove.account;
 
 import com.mycompany.ove.model.UserRegistry;
 import com.mycompany.ove.model.Account;
-import com.mycompany.ove.model.Model;
-import com.mycompany.ove.model.ModelFactory;
+
 import com.mycompany.ove.model.Person;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;

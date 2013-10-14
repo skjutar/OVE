@@ -43,7 +43,7 @@ public class ScheduleBean implements Serializable
   //  @EJB
  //   private SchoolRegistry reg;
     
-    private ScheduleModel eventModel;  
+    private ScheduleModel eventModel; 
     private List<School> schoolList;
 
     private List<Session> sessionList;
@@ -62,7 +62,6 @@ public class ScheduleBean implements Serializable
         eventModel = new DefaultScheduleModel();  
     //    schoolList =  reg.getRange(0, reg.getCount());
  //       createSessions(schoolList);
-       
      //  schoolList.  //     eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));  
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));  
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));  

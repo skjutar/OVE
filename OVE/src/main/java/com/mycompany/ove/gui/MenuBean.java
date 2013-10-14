@@ -5,6 +5,12 @@
 package com.mycompany.ove.gui;
 
 
+import com.mycompany.ove.model.School;
+import com.mycompany.ove.model.SchoolRegistry;
+import com.mycompany.ove.model.UserRegistry;
+import java.io.Serializable;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.el.ExpressionFactory;
 import javax.el.MethodExpression;
 import javax.enterprise.context.RequestScoped;
@@ -22,29 +28,41 @@ import org.primefaces.model.*;
  *
  * @author kristofferskjutar
  */
-@RequestScoped
+@SessionScoped
 @Named("menuBean")
-public class MenuBean {
+public class MenuBean implements Serializable {
     
-    private MenuModel model = new DefaultMenuModel();
+  
     
-    public MenuBean() {
-        
+    @EJB
+    private SchoolRegistry registry;
+    
+    private ExpressionFactory factory =   FacesContext.getCurrentInstance().getApplication().getExpressionFactory();
+    private MethodExpression exp = factory.createMethodExpression(FacesContext.getCurrentInstance().getELContext(), "#{loginBean.logout}", null, new Class[]{});
+    
+    
+
+    
+    public MenuModel getModel() {
+        MenuModel model = new DefaultMenuModel();
         MenuItem menuItem = new MenuItem();
         menuItem.setValue("MyPage");
         menuItem.setOutcome("MyPage");
         menuItem.setId("MyPage");
         model.addMenuItem(menuItem);
-        
+   
         Submenu submenu = new Submenu();
-        submenu.setLabel("Scools");
-        menuItem = new MenuItem();
-        menuItem.setValue("School1");
-        menuItem.setId("School1");
-        submenu.getChildren().add(menuItem);
+        submenu.setLabel("Schools");
         
+        List<School> schools = registry.getRange(0, registry.getCount());
+        for(School school : schools)
+        {
+            menuItem = new MenuItem();
+            menuItem.setValue(school.getName());
+            menuItem.setId(school.getName());
+            submenu.getChildren().add(menuItem);
+        }
         model.addSubmenu(submenu);
-        
         menuItem = new MenuItem();
         menuItem.setValue("Tutors");
         menuItem.setOutcome("Tutors");
@@ -59,17 +77,12 @@ public class MenuBean {
             menuItem.setOutcome("Admin");
             model.addMenuItem(menuItem);
         }
-        ExpressionFactory factory =   FacesContext.getCurrentInstance().getApplication().getExpressionFactory();
-        MethodExpression exp = factory.createMethodExpression(FacesContext.getCurrentInstance().getELContext(), "#{loginBean.logout}", null, new Class[]{});
-       //MethodExpressionActionListener actionListener = new MethodExpressionActionListener(exp);
+       
        menuItem = new MenuItem();
        menuItem.setValue("Logout");
        menuItem.setId("Logout");
        menuItem.setActionExpression(exp);
        model.addMenuItem(menuItem);
-    }
-    
-    public MenuModel getModel() {
         return model;
     }
     

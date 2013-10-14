@@ -6,6 +6,8 @@ package com.mycompany.ove.model;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,6 +15,8 @@ import javax.persistence.PersistenceContext;
  *
  * @author Gustav
  */
+@Stateless  // A stateless EJB
+@LocalBean
 public class SchoolRegistry extends AbstractDAO<School, Long> implements Serializable
 {
      private static final String PU = "database_pu";
