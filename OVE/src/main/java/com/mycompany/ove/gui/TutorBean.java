@@ -19,13 +19,15 @@ import javax.inject.Named;
 @SessionScoped
 public class TutorBean implements Serializable{
     
-    List<Worker> tutors = new LinkedList();
+    List<Worker> tutors;
     
     public TutorBean() {
-        addTutor(new Worker(9001015050L, "Lisa", "lisa@mail.se", "0707777777", "Chalmers"));
-        addTutor(new Worker(9001015051L, "Madeleine", "madeleine@mail.se", "0707777778", "Chalmers"));
-        addTutor(new Worker(9001015052L, "Gustav", "gustav@mail.se", "0707777779", "Chalmers"));
-        addTutor(new Worker(9001015053L, "Kristoffer", "kristoffer@mail.se", "0707777776", "Chalmers"));
+        tutors = new LinkedList();
+        
+        tutors.add(new Worker(9001015050L, "Lisa", "lisa@mail.se", "0707777777", "Chalmers"));
+        tutors.add(new Worker(9001015051L, "Madeleine", "madeleine@mail.se", "0707777778", "Chalmers"));
+        tutors.add(new Worker(9001015052L, "Gustav", "gustav@mail.se", "0707777779", "Chalmers"));
+        tutors.add(new Worker(9001015053L, "Kristoffer", "kristoffer@mail.se", "0707777776", "Chalmers"));
     }
     
     public Worker selectedTutor() {
