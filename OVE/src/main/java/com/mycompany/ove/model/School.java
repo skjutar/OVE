@@ -6,6 +6,7 @@ package com.mycompany.ove.model;
 
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
@@ -24,7 +25,7 @@ public class School extends AbstractEntity {
     private String address;
     @ManyToMany
     private List<Person> contactPersons;
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     private Schedule schedule;
 
     public School() {

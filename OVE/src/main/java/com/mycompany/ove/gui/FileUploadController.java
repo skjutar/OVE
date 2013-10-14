@@ -5,6 +5,8 @@
  */
 package com.mycompany.ove.gui;
 
+
+import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;  
@@ -13,9 +15,9 @@ import javax.inject.Named;
   
 import org.primefaces.model.UploadedFile;  
  
-@Named("fileUpload")
-@RequestScoped
-public class FileUploadController {  
+@Named("fileUploadC")
+@SessionScoped
+public class FileUploadController implements Serializable{  
   
     private UploadedFile file;  
   

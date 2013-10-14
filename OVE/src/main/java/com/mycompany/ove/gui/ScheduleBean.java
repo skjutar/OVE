@@ -4,6 +4,8 @@
  */
 package com.mycompany.ove.gui;
 
+import com.mycompany.ove.model.School;
+import com.mycompany.ove.model.SchoolRegistry;
 import com.mycompany.ove.model.Session;
 import com.mycompany.ove.model.Worker;
 import java.io.Serializable;
@@ -11,6 +13,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.enterprise.context.RequestScoped;
+
+import javax.ejb.EJB;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -30,10 +37,15 @@ import org.primefaces.model.ScheduleModel;
  * @author Gustav
  */
 @Named("scheduleBean")
-@SessionScoped
+@RequestScoped
 public class ScheduleBean implements Serializable
 {
+  //  @EJB
+ //   private SchoolRegistry reg;
+    
     private ScheduleModel eventModel;  
+    private List<School> schoolList;
+
     private List<Session> sessionList;
     private List<Worker> workerList;
     private int numberOfStudents;
@@ -48,23 +60,32 @@ public class ScheduleBean implements Serializable
         sessionList = new ArrayList<Session>();
         workerList = new ArrayList<Worker>();
         eventModel = new DefaultScheduleModel();  
-      //  createSessions(sessionList);
-        eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));  
+    //    schoolList =  reg.getRange(0, reg.getCount());
+ //       createSessions(schoolList);
+       
+     //  schoolList.  //     eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));  
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));  
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));  
         eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm())); 
         
     }  
-    private void createSession(ArrayList<Session> sessionList)
+ /*  private void createSessions(List<School> schoolList)
     {
-        for(Session s: sessionList)
-        {
-            //Used getters that i need to get from Session
-            //takes eventName, startCalendar and endCalendar time
-     //       eventModel.addEvent(new DefaultScheduleEvent(s.getName(), s.getStartTime(),s.getEndTime()));
-            //Add method to add other info to the event that+s not created in the constructor
-        }
-    }
+        //list of schools
+        for(School forSchool: schoolList)
+       {    
+           //Sessions for this school
+         sessionList =  forSchool.getSchedule().getSessions();
+         //List of sessions
+         for(Session forSession: sessionList)
+         {      //Create an new event for this session
+             eventModel.addEvent(new DefaultScheduleEvewnt(forSchool.getName(),forSession.getStartTime()
+                     ,forSession.getEndTime()));
+                     forSession
+         }
+         
+       }
+    } */
     public Date getRandomDate(Date base) {  
         Calendar date = Calendar.getInstance();  
         date.setTime(base);  
