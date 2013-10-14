@@ -32,7 +32,7 @@ public class CreateAccountBean {
    
    private String password;
    
-   private int idNumber;
+   private Long idNumber;
    
    private String name;
    
@@ -76,14 +76,14 @@ public class CreateAccountBean {
     /**
      * @return the idNumber
      */
-    public int getIdNumber() {
+    public Long getIdNumber() {
         return idNumber;
     }
 
     /**
      * @param idNumber the idNumber to set
      */
-    public void setIdNumber(int idNumber) {
+    public void setIdNumber(Long idNumber) {
         this.idNumber = idNumber;
     }
 
