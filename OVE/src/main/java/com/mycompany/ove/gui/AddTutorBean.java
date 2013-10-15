@@ -32,7 +32,7 @@ public class AddTutorBean implements Serializable {
     private String address;
     private int salary;
     
-    public void addTutor() {
+    public String addTutor() {
         //RequestContext context = RequestContext.getCurrentInstance();  
         FacesMessage msg;   
         Worker tutor =  reg.getTutor(idNumber);
@@ -50,6 +50,7 @@ public class AddTutorBean implements Serializable {
         
         FacesContext.getCurrentInstance().addMessage(null, msg);  
         //context.addCallbackParam("loggedIn", loggedIn);  
+	return Navigation.PRODUCT_ADDED.toString();
     }
 
     public Long getIdNumber() {

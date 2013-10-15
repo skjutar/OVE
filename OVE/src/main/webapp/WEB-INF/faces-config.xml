@@ -42,7 +42,7 @@
     <navigation-rule>
         <from-view-id>/jsf/products/tutors.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>add</from-outcome>
+            <from-outcome>ADD_PRODUCT</from-outcome>
             <to-view-id>/jsf/products/addTutor.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule> 
@@ -50,7 +50,7 @@
     <navigation-rule>
         <from-view-id>/jsf/products/addTutor.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>add</from-outcome>
+            <from-outcome>PRODUCT_ADDED</from-outcome>
             <to-view-id>/jsf/products/tutors.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule> 

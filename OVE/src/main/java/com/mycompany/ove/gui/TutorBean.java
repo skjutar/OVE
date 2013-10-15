@@ -4,7 +4,7 @@
  */
 package com.mycompany.ove.gui;
 
-import com.mycompany.ove.model.Worker;
+import com.mycompany.ove.model.*;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +18,10 @@ import javax.inject.Named;
 @Named("tutorBean")
 @SessionScoped
 public class TutorBean implements Serializable{
+    
+    /*
+     * Add registry?
+     */
     
     List<Worker> tutors;
     private Worker selectedTutor;
@@ -43,7 +47,13 @@ public class TutorBean implements Serializable{
         return tutors;
     }
     
+    public String addTutor() {
+	return Navigation.ADD_PRODUCT.toString();
+    }
+    
+    /*
     public void addTutor(Worker tutor) {
         tutors.add(tutor);
     }
+    */
 }
