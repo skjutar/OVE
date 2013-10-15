@@ -26,9 +26,11 @@ import java.util.ArrayList;
 public class Session extends AbstractEntity {
     
    // private GregorianCalendar startTime;
+
   //  private GregorianCalendar endTime;
     private Long startTime;
     private Long endTime;
+
     private int nbrOfStudents;
     private List<Worker> tutors;
     private String notation;

@@ -9,6 +9,7 @@ import com.mycompany.ove.model.Account;
 import com.mycompany.ove.model.Model;
 import com.mycompany.ove.model.ModelFactory;
 import com.mycompany.ove.model.Person;
+import com.mycompany.ove.model.SchoolRegistry;
 import com.mycompany.ove.model.UserRegistry;
 import java.io.Serializable;
 import java.util.List;
@@ -35,11 +36,10 @@ public class LoginBean implements Serializable{
    @EJB
    private UserRegistry reg;
    
+   
    private String username;  
       
    private String password;  
-    
-   //private Model model = ModelFactory.getModel("OVE_model_pu");
     
    private Long idNumber;
    
@@ -51,6 +51,7 @@ public class LoginBean implements Serializable{
    
    private String emailAdress;
    
+   private String picUrl;
    
      
    
@@ -87,6 +88,7 @@ public class LoginBean implements Serializable{
                 setTelephoneNumber(p.getPhoneNbr());
                 setIdNumber(p.getIdNumber());
                 setName(p.getName());
+                setPicUrl(p.getPicUrl());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", username);
             }
         
@@ -106,6 +108,8 @@ public class LoginBean implements Serializable{
         String outcome = "Logout"; 
         facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, outcome);        
     }
+    
+  
 
    
     
@@ -179,6 +183,20 @@ public class LoginBean implements Serializable{
      */
     public void setEmailAdress(String emailAdress) {
         this.emailAdress = emailAdress;
+    }
+
+    /**
+     * @return the picUrl
+     */
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    /**
+     * @param picUrl the picUrl to set
+     */
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
     
     

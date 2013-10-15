@@ -46,7 +46,7 @@ public class ScheduleBean implements Serializable
     @EJB
     private SchoolRegistry reg;
     
-    private ScheduleModel eventModel;  
+    private ScheduleModel eventModel; 
     private List<School> schoolList;
 
     private List<Session> sessionList;
@@ -54,7 +54,7 @@ public class ScheduleBean implements Serializable
     private String schoolName;
     private String notation;
     private int nbrOfStudents;
-    private List<Worker> tutor;
+    private List<Worker> tutors;
       
     //Overide this to handle events,   comments and time 
     private ScheduleEvent event = new DefaultScheduleEvent();
@@ -62,6 +62,7 @@ public class ScheduleBean implements Serializable
     
     public ScheduleBean() {  
         //Get a list of sessions from somewhere 
+
         //eventModel = new DefaultScheduleModel();
       //  eventModel = (ScheduleModel) new OveScheduleEvent();
       //  schoolList =  reg.getRange(0, reg.getCount());
@@ -71,6 +72,7 @@ public class ScheduleBean implements Serializable
       //  eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));  
      //   eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));  
      //   eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm())); 
+
         
     }  
     //Create all sessions for all schools in this list
@@ -160,7 +162,7 @@ public class ScheduleBean implements Serializable
             {
                 setNotation(s.getNotation());
                 setNbrOfStudents(s.getNbrOfStudents());
-                setTutor(s.getTutors());
+                setTutors(s.getTutors());
             }
         }
     }  
@@ -232,17 +234,17 @@ public class ScheduleBean implements Serializable
     /**
      * @return the tutor
      */
-    public List<Worker> getTutor()
+    public List<Worker> getTutors()
     {
-        return tutor;
+        return tutors;
     }
 
     /**
      * @param tutor the tutor to set
      */
-    public void setTutor(List<Worker> tutor)
+    public void setTutors(List<Worker> tutors)
     {
-        this.tutor = tutor;
+        this.tutors = tutors;
     }
 }  
 

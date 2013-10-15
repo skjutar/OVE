@@ -19,6 +19,7 @@ public abstract class AbstractPerson extends AbstractEntity
     protected String mail;
     protected String phoneNbr;
     protected String address;
+    private String picUrl;
 
     public AbstractPerson() {
     }
@@ -29,7 +30,19 @@ public abstract class AbstractPerson extends AbstractEntity
         this.mail = mail;
         this.phoneNbr = phoneNbr;
         this.address = address;
+        this.picUrl="URL";
     }
+    
+    public AbstractPerson(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {
+        super(id);
+        this.idNumber = idNumber;
+        this.name = name;
+        this.mail = mail;
+        this.phoneNbr = phoneNbr;
+        this.address = address;
+        this.picUrl="URL";
+    }
+    
 
     public Long getIdNumber() {
         return idNumber;
@@ -69,6 +82,20 @@ public abstract class AbstractPerson extends AbstractEntity
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    /**
+     * @return the picUrl
+     */
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    /**
+     * @param picUrl the picUrl to set
+     */
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
 }

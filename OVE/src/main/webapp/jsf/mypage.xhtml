@@ -18,55 +18,47 @@ and open the template in the editor.
                 <div id="container" style="overflow:hidden">  
                     <div id="inner" style="overflow:">
                 <div style="float:left">
-                    <h:form prependId="false">  
+                    <h:form id="mypage">  
                     <p:growl id="msgs" />  
-                     <p:panel header="About Me" style="width: 250px">  
+                    <p:panel id="pInfo" header="About Me" style="width: 250px">  
                        <h:panelGrid columns="2" columnClasses="column" cellpadding="5">  
-                        <h:outputText value="Name: " />  
-                           <p:inplace id="name">  
-                               <p:inputText value="#{loginBean.name}" disabled="true" />  
-                     </p:inplace>
-                         <h:outputText value="Username: " />  
-                           <p:inplace id="userName">  
-                               <p:inputText value="#{loginBean.username} "/>  
-                     </p:inplace>
-                        <h:outputText value="email" />
-                        <p:inplace id="email">
-                            <p:inputText value="#{loginBean.emailAdress} " />
-                        </p:inplace>
-                        <h:outputText value="pnumber" />
-                        <p:inplace id="pnumber">
-                            <p:inputText value="#{loginBean.idNumber} " />
-                        </p:inplace>
-                         <h:outputText value="tele" />
-                        <p:inplace id="tel">
-                            <p:inputText value="#{loginBean.telephoneNumber} " />
-                        </p:inplace>
+                           <h:outputText value="Name: " />  
+                           <p:inputText value="#{mypageBean.name}"  
+                                    required="true" label="text" />  
+                           <h:outputText value="Username: " />  
+                           <p:inputText value="#{mypageBean.username}"  
+                                    required="true" label="text" />  
+                           <h:outputText value="Email: " />  
+                           <p:inputText value="#{mypageBean.emailAdress}"  
+                                    required="true" label="text" />  
+                           <h:outputText value="Personal number: " />  
+                           <p:inputText value="#{mypageBean.idNumber}"  
+                                    required="true" label="text" />  
+                           <h:outputText value="Adress: " />  
+                           <p:inputText value="#{mypageBean.adress}"  
+                                    required="true" label="text" />  
+                           <h:outputText value="Tele: " />  
+                           <p:inputText value="#{mypageBean.telephoneNumber}"  
+                                    required="false" label="text" />  
+                         <h:outputText value="Profile picture URL: " />  
+                                 <p:inputText value="#{mypageBean.picUrl}"  
+                                    required="false" label="text" />  
+                            
+                                 
                   </h:panelGrid>  
-                </p:panel>  
+                         
+                         
+                        
+                </p:panel>
+                    <p:commandButton value="Save"  action="#{mypageBean.update}" ajax="false"  />  
             </h:form>
                 </div>
                         <div style="float:left;margin-left: 40em ">
-                       
+                            <h:form>
                             <h1>Profil Pic</h1>
-                            <h:graphicImage url="#{fileUpload.file}"/>
- 
-  
-                
-                            <h:form enctype="multipart/form-data">  
-  
-                            <p:messages showDetail="true"/>  
-  
-                            <p:fileUpload value="#{fileUpload.file}" mode="simple" sizeLimit="3145728"
-                                    allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                             invalidSizeMessage="Maximum file size allowed: 3 MB"
-                             auto="true"
-                             />  
-  
-                             <p:commandButton value="Submit" ajax="false"  
-                                              accesskey="" actionListener="#{fileUpload.upload()}"/>  
-  
-                    </h:form>  
+                            <p:graphicImage url="#{mypageBean.picUrl}" id="display" height="300" width="300"/>
+                            </h:form>
+                           
   
                         </div>
                 </div>

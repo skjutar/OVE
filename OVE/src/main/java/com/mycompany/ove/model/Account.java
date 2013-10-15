@@ -34,6 +34,12 @@ public class Account extends AbstractEntity {
         this.userName = userName;
         this.passWord = passWord;
     }
+    public Account(Long id, Person person, String userName, String passWord) {
+        super(id);
+        this.person = person;
+        this.userName = userName;
+        this.passWord = passWord;
+    }
 
     public Person getPerson() {
         return person;

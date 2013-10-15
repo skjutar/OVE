@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -21,10 +22,15 @@ public class Person extends AbstractPerson {
     {
         super();
     }
- 
+    
     public Person(Long idNumber, String name, String mail, String phoneNbr, String address)
     {
         super(idNumber,name,mail,phoneNbr,address);
+    }
+ 
+    public Person(Long id, Long idNumber, String name, String mail, String phoneNbr, String address)
+    {
+        super(id, idNumber,name,mail,phoneNbr,address);
     }
 
     @Override
@@ -54,3 +60,4 @@ public class Person extends AbstractPerson {
     }
     
 }
+
