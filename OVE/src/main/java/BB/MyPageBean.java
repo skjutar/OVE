@@ -8,6 +8,7 @@ import Model.AbstractPerson;
 import Model.Account;
 import Model.Person;
 import EJB.UserRegistry;
+import Model.Worker;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -64,10 +65,11 @@ public class MyPageBean implements Serializable {
    
    public String update()
    {
-       Person p = new Person(person.getId(),getIdNumber(), getName(), getEmailAdress(), 
+       Worker w = new Worker(person.getId(),getIdNumber(), getName(), getEmailAdress(), 
                getTelephoneNumber(), getAdress());
-       p.setPicUrl(getPicUrl());
-       Account updated = new Account(a.getId(), p, a.getUserName(), a.getPassWord());
+       w.setPicUrl(getPicUrl());
+       Account updated = new Account(a.getId(), w, a.getUserName(), a.getPassWord());
+       updated.setActivated(true);
        reg.update(updated);    
        FacesContext facesContext = FacesContext.getCurrentInstance();
        return "MyPage";

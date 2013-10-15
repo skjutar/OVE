@@ -35,7 +35,7 @@ public class Account extends AbstractEntity {
         this.passWord = passWord;
         this.activated=false;
     }
-    public Account(Long id, Person person, String userName, String passWord) {
+    public Account(Long id, AbstractPerson person, String userName, String passWord) {
         super(id);
         this.person = person;
         this.userName = userName;

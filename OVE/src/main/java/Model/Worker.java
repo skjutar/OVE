@@ -27,6 +27,10 @@ public class Worker extends AbstractPerson {
     public Worker(Long idNumber, String name, String mail, String phoneNbr, String address) {
         super(idNumber, name, mail, phoneNbr, address);
     }
+    
+    public Worker(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {      
+        super(id, idNumber, name, mail, phoneNbr, address);
+    }
 
     public Worker(Long idNumber, String name, String mail, String phoneNbr, String address, int salary) {
         super(idNumber, name, mail, phoneNbr, address);
