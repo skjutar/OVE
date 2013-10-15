@@ -84,7 +84,11 @@ and open the template in the editor.
                         <p:growl id="growl" showDetail="true" life="3000" />  
   
                          <p:dialog  id="dialog" header="Apply" widgetVar="applydlg" resizable="false">  
-  
+                             <h:outputText value="Options: " />  
+                             <p:selectOneRadio id="options" value="#{createAccountBean.type}">  
+                                    <f:selectItem itemLabel="Worker" itemValue="worker" />  
+                                    <f:selectItem itemLabel="Admin" itemValue="admin" />  
+                                </p:selectOneRadio>  
                             <h:panelGrid columns="2"   cellpadding="5" >  
                                 <h:outputLabel for="username" value="Username:" />  
                                 <p:inputText value="#{createAccountBean.username}"   
@@ -111,7 +115,7 @@ and open the template in the editor.
               
                                 <f:facet name="footer">  
                                     <p:commandButton id="applyButton" value="Apply" update="growl"   
-                                    actionListener="#{createAccountBean.create}"    
+                                                     actionListener="#{createAccountBean.create}"    
                                     accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
                                 </f:facet>  
                                
