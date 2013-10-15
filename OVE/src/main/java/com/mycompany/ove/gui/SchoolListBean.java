@@ -24,7 +24,7 @@ public class SchoolListBean implements Serializable{
     @EJB
     private SchoolRegistry registry;
     
-    private ListDataModel<School> allSchools;  
+    private SchoolDataModel allSchools;  
     
     private List<School> schoolsforList;  
       
@@ -38,7 +38,7 @@ public class SchoolListBean implements Serializable{
         //populateRandomCars(schoolsforList, 50);  
         schoolsforList=registry.getRange(0, registry.getCount());
   
-        allSchools = new  ListDataModel(schoolsforList);  
+        allSchools = new  SchoolDataModel(schoolsforList);  
     }  
   
     /*private void populateRandomCars(List<Car> list, int size) {  

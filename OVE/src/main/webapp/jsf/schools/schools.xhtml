@@ -22,8 +22,8 @@ and open the template in the editor.
   
                         <p:growl id="growl" showDetail="true"/>  
   
-                        <p:dataTable id="schools" var="school" value="#{schoollist.allSchools}" paginator="true" rows="10" > 
-                        <!--selection="#{schoollist.selectedSchool}" selectionMode="single"-->  
+                        <p:dataTable id="schools" var="school" value="#{schoollist.allSchools}" paginator="true" rows="10"  
+                        selection="#{schoollist.selectedSchool}" selectionMode="single">  
   
                             <p:ajax event="rowSelect" listener="#{schoollist.onRowSelect}"   
                                         update=":form:display :form:growl" oncomplete="PF('schoolDialog').show()" />  
