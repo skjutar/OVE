@@ -16,7 +16,66 @@ and open the template in the editor.
     
         <h:body>
             <ui:composition template="/WEB-INF/template.xhtml">
-                <ui:define name="content"> 
+                <ui:define name="content">
+                    
+                    <h:form id="form">  
+  
+                        <p:growl id="growl" showDetail="true"/>  
+  
+                        <p:dataTable id="schools" var="school" value="#{schoollist.allSchools}" paginator="true" rows="10" > 
+                        <!--selection="#{schoollist.selectedSchool}" selectionMode="single"-->  
+  
+                            <p:ajax event="rowSelect" listener="#{schoollist.onRowSelect}"   
+                                        update=":form:display :form:growl" oncomplete="PF('schoolDialog').show()" />  
+                            <p:ajax event="rowUnselect" listener="#{schoollist.onRowUnselect}" update=":form:growl"/>  
+  
+                            <f:facet name="header">  
+                                Select a row to display a school  
+                            </f:facet>  
+  
+                            <p:column headerText="Name">  
+                                #{school.name}  
+                            </p:column>  
+  
+                            <p:column headerText="Address">  
+                                #{school.address}  
+                            </p:column>  
+  
+                            <p:column headerText="Zip Code" >  
+                                #{school.zip}  
+                            </p:column>  
+  
+                            <p:column headerText="City">  
+                                #{school.city}  
+                            </p:column>  
+                        </p:dataTable>  
+                        
+                        <p:dialog id="dialog" header="School Detail" widgetVar="schoolDialog" resizable="false"  
+                showEffect="fade" hideEffect="explode">  
+  
+                            <h:panelGrid id="display" columns="2" cellpadding="4">  
+                                <!--
+                                <f:facet name="header">  
+                                    <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
+                                </f:facet>  
+  
+                                <h:outputText value="Model:" />  
+                                <h:outputText value="#{tableBean.selectedCar.model}" />  
+  
+                                <h:outputText value="Year:" />  
+                                <h:outputText value="#{tableBean.selectedCar.year}" />  
+  
+                                <h:outputText value="Manufacturer:" />  
+                                <h:outputText value="#{tableBean.selectedCar.manufacturer}" />  
+  
+                                <h:outputText value="Color:" />  
+                                <h:outputText value="#{tableBean.selectedCar.color}" />
+                                -->
+                            </h:panelGrid>  
+                        </p:dialog>  
+  
+                    </h:form>
+                    
 
                     <h:form id="addnewschool"> 
                         <h:outputLink id="addschoolLink" value="javascript:void(0)" onclick="addschooldlg.show()" title="login" >   
