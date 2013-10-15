@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove.model;
+package Model;
 
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -22,20 +22,28 @@ import javax.persistence.Transient;
 @Entity
 public class Account extends AbstractEntity {
     @OneToOne (cascade = CascadeType.ALL)
-    private Person person;
+    private AbstractPerson person;
     private String userName;
     private String passWord;
-
+    private Boolean activated;
     public Account() {
     }
     
-    public Account(Person person, String userName, String passWord) {
+    public Account(AbstractPerson person, String userName, String passWord) {
         this.person = person;
         this.userName = userName;
         this.passWord = passWord;
+        this.activated=false;
+    }
+    public Account(Long id, AbstractPerson person, String userName, String passWord) {
+        super(id);
+        this.person = person;
+        this.userName = userName;
+        this.passWord = passWord;
+        this.activated=false;
     }
 
-    public Person getPerson() {
+    public AbstractPerson getPerson() {
         return person;
     }
 
@@ -84,5 +92,19 @@ public class Account extends AbstractEntity {
     @Override
     public String toString() {
         return "User{" + "person=" + person + ", userName=" + userName + '}';
+    }
+
+    /**
+     * @return the activated
+     */
+    public Boolean getActivated() {
+        return activated;
+    }
+
+    /**
+     * @param activated the activated to set
+     */
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
     }
 }

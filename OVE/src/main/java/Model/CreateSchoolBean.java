@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove.gui;
+package Model;
 
-import com.mycompany.ove.model.School;
-import com.mycompany.ove.model.SchoolRegistry;
+import EJB.SchoolRegistry;
 import java.beans.*;
 import java.io.Serializable;
 import javax.ejb.EJB;

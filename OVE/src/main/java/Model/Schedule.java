@@ -2,12 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove.model;
+package Model;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -20,8 +22,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Schedule extends AbstractEntity{
     
+      //  @JoinColumn
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
     private List<Session> sessions;
 
     public Schedule() {

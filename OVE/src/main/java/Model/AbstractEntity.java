@@ -1,5 +1,5 @@
 
-package com.mycompany.ove.model;
+package Model;
 
 import java.io.Serializable;
 import java.util.Objects;

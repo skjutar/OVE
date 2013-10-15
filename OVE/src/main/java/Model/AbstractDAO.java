@@ -1,4 +1,4 @@
-package com.mycompany.ove.model;
+package Model;
 
 import java.util.ArrayList;
 import java.util.Collections;

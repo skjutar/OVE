@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove.model;
+package Model;
 
 import javax.persistence.Entity;
 
@@ -14,15 +14,22 @@ import javax.persistence.Entity;
  * @author lisastenberg
  */
 @Entity
-public class Worker extends Person {
-    
-    private int salary;
+public class Worker extends AbstractPerson {
 
-    public Worker() {
+    private int salary;
+    
+
+    public Worker()
+    {
+        super();
     }
     
     public Worker(Long idNumber, String name, String mail, String phoneNbr, String address) {
         super(idNumber, name, mail, phoneNbr, address);
+    }
+    
+    public Worker(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {      
+        super(id, idNumber, name, mail, phoneNbr, address);
     }
 
     public Worker(Long idNumber, String name, String mail, String phoneNbr, String address, int salary) {
@@ -60,5 +67,6 @@ public class Worker extends Person {
     public String toString() {
         return "Worker{" + "salary=" + salary + '}';
     }
+
     
 }

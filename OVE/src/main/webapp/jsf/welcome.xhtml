@@ -32,12 +32,17 @@ and open the template in the editor.
                 </p:layoutUnit>
                 
                 <p:layoutUnit position="center" >
-                    <div align="center">
-                        <h1>Welcome!</h1>
-                        <h1>This is a bla bla bla bla</h1>
-                        <h:graphicImage url="#{resource['img:tut.jpg']}" />                      
-                    </div>
-                    <h:button id="hiddenButton" outcome="Home"  style="display:none" class="button"/>
+
+                        
+                             <div align="center">
+                                 <h1>Welcome!</h1>
+                                 <h1>This is a bla bla bla bla</h1>
+                                 <h:graphicImage url="#{resource['img:tut.jpg']}" /> 
+                            </div>
+    
+ 
+                <h:button id="hiddenButton" outcome="Home"  style="display:none" class="button"/>
+
                 </p:layoutUnit>
                 <p:layoutUnit position="south" size="20" resizable="false" closable="false" collapsible="false">
                     This is a footer
@@ -79,7 +84,11 @@ and open the template in the editor.
                         <p:growl id="growl" showDetail="true" life="3000" />  
   
                          <p:dialog  id="dialog" header="Apply" widgetVar="applydlg" resizable="false">  
-  
+                             <h:outputText value="Options: " />  
+                             <p:selectOneRadio id="options" value="#{createAccountBean.type}">  
+                                    <f:selectItem itemLabel="Worker" itemValue="worker" />  
+                                    <f:selectItem itemLabel="Admin" itemValue="admin" />  
+                                </p:selectOneRadio>  
                             <h:panelGrid columns="2"   cellpadding="5" >  
                                 <h:outputLabel for="username" value="Username:" />  
                                 <p:inputText value="#{createAccountBean.username}"   
@@ -106,11 +115,12 @@ and open the template in the editor.
               
                                 <f:facet name="footer">  
                                     <p:commandButton id="applyButton" value="Apply" update="growl"   
-                                    actionListener="#{createAccountBean.create}"    
+                                                     actionListener="#{createAccountBean.create}"    
                                     accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
                                 </f:facet>  
                                
-                            </h:panelGrid>           
+                            </h:panelGrid>  
+                             <h:outputText value="You will receive an email to confirm your email adress"/>
                         </p:dialog>  
                     </h:form>
                 </p:layoutUnit>

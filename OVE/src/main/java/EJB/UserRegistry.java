@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove.model;
+package EJB;
 
+import Model.AbstractDAO;
+import Model.Account;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

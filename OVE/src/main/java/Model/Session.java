@@ -2,13 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove.model;
+package Model;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import Model.Worker;
+import java.util.ArrayList;
 
 /**
  * A class representing a Session. 
@@ -18,32 +21,38 @@ import javax.persistence.Entity;
  * 
  * @author lisastenberg
  */
+//@Embeddable
 @Entity
 public class Session extends AbstractEntity {
     
-    //private GregorianCalendar startTime;
-    //private GregorianCalendar endTime;
+   // private GregorianCalendar startTime;
+
+  //  private GregorianCalendar endTime;
+    private Long startTime;
+    private Long endTime;
+
     private int nbrOfStudents;
+    
     private List<Worker> tutors;
     private String notation;
-
+    
     public Session() {
     }
 
-    public Session(GregorianCalendar startTime, GregorianCalendar endTime, int nbrOfStudents, List<Worker> tutors) {
-        //this.startTime = startTime;
-        //this.endTime = endTime;
+    public Session(Long startTime, Long endTime, int nbrOfStudents, List<Worker> tutors) {
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.nbrOfStudents = nbrOfStudents;
         this.tutors = tutors;
     }
 
-  //  public GregorianCalendar getStartTime() {
-   //     return startTime;
-   // }
+    public Long getStartTime() {
+        return startTime;
+    }
 
-    //public GregorianCalendar getEndTime() {
-    //    return endTime;
-    //}
+    public Long getEndTime() {
+        return endTime;
+    }
 
     public int getNbrOfStudents() {
         return nbrOfStudents;
@@ -57,12 +66,12 @@ public class Session extends AbstractEntity {
         return notation;
     }
 
-    public void setStartTime(GregorianCalendar startTime) {
-       // this.startTime = startTime;
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
     }
 
-    public void setEndTime(GregorianCalendar endTime) {
-      //  this.endTime = endTime;
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
     }
 
     public void setNbrOfStudents(int nbrOfStudents) {
