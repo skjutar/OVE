@@ -4,6 +4,7 @@
  */
 package com.mycompany.ove.gui;
 
+// import com.mycompany.ove.model.OveScheduleEvent;
 import com.mycompany.ove.model.School;
 import com.mycompany.ove.model.SchoolRegistry;
 import com.mycompany.ove.model.Session;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -36,52 +38,38 @@ import org.primefaces.model.ScheduleModel;
 @SessionScoped
 public class ScheduleBean implements Serializable
 {
-  //  @EJB
- //   private SchoolRegistry reg;
+    @EJB
+    private SchoolRegistry reg;
     
     private ScheduleModel eventModel;  
     private List<School> schoolList;
 
     private List<Session> sessionList;
-    private List<Worker> workerList;
-    private int numberOfStudents;
+    private Date firstDate,secondDate;
+    private String schoolName;
     private String notation;
-    private int startTime,endTime;
+    private int nbrOfStudents;
+    private List<Worker> tutor;
       
     //Overide this to handle events,   comments and time 
     private ScheduleEvent event = new DefaultScheduleEvent();
+   // private ScheduleEvent event = new OveScheduleEvent();
     
     public ScheduleBean() {  
         //Get a list of sessions from somewhere 
-        sessionList = new ArrayList<Session>();
-        workerList = new ArrayList<Worker>();
-        eventModel = new DefaultScheduleModel();  
-    //    schoolList =  reg.getRange(0, reg.getCount());
- //       createSessions(schoolList);
+        eventModel = new DefaultScheduleModel();
+      //  eventModel = (ScheduleModel) new OveScheduleEvent();
+        schoolList =  reg.getRange(0, reg.getCount());
+    //   createSessions(schoolList);
        
-     //  schoolList.  //     eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));  
-        eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));  
-        eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));  
-        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm())); 
+        //eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));  
+      //  eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));  
+     //   eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));  
+     //   eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm())); 
         
     }  
- /*  private void createSessions(List<School> schoolList)
-    {
-        //list of schools
-        for(School forSchool: schoolList)
-       {    
-           //Sessions for this school
-         sessionList =  forSchool.getSchedule().getSessions();
-         //List of sessions
-         for(Session forSession: sessionList)
-         {      //Create an new event for this session
-             eventModel.addEvent(new DefaultScheduleEvewnt(forSchool.getName(),forSession.getStartTime()
-                     ,forSession.getEndTime()));
-                     forSession
-         }
-         
-       }
-    } */
+    //Create all sessions for all schools in this list
+   
     public Date getRandomDate(Date base) {  
         Calendar date = Calendar.getInstance();  
         date.setTime(base);  
@@ -96,87 +84,32 @@ public class ScheduleBean implements Serializable
           
         return calendar.getTime();  
     }  
-      
+    /**
+     * Update the eventModel 
+     */
+    private void updateModel()
+    {
+        schoolList = reg.getRange(0, reg.getCount());
+        for(School s: schoolList)
+        {
+            for(Session sc: s.getSchedule().getSessions())
+            {
+               firstDate = new Date(sc.getStartTime());
+               secondDate = new Date(sc.getEndTime());
+               eventModel.addEvent(new DefaultScheduleEvent(s.getName(),
+                       firstDate,secondDate));
+            }
+        }
+    }
+    /**
+     * 
+     * @return the eventModel 
+     */
     public ScheduleModel getEventModel() {  
+        updateModel();
         return eventModel;  
     }  
-      
-    private Calendar today() {  
-        Calendar calendar = Calendar.getInstance();  
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);  
-        return calendar;  
-    }  
-      
-    private Date previousDay8Pm() {  
-        Calendar t = (Calendar) today().clone();  
-        t.set(Calendar.AM_PM, Calendar.PM);  
-        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);  
-        t.set(Calendar.HOUR, 8);  
-          
-        return t.getTime();  
-    }  
-      
-    private Date previousDay11Pm() {  
-        Calendar t = (Calendar) today().clone();  
-        t.set(Calendar.AM_PM, Calendar.PM);  
-        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);  
-        t.set(Calendar.HOUR, 11);  
-          
-        return t.getTime();  
-    }  
-      
-    private Date today1Pm() {  
-        Calendar t = (Calendar) today().clone();  
-        t.set(Calendar.AM_PM, Calendar.PM);  
-        t.set(Calendar.HOUR, 1);  
-          
-        return t.getTime();  
-    }  
-      
-    private Date theDayAfter3Pm() {  
-        Calendar t = (Calendar) today().clone();  
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);       
-        t.set(Calendar.AM_PM, Calendar.PM);  
-        t.set(Calendar.HOUR, 3);  
-          
-        return t.getTime();  
-    }  
-  
-    private Date today6Pm() {  
-        Calendar t = (Calendar) today().clone();   
-        t.set(Calendar.AM_PM, Calendar.PM);  
-        t.set(Calendar.HOUR, 6);  
-          
-        return t.getTime();  
-    }  
-      
-    private Date nextDay9Am() {  
-        Calendar t = (Calendar) today().clone();  
-        t.set(Calendar.AM_PM, Calendar.AM);  
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);  
-        t.set(Calendar.HOUR, 9);  
-          
-        return t.getTime();  
-    }  
-      
-    private Date nextDay11Am() {  
-        Calendar t = (Calendar) today().clone();  
-        t.set(Calendar.AM_PM, Calendar.AM);  
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);  
-        t.set(Calendar.HOUR, 11);  
-          
-        return t.getTime();  
-    }  
-      
-    private Date fourDaysLater3pm() {  
-        Calendar t = (Calendar) today().clone();   
-        t.set(Calendar.AM_PM, Calendar.PM);  
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 4);  
-        t.set(Calendar.HOUR, 3);  
-          
-        return t.getTime();  
-    }  
-      
+
     public ScheduleEvent getEvent() {  
         return event;  
     }  
@@ -190,18 +123,36 @@ public class ScheduleBean implements Serializable
             eventModel.addEvent(event);  
         else  
             eventModel.updateEvent(event);  
-          
+      
+        //Använd info från dialogen
+       // event = new OveScheduleEvent();
+        //event = new OveScheduleEvent(null, null, null, 0, null, null);
         event = new DefaultScheduleEvent();  
     }  
       //Trycker event dialogen
     public void onEventSelect(SelectEvent selectEvent) {  
         event = (ScheduleEvent) selectEvent.getObject();  
     }  
-      
+   
     public void onDateSelect(SelectEvent selectEvent) {  
+
         event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());  
+        String name = event.getTitle();
+        Date startTime = event.getStartDate();
+        //Hämta info från databasen
+        School sch = reg.getByName(name).get(0);
+        setSchoolName(sch.getName());
+        for(Session s: reg.getByName(name).get(0).getSchedule().getSessions())
+        {
+            if(s.getStartTime() ==  event.getStartDate().getTime())
+            {
+                setNotation(s.getNotation());
+                setNbrOfStudents(s.getNbrOfStudents());
+                setTutor(s.getTutors());
+            }
+        }
     }  
-      
+    
     public void onEventMove(ScheduleEntryMoveEvent event) {  
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());  
           
@@ -217,5 +168,69 @@ public class ScheduleBean implements Serializable
     private void addMessage(FacesMessage message) {  
         FacesContext.getCurrentInstance().addMessage(null, message);  
     }  
+
+    /**
+     * @return the schoolName
+     */
+    public String getSchoolName()
+    {
+        return schoolName;
+    }
+
+    /**
+     * @param schoolName the schoolName to set
+     */
+    public void setSchoolName(String schoolName)
+    {
+        this.schoolName = schoolName;
+    }
+
+    /**
+     * @return the notation
+     */
+    public String getNotation()
+    {
+        return notation;
+    }
+
+    /**
+     * @param notation the notation to set
+     */
+    public void setNotation(String notation)
+    {
+        this.notation = notation;
+    }
+
+    /**
+     * @return the nbrOfStudents
+     */
+    public int getNbrOfStudents()
+    {
+        return nbrOfStudents;
+    }
+
+    /**
+     * @param nbrOfStudents the nbrOfStudents to set
+     */
+    public void setNbrOfStudents(int nbrOfStudents)
+    {
+        this.nbrOfStudents = nbrOfStudents;
+    }
+
+    /**
+     * @return the tutor
+     */
+    public List<Worker> getTutor()
+    {
+        return tutor;
+    }
+
+    /**
+     * @param tutor the tutor to set
+     */
+    public void setTutor(List<Worker> tutor)
+    {
+        this.tutor = tutor;
+    }
 }  
 

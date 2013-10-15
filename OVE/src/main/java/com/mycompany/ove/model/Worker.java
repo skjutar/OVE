@@ -4,6 +4,8 @@
  */
 package com.mycompany.ove.model;
 
+import javax.persistence.Entity;
+
 /**
  * A class representing a Worker.
  * 
@@ -11,9 +13,15 @@ package com.mycompany.ove.model;
  * 
  * @author lisastenberg
  */
-public class Worker extends Person {
+@Entity
+public class Worker extends AbstractPerson {
     
     private int salary;
+    
+    public Worker()
+    {
+        super();
+    }
     
     public Worker(int idNumber, String name, String mail, String phoneNbr, String address) {
         super(idNumber, name, mail, phoneNbr, address);
