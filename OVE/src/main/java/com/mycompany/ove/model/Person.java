@@ -16,19 +16,21 @@ import javax.persistence.Entity;
 @Entity
 public class Person extends AbstractPerson {
 
+
     public Person()
     {
         super();
     }
-    public Person(int idNumber, String name, String mail, String phoneNbr, String address)
+ 
+    public Person(Long idNumber, String name, String mail, String phoneNbr, String address)
     {
         super(idNumber,name,mail,phoneNbr,address);
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + this.idNumber;
+        hash = (int)(59 * hash + this.idNumber);
         return hash;
     }
     

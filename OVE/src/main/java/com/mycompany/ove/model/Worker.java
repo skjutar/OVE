@@ -15,19 +15,19 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Worker extends AbstractPerson {
-    
+
     private int salary;
-    
+
     public Worker()
     {
         super();
     }
     
-    public Worker(int idNumber, String name, String mail, String phoneNbr, String address) {
+    public Worker(Long idNumber, String name, String mail, String phoneNbr, String address) {
         super(idNumber, name, mail, phoneNbr, address);
     }
 
-    public Worker(int idNumber, String name, String mail, String phoneNbr, String address, int salary) {
+    public Worker(Long idNumber, String name, String mail, String phoneNbr, String address, int salary) {
         super(idNumber, name, mail, phoneNbr, address);
         this.salary = salary;
     }

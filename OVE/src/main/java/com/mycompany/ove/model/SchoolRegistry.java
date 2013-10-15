@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Gustav
+ * @author Gustav & Malla
  */
 @Stateless  // A stateless EJB
 @LocalBean
@@ -34,12 +34,17 @@ public class SchoolRegistry extends AbstractDAO<School, Long> implements Seriali
      public void postContruct() {
         super.setEntitymanager(em);     
     }    
-     
+     /**
+     * Gets schools by name
+     * @param name, which is searched for
+     * @return list of schools with the name.
+     */
       public List<School> getByName(String name) {
         List<School> found = new ArrayList<School>();
         for (School c : getRange(0, getCount())) {
             if (c.getName().equals(name)) {
                 found.add(c);
+
             }
         }
         return found;

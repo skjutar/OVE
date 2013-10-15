@@ -36,7 +36,7 @@ public class TestBean implements Serializable
     }
     public void addWorker(ActionEvent event)
     {   
-        Ove = new Worker(1232312,"Ove Sundberg", "ove@Sundberg.se", "34324234", "parkbänken 3");
+        Ove = new Worker(1232312L,"Ove Sundberg", "ove@Sundberg.se", "34324234", "parkbänken 3");
         reg.add(Ove);
         FacesMessage msg = null; 
         if(reg.getCount()==1)

@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class AbstractPerson extends AbstractEntity
 {
-     protected int idNumber;
+     protected Long idNumber;
     protected String name;
     protected String mail;
     protected String phoneNbr;
@@ -23,7 +23,7 @@ public abstract class AbstractPerson extends AbstractEntity
     public AbstractPerson() {
     }
     
-    public AbstractPerson(int idNumber, String name, String mail, String phoneNbr, String address) {
+    public AbstractPerson(Long idNumber, String name, String mail, String phoneNbr, String address) {
         this.idNumber = idNumber;
         this.name = name;
         this.mail = mail;
@@ -31,7 +31,7 @@ public abstract class AbstractPerson extends AbstractEntity
         this.address = address;
     }
 
-    public int getIdNumber() {
+    public Long getIdNumber() {
         return idNumber;
     }
 
@@ -51,7 +51,7 @@ public abstract class AbstractPerson extends AbstractEntity
         return address;
     }
     
-    public void setIdNumber(int idNumber) {
+    public void setIdNumber(Long idNumber) {
         this.idNumber = idNumber;
     }
 
