@@ -21,7 +21,7 @@ import javax.persistence.Entity;
 @Entity
 public class Session extends AbstractEntity {
     
-    //private GregorianCalendar startTime;
+   // private GregorianCalendar startTime;
     //private GregorianCalendar endTime;
     private int nbrOfStudents;
     private List<Worker> tutors;

@@ -21,6 +21,7 @@ public class Person extends AbstractEntity {
     private String mail;
     private String phoneNbr;
     private String address;
+    private String picUrl;
 
     public Person() {
     }
@@ -31,6 +32,17 @@ public class Person extends AbstractEntity {
         this.mail = mail;
         this.phoneNbr = phoneNbr;
         this.address = address;
+        this.picUrl=null;
+    }
+    
+    public Person(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {
+        super(id);
+        this.idNumber = idNumber;
+        this.name = name;
+        this.mail = mail;
+        this.phoneNbr = phoneNbr;
+        this.address = address;
+        this.picUrl=null;
     }
 
     public Long getIdNumber() {
@@ -97,6 +109,20 @@ public class Person extends AbstractEntity {
     @Override
     public String toString() {
         return "Person{" + "idNumber=" + idNumber + ", name=" + name + ", mail=" + mail + ", phoneNbr=" + phoneNbr + ", address=" + address + '}';
+    }
+
+    /**
+     * @return the picUrl
+     */
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    /**
+     * @param picUrl the picUrl to set
+     */
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
     
 }

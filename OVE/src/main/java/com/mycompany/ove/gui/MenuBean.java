@@ -41,6 +41,7 @@ public class MenuBean implements Serializable {
     private MethodExpression exp = factory.createMethodExpression(FacesContext.getCurrentInstance().getELContext(), "#{loginBean.logout}", null, new Class[]{});
     
     
+    
 
     
     public MenuModel getModel() {
