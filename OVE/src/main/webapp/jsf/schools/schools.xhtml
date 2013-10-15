@@ -9,22 +9,23 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>CLP Schools</title>
-    </h:head>
-    <h:body>
-        <ui:composition template="/WEB-INF/template.xhtml">
-            <ui:define name="content"> 
+    <f:view contentType="text/html">
+        <h:head>
+            <title>CLP Schools</title>
+        </h:head>
+    
+        <h:body>
+            <ui:composition template="/WEB-INF/template.xhtml">
+                <ui:define name="content"> 
 
-                                    <h:form id="addnewschool"> 
+                    <h:form id="addnewschool"> 
                         <h:outputLink id="addschoolLink" value="javascript:void(0)" onclick="addschooldlg.show()" title="login" >   
-                          <p:commandButton value="Add New School"  type="button" />  
+                            <p:commandButton value="Add New School"  type="button" />  
                         </h:outputLink>  
-                        
                         
                         <p:growl id="growl" showDetail="true" life="3000" />  
   
-                         <p:dialog  id="dialog" header="Add New School" widgetVar="addschooldlg" resizable="false">  
+                        <p:dialog  id="dialog" header="Add New School" widgetVar="addschooldlg" resizable="false">  
   
                             <h:panelGrid columns="2"   cellpadding="5" >  
                                 <h:outputLabel for="name" value="School name:" />  
@@ -33,38 +34,36 @@ and open the template in the editor.
                                 
                                 <h:outputLabel for="address" value="Adress:"/>  
                                 <h:inputText value="#{createSchoolBean.address}"   
-                               id="address" required="true" label="Address" />
-                                
-                               <h:outputLabel for="zip" value="Zip Code:"/>  
-                               <h:inputText value="#{createSchoolBean.zip}"   
-                               id="zip" required="true" label="Zip" />
-                               
-                               <h:outputLabel for="city" value="City:" />  
-                               <p:inputText value="#{createSchoolBean.city}"   
+                                id="address" required="true" label="Address" />
+                        
+                                <h:outputLabel for="zip" value="Zip Code:"/>  
+                                <h:inputText value="#{createSchoolBean.zip}"   
+                                id="zip" required="true" label="Zip" />
+                        
+                                <h:outputLabel for="city" value="City:" />  
+                                <p:inputText value="#{createSchoolBean.city}"   
                                 id="city" required="true" label="City" /> 
               
-                     <f:facet name="footer">  
-                          <p:commandButton id="addButton" value="Add School" update="growl"   
-                                           actionListener="#{createSchoolBean.create}"    
-                          accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
-                     </f:facet>  
-                               
-        </h:panelGrid>           
-    </p:dialog>  
-</h:form>
-                
-                
-            </ui:define>
-        </ui:composition>
-    </h:body>
+                                <f:facet name="footer">  
+                                    <p:commandButton id="addButton" value="Add School" update="growl"   
+                                    actionListener="#{createSchoolBean.create}"    
+                                    accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
+                                </f:facet>  
+                            </h:panelGrid>           
+                        </p:dialog>  
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
     <script type="text/javascript">  
   
-    function handleCreateRequest(xhr, status, args) {
-        console.log("Made it into function in schools.xhtml.")
-    if(args.created) {
-        addschooldlg.hide();  
-        $('#addschoolLink').fadeOut();
-    }
-    }
-</script>  
+        function handleCreateRequest2(xhr, status, args) {
+            console.log("Made it into function in schools.xhtml.");
+            if(args.created) {
+                addschooldlg.hide();  
+                $('#addschoolLink').fadeOut();
+            }
+        }
+    </script>  
 </html>
