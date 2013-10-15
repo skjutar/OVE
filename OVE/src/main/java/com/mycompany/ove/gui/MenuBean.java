@@ -51,6 +51,7 @@ public class MenuBean implements Serializable {
         menuItem.setOutcome("MyPage");
         menuItem.setId("MyPage");
         model.addMenuItem(menuItem);
+
    
         Submenu submenu = new Submenu();
         submenu.setLabel("Schools");
@@ -64,6 +65,7 @@ public class MenuBean implements Serializable {
             submenu.getChildren().add(menuItem);
         }
         model.addSubmenu(submenu);
+
         menuItem = new MenuItem();
         menuItem.setValue("Tutors");
         menuItem.setOutcome("Tutors");

@@ -14,11 +14,13 @@ import javax.persistence.Entity;
  * @author lisastenberg
  */
 @Entity
-public class Worker extends Person {
-    
+public class Worker extends AbstractPerson {
+
     private int salary;
 
-    public Worker() {
+    public Worker()
+    {
+        super();
     }
     
     public Worker(Long idNumber, String name, String mail, String phoneNbr, String address) {

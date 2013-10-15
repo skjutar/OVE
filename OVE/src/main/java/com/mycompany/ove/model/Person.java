@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -14,75 +15,22 @@ import javax.persistence.Entity;
  * @author lisastenberg
  */
 @Entity
-public class Person extends AbstractEntity {
+public class Person extends AbstractPerson {
 
-    private Long idNumber;
-    private String name;
-    private String mail;
-    private String phoneNbr;
-    private String address;
-    private String picUrl;
 
-    public Person() {
+    public Person()
+    {
+        super();
     }
     
-    public Person(Long idNumber, String name, String mail, String phoneNbr, String address) {
-        this.idNumber = idNumber;
-        this.name = name;
-        this.mail = mail;
-        this.phoneNbr = phoneNbr;
-        this.address = address;
-        this.picUrl=null;
+    public Person(Long idNumber, String name, String mail, String phoneNbr, String address)
+    {
+        super(idNumber,name,mail,phoneNbr,address);
     }
-    
-    public Person(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {
-        super(id);
-        this.idNumber = idNumber;
-        this.name = name;
-        this.mail = mail;
-        this.phoneNbr = phoneNbr;
-        this.address = address;
-        this.picUrl=null;
-    }
-
-    public Long getIdNumber() {
-        return idNumber;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public String getPhoneNbr() {
-        return phoneNbr;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-    
-    public void setIdNumber(Long idNumber) {
-        this.idNumber = idNumber;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public void setPhoneNbr(String phoneNbr) {
-        this.phoneNbr = phoneNbr;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+ 
+    public Person(Long id, Long idNumber, String name, String mail, String phoneNbr, String address)
+    {
+        super(id, idNumber,name,mail,phoneNbr,address);
     }
 
     @Override
@@ -110,19 +58,6 @@ public class Person extends AbstractEntity {
     public String toString() {
         return "Person{" + "idNumber=" + idNumber + ", name=" + name + ", mail=" + mail + ", phoneNbr=" + phoneNbr + ", address=" + address + '}';
     }
-
-    /**
-     * @return the picUrl
-     */
-    public String getPicUrl() {
-        return picUrl;
-    }
-
-    /**
-     * @param picUrl the picUrl to set
-     */
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
     
 }
+
