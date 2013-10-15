@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.annotation.PostConstruct;
 
 import javax.enterprise.context.RequestScoped;
 
@@ -61,9 +62,9 @@ public class ScheduleBean implements Serializable
     
     public ScheduleBean() {  
         //Get a list of sessions from somewhere 
-        eventModel = new DefaultScheduleModel();
+        //eventModel = new DefaultScheduleModel();
       //  eventModel = (ScheduleModel) new OveScheduleEvent();
-        schoolList =  reg.getRange(0, reg.getCount());
+      //  schoolList =  reg.getRange(0, reg.getCount());
     //   createSessions(schoolList);
        
         //eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));  
@@ -73,7 +74,14 @@ public class ScheduleBean implements Serializable
         
     }  
     //Create all sessions for all schools in this list
-   
+    
+    @PostConstruct
+    public void init()
+    {
+        eventModel = new DefaultScheduleModel();
+      //  eventModel = (ScheduleModel) new OveScheduleEvent();
+        schoolList =  reg.getRange(0, reg.getCount());
+    }
     public Date getRandomDate(Date base) {  
         Calendar date = Calendar.getInstance();  
         date.setTime(base);  

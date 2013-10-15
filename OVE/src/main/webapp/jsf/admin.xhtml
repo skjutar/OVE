@@ -31,22 +31,22 @@ and open the template in the editor.
     <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">  
     <h:panelGrid id="eventDetails" columns="2">
         <h:outputLabel for="title" value="Title"/>
-        <p> </p>
+        <h:inputText size="60" value="#{scheduleBean.schoolName}" />
         
-        <h:outputLabel for="position" value="#{scheduleBean.schoolName}"/>
-        <p:inputText/>
+        <h:outputLabel for="position" value="Position:"/>
+        <p:inputText size="60"/>
         
-        <h:outputLabel for="time" value="Time"/>
+        <h:outputLabel for="time" value="Time:"/>
         <p:inputText size="60" value="#{scheduleBean.event.startDate}"/>
         
-        <h:outputLabel for="students" value="Numver of students"/>
+        <h:outputLabel for="students" value="Number of students:"/>
         <p:inputText size="60" value="#{scheduleBean.nbrOfStudents}"/>
          
-        <h:outputLabel for="comments" value="Comments"/>
+        <h:outputLabel for="comments" value="Comments:"/>
         <p:inputTextarea rows="10" cols="60" value="#{scheduleBean.notation}"/>
        
  
-        <p:commandButton id="updateButton" value="Update" update="growl"   
+        <p:commandButton id="updateButton" value="Update"  
                          actionListener="#{scheduleBean.addEvent}"    
                           accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>
         
