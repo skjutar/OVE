@@ -61,7 +61,17 @@ public class TestBean implements Serializable
             msg = new FacesMessage("Couldnt add worker");
         }
     }
-    
+    /**
+     * Adds two schools to the reg
+     */
+    private void addTwoSchools()
+    {
+        List<Person> contactPersons = new ArrayList<Person>();
+        School firstSchool = new School("BackaSkolan", "34342", contactPersons);
+        School secondSchool = new School("Hvitfeldtska gymnasiet", "23341", contactPersons);
+        schReg.add(firstSchool);
+        schReg.add(secondSchool);
+    }
     private void initTwoSchools()
     {
         List<Person> contactPersons = new ArrayList<Person>();
