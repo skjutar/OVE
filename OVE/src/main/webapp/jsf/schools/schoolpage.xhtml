@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/template.xhtml">
+            <ui:define name="content"> 
+                <div id="container" style="overflow:hidden">  
+                    <div id="inner" style="overflow:">
+                        <div style="float:left">
+                            <h:form id="schoolpage">  
+                                <p:growl id="msgs" />  
+                               <p:panel id="pInfo" header="About #{schoolpage.school.name}" style="width: 250px">  
+                                    <h:panelGrid columns="2" columnClasses="column" cellpadding="5" >  
+                                        <h:outputText value="Name: " />  
+                                        <p:inputText value="#{schoolpage.school.name}"  
+                                                     required="true" label="text" />  
+                                        <h:outputText value="Address: " />  
+                                        <p:inputText value="#{schoolpage.school.address}"  
+                                                     required="true" label="text" />  
+                                        <h:outputText value="Zip Code: " />  
+                                        <p:inputText value="#{schoolpage.school.zip}"  
+                                                     required="true" label="text" />  
+                                        <h:outputText value="City: " />  
+                                        <p:inputText value="#{schoolpage.school.city}"  
+                                                     required="true" label="text" />  
+                                    </h:panelGrid> 
+                                </p:panel>
+
+                            </h:form>
+                        </div>
+                        <div style="float:left;margin-left: 40em ">
+                       
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

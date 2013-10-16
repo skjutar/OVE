@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+TODO (Malla)
+- Att välja en skola ur listan gå bra, men att välja en ny ger inget resultat.
+- Ta bort en skola ur listan.
+- Lägga till kontaktpersoner till skolorna.
+- KOmma till vy för en specifik skola.
+Optional
+- Förändra uppdatering av listan till js i listan ist för location.reload();
 To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
@@ -13,46 +20,48 @@ and open the template in the editor.
         <h:head>
             <title>CLP Schools</title>
         </h:head>
-    
+
         <h:body>
             <ui:composition template="/WEB-INF/template.xhtml">
                 <ui:define name="content">
-                    
+
                     <h:form id="form">  
-  
+
                         <p:growl id="growl" showDetail="true"/>  
-  
+
                         <p:dataTable id="schools" var="school" value="#{schoollist.allSchools}" paginator="true" rows="10"  
-                        selection="#{schoollist.selectedSchool}" selectionMode="single">  
-  
-                            <p:ajax event="rowSelect" listener="#{schoollist.onRowSelect}"   
-                                        update=":form:display :form:growl" oncomplete="PF('schoolDialog').show()" />  
+                                     selection="#{schoollist.selectedSchool}" selectionMode="single">  
+
+                            <p:ajax event="rowSelect" listener="#{schoollist.onRowSelect}"/>  
+
+                            <!--
                             <p:ajax event="rowUnselect" listener="#{schoollist.onRowUnselect}" update=":form:growl"/>  
-  
+                            -->
+                            
                             <f:facet name="header">  
                                 Select a row to display a school  
                             </f:facet>  
-  
-                            <p:column headerText="Name">  
+
+                            <p:column headerText="Name">
                                 #{school.name}  
                             </p:column>  
-  
+
                             <p:column headerText="Address">  
                                 #{school.address}  
                             </p:column>  
-  
+
                             <p:column headerText="Zip Code" >  
                                 #{school.zip}  
                             </p:column>  
-  
+
                             <p:column headerText="City">  
                                 #{school.city}  
                             </p:column>  
                         </p:dataTable>  
-                        
+
                         <p:dialog id="dialog" header="School Detail" widgetVar="schoolDialog" resizable="false"  
-                showEffect="fade" hideEffect="explode">  
-  
+                                  showEffect="fade" hideEffect="explode">  
+
                             <h:panelGrid id="display" columns="2" cellpadding="4">  
                                 <!--
                                 <f:facet name="header">  
@@ -73,58 +82,58 @@ and open the template in the editor.
                                 -->
                             </h:panelGrid>  
                         </p:dialog>  
-  
+
                     </h:form>
-                    
+
 
                     <h:form id="addnewschool"> 
                         <h:outputLink id="addschoolLink" value="javascript:void(0)" onclick="addschooldlg.show();" title="login" >   
                             <p:commandButton value="Add New School"  type="button" />  
                         </h:outputLink>  
-                        
+
                         <p:growl id="growl" showDetail="true" life="3000" />  
-  
+
                         <p:dialog  id="dialog" header="Add New School" widgetVar="addschooldlg" resizable="false">  
-  
+
                             <h:panelGrid columns="2"   cellpadding="5" >  
                                 <h:outputLabel for="name" value="School name:" />  
                                 <p:inputText value="#{createSchoolBean.name}"   
-                                id="name" required="true" label="Name" /> 
-                                
+                                             id="name" required="true" label="Name" /> 
+
                                 <h:outputLabel for="address" value="Adress:"/>  
                                 <h:inputText value="#{createSchoolBean.address}"   
-                                id="address" required="true" label="Address" />
-                        
+                                             id="address" required="true" label="Address" />
+
                                 <h:outputLabel for="zip" value="Zip Code:"/>  
                                 <h:inputText value="#{createSchoolBean.zip}"   
-                                id="zip" required="true" label="Zip" />
-                        
+                                             id="zip" required="true" label="Zip" />
+
                                 <h:outputLabel for="city" value="City:" />  
                                 <p:inputText value="#{createSchoolBean.city}"   
-                                id="city" required="true" label="City" /> 
-              
+                                             id="city" required="true" label="City" /> 
+
                                 <f:facet name="footer">  
                                     <p:commandButton id="addButton" value="Add School" update="growl"   
-                                    actionListener="#{createSchoolBean.create}"    
-                                    accesskey="" oncomplete="handleCreateRequest2(xhr, status, args)"/>                 
+                                                     actionListener="#{createSchoolBean.create}"    
+                                                     accesskey="" oncomplete="handleCreateRequest2(xhr, status, args)"/>                 
                                 </f:facet>  
                             </h:panelGrid>           
                         </p:dialog>  
                     </h:form>
-                        <script type="text/javascript">  
-  
-        function handleCreateRequest2(xhr, status, args) {
-            console.log("Made it into function in schools.xhtml.");
-            if(args.created) {
-                addschooldlg.hide();  
-                $('#addschoolLink').fadeOut();
-            }
-            location.reload();
-        }
-    </script> 
+                    <script type="text/javascript">
+
+                            function handleCreateRequest2(xhr, status, args) {
+                                console.log("Made it into function in schools.xhtml.");
+                                if (args.created) {
+                                    addschooldlg.hide();
+                                    $('#addschoolLink').fadeOut();
+                                }
+                                location.reload();
+                            }
+                    </script> 
                 </ui:define>
             </ui:composition>
         </h:body>
     </f:view>
- 
+
 </html>
