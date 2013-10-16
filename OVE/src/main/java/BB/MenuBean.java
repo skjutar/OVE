@@ -63,6 +63,8 @@ public class MenuBean implements Serializable {
         menuItem = new MenuItem();
         menuItem.setValue("Schools");
         menuItem.setOutcome("Schools");
+
+        menuItem.setId("Schools");
         model.addMenuItem(menuItem);
 
         menuItem = new MenuItem();

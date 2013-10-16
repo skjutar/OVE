@@ -137,8 +137,8 @@ public class ScheduleBean implements Serializable
 
     private void loadModel() {
        List<Session> sessions = sesReg.getRange(0, sesReg.getCount());
-       List<School> schoolList = reg.getRange(0, reg.getCount());
-       for(School school : schoolList)
+       List<School> schList = reg.getRange(0, reg.getCount());
+       for(School school : schList)
        {      
             for(Session s : school.getSchedule().getSessions())
             {

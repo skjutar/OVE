@@ -21,7 +21,7 @@ public class ScheduleEvent extends DefaultScheduleEvent {
     private Long modelId;
 
     public ScheduleEvent(String string, Date date, Date date0) {
-         super(string, date, date0);
+         super(string, date, date0);        
     }
     public ScheduleEvent()
     {
@@ -48,6 +48,7 @@ public class ScheduleEvent extends DefaultScheduleEvent {
     public List<Worker> getWorkerList() {
         return workerList;
     }
+    
 
     /**
      * @param workerList the workerList to set
