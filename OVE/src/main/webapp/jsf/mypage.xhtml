@@ -26,8 +26,8 @@ and open the template in the editor.
                            <p:inputText value="#{mypageBean.name}"  
                                     required="true" label="text" />  
                            <h:outputText value="Username: " />  
-                           <p:inputText value="#{mypageBean.username}"  
-                                    required="true" label="text" />  
+                           <h:outputText value="#{mypageBean.username}"  
+                                    />  
                            <h:outputText value="Email: " />  
                            <p:inputText value="#{mypageBean.emailAdress}"  
                                     required="true" label="text" />  
@@ -47,10 +47,10 @@ and open the template in the editor.
                                  
                   </h:panelGrid>  
                          
-                         
+                         <p:commandButton value="Save"  action="#{mypageBean.update}" ajax="false"  />  
                         
                 </p:panel>
-                    <p:commandButton value="Save"  action="#{mypageBean.update}" ajax="false"  />  
+                    
             </h:form>
                 </div>
                         <div style="float:left;margin-left: 40em ">

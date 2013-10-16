@@ -46,7 +46,7 @@
     </navigation-rule>
     
     <lifecycle>
-<phase-listener>com.mycompany.ove.account.AuthorizationListener</phase-listener>
+<phase-listener>Account.AuthorizationListener</phase-listener>
 </lifecycle>
     
 </faces-config>

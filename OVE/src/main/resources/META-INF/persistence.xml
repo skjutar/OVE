@@ -3,7 +3,7 @@
   <persistence-unit name="database_pu" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>jdbc/OVE_model</jta-data-source>
-    <class>com.mycompany.ove_model.Person</class>
+    <class>com.mycompany.ove.model.Person</class>
     <class>com.mycompany.ove.model.School</class>
     <class>com.mycompany.ove.model.Session</class>
     <class>com.mycompany.ove.model.Account</class>
@@ -12,7 +12,5 @@
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>
-  </persistence-unit>  
+  </persistence-unit>
 </persistence>
-
-
