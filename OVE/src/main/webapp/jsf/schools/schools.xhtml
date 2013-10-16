@@ -78,7 +78,7 @@ and open the template in the editor.
                     
 
                     <h:form id="addnewschool"> 
-                        <h:outputLink id="addschoolLink" value="javascript:void(0)" onclick="addschooldlg.show()" title="login" >   
+                        <h:outputLink id="addschoolLink" value="javascript:void(0)" onclick="addschooldlg.show();" title="login" >   
                             <p:commandButton value="Add New School"  type="button" />  
                         </h:outputLink>  
                         
@@ -106,16 +106,12 @@ and open the template in the editor.
                                 <f:facet name="footer">  
                                     <p:commandButton id="addButton" value="Add School" update="growl"   
                                     actionListener="#{createSchoolBean.create}"    
-                                    accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
+                                    accesskey="" oncomplete="handleCreateRequest2(xhr, status, args)"/>                 
                                 </f:facet>  
                             </h:panelGrid>           
                         </p:dialog>  
                     </h:form>
-                </ui:define>
-            </ui:composition>
-        </h:body>
-    </f:view>
-    <script type="text/javascript">  
+                        <script type="text/javascript">  
   
         function handleCreateRequest2(xhr, status, args) {
             console.log("Made it into function in schools.xhtml.");
@@ -123,6 +119,12 @@ and open the template in the editor.
                 addschooldlg.hide();  
                 $('#addschoolLink').fadeOut();
             }
+            location.reload();
         }
-    </script>  
+    </script> 
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+ 
 </html>

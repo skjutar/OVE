@@ -14,12 +14,16 @@ import javax.inject.Named;
 import org.primefaces.event.SelectEvent;  
 import org.primefaces.event.UnselectEvent;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.NavigationHandler;
+import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
   
 //import org.primefaces.examples.domain.Car;  
 //import org.primefaces.examples.view.CarDataModel;  
-@SessionScoped
+@RequestScoped
 @Named("schoollist")  
 public class SchoolListBean implements Serializable{  
     @EJB
@@ -55,10 +59,17 @@ public class SchoolListBean implements Serializable{
         return allSchools;  
     }  
   
-    public void onRowSelect(SelectEvent event) {  
-        //FacesMessage msg = new FacesMessage("School Selected", ((School) event.getObject()).getModel());  
+    public String onRowSelect(SelectEvent event) {  
+        /*FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/OVE/faces/jsf/schools/schoolpage.xhtml");*/
+        System.out.println("HEJHEJ!");
+        FacesMessage msg = new FacesMessage("School Selected", ((School) event.getObject()).getName());  
   
-        //FacesContext.getCurrentInstance().addMessage(null, msg);  
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
+       /*         NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
+        nh.handleNavigation(facesContext, null, "welcome");
+        */
+        return null;
+        
     }  
   
     public void onRowUnselect(UnselectEvent event) {  
