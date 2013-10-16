@@ -2,20 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ove.gui;
+package Model;
 
 import java.util.List;
 import javax.faces.model.ListDataModel;
-//import com.mycompany.ove.model.School;
 import org.primefaces.model.SelectableDataModel;
 
 /**
  *
  * @author Malla
  */
-public class SchoolDataModel {
-/**
-extends ListDataModel<School> implements SelectableDataModel<School> {
+public class SchoolDataModel extends ListDataModel<School> implements SelectableDataModel<School> {
 
     public SchoolDataModel(List<School> data) {
         super(data);
@@ -38,5 +35,4 @@ extends ListDataModel<School> implements SelectableDataModel<School> {
 
         return null;
     }
-    * **/
 }

@@ -1,5 +1,8 @@
-package com.mycompany.ove.gui;
+package BB;
 
+import EJB.SchoolRegistry;
+import Model.School;
+import Model.SchoolDataModel;
 import java.io.Serializable;  
 import java.util.ArrayList;  
 import java.util.Date;  
@@ -9,9 +12,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
   
 import org.primefaces.event.SelectEvent;  
-import org.primefaces.event.UnselectEvent; 
-//import com.mycompany.ove.model.SchoolRegistry;
-//import com.mycompany.ove.model.School;
+import org.primefaces.event.UnselectEvent;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.model.ListDataModel;
@@ -20,8 +21,7 @@ import javax.faces.model.ListDataModel;
 //import org.primefaces.examples.view.CarDataModel;  
 @SessionScoped
 @Named("schoollist")  
-public class SchoolListBean{
-    /**implements Serializable{  
+public class SchoolListBean implements Serializable{  
     @EJB
     private SchoolRegistry registry;
     
@@ -39,7 +39,7 @@ public class SchoolListBean{
         //populateRandomCars(schoolsforList, 50);  
         schoolsforList=registry.getRange(0, registry.getCount());
   
-        allSchools = new  SchoolDataModel(schoolsforList);  
+        allSchools = new SchoolDataModel(schoolsforList);  
     }  
   
  
@@ -66,5 +66,5 @@ public class SchoolListBean{
   
         //FacesContext.getCurrentInstance().addMessage(null, msg);  
     }
-    **/
+    
 } 

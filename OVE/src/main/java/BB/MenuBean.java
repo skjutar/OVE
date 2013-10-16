@@ -60,18 +60,11 @@ public class MenuBean implements Serializable {
         model.addMenuItem(menuItem);
 
    
-        Submenu submenu = new Submenu();
-        submenu.setLabel("Schools");
-        
-        List<School> schools = registry.getRange(0, registry.getCount());
-        for(School school : schools)
-        {
-            menuItem = new MenuItem();
-            menuItem.setValue(school.getName());
-            menuItem.setId(school.getName());
-            submenu.getChildren().add(menuItem);
-        }
-        model.addSubmenu(submenu);
+        menuItem = new MenuItem();
+        menuItem.setValue("Schools");
+        menuItem.setOutcome("Schools");
+        menuItem.setId("Schools");
+        model.addMenuItem(menuItem);
 
         menuItem = new MenuItem();
         menuItem.setValue("Tutors");
