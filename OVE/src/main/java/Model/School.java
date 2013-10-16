@@ -26,7 +26,7 @@ public class School extends AbstractEntity {
     private String address;
     private int zip;
     private String city;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Person> contactPersons;
     @OneToOne (cascade = CascadeType.ALL)
     private Schedule schedule;
