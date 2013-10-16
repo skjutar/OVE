@@ -156,5 +156,4 @@ public class ScheduleBean implements Serializable
     /**
      * @return the schoolName
      */
-}  
-
+}
