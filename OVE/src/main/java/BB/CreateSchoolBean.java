@@ -6,8 +6,12 @@ package BB;
 
 import Model.School;
 import EJB.SchoolRegistry;
+import Model.Person;
+import Model.Session;
 import java.beans.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -75,8 +79,10 @@ public class CreateSchoolBean implements Serializable {
        }       
        else  
        {
+           List<Session> sessions=new ArrayList<Session>();
+           List<Person> contacts=new ArrayList<Person>();
             created=true;
-            School school = new School(name, address, zip, city);
+            School school = new School(name, address, zip, city, sessions, contacts);
             reg.add(school);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School created");
        }

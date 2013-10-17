@@ -133,7 +133,7 @@ public class TestBean implements Serializable
         sessions.add(session);
         sessions.add(session2);
         Schedule schedule = new Schedule(sessions);
-        School school = new School("Chalmers", "chalmersgatan 4", 43351, "Göteborg");
+        School school = new School("Chalmers", "chalmersgatan 4", 43351, "Göteborg",new ArrayList<Session>(),new ArrayList<Person>());
 
         school.setSchedule(schedule);
         schReg.add(school);

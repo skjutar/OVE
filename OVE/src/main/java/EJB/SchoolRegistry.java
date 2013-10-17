@@ -22,27 +22,33 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless  // A stateless EJB
 @LocalBean
-public class SchoolRegistry extends AbstractDAO<School, Long> implements Serializable
-{
-     private static final String PU = "database_pu";
-     // This is JTA see persistence.xml
-     @PersistenceContext(unitName = PU)
-     private EntityManager em;
-     
-     public SchoolRegistry()
-     {
-         super(School.class);
-     }
-     @PostConstruct
-     public void postContruct() {
-        super.setEntitymanager(em);     
-    }    
-     /**
+public class SchoolRegistry extends AbstractDAO<School, Long> implements Serializable {
+
+    private static final String PU = "database_pu";
+    // This is JTA see persistence.xml
+    @PersistenceContext(unitName = PU)
+    private EntityManager em;
+
+    public SchoolRegistry() {
+        super(School.class);
+    }
+
+    @PostConstruct
+    public void postContruct() {
+        super.setEntitymanager(em);
+    }
+
+    /**
      * Gets schools by name
+     *
      * @param name, which is searched for
      * @return list of schools with the name.
      */
-      public List<School> getByName(String name) {
+    public List<School> getByName(String name) {
+        //Checks if the string name contains any å, ä, ö
+        if (!name.contains("Ã")) {
+            name = fixAAAEOE(name);
+        }
         List<School> found = new ArrayList<School>();
         for (School c : getRange(0, getCount())) {
             if (c.getName().equals(name)) {
@@ -52,5 +58,24 @@ public class SchoolRegistry extends AbstractDAO<School, Long> implements Seriali
         }
         return found;
     }
-}
 
+    private String fixAAAEOE(String name) {
+        while(name.contains("Ã")){
+            int i=name.indexOf("Ã");
+            StringBuilder oldsb = new StringBuilder(name);
+            oldsb.deleteCharAt(i);
+
+            char aaaeoe = ' ';
+            if(oldsb.charAt(i)=='¥')
+                aaaeoe='å';
+            else if(oldsb.charAt(i)=='¤')
+                aaaeoe='ä';
+            else if(oldsb.charAt(i)=='¶')
+                aaaeoe='ö';
+
+            oldsb.setCharAt(i, aaaeoe);
+            name=oldsb.toString();
+        }
+        return name;
+    }
+}

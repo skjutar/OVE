@@ -8,6 +8,7 @@ import EJB.SchoolRegistry;
 import java.beans.*;
 import java.io.Serializable;
 import Model.School;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -39,7 +40,23 @@ public class SchoolPageBean implements Serializable {
                 getCurrentInstance().getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
         String param = params.get("school");
+        System.out.println("*************************************************");
+        System.out.println("*************************************************");
+        System.out.println("*************************************************");
+        System.out.println("*************************************************");
+        System.out.println("*************************************************");
+        System.out.println("skolans namn i URL är: "+param);
+        System.out.println("Antal skolor i DB är :"+registry.getCount());
+        System.out.println("*************************************************");
+        System.out.println("*************************************************");
+        System.out.println("*************************************************");
+        System.out.println("*************************************************");
+        System.out.println("*************************************************");
+        List<School> skolor = registry.getByName(param);
+        System.out.println("Alla resultat när man sökt på "+ param+": "+skolor);
+
         school = registry.getByName(param).get(0);
+        System.out.println("Skolinfo på första obj:"+school);
     }
 
     public void setSchool(School s) {
