@@ -4,31 +4,42 @@
  */
 package BB;
 
+import Account.CreateAccountBean;
 import EJB.SchoolRegistry;
+import Model.Account;
+import Model.Person;
 import java.beans.*;
 import java.io.Serializable;
 import Model.School;
+import Model.Worker;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import javax.mail.MessagingException;
+import org.primefaces.context.RequestContext;
 
 /**
  *
  * @author Malla
  */
-@RequestScoped
+@SessionScoped
 @Named("schoolpage")
 public class SchoolPageBean implements Serializable {
 
     @EJB
     private SchoolRegistry registry;
     private School school;
+    Person p;
 
     /**
      * Initiates the School Page, decides which school it is to show, based on
@@ -50,16 +61,56 @@ public class SchoolPageBean implements Serializable {
 
         school = registry.getByName(param).get(0);
         System.out.println("* Skolinfo på första obj:" + school);
+        p = new Person();
+
         System.out.println("*");
         System.out.println("**********Done in init() method******************");
         System.out.println("*************************************************");
+    }
+
+    public School getSchool() {
+        init();
+        return school;
     }
 
     public void setSchool(School s) {
         this.school = s;
     }
 
-    public School getSchool() {
-        return school;
+    public Person getPerson() {
+        return p;
+    }
+
+    public void setPerson(Person p) {
+        this.p = p;
+    }
+
+    public void create(ActionEvent event) {
+        System.out.println("*************************************");
+        System.out.println("*************************************");
+        System.out.println("*************************************");
+        System.out.println("*************************************");
+        System.out.println("* KOM IN I CREATE!");
+        //model = ModelFactory.getModel("OVE_model_pu");
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage msg = null;
+        boolean created = false;
+        if (/*kolla om kontakten finns redan*/false) {
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");
+        } else {
+            created = true;
+            Person newcontact = new Person(p.getName(), p.getMail(), p.getMail(), "-");
+            System.out.println("*************************************");
+            System.out.println("*************************************");
+            System.out.println("*************************************");
+            System.out.println("*************************************");
+            System.out.println("** Person:" + newcontact);
+
+            // registry.add(a);
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "Contact created");
+        }
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("created", created);
     }
 }

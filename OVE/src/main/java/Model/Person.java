@@ -32,6 +32,10 @@ public class Person extends AbstractPerson {
     {
         super(id, idNumber,name,mail,phoneNbr,address);
     }
+        public Person(String name, String mail, String phoneNbr, String address)
+    {
+        super(name,mail,phoneNbr,address);
+    }
 
     @Override
     public int hashCode() {

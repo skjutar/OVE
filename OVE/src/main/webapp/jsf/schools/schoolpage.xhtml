@@ -38,6 +38,46 @@ and open the template in the editor.
                                 </p:panel>
 
                             </h:form>
+                            
+                            <h:form id="addcontact"> 
+                                <h:outputLink id="addcontactLink" value="javascript:void(0)" onclick="addcontactdlg.show()" title="Add a new contact" >   
+                                    <p:commandButton value="Add a new contact"  type="button" />  
+                                </h:outputLink>  
+                        
+                        
+                                <p:growl id="growl" showDetail="true" life="3000" />  
+  
+                                <p:dialog  id="dialog" header="Add Contact" widgetVar="addcontactdlg" resizable="false">  
+                                    <h:panelGrid columns="2"   cellpadding="5" >
+                                        
+                                
+                                        <h:outputLabel for="name" value="Name:" />  
+                                        <p:inputText value="#{schoolpage.person.name}"   
+                                        id="name" required="true" label="name" />             
+                                
+                                        <h:outputLabel for="email" value="Email:"/>  
+                                        <h:inputText value="#{schoolpage.person.mail}"   
+                                        id="email" required="true" label="Email" />
+                                        
+                                        <h:outputLabel for="telephoneNumber" value="Tele:"/>  
+                                        <h:inputText value="#{schoolpage.person.phoneNbr}"   
+                                        id="telephoneNumber" required="true" label="Tele" />
+                                        
+                                        <h:outputLabel for="adress" value="Adress:"/>  
+                                        <h:inputText value="#{schoolpage.person.address}"   
+                                        id="adress" required="true" label="Adress" />
+                               
+              
+                                        <f:facet name="footer">  
+                                            <p:commandButton id="addButton" value="Add new contact" update="growl"   
+                                            actionListener="#{schoolpage.create}"    
+                                            accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
+                                        </f:facet>  
+                               
+                                    </h:panelGrid>  
+                                    <h:outputText value="You will receive an email to confirm your email adress"/>
+                                </p:dialog>  
+                            </h:form>
                         </div>
                         <div style="float:left;margin-left: 40em ">
                        
@@ -45,7 +85,15 @@ and open the template in the editor.
                     </div>
                 </div>
 
-
+    <script type="text/javascript">  
+    
+    function handleCreateRequest(xhr, status, args) {
+    if(args.created) {
+        addcontactdlg.hide();  
+        $('#addcontactLink').fadeOut();
+    }
+    }
+</script> 
 
             </ui:define>
         </ui:composition>
