@@ -93,7 +93,7 @@ public class LoginBean implements Serializable{
                 if(a.getPerson().isAdmin()){
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("admin", "admin");
                 }
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", username);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("id", a.getId());
             }
         
         else{  

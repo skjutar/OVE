@@ -79,9 +79,11 @@ public class CreateSchoolBean implements Serializable {
        }       
        else  
        {
+
            List<Session> sessions=new ArrayList<Session>();
            List<Person> contacts=new ArrayList<Person>();
             created=true;
+
             School school = new School(name, address, zip, city, sessions, contacts);
             reg.add(school);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School created");

@@ -32,6 +32,8 @@ public class SchoolListBean implements Serializable {
 
     @EJB
     private SchoolRegistry registry;
+
+    private List<String> schoolNames;
     private SchoolDataModel allSchools;
     private List<School> schoolsforList;
     private School selectedSchool;
@@ -44,6 +46,8 @@ public class SchoolListBean implements Serializable {
         schoolsforList = registry.getRange(0, registry.getCount());
 
         allSchools = new SchoolDataModel(schoolsforList);
+        
+        setSchoolNames();
     }
 
     public School getSelectedSchool() {
@@ -70,6 +74,45 @@ public class SchoolListBean implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(SchoolListBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * @return the schoolsforList
+     */
+    public List<School> getSchoolsforList()
+    {
+        return schoolsforList;
+    }
+
+    /**
+     * @param schoolsforList the schoolsforList to set
+     */
+    public void setSchoolsforList(List<School> schoolsforList)
+    {
+        this.schoolsforList = schoolsforList;
+    }
+
+    /**
+     * @return the schoolNames
+     */
+    public List<String> getSchoolNames()
+    {
+        return schoolNames;
+    }
+
+    /**
+     * @param schoolNames the schoolNames to set
+     */
+    public void setSchoolNames()
+    {
+        schoolNames = new ArrayList<String>();
+        for(School s: schoolsforList)
+        {
+            if(!schoolNames.contains(s))
+            {
+                schoolNames.add(s.getName());
+            }
+       }
     }
     
     /**

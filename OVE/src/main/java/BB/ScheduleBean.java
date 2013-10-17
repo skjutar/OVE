@@ -8,6 +8,7 @@ package BB;
 import Model.School;
 import EJB.SchoolRegistry;
 import EJB.SessionRegistry;
+import EJB.WorkerRegistry;
 import Model.ScheduleEvent;
 import Model.Session;
 import Model.Worker;
@@ -33,6 +34,7 @@ import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.DualListModel;
 
 
 import org.primefaces.model.ScheduleModel;
@@ -50,12 +52,18 @@ public class ScheduleBean implements Serializable
     
     @EJB
     private SessionRegistry sesReg;
+    
+    @EJB
+    private WorkerRegistry workReg;
     private ScheduleModel eventModel; 
     private List<School> schoolList;
 
       
     //Overide this to handle events,   comments and time 
     private ScheduleEvent event = new ScheduleEvent();
+    private ArrayList<String> target;
+    private ArrayList<String> source;
+    private DualListModel<String> workerModel;
    
     //Create all sessions for all schools in this list
    @PostConstruct
@@ -63,6 +71,7 @@ public class ScheduleBean implements Serializable
    {
        eventModel = new DefaultScheduleModel();
        loadModel();
+       loadWorkers();
    }
     
     /**
@@ -80,15 +89,26 @@ public class ScheduleBean implements Serializable
     public void setEvent(ScheduleEvent event) {  
         this.event = event;  
     }  
+    
+  
       
-    public void addEvent(ActionEvent actionEvent) {  
+    public void addEvent(ActionEvent actionEvent) { 
+        ArrayList<Worker> workerList = new ArrayList<Worker>();
+        for(String s : workerModel.getTarget())
+        {            
+            workerList.add(workReg.getById(Long.parseLong(s.split(" ")[2])));
+        }
+ 
+        event.setWorkerList(workerList);
         if(event.getId() == null)  
         {
-        
+            
             School s = reg.getByName(event.getSchoolName()).get(0);
-            List<Session> sessionList = s.getSchedule().getSessions();
-            sessionList.add(new Session(event.getStartDate(), event.getEndDate(), event.getNumberOfStudents(), event.getWorkerList(), event.getNotation()));
+            System.out.println("Antal sessions i Chalmers: "+s.getSchedule().getSessions().size());
+            s.getSchedule().getSessions().add(new Session(event.getStartDate(), event.getEndDate(), event.getNumberOfStudents(), event.getWorkerList(), event.getNotation()));         
+            System.out.println("Antal sessions i Chalmers: "+s.getSchedule().getSessions().size());
             s = reg.update(s);
+            System.out.println("Antal sessions i Chalmers: "+s.getSchedule().getSessions().size());
             for(Session ses : s.getSchedule().getSessions())
             {
                 if(ses.getStartTime().compareTo(event.getStartDate())==0 
@@ -107,33 +127,34 @@ public class ScheduleBean implements Serializable
             sesReg.update(new Session(event.getModelId(), event.getStartDate(), event.getEndDate(), event.getNumberOfStudents(), event.getWorkerList(), event.getNotation()));
     
         }
-        event = new ScheduleEvent();  
+        event = new ScheduleEvent(); 
+        target.clear();
     }  
       //Trycker event dialogen
     public void onEventSelect(SelectEvent selectEvent) {  
-        event = (ScheduleEvent) selectEvent.getObject();  
+        loadWorkers();
+        event = (ScheduleEvent) selectEvent.getObject();
+        for(Worker w : event.getWorkerList())
+        {
+            workerModel.getTarget().add(w.getName()+ " "+w.getIdNumber());
+        }
+        for(String s : workerModel.getTarget())
+        {
+            if(workerModel.getSource().contains(s))
+            {
+                workerModel.getSource().remove(s);
+            }
+        }
     }  
    
     public void onDateSelect(SelectEvent selectEvent) {  
+        loadWorkers();
         event = new ScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject()); 
         event.setAllDay(false);
+        target.clear();
     }  
     
-    public void onEventMove(ScheduleEntryMoveEvent event) {  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());  
-          
-        addMessage(message);  
-    }  
-      
-    public void onEventResize(ScheduleEntryResizeEvent event) {  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());  
-          
-        addMessage(message);  
-    }  
-      
-    private void addMessage(FacesMessage message) {  
-        FacesContext.getCurrentInstance().addMessage(null, message);  
-    }  
+  
 
     private void loadModel() {
        List<Session> sessions = sesReg.getRange(0, sesReg.getCount());
@@ -153,7 +174,73 @@ public class ScheduleBean implements Serializable
        }
     }
 
+    private void loadWorkers() {
+        List<Worker> workerList = workReg.getRange(0, workReg.getCount());
+        setSource(new ArrayList<String>());
+        setTarget(new ArrayList<String>());
+        for(Worker w : workerList)
+        {
+            getSource().add(w.getName()+ " "+w.getIdNumber());
+        }  
+        setWorkerModel(new DualListModel<String>(source, target));
+    }
+
+   
+
+   
+    
+
     /**
-     * @return the schoolName
+     * @return the target
      */
-}
+
+    public ArrayList<String> getTarget() {
+        return target;
+    }
+
+    /**
+     * @param target the target to set
+     */
+    public void setTarget(ArrayList<String> target) {
+        this.target = target;
+    }
+
+    /**
+     * @return the source
+     */
+    public ArrayList<String> getSource() {
+        return source;
+    }
+
+    /**
+     * @param source the source to set
+     */
+    public void setSource(ArrayList<String> source) {
+        this.source = source;
+    }
+
+    /**
+     * @return the workerModel
+     */
+    public DualListModel<String> getWorkerModel() {
+        return workerModel;
+    }
+
+    /**
+     * @param workerModel the workerModel to set
+     */
+    public void setWorkerModel(DualListModel<String> workerModel) {
+        this.workerModel = workerModel;
+    }
+
+    /**
+     * @return the workers
+     */
+   
+    
+    
+
+
+   
+}  
+

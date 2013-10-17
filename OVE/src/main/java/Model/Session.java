@@ -32,10 +32,10 @@ public class Session extends AbstractEntity {
    // private GregorianCalendar startTime;
 
   //  private GregorianCalendar endTime;
-     @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date startTime;
-     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date endTime;
 
     private int nbrOfStudents;
