@@ -193,6 +193,7 @@ public class ScheduleBean implements Serializable
     /**
      * @return the target
      */
+
     public ArrayList<String> getTarget() {
         return target;
     }

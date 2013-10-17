@@ -41,6 +41,7 @@ public class TestBean implements Serializable
     
     private Worker Ove;
     private List<Session> sessions;
+    private List<Session> sessions2;
     private List<Worker> workerList;
     
     public TestBean()
@@ -61,12 +62,23 @@ public class TestBean implements Serializable
             msg = new FacesMessage("Couldnt add worker");
         }
     }
-    
-    private void initTwoSchools()
+    /**
+     * Adds two schools to the reg
+     */
+    private void addTwoSchools()
+    {
+        List<Person> contactPersons = new ArrayList<Person>();
+        School firstSchool = new School("BackaSkolan", "34342", contactPersons);
+        School secondSchool = new School("Hvitfeldtska gymnasiet", "23341", contactPersons);
+        schReg.add(firstSchool);
+        schReg.add(secondSchool);
+    }
+    public void initTwoSchools()
     {
         List<Person> contactPersons = new ArrayList<Person>();
         contactPersons.add(new Person(881003L, "Rikard Eriksson", "rikard@gmail.com", "07011111", "avenyn 5"));     
         School school = new School("BackaSkolan", "41681", contactPersons);
+     //   School school2 = new School("Hvitfeldtska", "33232", contactPersons);
         sessions = new ArrayList<Session>();
         List<Worker> wList = new ArrayList<Worker>();
         
@@ -86,6 +98,7 @@ public class TestBean implements Serializable
         Schedule schedule = new Schedule(sessions);
         
         school.setSchedule(schedule);
+     //   schReg.add(school2);
         schReg.add(school);
        // Worker oddWorker = new Worker(77777L, "oddOve", "oddOve@gmail.com", "0706666", "oddovegatan 5", 12);
        // oddWorker.setSessions(sessions);
@@ -112,6 +125,7 @@ public class TestBean implements Serializable
     public void testAdminSchedule(ActionEvent event)
     {
         sessions = new ArrayList<Session>();
+        sessions2 = new ArrayList<Session>();
         workerList = new ArrayList<Worker>();
         Calendar time = Calendar.getInstance();
         Ove = new Worker(1232312L,"Ove Sundberg", "ove@Sundberg.se", "34324234", 
@@ -120,14 +134,24 @@ public class TestBean implements Serializable
         workerList.add(Ove);
         Session session = new Session(new Date(time.getTimeInMillis()), new Date(time.getTimeInMillis()+10000), 45, workerList);
         session.setNotation("DET HÄR ÄR EN NOTATION");
-        Session session2 = new Session(new Date(time.getTimeInMillis()+99999*1000), new Date(time.getTimeInMillis()+99999*1500), 23, workerList);
         sessions.add(session);
-        sessions.add(session2);
         Schedule schedule = new Schedule(sessions);
         School school = new School("Chalmers", "chalmersgatan 4", 43351, "Göteborg");
 
         school.setSchedule(schedule);
-        schReg.add(school);
+        
+   //     schReg.add(school);
+        
+        Session session2 = new Session(new Date(time.getTimeInMillis()+99999*1000), new Date(time.getTimeInMillis()+99999*1500), 23, workerList);
+        sessions2.add(session2);
+        Schedule schedule2 = new Schedule(sessions2);
+        School school2 = new School("Backaskolan", "Backavägen 64", 23311, "Hisingen");
+        school2.setSchedule(schedule2);
+        
+        schReg.add(school2);
+        
+        
+        
     }
     
     
