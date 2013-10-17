@@ -19,7 +19,7 @@ and open the template in the editor.
   
     <p:growl id="messages" showDetail="true" />  
   
-    <p:schedule id="schedule" value="#{scheduleBean.eventModel}" widgetVar="myschedule" timeZone="GMT+2">  
+    <p:schedule id="schedule" value="#{scheduleBean.eventModel}" widgetVar="myschedule" timeZone="GMT+1" timeFormat="">  
   
         <p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
         <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
@@ -33,13 +33,13 @@ and open the template in the editor.
         <h:outputLabel for="title" value="School"/>
         <p:inputText value="#{scheduleBean.event.schoolName}"/>
         <h:outputLabel value="From:" for="from"/>
-        <p:inputMask id="from" value="#{scheduleBean.event.startDate}" mask="99/99/9999">  
-                <f:convertDateTime pattern="dd/MM/yyyy" />  
+        <p:inputMask id="from" value="#{scheduleBean.event.startDate}" mask="99:99/99/99/9999">  
+                <f:convertDateTime pattern="HH:mm/dd/MM/yyyy" />  
             </p:inputMask>  
   
             <h:outputLabel for="to" value="To:" />  
-            <p:inputMask id="to" value="#{scheduleBean.event.endDate}" mask="99/99/9999">  
-                <f:convertDateTime pattern="dd/MM/yyyy" />  
+            <p:inputMask id="to" value="#{scheduleBean.event.endDate}" mask="99:99/99/99/9999">  
+                <f:convertDateTime pattern="HH:mm/dd/MM/yyyy" />  
             </p:inputMask>  
         
         
@@ -48,13 +48,17 @@ and open the template in the editor.
          
         <h:outputLabel for="comments" value="Comments"/>
         <p:inputTextarea rows="10" cols="60" value="#{scheduleBean.event.notation}"/>
-       
- 
-        <p:commandButton id="updateButton" value="Save" 
+  
+        
+        </h:panelGrid> 
+        
+        <p:pickList id="pickList" value="#{scheduleBean.workerModel}" var="worker"   
+                    itemLabel="#{worker}" itemValue="#{worker}"  /> 
+        
+         <p:commandButton id="updateButton" value="Save" 
                          actionListener="#{scheduleBean.addEvent}" ajax="false"   
                          oncomplete="myschedule.update(); eventDialog.hide();"/>
         
-        </h:panelGrid>  
     </p:dialog>  
   
 </h:form>  

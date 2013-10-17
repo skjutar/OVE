@@ -31,10 +31,10 @@ public void afterPhase(PhaseEvent event) {
     }
  
     else{
-        Object currentUser = session.getAttribute("username");
+        Object currentId = session.getAttribute("id");
         NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
         
-        if (!hasBeenLoggedIn && (currentUser == null || currentUser == "")) {
+        if (!hasBeenLoggedIn && (currentId == null || currentId == "")) {
             nh.handleNavigation(facesContext, null, "welcome");
         }
         else if(currentPage.equals("/jsf/admin.xhtml") && session.getAttribute("admin")==null) {

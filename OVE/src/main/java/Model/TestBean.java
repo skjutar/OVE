@@ -116,6 +116,7 @@ public class TestBean implements Serializable
         Calendar time = Calendar.getInstance();
         Ove = new Worker(1232312L,"Ove Sundberg", "ove@Sundberg.se", "34324234", 
                 "parkbänken utanför konsum");
+       
         workerList.add(Ove);
         Session session = new Session(new Date(time.getTimeInMillis()), new Date(time.getTimeInMillis()+10000), 45, workerList);
         session.setNotation("DET HÄR ÄR EN NOTATION");

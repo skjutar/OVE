@@ -72,9 +72,9 @@ public class MenuBean implements Serializable {
         menuItem.setOutcome("Tutors");
         menuItem.setId("Tutors");
         model.addMenuItem(menuItem);
-        String username =  (String)FacesContext.getCurrentInstance()
-                .getExternalContext().getSessionMap().get("username");
-        Account a = uReg.getByName(username).get(0);
+        Long id =  (Long)FacesContext.getCurrentInstance()
+                .getExternalContext().getSessionMap().get("id");
+        Account a = uReg.find(id);
         if(a.getPerson().isAdmin())
         {
             menuItem = new MenuItem();
