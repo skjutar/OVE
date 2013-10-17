@@ -27,8 +27,45 @@ and open the template in the editor.
   
     </h:panelGrid>  
  
-    <p:commandButton action="#{tutorBean.navToAddTutor}" value="Submit" />
-    <p:button id="addTutor" value ="Add Tutor" onclick="" /> 
+    <h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="applydlg.show()" title="Add Tutor" >
+	<p:commandButton value="Add" />
+     </h:outputLink> 
+    
+	    <p:growl id="growl" showDetail="true" life="3000" />  
+  
+                         <p:dialog  id="dialog" header="Apply" widgetVar="applydlg" resizable="false"> 
+                            <h:panelGrid columns="2"   cellpadding="5" >  
+                                <h:outputLabel for="name" value="name:"/>  
+                                <h:inputText value="#{addTutorBean.name}"   
+                                id="name" required="true" label="Name:" />
+                                <h:outputLabel for="idNumber" value="ID number:" />  
+                                <p:inputText value="#{addTutorBean.idNumber}"   
+                                id="idNumber" required="true" label="idNumber" /> 
+                                <h:outputLabel for="email" value="Email:"/>  
+                                <h:inputText value="#{addTutorBean.mail}"   
+                                id="email" required="true" label="Email" />
+                                <h:outputLabel for="telephoneNumber" value="Tele:"/>  
+                                <h:inputText value="#{addTutorBean.phoneNbr}"   
+                                id="telephoneNumber" required="true" label="Tele" />
+                                <h:outputLabel for="address" value="Address:"/>  
+                                <h:inputText value="#{addTutorBean.address}"   
+                                id="address" required="false" label="Address" />
+				<h:outputLabel for="salary" value="Salary:"/>  
+                                <h:inputText value="#{addTutorBean.salary}"   
+                                id="salary" required="true" label="Salary" />
+                               
+              
+                                <f:facet name="footer">  
+                                    <p:commandButton id="applyButton" value="Apply" update="growl"   
+                                                     actionListener="#{addTutorBean.addTutor}"    
+                                    accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
+                                </f:facet>  
+                               
+                            </h:panelGrid>  
+                             <h:outputText value="Tutor added"/>
+                        </p:dialog>  
+    
+    <!--<p:button id="addTutor" value ="Add Tutor" onclick="" /> -->
     <!--
     <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
         <h:panelGrid columns="1" id="display">  
