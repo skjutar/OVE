@@ -13,6 +13,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -65,6 +66,18 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         List <Worker> list =  em.createQuery("select t from Worker t where t.Worker_ID = "+id).getResultList();
         em.close();
         return list;
+    }
+    
+    public Worker getById(Long id)
+    {
+        Query q = em.createQuery("select t from Worker t where t.idNumber="+id);// WHERE t.idNumber = :id");
+        //q.setParameter("id", id);
+       
+        List <Worker> list = q.getResultList();
+        if(list.isEmpty())
+            return null;
+        
+        return list.get(0);
     }
 }
 

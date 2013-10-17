@@ -60,27 +60,21 @@ public class MenuBean implements Serializable {
         model.addMenuItem(menuItem);
 
    
-        Submenu submenu = new Submenu();
-        submenu.setLabel("Schools");
-        
-        List<School> schools = registry.getRange(0, registry.getCount());
-        for(School school : schools)
-        {
-            menuItem = new MenuItem();
-            menuItem.setValue(school.getName());
-            menuItem.setId(school.getName());
-            submenu.getChildren().add(menuItem);
-        }
-        model.addSubmenu(submenu);
+        menuItem = new MenuItem();
+        menuItem.setValue("Schools");
+        menuItem.setOutcome("Schools");
+
+        menuItem.setId("Schools");
+        model.addMenuItem(menuItem);
 
         menuItem = new MenuItem();
         menuItem.setValue("Tutors");
         menuItem.setOutcome("Tutors");
         menuItem.setId("Tutors");
         model.addMenuItem(menuItem);
-        String username =  (String)FacesContext.getCurrentInstance()
-                .getExternalContext().getSessionMap().get("username");
-        Account a = uReg.getByName(username).get(0);
+        Long id =  (Long)FacesContext.getCurrentInstance()
+                .getExternalContext().getSessionMap().get("id");
+        Account a = uReg.find(id);
         if(a.getPerson().isAdmin())
         {
             menuItem = new MenuItem();

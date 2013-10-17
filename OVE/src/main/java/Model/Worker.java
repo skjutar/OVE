@@ -4,7 +4,10 @@
  */
 package Model;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 /**
  * A class representing a Worker.
@@ -17,6 +20,8 @@ import javax.persistence.Entity;
 public class Worker extends AbstractPerson {
 
     private int salary;
+    @ManyToMany(mappedBy = "tutors", cascade= CascadeType.ALL)   
+    private List<Session> sessions;
     
 
     public Worker()
@@ -66,6 +71,20 @@ public class Worker extends AbstractPerson {
     @Override
     public String toString() {
         return "Worker{" + "salary=" + salary + '}';
+    }
+
+    /**
+     * @return the sessions
+     */
+    public List<Session> getSessions() {
+        return sessions;
+    }
+
+    /**
+     * @param sessions the sessions to set
+     */
+    public void setSessions(List<Session> sessions) {
+        this.sessions = sessions;
     }
 
     

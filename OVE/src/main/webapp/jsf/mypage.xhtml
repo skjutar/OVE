@@ -26,8 +26,8 @@ and open the template in the editor.
                            <p:inputText value="#{mypageBean.name}"  
                                     required="true" label="text" />  
                            <h:outputText value="Username: " />  
-                           <p:inputText value="#{mypageBean.username}"  
-                                    required="true" label="text" />  
+                           <h:outputText value="#{mypageBean.username}"  
+                                    />  
                            <h:outputText value="Email: " />  
                            <p:inputText value="#{mypageBean.emailAdress}"  
                                     required="true" label="text" />  
@@ -65,17 +65,17 @@ and open the template in the editor.
                 </div>
                 
                  
-                <p:carousel id="basicCarousel" value="#{carouselBean.carsSmall}" var="monthly" itemStyleClass="monthlyItem">  
+                <p:carousel id="basicCarousel" value="#{carouselBean.months}" var="monthly" itemStyleClass="monthlyItem">  
                     <f:facet name="header">  
                             Work per month.  
                     </f:facet>  
                         <h:panelGrid columns="1" style="width:100%" cellpadding="5">  
-                            <strong> #{monthly.manufacturer}</strong>
-                            <h:outputText value="No. sessions: #{monthly.model}" />  
+                            <strong> #{monthly.month}</strong>
+                            <h:outputText value="No. sessions: #{monthly.noOfSessions}" />  
           
-                            <h:outputText value="Total hours: #{monthly.year}" />  
+                            <h:outputText value="Total hours: #{monthly.hours}" />  
           
-                            <h:outputText value="Total salary: #{monthly.color}" />  
+                            <h:outputText value="Total salary: #{monthly.salary}" />  
                         </h:panelGrid>  
                         <f:facet name="footer">  
                      

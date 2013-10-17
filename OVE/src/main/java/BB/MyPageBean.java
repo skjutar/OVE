@@ -47,9 +47,9 @@ public class MyPageBean implements Serializable {
    @PostConstruct
    public void init()
    {
-       String sessionName =  (String)FacesContext.getCurrentInstance()
-                .getExternalContext().getSessionMap().get("username");
-       a = reg.getByName(sessionName).get(0);
+       Long modelId =  (Long)FacesContext.getCurrentInstance()
+                .getExternalContext().getSessionMap().get("id");
+       a = reg.find(modelId);
        person = a.getPerson();
        setUsername(a.getUserName());
        setAdress(person.getAddress());
@@ -58,10 +58,14 @@ public class MyPageBean implements Serializable {
        setTelephoneNumber(person.getPhoneNbr());
        setName(person.getName());
        setPicUrl(person.getPicUrl());
+       initSessionList();
        
    }
    
-   
+   private void initSessionList()
+   {
+       
+   }
    
    public String update()
    {

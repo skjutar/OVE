@@ -24,19 +24,22 @@ public void afterPhase(PhaseEvent event) {
  
     boolean hasBeenLoggedIn = (currentPage.lastIndexOf("welcome.xhtml") > -1);
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
- 
+    
     if(session==null){
         NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
         nh.handleNavigation(facesContext, null, "welcome");
     }
  
     else{
-        Object currentUser = session.getAttribute("username");
- 
-    if (!hasBeenLoggedIn && (currentUser == null || currentUser == "")) {
+        Object currentId = session.getAttribute("id");
         NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
-        nh.handleNavigation(facesContext, null, "welcome");
+        
+        if (!hasBeenLoggedIn && (currentId == null || currentId == "")) {
+            nh.handleNavigation(facesContext, null, "welcome");
         }
+        else if(currentPage.equals("/jsf/admin.xhtml") && session.getAttribute("admin")==null) {
+                nh.handleNavigation(facesContext, null, "Home");                 
+            }
     }
     }
 

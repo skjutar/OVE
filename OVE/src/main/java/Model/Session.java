@@ -12,6 +12,10 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import Model.Worker;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
 
 /**
  * A class representing a Session. 
@@ -28,29 +32,52 @@ public class Session extends AbstractEntity {
    // private GregorianCalendar startTime;
 
   //  private GregorianCalendar endTime;
-    private Long startTime;
-    private Long endTime;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    Date startTime;
+    
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    Date endTime;
 
     private int nbrOfStudents;
     
+    @ManyToMany(cascade= CascadeType.PERSIST)
     private List<Worker> tutors;
     private String notation;
     
     public Session() {
     }
 
-    public Session(Long startTime, Long endTime, int nbrOfStudents, List<Worker> tutors) {
+    public Session(Date startTime, Date endTime, int nbrOfStudents, List<Worker> tutors) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.nbrOfStudents = nbrOfStudents;
         this.tutors = tutors;
     }
+    
+    public Session(Date startTime, Date endTime, int nbrOfStudents, List<Worker> tutors, String notation) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.nbrOfStudents = nbrOfStudents;
+        this.tutors = tutors;
+        this.notation=notation;
+    }
+    
+    public Session(Long id, Date startTime, Date endTime, int nbrOfStudents, List<Worker> tutors, String notation) {
+        super(id);
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.nbrOfStudents = nbrOfStudents;
+        this.tutors = tutors;
+        this.notation=notation;
+    }
+    
+    
 
-    public Long getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public Long getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
@@ -66,11 +93,11 @@ public class Session extends AbstractEntity {
         return notation;
     }
 
-    public void setStartTime(Long startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(Long endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
