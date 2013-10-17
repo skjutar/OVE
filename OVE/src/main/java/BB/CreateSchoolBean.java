@@ -4,6 +4,7 @@
  */
 package BB;
 
+import Model.School;
 import EJB.SchoolRegistry;
 import java.beans.*;
 import java.io.Serializable;
