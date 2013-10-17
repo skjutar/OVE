@@ -30,10 +30,11 @@ and open the template in the editor.
   
     <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">  
     <h:panelGrid id="eventDetails" columns="2">
+        
         <h:outputLabel for="title" value="School"/>
         <p:selectOneMenu id="school" value="#{scheduleBean.event.schoolName}">
             <f:selectItem itemLabel="#{scheduleBean.event.schoolName}" itemValue="" />
-            <f:selectItems value="#{schoollist.allSchools}" />
+            <f:selectItems value="#{schoollist.schoolNames}" />
         </p:selectOneMenu>
         <h:outputLabel value="From:" for="from"/>
         <p:inputMask id="from" value="#{scheduleBean.event.startDate}" mask="99/99/9999">  
@@ -51,7 +52,6 @@ and open the template in the editor.
          
         <h:outputLabel for="comments" value="Comments"/>
         <p:inputTextarea rows="10" cols="60" value="#{scheduleBean.event.notation}"/>
-       
  
         <p:commandButton id="updateButton" value="Save" 
                          actionListener="#{scheduleBean.addEvent}" ajax="false"   
