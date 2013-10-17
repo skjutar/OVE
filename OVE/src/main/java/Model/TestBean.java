@@ -139,7 +139,7 @@ public class TestBean implements Serializable
 
         school.setSchedule(schedule);
         
-        schReg.add(school);
+   //     schReg.add(school);
         
         Session session2 = new Session(new Date(time.getTimeInMillis()+99999*1000), new Date(time.getTimeInMillis()+99999*1500), 23, workerList);
         sessions2.add(session2);
@@ -147,7 +147,7 @@ public class TestBean implements Serializable
         School school2 = new School("Backaskolan", "Backavägen 64", 23311, "Hisingen");
         school2.setSchedule(schedule2);
         
-     //   schReg.add(school2);
+        schReg.add(school2);
         
         
         
