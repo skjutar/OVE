@@ -28,13 +28,13 @@ and open the template in the editor.
                 <p:layoutUnit position="center" >
                     <div align="center">
                     <h:graphicImage url="#{resource['img:banner.jpg']}" />
-                    <h:form> 
-                        <p:menubar styleClass="menubar" model="#{menuBean.model}" >
-
-                           
-        
+                    <h:form id="menubar"> 
+                        <p:menubar styleClass="menubar" model="#{menuBean.model}" >    
+                            
                     </p:menubar>
+
                     </h:form>
+           
                 <ui:insert name="content">Put default content here, if any.</ui:insert>
                 </div>
             </p:layoutUnit>
@@ -43,10 +43,11 @@ and open the template in the editor.
            </p:layoutUnit>
                 
                 <p:layoutUnit position="east" size="70"  resizable="false" closable="false" collapsible="false">
+                    
                 </p:layoutUnit>
      
                 <p:layoutUnit position="south" size="20" resizable="false" closable="false" collapsible="false">
-                    This is a footer
+                    
                 </p:layoutUnit>
             </p:layout>
                     

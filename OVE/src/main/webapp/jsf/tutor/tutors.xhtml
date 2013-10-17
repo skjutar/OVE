@@ -24,38 +24,20 @@ and open the template in the editor.
         <p:selectOneListbox id="basic" value="#{tutorBean.selectedTutor}">  
             <f:selectItems value="#{tutorBean.tutors}" var="tutor" itemLabel="#{tutor.name}" itemValue="tutor" />
         </p:selectOneListbox> 
-        <!--
-  
-        <h:outputText value="Advanced" />  
-        <p:selectOneListbox id="scroll" value="#{autoCompleteBean.selectedPlayer1}" converter="player" var="p" style="height:200px">  
-            <f:selectItems value="#{autoCompleteBean.players}" var="player" itemLabel="#{player.name}" itemValue="#{player}" />  
-  
-            <p:column>  
-                <p:graphicImage value="/images/barca/#{p.photo}" width="40"/>  
-            </p:column>  
-  
-            <p:column>  
-                #{p.name} - #{p.number}  
-            </p:column>  
-        </p:selectOneListbox>  
-        -->
   
     </h:panelGrid>  
-  
-    <p:separator />  
-  
-    <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg').show()" />
-    <p:button id="addTutor" value ="Add Tutor" onclick="" />
-  
+ 
+    <p:commandButton action="#{tutorBean.navToAddTutor}" value="Submit" />
+    <p:button id="addTutor" value ="Add Tutor" onclick="" /> 
+    <!--
     <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
         <h:panelGrid columns="1" id="display">  
             
             <h:outputText value="Tutor:" /><h:outputText id="selectedNumber" value="#{tutorBean.selectedTutor}" /> 
         </h:panelGrid>  
     </p:dialog>  
+    -->
     
-    
-  
     </h:form>  
     </ui:define>
     </ui:composition>

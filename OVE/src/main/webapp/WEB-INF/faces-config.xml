@@ -17,7 +17,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id> 
         <navigation-case>
-            <from-outcome>home</from-outcome>
+            <from-outcome>Home</from-outcome>
             <to-view-id>/jsf/home.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
@@ -37,26 +37,32 @@
             <from-outcome>Admin</from-outcome>
             <to-view-id>/jsf/admin.xhtml</to-view-id>
         </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>Logout</from-outcome>
+            <to-view-id>/jsf/welcome.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>/jsf/products/tutors.xhtml</from-view-id>
+        <from-view-id>/jsf/tutor/tutors.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>ADD_PRODUCT</from-outcome>
-            <to-view-id>/jsf/products/addTutor.xhtml</to-view-id>
+            <from-outcome>ADD_TUTOR</from-outcome>
+            <to-view-id>/jsf/tutor/addTutor.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule> 
     
     <navigation-rule>
-        <from-view-id>/jsf/products/addTutor.xhtml</from-view-id>
+        <from-view-id>/jsf/tutor/addTutor.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>PRODUCT_ADDED</from-outcome>
-            <to-view-id>/jsf/products/tutors.xhtml</to-view-id>
+            <from-outcome>TUTOR_ADDED</from-outcome>
+            <to-view-id>/jsf/tutor/tutors.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule> 
     
     <lifecycle>
-<phase-listener>com.mycompany.ove.account.AuthorizationListener</phase-listener>
+<phase-listener>Account.AuthorizationListener</phase-listener>
 </lifecycle>
     
 </faces-config>
