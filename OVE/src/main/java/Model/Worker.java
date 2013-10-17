@@ -41,6 +41,7 @@ public class Worker extends AbstractPerson {
         super(idNumber, name, mail, phoneNbr, address);
         this.salary = salary;
     }
+ 
 
     public int getSalary() {
         return salary;
@@ -72,7 +73,7 @@ public class Worker extends AbstractPerson {
     public String toString() {
         return "Worker{" + "salary=" + salary + '}';
     }
-
+    
     /**
      * @return the sessions
      */
