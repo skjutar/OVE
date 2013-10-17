@@ -49,7 +49,7 @@ protected EntityManager getEntityManager() {
             
         } catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println("* ABSTRACTDAO: "+e);
         }
     }
 
@@ -98,7 +98,7 @@ protected EntityManager getEntityManager() {
     
     public int getCount() {
         List <T> list =  em.createQuery("select t from " + clazz.getSimpleName()+ " t").getResultList();
-        System.out.println(list.toString());
+        System.out.println("* ABSTRACTDAO: "+list.toString());
         return list.size();
     }
     

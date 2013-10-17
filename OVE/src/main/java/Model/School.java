@@ -48,17 +48,6 @@ public class School extends AbstractEntity {
         this.address = address;
         this.contacts = contacts;
     }
-    
-    public School(String name, String address, int zip, String city, List<Session> sessions, List<Person> contactPersons) {
-        this.name = name;
-        this.address = address;
-        this.contactPersons = contactPersons;
-        this.schedule=new Schedule(sessions);
-        this.zip=zip;
-        this.city=city;
-    }
-    
-    
 
     public String getName() {
         return name;

@@ -46,7 +46,7 @@ public class SchoolRegistry extends AbstractDAO<School, Long> implements Seriali
      */
     public List<School> getByName(String name) {
         //Checks if the string name contains any å, ä, ö
-        if (!name.contains("Ã")) {
+        if (name.contains("Ã")) {
             name = fixAAAEOE(name);
         }
         List<School> found = new ArrayList<School>();
@@ -58,23 +58,29 @@ public class SchoolRegistry extends AbstractDAO<School, Long> implements Seriali
         }
         return found;
     }
-
+    /**
+     * Fixes any Ã¥(å), Ã¤(ä), Ã¶(ö) characters in
+     * the parameter, and replaces with the correct letter.
+     * @param name String which is to be 'fixed'.
+     * @return the parameter name, with weird characters replaced.
+     */
     private String fixAAAEOE(String name) {
-        while(name.contains("Ã")){
-            int i=name.indexOf("Ã");
+        while (name.contains("Ã")) {
+            int i = name.indexOf("Ã");
             StringBuilder oldsb = new StringBuilder(name);
             oldsb.deleteCharAt(i);
 
             char aaaeoe = ' ';
-            if(oldsb.charAt(i)=='¥')
-                aaaeoe='å';
-            else if(oldsb.charAt(i)=='¤')
-                aaaeoe='ä';
-            else if(oldsb.charAt(i)=='¶')
-                aaaeoe='ö';
+            if (oldsb.charAt(i) == '¥') {
+                aaaeoe = 'å';
+            } else if (oldsb.charAt(i) == '¤') {
+                aaaeoe = 'ä';
+            } else if (oldsb.charAt(i) == '¶') {
+                aaaeoe = 'ö';
+            }
 
             oldsb.setCharAt(i, aaaeoe);
-            name=oldsb.toString();
+            name = oldsb.toString();
         }
         return name;
     }
