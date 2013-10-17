@@ -33,7 +33,7 @@ public class AddTutorBean implements Serializable {
     private String address;
     private int salary;
     
-    public String addTutor() {
+    public void addTutor() {
         //RequestContext context = RequestContext.getCurrentInstance();  
         FacesMessage msg;   
         Worker tutor =  reg.getTutor(idNumber);
@@ -41,7 +41,7 @@ public class AddTutorBean implements Serializable {
         if(tutor == null){                
                 tutor = new Worker(idNumber, name, mail, phoneNbr, address, salary);
                 reg.add(tutor);
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Person added ", name);  
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tutor added ", name); 
                 //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", username);
             }
         
@@ -49,11 +49,11 @@ public class AddTutorBean implements Serializable {
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "This tutor already exists");  
         }  
         
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-        //context.addCallbackParam("loggedIn", loggedIn);  
-	return Navigation.TUTOR_ADDED.toString();
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
+	RequestContext.getCurrentInstance().reset("form:panel");
+	
     }
-
+    
     public Long getIdNumber() {
         return idNumber;
     }

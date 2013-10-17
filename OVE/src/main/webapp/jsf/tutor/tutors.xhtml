@@ -21,19 +21,19 @@ and open the template in the editor.
                  columnClasses="label, column">  
   
         <h:outputText value="Tutors" />  
-        <p:selectOneListbox id="basic" value="#{tutorBean.selectedTutor}">  
+        <p:selectOneListbox id="tutorList" value="#{tutorBean.selectedTutor}">  
             <f:selectItems value="#{tutorBean.tutors}" var="tutor" itemLabel="#{tutor.name}" itemValue="tutor" />
         </p:selectOneListbox> 
   
     </h:panelGrid>  
  
-    <h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="applydlg.show()" title="Add Tutor" >
+    <h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="applydlg.show();" title="Add Tutor" >
 	<p:commandButton value="Add" />
      </h:outputLink> 
     
 	    <p:growl id="growl" showDetail="true" life="3000" />  
   
-                         <p:dialog  id="dialog" header="Apply" widgetVar="applydlg" resizable="false"> 
+                         <p:dialog  id="dialog" header="Add Tutor" widgetVar="applydlg" resizable="false"> 
                             <h:panelGrid columns="2"   cellpadding="5" >  
                                 <h:outputLabel for="name" value="name:"/>  
                                 <h:inputText value="#{addTutorBean.name}"   
@@ -56,13 +56,14 @@ and open the template in the editor.
                                
               
                                 <f:facet name="footer">  
-                                    <p:commandButton id="applyButton" value="Apply" update="growl"   
+				    <p:button id="cancelButton" value="Cancel" onclick="applydlg.hide();" />
+                                    <p:commandButton id="addButton" value="Add" update="tutorList"   
                                                      actionListener="#{addTutorBean.addTutor}"    
-                                    accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
+                                    accesskey="" oncomplete="applydlg.hide();">
+					<p:resetInput target="applydlg" /> </p:commandButton>                 
                                 </f:facet>  
                                
                             </h:panelGrid>  
-                             <h:outputText value="Tutor added"/>
                         </p:dialog>  
     
     <!--<p:button id="addTutor" value ="Add Tutor" onclick="" /> -->

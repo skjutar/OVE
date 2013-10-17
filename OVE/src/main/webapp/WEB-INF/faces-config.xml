@@ -49,22 +49,6 @@
         </navigation-case>
     </navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/jsf/tutor/tutors.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>ADD_TUTOR</from-outcome>
-            <to-view-id>/jsf/tutor/addTutor.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule> 
-    
-    <navigation-rule>
-        <from-view-id>/jsf/tutor/addTutor.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>TUTOR_ADDED</from-outcome>
-            <to-view-id>/jsf/tutor/tutors.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule> 
-    
     <lifecycle>
 <phase-listener>Account.AuthorizationListener</phase-listener>
 </lifecycle>
