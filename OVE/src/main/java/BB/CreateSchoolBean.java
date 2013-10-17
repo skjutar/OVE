@@ -77,7 +77,6 @@ public class CreateSchoolBean implements Serializable {
             created=true;
             School school = new School(name, address, zip, city);
             reg.add(school);
-            //model.getUserRegistry().add(a);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School created");
        }
        
