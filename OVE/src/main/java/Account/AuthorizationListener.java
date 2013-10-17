@@ -24,7 +24,7 @@ public void afterPhase(PhaseEvent event) {
  
     boolean hasBeenLoggedIn = (currentPage.lastIndexOf("welcome.xhtml") > -1);
     HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
- 
+    
     if(session==null){
         NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
         nh.handleNavigation(facesContext, null, "welcome");
@@ -32,11 +32,14 @@ public void afterPhase(PhaseEvent event) {
  
     else{
         Object currentUser = session.getAttribute("username");
- 
-    if (!hasBeenLoggedIn && (currentUser == null || currentUser == "")) {
         NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
-        nh.handleNavigation(facesContext, null, "welcome");
+        
+        if (!hasBeenLoggedIn && (currentUser == null || currentUser == "")) {
+            nh.handleNavigation(facesContext, null, "welcome");
         }
+        else if(currentPage.equals("/jsf/admin.xhtml") && session.getAttribute("admin")==null) {
+                nh.handleNavigation(facesContext, null, "Home");                 
+            }
     }
     }
 
