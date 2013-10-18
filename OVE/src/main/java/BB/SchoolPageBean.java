@@ -41,7 +41,6 @@ public class SchoolPageBean implements Serializable {
     private SchoolRegistry schoolreg;
     @EJB
     private PersonRegistry persreg;
-    
     private School school;
     Person p;
 
@@ -93,8 +92,12 @@ public class SchoolPageBean implements Serializable {
         System.out.println("*************************************");
         System.out.println("*************************************");
         System.out.println("*************************************");
-        System.out.println("*************************************");
         System.out.println("* KOM IN I CREATE!");
+        System.out.println("* Innan:                       ******");
+        System.out.println(persreg.toString());
+        System.out.println("* Utskrift klar:               ******");
+
+
         //model = ModelFactory.getModel("OVE_model_pu");
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
@@ -110,8 +113,11 @@ public class SchoolPageBean implements Serializable {
             System.out.println("*************************************");
             System.out.println("** Person:" + newcontact);
 
-            persreg.add(p);
-            school.getContactPersons().add(persreg.getByName(p.getName()).get(0));
+            //persreg.add(p);
+            System.out.println("* Efter:                       ******");
+            System.out.println(persreg.toString());
+            System.out.println("* Utskrift klar:               ******");
+            school.getContactPersons().add(newcontact);
             schoolreg.update(school);
             //registry.addContact(school, p);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "Contact created");

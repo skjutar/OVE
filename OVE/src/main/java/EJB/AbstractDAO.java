@@ -1,4 +1,4 @@
-package Model;
+package EJB;
 
 import java.util.ArrayList;
 import java.util.Collections;

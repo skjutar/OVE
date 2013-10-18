@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -26,7 +27,7 @@ public class School extends AbstractEntity {
     private String address;
     private int zip;
     private String city;
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Person> contacts;
     @OneToOne (cascade = CascadeType.ALL)
     private Schedule schedule;

@@ -5,7 +5,6 @@
  */
 package EJB;
 
-import Model.AbstractDAO;
 import Model.Person;
 import Model.School;
 import java.io.Serializable;
