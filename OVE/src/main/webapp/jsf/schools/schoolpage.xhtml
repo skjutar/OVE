@@ -39,9 +39,9 @@ and open the template in the editor.
 
                             </h:form>
                             
-                            <h:form id="allcontacts">  
-                                <p:growl id="growl" showDetail="true"/>  
-                                <p:dataTable id="contactsTable" var="contact" value="#{schoolpage.contacts}">  
+                            <h:form id="allcontacts" >  
+                                <p:growl id="growl" showDetail="true" />  
+                                <p:dataTable id="contactsTable" var="contact" value="#{schoolpage.contacts}" style="width:50%;">  
                                     <p:ajax event="rowToggle" listener="#{schoolpage.onRowToggle}" update=":allcontacts:growl" />  
   
                                     <f:facet name="header">  
@@ -67,13 +67,14 @@ and open the template in the editor.
                                     </p:column>  
                               
                                     <p:rowExpansion>  
-                                        <h:panelGrid id="display" columns="2" cellpadding="4" style="width:300px;"  
+                                        <h:panelGrid id="display" columns="2" cellpadding="4" style="width:100%;"  
                                                         styleClass=" ui-widget-content grid">  
-                              
+                                            
                                             <f:facet name="header">  
                                                 <!--<p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/>  -->
                                             </f:facet>  
-                              
+
+
                                             <h:outputText value="Name:" />  
                                             <h:outputText id="model" value="#{contact.name}" />  
                               
