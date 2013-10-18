@@ -56,7 +56,7 @@ public class MyPageBean implements Serializable {
        Long modelId =  (Long)FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("id");
        a = reg.find(modelId);
-       person = (Worker)a.getPerson();
+       person = a.getPerson();
        setUsername(a.getUserName());
        setAdress(person.getAddress());
        setEmailAdress(person.getMail());
