@@ -43,6 +43,7 @@ public class School extends AbstractEntity {
         this.schedule= new Schedule(sessions);
     }
 
+
     public School(String name, String address, List<Person> contacts) {
         this.name = name;
         this.address = address;
