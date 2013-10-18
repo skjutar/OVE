@@ -22,20 +22,20 @@ import javax.persistence.Transient;
 @Entity
 public class Account extends AbstractEntity {
     @OneToOne (cascade = CascadeType.ALL)
-    private AbstractPerson person;
+    private Worker person;
     private String userName;
     private String passWord;
     private Boolean activated;
     public Account() {
     }
     
-    public Account(AbstractPerson person, String userName, String passWord) {
+    public Account(Worker person, String userName, String passWord) {
         this.person = person;
         this.userName = userName;
         this.passWord = passWord;
         this.activated=false;
     }
-    public Account(Long id, AbstractPerson person, String userName, String passWord) {
+    public Account(Long id, Worker person, String userName, String passWord) {
         super(id);
         this.person = person;
         this.userName = userName;
@@ -43,7 +43,7 @@ public class Account extends AbstractEntity {
         this.activated=false;
     }
 
-    public AbstractPerson getPerson() {
+    public Worker getPerson() {
         return person;
     }
 
@@ -55,7 +55,7 @@ public class Account extends AbstractEntity {
         return passWord;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(Worker person) {
         this.person = person;
     }
 

@@ -4,14 +4,10 @@
  */
 package Model;
 
-import java.io.Serializable;
-import java.util.GregorianCalendar;
+
 import java.util.List;
-import java.util.Objects;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import Model.Worker;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
@@ -40,7 +36,8 @@ public class Session extends AbstractEntity {
 
     private int nbrOfStudents;
     
-    @ManyToMany(cascade= CascadeType.PERSIST)
+    //@ManyToMany(cascade= CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Worker> tutors;
     private String notation;
     
