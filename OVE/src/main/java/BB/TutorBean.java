@@ -37,6 +37,7 @@ public class TutorBean implements Serializable{
     
     public void setSelectedTutor(Worker tutor) {
         selectedTutor = tutor;
+	System.out.println("------ SET SELECTED TUTOR -------"+ tutor);
     }
     
     public void updateTutor() {

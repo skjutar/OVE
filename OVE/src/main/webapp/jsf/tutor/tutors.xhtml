@@ -26,11 +26,12 @@ and open the template in the editor.
         <h:outputText value="Tutors" />  
         <p:selectOneListbox id="tutorList" value="#{tutorBean.selectedTutor}" >  
             <f:selectItems value="#{tutorBean.tutors}" var="tutor" itemLabel="#{tutor.name}" itemValue="tutor" />
-	    <p:ajax update="tutorInfo"/>
+	    
+	    <!--<p:ajax update="tutorInfo"/>-->
         </p:selectOneListbox> 
   
     </h:panelGrid>  
-	    <p:button id="submitButton" value="Submit" onclick="info;" /> 
+	    <!--<p:button id="submitButton" value="Submit" onclick="info;" /> -->
  
     <h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="applydlg.show();" title="Add Tutor" >
 	<p:commandButton value="Add" />
