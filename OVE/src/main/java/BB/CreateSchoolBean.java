@@ -88,8 +88,8 @@ public class CreateSchoolBean implements Serializable {
            contacts.add(new Person("lisa", "lisa@mail.com", "0734567890", "chabo"));
             created=true;
 
+
             School school = new School(name, address, zip, city, sessions, contacts);
-            System.out.println("School is now"+ school);
             reg.add(school);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School created");
        }

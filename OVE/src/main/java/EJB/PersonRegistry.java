@@ -46,6 +46,7 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
             }
         }
         return found;
+    
     }
     
     public List<Person> getLinked(Long id)

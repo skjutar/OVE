@@ -17,9 +17,12 @@ and open the template in the editor.
             <ui:define name="content"> 
      <h:form id="form">  
   
-    <p:growl id="messages" showDetail="true" />  
-  
+    <p:growl id="messages" showDetail="true" /> 
+    <div align="left" >
+        <p:commandButton id="basic" value="Salaries" onclick="saleryDialog.show();" type="button" />  
+    </div>
     <p:schedule id="schedule" value="#{scheduleBean.eventModel}" widgetVar="myschedule" timeZone="GMT+1" timeFormat="">  
+
   
         <p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}" update="eventDetails, pickList" oncomplete="eventDialog.show()" />  
         <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}" update="eventDetails, pickList" oncomplete="eventDialog.show()" />  
@@ -71,9 +74,32 @@ and open the template in the editor.
                          oncomplete="myschedule.update(); eventDialog.hide();"/>
         
     </p:dialog>  
+    <p:dialog widgetVar="saleryDialog" header="" showEffect="clip" hideEffect="clip" resizable="false" style="width: 40%">  
+        <p:dataTable var="worker" value="#{salaryBean.salary}" id="salaryList" editable="true" editMode="cell" style="width:100%">  
   
+        <f:facet name="header">  
+            Salary  
+        </f:facet>  
+  
+         <p:ajax event="cellEdit" listener="#{salaryBean.onCellEdit}" update=":form:messages" />  
+  
+        <p:column headerText="Name" style="width:60%">  
+                    <h:outputLabel value="#{worker.name}" />
+        </p:column>  
+  
+        <p:column headerText="Hourly wage" style="width:40%">  
+            <p:cellEditor>  
+                <f:facet name="output"><h:outputText value="#{worker.salary}"/></f:facet>  
+                <f:facet name="input"><p:inputText value="#{worker.salary}" style="width:96%" label="Salary"/></f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+  
+    </p:dataTable>  
+    </p:dialog>
+  
+    
+    
 </h:form>  
-                
                 
             </ui:define>
         </ui:composition>
