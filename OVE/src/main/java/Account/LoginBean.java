@@ -96,10 +96,14 @@ public class LoginBean implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("id", a.getId());
             }
         
-        else{  
+        else if(a==null){  
             loggedIn = false;  
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");  
-        }  
+        } 
+        else if(!a.getActivated()){
+            loggedIn = false;  
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Your account is not activated");  
+        }
         
         FacesContext.getCurrentInstance().addMessage(null, msg);  
         context.addCallbackParam("loggedIn", loggedIn);  

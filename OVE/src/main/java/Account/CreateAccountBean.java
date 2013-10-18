@@ -18,6 +18,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.mail.MessagingException;
+import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.constraints.Pattern;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -39,7 +42,7 @@ public class CreateAccountBean {
    private String password;
    
    private Long idNumber;
-   
+
    private String name;
    
    private String adress;
@@ -48,7 +51,7 @@ public class CreateAccountBean {
    
    private String emailAdress;
    
-   private String type;
+   private String type="worker";
    
    //private Model model;
    
