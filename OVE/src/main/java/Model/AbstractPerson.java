@@ -11,7 +11,7 @@ import javax.persistence.*;
  * @author Gustav
  */
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table(name="Persons")
 public abstract class AbstractPerson extends AbstractEntity
 {

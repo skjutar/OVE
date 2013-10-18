@@ -99,13 +99,19 @@ and open the template in the editor.
                                 id="password" required="true" label="password" />
                                 <h:outputLabel for="forName" value="name:"/>  
                                 <h:inputText value="#{createAccountBean.name}"   
-                                id="name" required="true" label="Name:" />
+                                id="name" required="true" label="Name:" >
+                                    <f:validateRegex pattern="^[a-zA-Z]+\s[a-zA-Z]+$" />
+                                     <p:ajax update="msgname" event="keyup" /> 
+                                </h:inputText>
                                 <h:outputLabel for="idNumber" value="ID number:" />  
                                 <p:inputText value="#{createAccountBean.idNumber}"   
                                 id="idNumber" required="true" label="idNumber" /> 
                                 <h:outputLabel for="email" value="Email:"/>  
                                 <h:inputText value="#{createAccountBean.emailAdress}"   
-                                id="email" required="true" label="Email" />
+                                id="email" required="true" label="Email" >
+                                    <f:validateRegex pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" />
+                                    <p:ajax update="msgmail" event="keyup" /> 
+                                </h:inputText>
                                 <h:outputLabel for="telephoneNumber" value="Tele:"/>  
                                 <h:inputText value="#{createAccountBean.telephoneNumber}"   
                                 id="telephoneNumber" required="true" label="Tele" />
@@ -121,6 +127,8 @@ and open the template in the editor.
                                 </f:facet>  
                                
                             </h:panelGrid>  
+                             <p:message for="name" id="msgname" display="icon"/>
+                             <p:message for="email" id="msgmail" display="icon"/>
                              <h:outputText value="You will receive an email to confirm your email adress"/>
                         </p:dialog>  
                     </h:form>

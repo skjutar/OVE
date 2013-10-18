@@ -93,6 +93,19 @@ public class ScheduleBean implements Serializable
   
       
     public void addEvent(ActionEvent actionEvent) { 
+        
+       /* Date start = this.event.getStartDate();
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(start.getTime());
+        c.add(Calendar.HOUR_OF_DAY, -1);
+        this.event.setStartDate(new Date(c.getTimeInMillis()));
+        
+        Date end = this.event.getEndDate();
+        c.setTimeInMillis(end.getTime());
+        c.add(Calendar.HOUR_OF_DAY, -1);
+        this.event.setEndDate(new Date(c.getTimeInMillis())); */
+        
+        
         ArrayList<Worker> workerList = new ArrayList<Worker>();
         for(String s : workerModel.getTarget())
         {            
@@ -104,6 +117,7 @@ public class ScheduleBean implements Serializable
         {
             
             School s = reg.getByName(event.getSchoolName()).get(0);
+            event.setTitle(s.getName());
             System.out.println("Antal sessions i Chalmers: "+s.getSchedule().getSessions().size());
             s.getSchedule().getSessions().add(new Session(event.getStartDate(), event.getEndDate(), event.getNumberOfStudents(), event.getWorkerList(), event.getNotation()));         
             System.out.println("Antal sessions i Chalmers: "+s.getSchedule().getSessions().size());
@@ -128,8 +142,19 @@ public class ScheduleBean implements Serializable
     
         }
         event = new ScheduleEvent(); 
-        target.clear();
+        loadWorkers();
     }  
+    
+    public void deleteEvent(ActionEvent actionEvent)
+    {
+       School s = reg.getByName(event.getSchoolName()).get(0);
+       s.getSchedule().getSessions().remove(sesReg.find(event.getModelId()));
+       reg.update(s);
+       sesReg.remove(event.getModelId());
+       eventModel.deleteEvent(event);
+       event = new ScheduleEvent(); 
+       loadWorkers();
+    }
       //Trycker event dialogen
     public void onEventSelect(SelectEvent selectEvent) {  
         loadWorkers();
@@ -137,13 +162,7 @@ public class ScheduleBean implements Serializable
         for(Worker w : event.getWorkerList())
         {
             workerModel.getTarget().add(w.getName()+ " "+w.getIdNumber());
-        }
-        for(String s : workerModel.getTarget())
-        {
-            if(workerModel.getSource().contains(s))
-            {
-                workerModel.getSource().remove(s);
-            }
+            workerModel.getSource().remove(w.getName()+ " "+w.getIdNumber());
         }
     }  
    
@@ -151,7 +170,6 @@ public class ScheduleBean implements Serializable
         loadWorkers();
         event = new ScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject()); 
         event.setAllDay(false);
-        target.clear();
     }  
     
   

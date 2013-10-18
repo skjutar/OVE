@@ -8,6 +8,7 @@ import Model.AbstractPerson;
 import Model.Account;
 import Model.Person;
 import EJB.UserRegistry;
+import EJB.WorkerRegistry;
 import Model.Worker;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,6 +29,9 @@ public class MyPageBean implements Serializable {
     
    @EJB
    private UserRegistry reg;
+   
+   @EJB
+   private WorkerRegistry wReg;
    
    private String username;
     
@@ -40,9 +45,10 @@ public class MyPageBean implements Serializable {
    
    private String emailAdress;
    
+   
    private String picUrl;
     private Account a;
-    private AbstractPerson person;
+    private Worker person;
    
    @PostConstruct
    public void init()
@@ -50,7 +56,7 @@ public class MyPageBean implements Serializable {
        Long modelId =  (Long)FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("id");
        a = reg.find(modelId);
-       person = a.getPerson();
+       person = (Worker)a.getPerson();
        setUsername(a.getUserName());
        setAdress(person.getAddress());
        setEmailAdress(person.getMail());
@@ -69,13 +75,17 @@ public class MyPageBean implements Serializable {
    
    public String update()
    {
-       Worker w = new Worker(person.getId(),getIdNumber(), getName(), getEmailAdress(), 
-               getTelephoneNumber(), getAdress());
-       w.setPicUrl(getPicUrl());
-       Account updated = new Account(a.getId(), w, a.getUserName(), a.getPassWord());
-       updated.setActivated(true);
-       reg.update(updated);    
-       FacesContext facesContext = FacesContext.getCurrentInstance();
+       person.setAddress(getAdress());
+       person.setIdNumber(getIdNumber());
+       person.setMail(getEmailAdress());
+       person.setName(getName());
+       person.setPhoneNbr(getTelephoneNumber());
+       person.setPicUrl(picUrl);
+       
+       //Worker w = new Worker(person.getId(),getIdNumber(), getName(), getEmailAdress(), 
+       //        getTelephoneNumber(), getAdress());
+        
+       wReg.update(person);    
        return "MyPage";
    }
    
