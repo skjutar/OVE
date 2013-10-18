@@ -8,7 +8,6 @@
         <Node id="jsf/welcome.xhtml" x="650" y="150" zoom="true"/>
         <Node id="*" x="400" y="300" zoom="true"/>
         <Node id="jsf/home.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="jsf/tutor/addTutor.xhtml" x="400" y="450" zoom="true"/>
         <Node id="jsf/admin.xhtml" x="150" y="300" zoom="true"/>
         <Node id="jsf/tutor/tutors.xhtml" x="650" y="300" zoom="true"/>
     </Scope>

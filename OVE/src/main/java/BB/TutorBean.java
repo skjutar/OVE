@@ -39,6 +39,10 @@ public class TutorBean implements Serializable{
         selectedTutor = tutor;
     }
     
+    public void updateTutor() {
+	reg.update(selectedTutor);
+    }
+    
     public List<Worker> getTutors() {
         return reg.getRange(0, reg.getCount());
     }
