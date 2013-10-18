@@ -39,19 +39,20 @@ public class SetSalaryBean implements Serializable
     {
       
     }
+    
     @PostConstruct
     public void postConstruct()
     {
      workerList = new ArrayList<Worker>();   
-    }
-    public ArrayList<Worker> getSalary()
-    {
-     //   workerList = new ArrayList<Worker>();
-        for(Worker w: workerReg.getRange(0, workerReg.getCount()))
+     for(Worker w: workerReg.getRange(0, workerReg.getCount()))
         {
             //List of all workers in database
             workerList.add(w);
         }
+    }
+    
+    public ArrayList<Worker> getSalary()
+    {
         return workerList;    
     }
     
@@ -70,25 +71,6 @@ public class SetSalaryBean implements Serializable
             FacesMessage msg2 = new FacesMessage("The salary is :" , Integer.toString(newSalary));
             FacesContext.getCurrentInstance().addMessage(null, msg); 
             FacesContext.getCurrentInstance().addMessage(null, msg2);
-        
-    }
-    //Save salaries
-    public void update(RowEditEvent event)
-    {
-       //      update((Worker)event.getObject());
-           w = ((Worker)event.getObject());
-
-          w.setSalary(0);
-          workerReg.update(w);
-
-            
-            FacesMessage msg = new FacesMessage("Salary is changed for: ", ((Worker) event.getObject()).getName()); 
-            FacesMessage msg2 = new FacesMessage("The salary is :" , Long.toString(((Worker) event.getObject()).getSalary()));
-            FacesContext.getCurrentInstance().addMessage(null, msg); 
-            FacesContext.getCurrentInstance().addMessage(null, msg2);
-    }
-    public void onCancel(RowEditEvent event)
-    {
         
     }
 }
