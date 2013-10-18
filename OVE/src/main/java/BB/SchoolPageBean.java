@@ -4,29 +4,20 @@
  */
 package BB;
 
-import Account.CreateAccountBean;
 import EJB.PersonRegistry;
 import EJB.SchoolRegistry;
-import Model.Account;
 import Model.Person;
-import java.beans.*;
 import java.io.Serializable;
 import Model.School;
-import Model.Worker;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
-import javax.mail.MessagingException;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -88,35 +79,44 @@ public class SchoolPageBean implements Serializable {
         this.p = p;
     }
 
+    /**
+     * Creates a new person and adds to the school.
+     * Method is currently NOT checking for duplicates in the contact list. This
+     * is because the class Person currently is not implemented to hold more
+     * than one field for email, phone, address etc.
+     * @param event contains the information about the person to be added.
+     */
     public void create(ActionEvent event) {
+        System.out.println("*");
         System.out.println("*************************************");
-        System.out.println("*************************************");
-        System.out.println("*************************************");
-        System.out.println("* KOM IN I CREATE!");
-        System.out.println("* Innan:                       ******");
-        System.out.println(persreg.toString());
-        System.out.println("* Utskrift klar:               ******");
+        System.out.println("* IN CREATE FUNCTION!               *");
+        System.out.println("*                                   *");
+        school.getContactPersons().size(); //Only have this here because otherwise the contacts are not instansiated for some reason(?).
+        System.out.println("* Schools contacts before:          *");
+        System.out.println(school.getContactPersons().toString());
 
-
-        //model = ModelFactory.getModel("OVE_model_pu");
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean created = false;
-        if (/*kolla om kontakten finns redan*/false) {
+        /*
+         * Could implement to check if contact lready exists here, but as there
+         * currently is no way to add a second number/email/address to an object
+         * Person, we willnot implment this function now.
+         */
+        if (/*check if person already exists in registry*/false) {
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");
         } else {
             created = true;
             Person newcontact = new Person(p.getName(), p.getMail(), p.getMail(), "-");
-            System.out.println("*************************************");
-            System.out.println("*************************************");
-            System.out.println("*************************************");
-            System.out.println("*************************************");
-            System.out.println("** Person:" + newcontact);
-
-            //persreg.add(p);
-            System.out.println("* Efter:                       ******");
-            System.out.println(persreg.toString());
-            System.out.println("* Utskrift klar:               ******");
+            System.out.println("*");
+            System.out.println("* Person to add:" + newcontact);
+            System.out.println("*");
+            System.out.println("* School we add to:" + school);
+            System.out.println("*");
+            System.out.println("* Number of contacts in school:" + school.getContactPersons().size()); //HÄR initieras listan med kontaktpersoner. 
+            System.out.println("*");
+            System.out.println("* Schools contacts after:           *");
+            System.out.println(school.getContactPersons().toString());
             school.getContactPersons().add(newcontact);
             schoolreg.update(school);
             //registry.addContact(school, p);
@@ -125,5 +125,9 @@ public class SchoolPageBean implements Serializable {
 
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("created", created);
+        System.out.println("* DONE WITH CREATE FUNCTION!        *");
+        System.out.println("*************************************");
+        System.out.println("*");
+
     }
 }
