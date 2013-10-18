@@ -4,7 +4,6 @@
  */
 package EJB;
 
-import Model.AbstractDAO;
 import Model.Worker;
 import java.util.ArrayList;
 import java.util.List;

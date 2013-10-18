@@ -73,19 +73,23 @@ public class CreateSchoolBean implements Serializable {
        RequestContext context = RequestContext.getCurrentInstance(); 
        FacesMessage msg = null;
        boolean created = false; 
+       List<Session> sessions;
+           List<Person> contacts;
+           
        if(!reg.getByName(name).isEmpty())
        {
            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "School already exists!");  
        }       
        else  
        {
-           List<Session> sessions = new ArrayList<Session>();
-           List<Person> contacts = new ArrayList<Person>();
+
+           sessions=new ArrayList<Session>();
+           contacts=new ArrayList<Person>();
+           contacts.add(new Person("lisa", "lisa@mail.com", "0734567890", "chabo"));
             created=true;
 
-           
-            School school = new School(name, address, zip, city, sessions, contacts);
 
+            School school = new School(name, address, zip, city, sessions, contacts);
             reg.add(school);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School created");
        }

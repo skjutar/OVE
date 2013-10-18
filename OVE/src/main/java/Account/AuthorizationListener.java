@@ -40,6 +40,7 @@ public void afterPhase(PhaseEvent event) {
         else if(currentPage.equals("/jsf/admin.xhtml") && session.getAttribute("admin")==null) {
                 nh.handleNavigation(facesContext, null, "Home");                 
             }
+        
     }
     }
 

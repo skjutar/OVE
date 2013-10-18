@@ -136,7 +136,7 @@ public class TestBean implements Serializable
         session.setNotation("DET HÄR ÄR EN NOTATION");
         sessions.add(session);
         Schedule schedule = new Schedule(sessions);
-        School school = new School("Chalmers", "chalmersgatan 4", 43351, "Göteborg");
+        School school = new School("Chalmers", "chalmersgatan 4", 43351, "Göteborg",new ArrayList<Session>(),new ArrayList<Person>());
 
         school.setSchedule(schedule);
         
@@ -145,7 +145,7 @@ public class TestBean implements Serializable
         Session session2 = new Session(new Date(time.getTimeInMillis()+99999*1000), new Date(time.getTimeInMillis()+99999*1500), 23, workerList);
         sessions2.add(session2);
         Schedule schedule2 = new Schedule(sessions2);
-        School school2 = new School("Backaskolan", "Backavägen 64", 23311, "Hisingen");
+        School school2 = new School("Backaskolan", "Backavägen 64", 23311, "Hisingen",new ArrayList<Session>(),new ArrayList<Person>());
         school2.setSchedule(schedule2);
         
         schReg.add(school2);

@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -26,39 +27,29 @@ public class School extends AbstractEntity {
     private String address;
     private int zip;
     private String city;
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Person> contactPersons;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<Person> contacts;
     @OneToOne (cascade = CascadeType.ALL)
     private Schedule schedule;
 
     public School() {
     }
 
-    public School(String name, String address, int zip, String city) {
+    public School(String name, String address, int zip, String city, List<Session> sessions, List<Person> contacts) {
         this.name = name;
         this.address = address;
         this.zip = zip;
         this.city = city;
+        this.contacts=contacts;
+        this.schedule= new Schedule(sessions);
     }
-       public School(String name, String address, int zip, String city, 
-               List<Session> sessions, List<Person> contactPerson) {
-        this.name = name;
-        this.address = address;
-        this.zip = zip;
-        this.city = city;
-        this.schedule = new Schedule(sessions);
-        this.contactPersons = contactPerson;
-    }
-    
 
-    public School(String name, String address, List<Person> contactPersons) {
+
+    public School(String name, String address, List<Person> contacts) {
         this.name = name;
         this.address = address;
-        this.contactPersons = contactPersons;
+        this.contacts = contacts;
     }
-    
-    
-    
 
     public String getName() {
         return name;
@@ -77,7 +68,7 @@ public class School extends AbstractEntity {
     }
 
     public List<Person> getContactPersons() {
-        return contactPersons;
+        return contacts;
     }
 
     public Schedule getSchedule() {
@@ -101,7 +92,7 @@ public class School extends AbstractEntity {
     }
 
     public void setContactPersons(List<Person> contactPersons) {
-        this.contactPersons = contactPersons;
+        this.contacts = contactPersons;
     }
 
     public void setSchedule(Schedule schedule) {
@@ -136,7 +127,7 @@ public class School extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "School{" + "name=" + name + ", address=" + address + '}';
+        return "School{" + "name=" + name + ", address=" + address + "Contacts:"+contacts+'}';
     }
     
 }

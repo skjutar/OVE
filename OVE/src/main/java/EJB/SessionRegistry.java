@@ -4,7 +4,6 @@
  */
 package EJB;
 
-import Model.AbstractDAO;
 import Model.Account;
 import Model.Session;
 import java.io.Serializable;

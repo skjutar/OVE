@@ -32,7 +32,6 @@ public class SchoolListBean implements Serializable {
 
     @EJB
     private SchoolRegistry registry;
-
     private List<String> schoolNames;
     private SchoolDataModel allSchools;
     private List<School> schoolsforList;
@@ -46,7 +45,7 @@ public class SchoolListBean implements Serializable {
         schoolsforList = registry.getRange(0, registry.getCount());
 
         allSchools = new SchoolDataModel(schoolsforList);
-        
+
         setSchoolNames();
     }
 
@@ -64,60 +63,66 @@ public class SchoolListBean implements Serializable {
 
     /**
      * Navigates browser to the page of a specific school, where
+     *
      * @param event has the object from which the method can decide which school
      */
     public void onRowSelect(SelectEvent event) {
+        System.out.println("*************************************************");
+        System.out.println("*****In onRowSelect in SchoolListBean************");
+        System.out.println("*************************************************");
         FacesMessage msg = new FacesMessage("School Selected", ((School) event.getObject()).getName());
-        String name=((School) event.getObject()).getName();
+        String name = ((School) event.getObject()).getName();
+        System.out.println("*School chosen is: "+name);
+
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("schoolpage.xhtml?school="+name);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("schoolpage.xhtml?school=" + name);
         } catch (IOException ex) {
             Logger.getLogger(SchoolListBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("*************************************************");
+        System.out.println("*****Done in onRowSelect in SchoolListBean*******");
+        System.out.println("*************************************************");
+        System.out.println(" ");
+
     }
 
     /**
      * @return the schoolsforList
      */
-    public List<School> getSchoolsforList()
-    {
+    public List<School> getSchoolsforList() {
         return schoolsforList;
     }
 
     /**
      * @param schoolsforList the schoolsforList to set
      */
-    public void setSchoolsforList(List<School> schoolsforList)
-    {
+    public void setSchoolsforList(List<School> schoolsforList) {
         this.schoolsforList = schoolsforList;
     }
 
     /**
      * @return the schoolNames
      */
-    public List<String> getSchoolNames()
-    {
+    public List<String> getSchoolNames() {
         return schoolNames;
     }
 
     /**
      * @param schoolNames the schoolNames to set
      */
-    public void setSchoolNames()
-    {
+    public void setSchoolNames() {
         schoolNames = new ArrayList<String>();
-        for(School s: schoolsforList)
-        {
-            if(!schoolNames.contains(s))
-            {
+        for (School s : schoolsforList) {
+            if (!schoolNames.contains(s)) {
                 schoolNames.add(s.getName());
             }
-       }
+        }
     }
-    
+
     /**
      * KAN TROLIGTVIS TAS BORT
-     * @param event 
+     *
+     * @param event
      */
     public void onRowUnselect(UnselectEvent event) {
         FacesMessage msg = new FacesMessage("Car Unselected", ((School) event.getObject()).getName());
