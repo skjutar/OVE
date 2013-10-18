@@ -13,6 +13,7 @@ import Model.Worker;
 import EJB.WorkerRegistry;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.el.ExpressionFactory;
 import javax.el.MethodExpression;
@@ -46,10 +47,16 @@ public class MenuBean implements Serializable {
     
     private ExpressionFactory factory =   FacesContext.getCurrentInstance().getApplication().getExpressionFactory();
     private MethodExpression exp = factory.createMethodExpression(FacesContext.getCurrentInstance().getELContext(), "#{loginBean.logout}", null, new Class[]{});
+    private Account a;
     
     
-    
-
+    @PostConstruct
+    public void init()
+    {
+         Long id =  (Long)FacesContext.getCurrentInstance()
+                .getExternalContext().getSessionMap().get("id");
+        a = uReg.find(id);
+    }
     
     public MenuModel getModel() {
         MenuModel model = new DefaultMenuModel();
@@ -72,9 +79,6 @@ public class MenuBean implements Serializable {
         menuItem.setOutcome("Tutors");
         menuItem.setId("Tutors");
         model.addMenuItem(menuItem);
-        Long id =  (Long)FacesContext.getCurrentInstance()
-                .getExternalContext().getSessionMap().get("id");
-        Account a = uReg.find(id);
         if(a.getPerson().isAdmin())
         {
             menuItem = new MenuItem();
