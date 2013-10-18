@@ -36,6 +36,7 @@ public class SchoolPageBean implements Serializable {
     private School school;
     Person p;
     private List<Person> contacts;
+    private String delete;
 
     /**
      * Initiates the School Page, decides which school it is to show, based on
@@ -43,6 +44,7 @@ public class SchoolPageBean implements Serializable {
      */
     @PostConstruct
     public void init() {
+        delete = "false";
         System.out.println("*************************************************");
         System.out.println("**********In init() method in ScholPageBean******");
         System.out.println("*");
@@ -88,6 +90,14 @@ public class SchoolPageBean implements Serializable {
 
     public void setPerson(Person p) {
         this.p = p;
+    }
+
+    public String getDelete() {
+        return delete;
+    }
+
+    public void setDelete(String b) {
+        this.delete = b;
     }
 
     /**
@@ -154,6 +164,33 @@ public class SchoolPageBean implements Serializable {
         FacesMessage msg = null;
         boolean created = true;
         schoolreg.update(school);
+        msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School Edited");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("created", created);
+        System.out.println("* DONE WITH EDIT FUNCTION!        *");
+        System.out.println("*************************************");
+        System.out.println("*");
+
+    }
+
+    public void remove(ActionEvent event) {
+        System.out.println("*");
+        System.out.println("*************************************");
+        System.out.println("* IN DELETE FUNCTION!               *");
+        System.out.println("*                                   *");
+        System.out.println("* Boolean is now:          *");
+        if (delete == "true") {
+            System.out.println("true, delete the school");
+
+        } else {
+            System.out.println("false. keep the school");
+
+        }
+
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage msg = null;
+        boolean created = true;
+        //schoolreg.update(school);
         msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School Edited");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("created", created);

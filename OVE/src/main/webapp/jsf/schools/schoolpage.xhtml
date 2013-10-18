@@ -23,13 +23,13 @@ and open the template in the editor.
                                <p:panel id="pInfo" header="About #{schoolpage.school.name}" style="width: 250px">  
                                     <h:panelGrid columns="2" columnClasses="column" cellpadding="5" >  
                                         <h:outputText value="Name: " style="font-weight:bold"/>
-                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.name}" /> 
+                                        <h:outputLabel value="#{schoolpage.school.name}" /> 
                                         <h:outputText value="Address: " style="font-weight:bold"/>  
-                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.address}" /> 
+                                        <h:outputLabel value="#{schoolpage.school.address}" /> 
                                         <h:outputText value="Zip Code: " style="font-weight:bold"/>  
-                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.zip}" /> 
+                                        <h:outputLabel value="#{schoolpage.school.zip}" /> 
                                         <h:outputText value="City: " style="font-weight:bold"/>  
-                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.city}" /> 
+                                        <h:outputLabel value="#{schoolpage.school.city}" /> 
 
                                         <h:form id="editschool"> 
                                             <h:outputLink id="editschoolLink" value="javascript:void(0)" onclick="editschooldlg.show()" title="Edit this school" >   
@@ -67,7 +67,41 @@ and open the template in the editor.
                                                     </f:facet>  
 
                                                 </h:panelGrid>  
-                                                <h:outputText value="You will receive an email to confirm your email adress"/>
+                                                <h:outputText value="Clicking 'Save changes' will overwrite the old information about this school."/>
+                                            </p:dialog>  
+                                        </h:form> 
+                                        
+                                        
+                                        
+                                        <h:form id="deleteschool"> 
+                                            <h:outputLink id="deleteschoolLink" value="javascript:void(0)" onclick="deleteschooldlg.show()" title="Delete this school" >   
+                                                <p:commandButton value="Delete this school"  type="button" />  
+                                            </h:outputLink>  
+                                            <p:growl id="growly" showDetail="true" life="3000" />  
+
+                                            <p:dialog  id="dialog" header="Delete School" widgetVar="deleteschooldlg" resizable="false"> 
+                                                <h:outputText value="Are you sure you want to selete this school? It can not be undone." style="font-weight:bold"/>
+                                                <h:panelGrid columns="2"   cellpadding="5" >
+
+<!--
+                                                    <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">  
+   -->
+                                                        <p:selectOneRadio id="options" value="#{schoolpage.delete}">  
+                                                            <f:selectItem itemLabel="No." itemValue="false" />  
+                                                            <f:selectItem itemLabel="Yes, DELETE!" itemValue="true" /> 
+                                                        </p:selectOneRadio>  
+<!--
+                                                    </h:panelGrid> -->
+
+
+                                                    <f:facet name="footer">  
+                                                        <p:commandButton id="deleteSchool" value="Ok." update="growly"   
+                                                        actionListener="#{schoolpage.remove}"    
+                                                        accesskey="" oncomplete="handleDeleteRequest(xhr, status, args)"/>                 
+                                                    </f:facet>  
+
+                                                </h:panelGrid>  
+                                                
                                             </p:dialog>  
                                         </h:form>                                        
 
@@ -189,6 +223,13 @@ and open the template in the editor.
     if(args.created) {
         editschooldlg.hide();  
         $('#editschoolLink').fadeOut();
+    }
+    location.reload();
+    }
+            function handleDeleteRequest(xhr, status, args) {
+    if(args.created) {
+        deleteschooldlg.hide();  
+        $('#deleteschoolLink').fadeOut();
     }
     location.reload();
     }
