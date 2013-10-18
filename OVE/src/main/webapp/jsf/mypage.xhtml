@@ -31,9 +31,6 @@ and open the template in the editor.
                            <h:outputText value="Email: " />  
                            <p:inputText value="#{mypageBean.emailAdress}"  
                                     required="true" label="text" />  
-                           <h:outputText value="Personal number: " />  
-                           <p:inputText value="#{mypageBean.idNumber}"  
-                                    required="true" label="text" />  
                            <h:outputText value="Adress: " />  
                            <p:inputText value="#{mypageBean.adress}"  
                                     required="true" label="text" />  
@@ -53,19 +50,16 @@ and open the template in the editor.
                     
             </h:form>
                 </div>
-                        <div style="float:left;margin-left: 40em ">
+                        
+                        <div style="float:left;margin-left: 10em ">
                             <h:form>
                             <h1>Profil Pic</h1>
-                            <p:graphicImage url="#{mypageBean.picUrl}" id="display" height="300" width="300"/>
+                            <p:graphicImage url="#{mypageBean.picUrl}" id="display" height="250" width="250"/>
                             </h:form>
-                           
-  
                         </div>
-                </div>
-                </div>
-                
-                 
-                <p:carousel id="basicCarousel" value="#{carouselBean.months}" var="monthly" itemStyleClass="monthlyItem">  
+                        
+                        <div style="float: right">
+                            <p:carousel id="basicCarousel" value="#{carouselBean.months}" var="monthly" itemStyleClass="monthlyItem">  
                     <f:facet name="header">  
                             Work per month.  
                     </f:facet>  
@@ -81,7 +75,15 @@ and open the template in the editor.
                      
                              </f:facet>  
                 </p:carousel>
+                        </div>
+                        
+                        
+                </div>
+                </div>
                 
+                <div align="left">
+                
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

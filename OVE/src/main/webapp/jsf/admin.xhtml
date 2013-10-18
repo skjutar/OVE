@@ -21,8 +21,8 @@ and open the template in the editor.
   
     <p:schedule id="schedule" value="#{scheduleBean.eventModel}" widgetVar="myschedule" timeZone="GMT+1" timeFormat="">  
   
-        <p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
-        <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
+        <p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}" update="eventDetails, pickList" oncomplete="eventDialog.show()" />  
+        <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}" update="eventDetails, pickList" oncomplete="eventDialog.show()" />  
         <p:ajax event="eventMove" listener="#{scheduleBean.onEventMove}" update="messages" />  
         <p:ajax event="eventResize" listener="#{scheduleBean.onEventResize}" update="messages" />  
   
@@ -58,10 +58,16 @@ and open the template in the editor.
         </h:panelGrid> 
         
         <p:pickList id="pickList" value="#{scheduleBean.workerModel}" var="worker"   
-                    itemLabel="#{worker}" itemValue="#{worker}"  /> 
+                    itemLabel="#{worker}" itemValue="#{worker}" >
+            <f:facet name="sourceCaption">Available</f:facet>  
+        <f:facet name="targetCaption">Working</f:facet> 
+        </p:pickList>
         
          <p:commandButton id="updateButton" value="Save" 
                          actionListener="#{scheduleBean.addEvent}" ajax="false"   
+                         oncomplete="myschedule.update(); eventDialog.hide();"/>
+         <p:commandButton id="deleteButton" value="Delete"
+                          actionListener="#{scheduleBean.deleteEvent}" ajax="false"   
                          oncomplete="myschedule.update(); eventDialog.hide();"/>
         
     </p:dialog>  
