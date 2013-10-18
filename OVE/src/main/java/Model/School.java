@@ -40,6 +40,16 @@ public class School extends AbstractEntity {
         this.zip = zip;
         this.city = city;
     }
+       public School(String name, String address, int zip, String city, 
+               List<Session> sessions, List<Person> contactPerson) {
+        this.name = name;
+        this.address = address;
+        this.zip = zip;
+        this.city = city;
+        this.schedule = new Schedule(sessions);
+        this.contactPersons = contactPerson;
+    }
+    
 
     public School(String name, String address, List<Person> contactPersons) {
         this.name = name;
@@ -47,14 +57,6 @@ public class School extends AbstractEntity {
         this.contactPersons = contactPersons;
     }
     
-    public School(String name, String address, int zip, String city, List<Session> sessions, List<Person> contactPersons) {
-        this.name = name;
-        this.address = address;
-        this.contactPersons = contactPersons;
-        this.schedule=new Schedule(sessions);
-        this.zip=zip;
-        this.city=city;
-    }
     
     
 

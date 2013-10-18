@@ -4,10 +4,12 @@
  */
 package BB;
 
+import EJB.WorkerRegistry;
 import Model.Worker;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -20,6 +22,9 @@ import javax.inject.Named;
 public class TutorBean implements Serializable{
     
     List<Worker> tutors = new LinkedList();
+    
+
+    
     
     public TutorBean() {
         addTutor(new Worker(9001015050L, "Lisa", "lisa@mail.se", "0707777777", "Chalmers"));
@@ -38,5 +43,5 @@ public class TutorBean implements Serializable{
     
     public void addTutor(Worker tutor) {
         tutors.add(tutor);
-    }
+    } 
 }
