@@ -6,6 +6,7 @@
 package EJB;
 
 import Model.AbstractDAO;
+import Model.Person;
 import Model.School;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -58,9 +59,11 @@ public class SchoolRegistry extends AbstractDAO<School, Long> implements Seriali
         }
         return found;
     }
+
     /**
-     * Fixes any Ã¥(å), Ã¤(ä), Ã¶(ö) characters in
-     * the parameter, and replaces with the correct letter.
+     * Fixes any Ã¥(å), Ã¤(ä), Ã¶(ö) characters in the parameter, and replaces
+     * with the correct letter.
+     *
      * @param name String which is to be 'fixed'.
      * @return the parameter name, with weird characters replaced.
      */
@@ -83,5 +86,11 @@ public class SchoolRegistry extends AbstractDAO<School, Long> implements Seriali
             name = oldsb.toString();
         }
         return name;
+    }
+
+    public void addContact(School s, Person p) {
+        System.out.println("***School before:" + s);
+        s.getContactPersons().add(p);
+        System.out.println("***School now:" + s);
     }
 }

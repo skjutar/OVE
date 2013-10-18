@@ -5,6 +5,7 @@
 package BB;
 
 import Account.CreateAccountBean;
+import EJB.PersonRegistry;
 import EJB.SchoolRegistry;
 import Model.Account;
 import Model.Person;
@@ -37,7 +38,10 @@ import org.primefaces.context.RequestContext;
 public class SchoolPageBean implements Serializable {
 
     @EJB
-    private SchoolRegistry registry;
+    private SchoolRegistry schoolreg;
+    @EJB
+    private PersonRegistry persreg;
+    
     private School school;
     Person p;
 
@@ -55,11 +59,11 @@ public class SchoolPageBean implements Serializable {
                 getExternalContext().getRequestParameterMap();
         String param = params.get("school");
         System.out.println("* name of school in URL: " + param);
-        System.out.println("* Number of schools in database :" + registry.getCount());
-        List<School> skolor = registry.getByName(param);
+        System.out.println("* Number of schools in database :" + schoolreg.getCount());
+        List<School> skolor = schoolreg.getByName(param);
         System.out.println("* All results when searched for " + param + ":   " + skolor);
 
-        school = registry.getByName(param).get(0);
+        school = schoolreg.getByName(param).get(0);
         System.out.println("* Skolinfo på första obj:" + school);
         p = new Person();
 
@@ -106,7 +110,10 @@ public class SchoolPageBean implements Serializable {
             System.out.println("*************************************");
             System.out.println("** Person:" + newcontact);
 
-            // registry.add(a);
+            persreg.add(p);
+            school.getContactPersons().add(persreg.getByName(p.getName()).get(0));
+            schoolreg.update(school);
+            //registry.addContact(school, p);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "Contact created");
         }
 

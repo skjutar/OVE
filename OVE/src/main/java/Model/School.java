@@ -125,7 +125,7 @@ public class School extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "School{" + "name=" + name + ", address=" + address + '}';
+        return "School{" + "name=" + name + ", address=" + address + "Contacts:"+contacts+'}';
     }
     
 }
