@@ -39,6 +39,57 @@ and open the template in the editor.
 
                             </h:form>
                             
+                            <h:form id="allcontacts">  
+                                <p:growl id="growl" showDetail="true"/>  
+                                <p:dataTable id="contactsTable" var="contact" value="#{schoolpage.contacts}">  
+                                    <p:ajax event="rowToggle" listener="#{schoolpage.onRowToggle}" update=":allcontacts:growl" />  
+  
+                                    <f:facet name="header">  
+                                        All contacts of this school. Expand rows to see detailed information  
+                                    </f:facet>  
+  
+                                    <p:column style="width:2%">  
+                                        <p:rowToggler />  
+                                    </p:column>  
+  
+                                    <p:column style="width:49%">  
+                                        <f:facet name="header">  
+                                                Name  
+                                        </f:facet>  
+                                        <h:outputText value="#{contact.name}" />  
+                                    </p:column>  
+  
+                                    <p:column style="width:49%">  
+                                        <f:facet name="header">  
+                                                Email  
+                                        </f:facet>  
+                                        <h:outputText value="#{contact.mail}" />  
+                                    </p:column>  
+                              
+                                    <p:rowExpansion>  
+                                        <h:panelGrid id="display" columns="2" cellpadding="4" style="width:300px;"  
+                                                        styleClass=" ui-widget-content grid">  
+                              
+                                            <f:facet name="header">  
+                                                <!--<p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/>  -->
+                                            </f:facet>  
+                              
+                                            <h:outputText value="Name:" />  
+                                            <h:outputText id="model" value="#{contact.name}" />  
+                              
+                                            <h:outputText value="Address:" />  
+                                            <h:outputText id="year" value="#{contact.address}" />  
+                              
+                                            <h:outputText value="Telephone number:" />  
+                                            <h:outputText value="#{contact.phoneNbr}"/>  
+                              
+                                            <h:outputText value="Email:" />  
+                                            <h:outputText value="#{contact.mail}"/>  
+                                        </h:panelGrid>  
+                                    </p:rowExpansion>  
+                                </p:dataTable>  
+                            </h:form>  
+                            
                             <h:form id="addcontact"> 
                                 <h:outputLink id="addcontactLink" value="javascript:void(0)" onclick="addcontactdlg.show()" title="Add a new contact" >   
                                     <p:commandButton value="Add a new contact"  type="button" />  

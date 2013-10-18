@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.ToggleEvent;
 
 /**
  *
@@ -34,6 +35,7 @@ public class SchoolPageBean implements Serializable {
     private PersonRegistry persreg;
     private School school;
     Person p;
+    private List<Person> contacts;
 
     /**
      * Initiates the School Page, decides which school it is to show, based on
@@ -56,6 +58,8 @@ public class SchoolPageBean implements Serializable {
         school = schoolreg.getByName(param).get(0);
         System.out.println("* Skolinfo på första obj:" + school);
         p = new Person();
+        school.getContactPersons().size(); //Only have this here because otherwise the contacts are not instansiated for some reason(?).
+        contacts = school.getContactPersons();
 
         System.out.println("*");
         System.out.println("**********Done in init() method******************");
@@ -71,6 +75,14 @@ public class SchoolPageBean implements Serializable {
         this.school = s;
     }
 
+    public List<Person> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Person> s) {
+        this.contacts = s;
+    }
+
     public Person getPerson() {
         return p;
     }
@@ -80,10 +92,11 @@ public class SchoolPageBean implements Serializable {
     }
 
     /**
-     * Creates a new person and adds to the school.
-     * Method is currently NOT checking for duplicates in the contact list. This
-     * is because the class Person currently is not implemented to hold more
-     * than one field for email, phone, address etc.
+     * Creates a new person and adds to the school. Method is currently NOT
+     * checking for duplicates in the contact list. This is because the class
+     * Person currently is not implemented to hold more than one field for
+     * email, phone, address etc.
+     *
      * @param event contains the information about the person to be added.
      */
     public void create(ActionEvent event) {
@@ -130,4 +143,12 @@ public class SchoolPageBean implements Serializable {
         System.out.println("*");
 
     }
+    
+    public void onRowToggle(ToggleEvent event) {  
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,  
+                                            "Row State " + event.getVisibility(),  
+                                            "Name:" + ((Person) event.getData()).getName());  
+          
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
 }
