@@ -4,7 +4,9 @@
  */
 package Account;
 
+import EJB.PersonRegistry;
 import EJB.UserRegistry;
+import EJB.WorkerRegistry;
 import Mail.MailBean;
 import Model.Account;
 import Model.Person;
@@ -36,6 +38,12 @@ public class CreateAccountBean {
    
    @EJB
    private MailBean mailBean;
+   
+   @EJB
+   private PersonRegistry personReg;
+   
+   @EJB
+   private WorkerRegistry workerReg;
     
    private String username;
    
@@ -146,10 +154,14 @@ public class CreateAccountBean {
        RequestContext context = RequestContext.getCurrentInstance(); 
        FacesMessage msg = null;
        boolean created = false; 
-       if(!reg.getByName(username).isEmpty())
+       if((!reg.getByName(username).isEmpty())) //|| (!personReg.getByPNumber(idNumber).isEmpty()))
        {
            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");  
-       }       
+       }
+     /*  else if((!personReg.getByPNumber(idNumber).isEmpty()) || (!workerReg.getByPNumber(idNumber).isEmpty()))
+       {
+           msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Personal ID is already in use");
+       } */
        else  
        {
             created=true; 
