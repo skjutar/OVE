@@ -1,6 +1,10 @@
 OVE
 ==============================
+This web application is developed with the main objective to facilitate the administrative work for the project managers of the Chalmers Läxhjälpsprojekt (CLP). It is also possible for tutors to have/manage accounts and see their monthly salary, which varies depending on the amount of hours worked.
 
+With this application, it is possible to have an overiew of the different schools with which the CLP collaborate, and the various contact persons connected to each and every one of these schools. Administrators can add, remove, edit and see the tutoring sessions which are to take place, and which tutors will be working at them. 
+
+See also PossibleExpansions.txt for features which could be added to the application.
 
 ==============================
 To run the project you have to
