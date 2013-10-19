@@ -20,7 +20,7 @@ and open the template in the editor.
                         <div style="float:left">
                             <h:form id="schoolpage">  
                                 <p:growl id="msgs" />  
-                               <p:panel id="pInfo" header="About #{schoolpage.school.name}" style="width: 250px">  
+                               <p:panel id="pInfo" header="About #{schoolpage.school.name} #{schoolpage.check}" style="width: 250px">  
                                     <h:panelGrid columns="2" columnClasses="column" cellpadding="5" >  
                                         <h:outputText value="Name: " style="font-weight:bold"/>
                                         <h:outputLabel value="#{schoolpage.school.name}" /> 
