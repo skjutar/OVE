@@ -105,74 +105,8 @@ and open the template in the editor.
                             </h:panelGrid>  
                         </p:dialog>  
                             </h:form>  
-<!--
-        <h:form id="form">  
-  
-    <h:panelGrid columns="1" style="margin-bottom:20px" cellpadding="5"  
-                 columnClasses="label, column" >  
-  
-        <h:outputText value="Tutors" />  
 	
-        <p:selectOneListbox id="tutorList" value="#{tutorBean.selectedTutor}" >  
-            <f:selectItems value="#{tutorBean.tutors}" var="tutor" itemLabel="#{tutor.name}" itemValue="tutor" />
-	    
-        </p:selectOneListbox> 
-
-    </h:panelGrid>  
-    <h:outputLink id="showTutorLink" value="javascript:void(0)" onclick="infodlg.show();" title="About Tutor" >
-	<p:commandButton value="Show Info" />
-     </h:outputLink>    
--->
-    
-    <!--
-    <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="infodlg">  
-        <h:panelGrid columns="1" id="display">  
-            
-            <h:outputText value="Tutor:" /><h:outputText id="selectedNumber" value="#{tutorBean.selectedTutor}" /> 
-        </h:panelGrid>  
-    </p:dialog>  
-    -->
-    <!--
-    </h:form> -->
-	
-	    </div>
-		<!--
-
-		<div style="float:right">
-                    <h:form id="tutorInfo">  
-                    <p:growl id="msgs" />  
-                    <p:panel id="pInfo" header="#{tutorBean.selectedTutor.idNumber}" style="width: 250px" widgetVar="dlg">  
-                       <h:panelGrid id="info" columns="2" columnClasses="column" cellpadding="5">  
-			   <h:outputText value="Name " />  
-                           <p:inputText value="#{tutorBean.selectedTutor.name}"  
-                                    required="true" label="text" />  
-                           <h:outputText value="Email: " />  
-                           <p:inputText value="#{tutorBean.selectedTutor.mail}"  
-                                    required="true" label="text" />  
-                           <h:outputText value="Address: " />  
-                           <p:inputText value="#{tutorBean.selectedTutor.address}"  
-                                    required="true" label="text" />  
-                           <h:outputText value="Tele: " />  
-                           <p:inputText value="#{tutorBean.selectedTutor.phoneNbr}"  
-                                    required="false" label="text" />  
-			   <h:outputText value="Salary: " />  
-                           <p:inputText value="#{tutorBean.selectedTutor.salary}"  
-                                    required="true" label="text" />  
-                         <h:outputText value="Profile picture URL: " />  
-			 <p:inputText value="#{tutorBean.selectedTutor.picUrl}"  
-                                    required="false" label="text" />  
-                            
-                                 
-                  </h:panelGrid>  
-                         
-			<p:commandButton value="Save"  action="" ajax="false"  />  
-                        
-                </p:panel>
-                    
-            </h:form>
- -->
-                <!--</div>-->
-		
+	    </div>		
 	    </div>
     </ui:define>
     </ui:composition>
