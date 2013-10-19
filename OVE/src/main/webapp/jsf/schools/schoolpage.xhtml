@@ -72,38 +72,28 @@ and open the template in the editor.
                                         </h:form> 
                                         
                                         
-                                        
-                                        <h:form id="deleteschool"> 
-                                            <h:outputLink id="deleteschoolLink" value="javascript:void(0)" onclick="deleteschooldlg.show()" title="Delete this school" >   
+                                        <h:outputLink id="deleteschoolLink" value="javascript:void(0)" onclick="deleteschooldlg.show()" title="Delete this school" >   
                                                 <p:commandButton value="Delete this school"  type="button" />  
                                             </h:outputLink>  
-                                            <p:growl id="growly" showDetail="true" life="3000" />  
-
-                                            <p:dialog  id="dialog" header="Delete School" widgetVar="deleteschooldlg" resizable="false"> 
-                                                <h:outputText value="Are you sure you want to selete this school? It can not be undone." style="font-weight:bold"/>
-                                                <h:panelGrid columns="2"   cellpadding="5" >
-
-<!--
-                                                    <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">  
-   -->
-                                                        <p:selectOneRadio id="options" value="#{schoolpage.delete}">  
-                                                            <f:selectItem itemLabel="No." itemValue="false" />  
-                                                            <f:selectItem itemLabel="Yes, DELETE!" itemValue="true" /> 
-                                                        </p:selectOneRadio>  
-<!--
-                                                    </h:panelGrid> -->
-
-
-                                                    <f:facet name="footer">  
-                                                        <p:commandButton id="deleteSchool" value="Ok." update="growly"   
-                                                        actionListener="#{schoolpage.remove}"    
-                                                        accesskey="" oncomplete="handleDeleteRequest(xhr, status, args)"/>                 
-                                                    </f:facet>  
-
-                                                </h:panelGrid>  
+                                        <p:dialog  id="dialog" header="Delete School" widgetVar="deleteschooldlg" resizable="false"> 
+                                            <h:panelGrid columns="2"   cellpadding="5" > 
+                                                Are you sure you want to delete this school? <br>
+                                                This can not be undone. </br>
                                                 
-                                            </p:dialog>  
-                                        </h:form>                                        
+                                                <f:facet name="footer">  
+                                                    <p:commandButton id="cancelButton" value="Cancel" update="msgs"       
+                                                        accesskey="" onclick="deleteschooldlg.hide();">
+                                                        <p:resetInput target="deleteschooldlg" /> 
+                                                    </p:commandButton>  
+                                                    <p:commandButton id="deleteButton" value="Delete" update="msgs"   
+                                                        actionListener="#{schoolpage.removethis}"    
+                                                        accesskey="" oncomplete="deleteschooldlg.hide();">
+                                                        <p:resetInput target="deleteschooldlg" /> 
+                                                    </p:commandButton>                 
+                                                </f:facet>  
+
+                                            </h:panelGrid>  
+                                        </p:dialog>                                       
 
                                     </h:panelGrid> 
                                 </p:panel>

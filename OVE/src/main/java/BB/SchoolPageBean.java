@@ -173,7 +173,7 @@ public class SchoolPageBean implements Serializable {
 
     }
 
-    public void remove(ActionEvent event) {
+    public void removethis(ActionEvent event) {
         System.out.println("*");
         System.out.println("*************************************");
         System.out.println("* IN DELETE FUNCTION!               *");
