@@ -44,11 +44,16 @@ public class TutorBean implements Serializable{
 	System.out.println("------ SET SELECTED TUTOR -------"+ tutor);
     }
     
-    public void updateTutor() {
-	reg.update(selectedTutor);
+    public void updateTutor(Worker tutor) {
+	System.out.println("UPDATING " + tutor.getName());
+	reg.update(tutor);
+	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,  
+                                            "Name", tutor.getName());  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
     }
     
     public void removeTutor(Long id) {
+	System.out.println("REMOVING " + id);
 	reg.remove(id);
 	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,  
                                             "Id", "" + id);  
