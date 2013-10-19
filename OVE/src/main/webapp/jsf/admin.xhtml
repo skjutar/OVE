@@ -31,13 +31,15 @@ and open the template in the editor.
   
     </p:schedule>  
   
+    <p:growl id="growlDialog" showDetail="true" life="3000" />
     <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">  
     <h:panelGrid id="eventDetails" columns="2">
         
         <h:outputLabel for="title" value="School"/>
-        <p:selectOneMenu id="school" value="#{scheduleBean.event.schoolName}">
+        <p:selectOneMenu id="school" value="#{scheduleBean.event.schoolName}" required="true"
+            requiredMessage="You must select a school">
             <f:selectItem itemLabel="#{scheduleBean.event.schoolName}" itemValue="" />
-            <f:selectItems value="#{schoollist.schoolNames}" />
+            <f:selectItems value="#{schoollist.schoolNames}"  />
         </p:selectOneMenu>
         <h:outputLabel value="From:" for="from"/>
         <p:inputMask id="from" value="#{scheduleBean.event.startDate}" mask="99:99/99/99/9999">  
@@ -54,7 +56,7 @@ and open the template in the editor.
         <p:inputText size="60" value="#{scheduleBean.event.numberOfStudents}"/>
          
         <h:outputLabel for="comments" value="Comments"/>
-        <p:inputTextarea rows="10" cols="60" value="#{scheduleBean.event.notation}"/>
+        <p:inputTextarea rows="10" cols="60" value="#{scheduleBean.event.notation}" required="true"/>
 
   
         
@@ -66,7 +68,7 @@ and open the template in the editor.
         <f:facet name="targetCaption">Working</f:facet> 
         </p:pickList>
         
-         <p:commandButton id="updateButton" value="Save" 
+         <p:commandButton id="updateButton" value="Save" update="growlDialog"
                          actionListener="#{scheduleBean.addEvent}" 
                          oncomplete="myschedule.update(); eventDialog.hide();"/>
          <p:commandButton id="deleteButton" value="Delete"
@@ -104,14 +106,6 @@ and open the template in the editor.
             </ui:define>
         </ui:composition>
     </h:body>
-    
-    <script type="text/javascript">  
-    function handleShowEvent() {  
-            eventDialog.show();
-            deleteButton.hide();           
-              
-    } 
-    </script>
     
     
 </html>
