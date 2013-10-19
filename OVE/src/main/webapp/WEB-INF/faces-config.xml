@@ -34,7 +34,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>Tutors</from-outcome>
-            <to-view-id>/jsf/tutors/tutors.xhtml</to-view-id>
+            <to-view-id>/jsf/tutor/tutors.xhtml</to-view-id>
         </navigation-case>
                
         <navigation-case>

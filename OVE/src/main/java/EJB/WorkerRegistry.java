@@ -49,6 +49,16 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         return found;
     }
     
+    public Worker getTutor(Long id){
+        List <Worker> list =  em.createQuery("select t from Worker t WHERE "
+                + "t.id = '" + id + "'")
+        .getResultList();
+        if(list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+    
     public List<Worker> getLinked(Long id)
     {
         em.getTransaction().begin();
@@ -68,6 +78,5 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         
         return list.get(0);
     }
-    
 }
 
