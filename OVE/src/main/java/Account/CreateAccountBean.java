@@ -49,7 +49,7 @@ public class CreateAccountBean {
    
    private String password;
    
-   private Long idNumber;
+   private String idNumber;
 
    private String name;
    
@@ -95,14 +95,14 @@ public class CreateAccountBean {
     /**
      * @return the idNumber
      */
-    public Long getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
     /**
      * @param idNumber the idNumber to set
      */
-    public void setIdNumber(Long idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
@@ -151,6 +151,9 @@ public class CreateAccountBean {
    public void create(ActionEvent event)
    {
        //model = ModelFactory.getModel("OVE_model_pu");
+       String[] idArray = this.idNumber.split("-");
+       String parsedId = idArray[0]+idArray[1];
+       Long idNumber = Long.parseLong(parsedId);
        RequestContext context = RequestContext.getCurrentInstance(); 
        FacesMessage msg = null;
        boolean created = false; 
