@@ -67,7 +67,7 @@ and open the template in the editor.
         </p:pickList>
         
          <p:commandButton id="updateButton" value="Save" 
-                         actionListener="#{scheduleBean.addEvent}" ajax="false"   
+                         actionListener="#{scheduleBean.addEvent}" 
                          oncomplete="myschedule.update(); eventDialog.hide();"/>
          <p:commandButton id="deleteButton" value="Delete"
                           actionListener="#{scheduleBean.deleteEvent}"  disabled="#{scheduleBean.showDelete}"
