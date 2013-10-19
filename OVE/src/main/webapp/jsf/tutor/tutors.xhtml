@@ -55,14 +55,12 @@ and open the template in the editor.
 
 		    <h:outputText value="Salary" />  
 		    <h:outputText value="#{tutor.salary}"/>  
+		    
+ 
 		</h:panelGrid>  
 
-		<!-- DELETE BUTTON -->
-
-		<h:outputLink id="deleteTutorLink" value="javascript:void(0)" onclick="#{tutorBean.removeTutor(tutor.id)}" title="Delete" >
-		    <p:commandButton value="Delete" update="tutorsTable" />
-		</h:outputLink> 
-
+		<p:commandButton id="deleteButton" value="Delete" update="tutorsTable"
+					 actionListener="#{tutorBean.removeTutor(tutor.id)}" />
 	    </p:rowExpansion>  
 	</p:dataTable>  
 	<h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="adddlg.show();" title="Add Tutor" >

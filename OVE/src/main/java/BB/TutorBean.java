@@ -43,8 +43,9 @@ public class TutorBean implements Serializable{
         selectedTutor = tutor;
 	System.out.println("------ SET SELECTED TUTOR -------"+ tutor);
     }
-    
+
     public void removeTutor(Long id) {
+	System.out.println("REMOVING " + id);
 	reg.remove(id);
 	System.out.println("------ REMOVED TUTOR -------"+ id);
     }
