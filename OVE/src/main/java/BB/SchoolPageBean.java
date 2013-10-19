@@ -67,7 +67,6 @@ public class SchoolPageBean implements Serializable {
     }
 
     public School getSchool() {
-        init();
         return school;
     }
 
@@ -132,7 +131,6 @@ public class SchoolPageBean implements Serializable {
             System.out.println(school.getContactPersons().toString());
             school.getContactPersons().add(newcontact);
             schoolreg.update(school);
-            //registry.addContact(school, p);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "Contact created");
         }
 
@@ -143,12 +141,33 @@ public class SchoolPageBean implements Serializable {
         System.out.println("*");
 
     }
-    
-    public void onRowToggle(ToggleEvent event) {  
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,  
-                                            "Row State " + event.getVisibility(),  
-                                            "Name:" + ((Person) event.getData()).getName());  
-          
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-    }  
+
+    public void edit(ActionEvent event) {
+        System.out.println("*");
+        System.out.println("*************************************");
+        System.out.println("* IN EDIT FUNCTION!               *");
+        System.out.println("*                                   *");
+        System.out.println("* Schools info now:          *");
+        System.out.println(school.toString());
+
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage msg = null;
+        boolean created = true;
+        schoolreg.update(school);
+        msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School Edited");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("created", created);
+        System.out.println("* DONE WITH EDIT FUNCTION!        *");
+        System.out.println("*************************************");
+        System.out.println("*");
+
+    }
+
+    public void onRowToggle(ToggleEvent event) {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Row State " + event.getVisibility(),
+                "Name:" + ((Person) event.getData()).getName());
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 }
