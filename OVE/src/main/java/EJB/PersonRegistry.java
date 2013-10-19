@@ -57,7 +57,7 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
         return list;
     }
 
-   /* public List<Person> getByPNumber(long id)
+    public List<Person> getByPNumber(long id)
     {
         List<Person> found = new ArrayList<Person>();
         for(Person c: getRange(0,getCount())) {
@@ -67,7 +67,7 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
         }
         return found;
     }
-    */
+    
     
     @Override
     public String toString(){

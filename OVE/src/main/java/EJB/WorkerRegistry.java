@@ -78,7 +78,7 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         
         return list.get(0);
     }
-  /*  public List<Worker> getByPNumber(Long id) {
+    public List<Worker> getByPNumber(Long id) {
         List<Worker> found = new ArrayList<Worker>();
         for (Worker c : getRange(0, getCount())) {
             if (c.getIdNumber().equals(id)) {
@@ -86,7 +86,7 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
             }
         }
         return found;
-    } */
+    } 
     
 
 }

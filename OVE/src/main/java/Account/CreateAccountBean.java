@@ -158,10 +158,10 @@ public class CreateAccountBean {
        {
            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");  
        }
-     /*  else if((!personReg.getByPNumber(idNumber).isEmpty()) || (!workerReg.getByPNumber(idNumber).isEmpty()))
+       else if((!personReg.getByPNumber(idNumber).isEmpty()) || (!workerReg.getByPNumber(idNumber).isEmpty()))
        {
            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Personal ID is already in use");
-       } */
+       } 
        else  
        {
             created=true; 
