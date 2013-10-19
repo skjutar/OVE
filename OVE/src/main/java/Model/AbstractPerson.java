@@ -21,7 +21,7 @@ public abstract class AbstractPerson extends AbstractEntity
     protected String phoneNbr;
     protected String address;
     private String picUrl;
-    private boolean admin;
+    private boolean isAdmin;
 
     public AbstractPerson() {
     }
@@ -112,14 +112,20 @@ public abstract class AbstractPerson extends AbstractEntity
      * @return the admin
      */
     public boolean isAdmin() {
-        return admin;
+        return isAdmin;
     }
 
     /**
      * @param admin the admin to set
      */
     public void setAdmin(boolean admin) {
-        this.admin = admin;
+        this.isAdmin = admin;
     }
 
+    @Override
+    public String toString() {
+	return "AbstractPerson + {id=" + idNumber + ", name=" + name + ", mail="
+	+ mail + ", phoneNbr=" + phoneNbr + ", address=" + address + ", isAdmin= " 
+	+ isAdmin + "}";
+    }
 }
