@@ -27,7 +27,7 @@ import org.primefaces.context.RequestContext;
 
 /**
  * Runned when a user creates an account
- * @author kristofferskjutar
+ * @author kristofferskjutar and Gustav Dahl
  */
 @RequestScoped
 @Named("createAccountBean")

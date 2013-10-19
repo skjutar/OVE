@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author kristofferskjutar
+ * @author kristofferskjutar and Gustav Dahl
  */
 @Stateless  // A stateless EJB
 @LocalBean
