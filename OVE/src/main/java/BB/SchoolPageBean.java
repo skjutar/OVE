@@ -179,18 +179,13 @@ public class SchoolPageBean implements Serializable {
         System.out.println("* IN DELETE FUNCTION!               *");
         System.out.println("*                                   *");
         System.out.println("* Boolean is now:          *");
-        if (delete == "true") {
-            System.out.println("true, delete the school");
+        
+        schoolreg.remove(school.getId());
 
-        } else {
-            System.out.println("false. keep the school");
-
-        }
-
+        
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean created = true;
-        //schoolreg.update(school);
         msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School Edited");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("created", created);
