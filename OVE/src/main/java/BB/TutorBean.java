@@ -48,6 +48,13 @@ public class TutorBean implements Serializable{
 	reg.update(selectedTutor);
     }
     
+    public void removeTutor(Long id) {
+	reg.remove(id);
+	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,  
+                                            "Id", "" + id);  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }
+    
     public List<Worker> getTutors() {
         return reg.getRange(0, reg.getCount());
     }

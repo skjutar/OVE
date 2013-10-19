@@ -64,6 +64,13 @@ and open the template in the editor.
                                             <h:outputText value="Salary" />  
                                             <h:outputText value="#{tutor.salary}"/>  
                                         </h:panelGrid>  
+					
+					<!-- DELETE BUTTON -->
+					
+					<h:outputLink id="deleteTutorLink" value="javascript:void(0)" onclick="#{tutorBean.removeTutor(tutor.id)}" title="Delete" >
+					    <p:commandButton value="Delete" update="tutorsTable" />
+					 </h:outputLink> 
+					
                                     </p:rowExpansion>  
                                 </p:dataTable>  
     <h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="adddlg.show();" title="Add Tutor" >
@@ -98,7 +105,7 @@ and open the template in the editor.
 				    <p:button id="cancelButton" value="Cancel" onclick="adddlg.hide();" />
                                     <p:commandButton id="addButton" value="Add" update="tutorsTable"   
                                                      actionListener="#{addTutorBean.addTutor}"    
-                                    accesskey="" oncomplete="adddlg.hide();">
+                                     oncomplete="adddlg.hide();">
 					<p:resetInput target="adddlg" /> </p:commandButton>                 
                                 </f:facet>  
                                
