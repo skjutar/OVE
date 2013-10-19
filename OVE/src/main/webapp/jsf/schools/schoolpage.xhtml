@@ -22,7 +22,15 @@ and open the template in the editor.
                                 <p:growl id="msgs" />  
                                <p:panel id="pInfo" header="About #{schoolpage.school.name}" style="width: 250px">  
                                     <h:panelGrid columns="2" columnClasses="column" cellpadding="5" >  
-                                        <h:outputText value="Name: " />  
+                                        <h:outputText value="Name: " style="font-weight:bold"/>
+                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.name}" /> 
+                                        <h:outputText value="Address: " style="font-weight:bold"/>  
+                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.address}" /> 
+                                        <h:outputText value="Zip Code: " style="font-weight:bold"/>  
+                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.zip}" /> 
+                                        <h:outputText value="City: " style="font-weight:bold"/>  
+                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.city}" /> 
+                                        <!--
                                         <p:inputText value="#{schoolpage.school.name}"  
                                                      required="true" label="text" />  
                                         <h:outputText value="Address: " />  
@@ -34,9 +42,144 @@ and open the template in the editor.
                                         <h:outputText value="City: " />  
                                         <p:inputText value="#{schoolpage.school.city}"  
                                                      required="true" label="text" />  
+                                                                                -->
+                                        <h:form id="editschool"> 
+                                            <h:outputLink id="editschoolLink" value="javascript:void(0)" onclick="editschooldlg.show()" title="Edit this school" >   
+                                                <p:commandButton value="Edit this school"  type="button" />  
+                                            </h:outputLink>  
+
+
+                                            <p:growl id="growl" showDetail="true" life="3000" />  
+
+                                            <p:dialog  id="dialog" header="Edit School" widgetVar="editschooldlg" resizable="false">  
+                                                <h:panelGrid columns="2"   cellpadding="5" >
+
+
+                                                    <h:outputLabel for="name" value="Name:" />  
+                                                    <p:inputText value="#{schoolpage.school.name}"   
+                                                    id="name" required="true" label="Name" />             
+
+                                                    <h:outputLabel for="address" value="Address: "/>  
+                                                    <h:inputText value="#{schoolpage.school.address}"   
+                                                    id="address" required="true" label="Address" />
+
+                                                    <h:outputLabel for="zipcode" value="Zip Code: "/>  
+                                                    <h:inputText value="#{schoolpage.school.zip}"   
+                                                    id="zipcode" required="true" label="Zip" />
+
+                                                    <h:outputLabel for="city" value="City: "/>  
+                                                    <h:inputText value="#{schoolpage.school.city}"   
+                                                    id="city" required="true" label="City" />
+
+
+                                                    <f:facet name="footer">  
+                                                        <p:commandButton id="editSchool" value="Save changes" update="growl"   
+                                                        actionListener="#{schoolpage.edit}"    
+                                                        accesskey="" oncomplete="handleEditRequest(xhr, status, args)"/>                 
+                                                    </f:facet>  
+
+                                                </h:panelGrid>  
+                                                <h:outputText value="You will receive an email to confirm your email adress"/>
+                                            </p:dialog>  
+                                        </h:form>                                        
+
                                     </h:panelGrid> 
                                 </p:panel>
 
+                            </h:form>
+                        </div>
+                        <div>
+                            
+                            <h:form id="allcontacts" >  
+                                <p:growl id="growl" showDetail="true" />  
+                                <p:dataTable id="contactsTable" var="contact" value="#{schoolpage.contacts}" style="width:50%;">  
+                                    <p:ajax event="rowToggle" listener="#{schoolpage.onRowToggle}" update=":allcontacts:growl" />  
+  
+                                    <f:facet name="header">  
+                                        All contacts of this school. Expand rows to see detailed information  
+                                    </f:facet>  
+  
+                                    <p:column style="width:2%">  
+                                        <p:rowToggler />  
+                                    </p:column>  
+  
+                                    <p:column style="width:49%">  
+                                        <f:facet name="header">  
+                                                Name  
+                                        </f:facet>  
+                                        <h:outputText value="#{contact.name}" />  
+                                    </p:column>  
+  
+                                    <p:column style="width:49%">  
+                                        <f:facet name="header">  
+                                                Email  
+                                        </f:facet>  
+                                        <h:outputText value="#{contact.mail}" />  
+                                    </p:column>  
+                              
+                                    <p:rowExpansion>  
+                                        <h:panelGrid id="display" columns="2" cellpadding="4" style="width:100%;"  
+                                                        styleClass=" ui-widget-content grid">  
+                                            
+                                            <f:facet name="header">  
+                                                <!--<p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/>  -->
+                                            </f:facet>  
+
+
+                                            <h:outputText value="Name:" />  
+                                            <h:outputText id="model" value="#{contact.name}" />  
+                              
+                                            <h:outputText value="Address:" />  
+                                            <h:outputText id="year" value="#{contact.address}" />  
+                              
+                                            <h:outputText value="Telephone number:" />  
+                                            <h:outputText value="#{contact.phoneNbr}"/>  
+                              
+                                            <h:outputText value="Email:" />  
+                                            <h:outputText value="#{contact.mail}"/>  
+                                        </h:panelGrid>  
+                                    </p:rowExpansion>  
+                                </p:dataTable>  
+                            </h:form>  
+                            
+                            <h:form id="addcontact"> 
+                                <h:outputLink id="addcontactLink" value="javascript:void(0)" onclick="addcontactdlg.show()" title="Add a new contact" >   
+                                    <p:commandButton value="Add a new contact"  type="button" />  
+                                </h:outputLink>  
+                        
+                        
+                                <p:growl id="growl" showDetail="true" life="3000" />  
+  
+                                <p:dialog  id="dialog" header="Add Contact" widgetVar="addcontactdlg" resizable="false">  
+                                    <h:panelGrid columns="2"   cellpadding="5" >
+                                        
+                                
+                                        <h:outputLabel for="name" value="Name:" />  
+                                        <p:inputText value="#{schoolpage.person.name}"   
+                                        id="name" required="true" label="name" />             
+                                
+                                        <h:outputLabel for="email" value="Email:"/>  
+                                        <h:inputText value="#{schoolpage.person.mail}"   
+                                        id="email" required="true" label="Email" />
+                                        
+                                        <h:outputLabel for="telephoneNumber" value="Tele:"/>  
+                                        <h:inputText value="#{schoolpage.person.phoneNbr}"   
+                                        id="telephoneNumber" required="true" label="Tele" />
+                                        
+                                        <h:outputLabel for="adress" value="Adress:"/>  
+                                        <h:inputText value="#{schoolpage.person.address}"   
+                                        id="adress" required="true" label="Adress" />
+                               
+              
+                                        <f:facet name="footer">  
+                                            <p:commandButton id="addButton" value="Add new contact" update="growl"   
+                                            actionListener="#{schoolpage.create}"    
+                                            accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
+                                        </f:facet>  
+                               
+                                    </h:panelGrid>  
+                                    <h:outputText value="You will receive an email to confirm your email adress"/>
+                                </p:dialog>  
                             </h:form>
                         </div>
                         <div style="float:left;margin-left: 40em ">
@@ -45,7 +188,23 @@ and open the template in the editor.
                     </div>
                 </div>
 
-
+    <script type="text/javascript">  
+    
+    function handleCreateRequest(xhr, status, args) {
+    if(args.created) {
+        addcontactdlg.hide();  
+        $('#addcontactLink').fadeOut();
+    }
+    location.reload();
+    }
+        function handleEditRequest(xhr, status, args) {
+    if(args.created) {
+        editschooldlg.hide();  
+        $('#editschoolLink').fadeOut();
+    }
+    location.reload();
+    }
+</script> 
 
             </ui:define>
         </ui:composition>

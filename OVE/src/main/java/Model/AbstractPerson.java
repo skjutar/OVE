@@ -34,6 +34,14 @@ public abstract class AbstractPerson extends AbstractEntity
         this.address = address;
         this.picUrl="URL";
     }
+        public AbstractPerson(String name, String mail, String phoneNbr, String address) {
+        this.idNumber = Math.round(Math.random()*100000);
+        this.name = name;
+        this.mail = mail;
+        this.phoneNbr = phoneNbr;
+        this.address = address;
+        this.picUrl="URL";
+    }
     
     public AbstractPerson(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {
         super(id);

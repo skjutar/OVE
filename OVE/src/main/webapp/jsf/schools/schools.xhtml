@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 TODO (Malla)
-- Att välja en skola ur listan gå bra, men att välja en ny ger inget resultat.
+- DONE - Att välja en skola ur listan gå bra, men att välja en ny ger inget resultat.
 - Ta bort en skola ur listan.
 - Lägga till kontaktpersoner till skolorna.
-- KOmma till vy för en specifik skola.
+- DONE - KOmma till vy för en specifik skola.
 Optional
 - Förändra uppdatering av listan till js i listan ist för location.reload();
 To change this template, choose Tools | Templates
@@ -98,7 +98,10 @@ and open the template in the editor.
                             <h:panelGrid columns="2"   cellpadding="5" >  
                                 <h:outputLabel for="name" value="School name:" />  
                                 <p:inputText value="#{createSchoolBean.name}"   
-                                             id="name" required="true" label="Name" /> 
+                                             id="name" required="true" label="Name" >
+                                    <f:validateRegex pattern="^[a-ö0-9_-]+$"/>
+                                    <p:ajax update="msgLowCase" event="keyup"/>
+                                </p:inputText>
 
                                 <h:outputLabel for="address" value="Adress:"/>  
                                 <h:inputText value="#{createSchoolBean.address}"   
@@ -116,7 +119,9 @@ and open the template in the editor.
                                     <p:commandButton id="addButton" value="Add School" update="growl"   
                                                      actionListener="#{createSchoolBean.create}"    
                                                      accesskey="" oncomplete="handleCreateRequest2(xhr, status, args)"/>                 
-                                </f:facet>  
+                                </f:facet> 
+                                
+                                <p:message for="name" id="msgLowCase" display="icon"/>
                             </h:panelGrid>           
                         </p:dialog>  
                     </h:form>
