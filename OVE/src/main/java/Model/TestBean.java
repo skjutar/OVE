@@ -39,15 +39,58 @@ public class TestBean implements Serializable
     @EJB
     private SessionRegistry sesReg;
     
+    @EJB
+    private PersonRegistry pReg;
+    
     private Worker Ove;
     private List<Session> sessions;
     private List<Session> sessions2;
     private List<Worker> workerList;
+    private Person person;
+    private int success;
     
     public TestBean()
     {
         
     }
+    
+    public void PersonRegistryTestAdd()
+    {
+        success=0;
+        person = new Person(66666L, "Test Testsson", "test@gmail.com", "070TEST", "testVägen");
+        pReg.add(person);
+        if(pReg.getCount()==1)
+        {
+            success++;
+        }
+        if(pReg.getByName(person.getName()).size()==1)
+        {
+            success++;
+        }
+        if(pReg.getByPNumber(person.getIdNumber()).size()==1)
+        {
+            success++;
+        }  
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Tests", "Number of success :" + success);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void PersonRegistryTestRemove()
+    {
+        success=0;
+        Person p = pReg.getByName(person.getName()).get(0);
+        pReg.remove(p.getId());
+        if(pReg.getCount()==0)
+        {
+            success++;
+        }
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Tests", "Number of success :" + success);
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }
+    
+    
+    
+    
     public void addWorker(ActionEvent event)
     {   
         Ove = new Worker(1232312L,"Ove Sundberg", "ove@Sundberg.se", "34324234", "parkbänken 3");

@@ -83,7 +83,7 @@ public class SchoolListBean implements Serializable {
         System.out.println("*****Done in onRowSelect in SchoolListBean*******");
         System.out.println("*************************************************");
         System.out.println(" ");
-
+        
     }
 
     /**

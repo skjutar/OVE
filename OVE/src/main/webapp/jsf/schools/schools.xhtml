@@ -32,7 +32,7 @@ and open the template in the editor.
                         <p:dataTable id="schools" var="school" value="#{schoollist.allSchools}" paginator="true" rows="10"  
                                      selection="#{schoollist.selectedSchool}" selectionMode="single">  
 
-                            <p:ajax event="rowSelect" listener="#{schoollist.onRowSelect}"/>  
+                            <p:ajax event="rowSelect" listener="#{schoollist.onRowSelect}" />  
 
                             <!--
                             <p:ajax event="rowUnselect" listener="#{schoollist.onRowUnselect}" update=":form:growl"/>  
