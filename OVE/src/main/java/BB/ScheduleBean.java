@@ -64,6 +64,7 @@ public class ScheduleBean implements Serializable
     private ArrayList<String> target;
     private ArrayList<String> source;
     private DualListModel<String> workerModel;
+    private boolean showDelete=true;
    
     //Create all sessions for all schools in this list
    @PostConstruct
@@ -145,6 +146,7 @@ public class ScheduleBean implements Serializable
     }
       //Trycker event dialogen
     public void onEventSelect(SelectEvent selectEvent) {  
+        setShowDelete(false);
         loadWorkers();
         event = (ScheduleEvent) selectEvent.getObject();
         for(Worker w : event.getWorkerList())
@@ -155,6 +157,7 @@ public class ScheduleBean implements Serializable
     }  
    
     public void onDateSelect(SelectEvent selectEvent) {  
+        setShowDelete(true);
         loadWorkers();
         event = new ScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject()); 
         event.setAllDay(false);
@@ -237,6 +240,20 @@ public class ScheduleBean implements Serializable
      */
     public void setWorkerModel(DualListModel<String> workerModel) {
         this.workerModel = workerModel;
+    }
+
+    /**
+     * @return the showDelete
+     */
+    public boolean isShowDelete() {
+        return showDelete;
+    }
+
+    /**
+     * @param showDelete the showDelete to set
+     */
+    public void setShowDelete(boolean showDelete) {
+        this.showDelete = showDelete;
     }
 
     /**
