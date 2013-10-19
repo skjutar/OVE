@@ -173,7 +173,7 @@ public class SchoolPageBean implements Serializable {
 
     }
 
-    public void removethis(ActionEvent event) {
+    public String removethis() {
         System.out.println("*");
         System.out.println("*************************************");
         System.out.println("* IN DELETE FUNCTION!               *");
@@ -197,6 +197,7 @@ public class SchoolPageBean implements Serializable {
         System.out.println("* DONE WITH EDIT FUNCTION!        *");
         System.out.println("*************************************");
         System.out.println("*");
+        return "Schools";
 
     }
 
