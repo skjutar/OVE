@@ -10,12 +10,12 @@ import javax.persistence.*;
  *
  * @author Gustav
  */
-@Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="Persons")
+
+//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class AbstractPerson extends AbstractEntity
 {
-     protected Long idNumber;
+    protected Long idNumber;
     protected String name;
     protected String mail;
     protected String phoneNbr;
@@ -28,6 +28,14 @@ public abstract class AbstractPerson extends AbstractEntity
     
     public AbstractPerson(Long idNumber, String name, String mail, String phoneNbr, String address) {
         this.idNumber = idNumber;
+        this.name = name;
+        this.mail = mail;
+        this.phoneNbr = phoneNbr;
+        this.address = address;
+        this.picUrl="URL";
+    }
+        public AbstractPerson(String name, String mail, String phoneNbr, String address) {
+        this.idNumber = Math.round(Math.random()*100000);
         this.name = name;
         this.mail = mail;
         this.phoneNbr = phoneNbr;

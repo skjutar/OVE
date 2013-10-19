@@ -4,7 +4,6 @@
  */
 package EJB;
 
-import Model.AbstractDAO;
 import Model.Person;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
      private static final String PU = "database_pu";
      // This is JTA see persistence.xml
      @PersistenceContext(unitName = PU)
-     private EntityManager emf;
+     private EntityManager em;
 
     
     public PersonRegistry()
@@ -47,6 +46,7 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
             }
         }
         return found;
+    
     }
     
     public List<Person> getLinked(Long id)
@@ -56,6 +56,7 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
         em.close();
         return list;
     }
+
    /* public List<Person> getByPNumber(long id)
     {
         List<Person> found = new ArrayList<Person>();
@@ -67,6 +68,18 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
         return found;
     }
     */
+    
+    @Override
+    public String toString(){
+       String persreg="***Person registry: \n";
+
+        for (Person p: getRange(0, super.getCount())){
+            persreg+=p.toString()+"\n";
+        }
+        return persreg;
+    }
+    
+    
     
 }
 

@@ -86,7 +86,7 @@ and open the template in the editor.
   
                          <p:dialog  id="dialog" header="Apply" widgetVar="applydlg" resizable="false">  
                              <h:outputText value="Options: " />  
-                             <p:selectOneRadio id="options" value="#{createAccountBean.type}">  
+                             <p:selectOneRadio id="options" value="#{createAccountBean.type}" required="true">  
                                     <f:selectItem itemLabel="Worker" itemValue="worker" />  
                                     <f:selectItem itemLabel="Admin" itemValue="admin" />  
                                 </p:selectOneRadio>  

@@ -94,18 +94,6 @@ public class ScheduleBean implements Serializable
       
     public void addEvent(ActionEvent actionEvent) { 
         
-       /* Date start = this.event.getStartDate();
-        Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(start.getTime());
-        c.add(Calendar.HOUR_OF_DAY, -1);
-        this.event.setStartDate(new Date(c.getTimeInMillis()));
-        
-        Date end = this.event.getEndDate();
-        c.setTimeInMillis(end.getTime());
-        c.add(Calendar.HOUR_OF_DAY, -1);
-        this.event.setEndDate(new Date(c.getTimeInMillis())); */
-        
-        
         ArrayList<Worker> workerList = new ArrayList<Worker>();
         for(String s : workerModel.getTarget())
         {            
@@ -118,11 +106,11 @@ public class ScheduleBean implements Serializable
             
             School s = reg.getByName(event.getSchoolName()).get(0);
             event.setTitle(s.getName());
-            System.out.println("Antal sessions i Chalmers: "+s.getSchedule().getSessions().size());
+            
             s.getSchedule().getSessions().add(new Session(event.getStartDate(), event.getEndDate(), event.getNumberOfStudents(), event.getWorkerList(), event.getNotation()));         
-            System.out.println("Antal sessions i Chalmers: "+s.getSchedule().getSessions().size());
+            
             s = reg.update(s);
-            System.out.println("Antal sessions i Chalmers: "+s.getSchedule().getSessions().size());
+           
             for(Session ses : s.getSchedule().getSessions())
             {
                 if(ses.getStartTime().compareTo(event.getStartDate())==0 

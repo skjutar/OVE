@@ -5,13 +5,16 @@
 package BB;
 
 import EJB.WorkerRegistry;
+import Model.Person;
 import Model.Worker;
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.event.ToggleEvent;
 
 /**
  *
@@ -21,27 +24,39 @@ import javax.inject.Named;
 @SessionScoped
 public class TutorBean implements Serializable{
     
-    List<Worker> tutors = new LinkedList();
+    @EJB
+    WorkerRegistry reg;
+    
+    private Worker selectedTutor;
     
 
     
     
     public TutorBean() {
-        addTutor(new Worker(9001015050L, "Lisa", "lisa@mail.se", "0707777777", "Chalmers"));
-        addTutor(new Worker(9001015051L, "Madeleine", "madeleine@mail.se", "0707777778", "Chalmers"));
-        addTutor(new Worker(9001015052L, "Gustav", "gustav@mail.se", "0707777779", "Chalmers"));
-        addTutor(new Worker(9001015053L, "Kristoffer", "kristoffer@mail.se", "0707777776", "Chalmers"));
+    }
+
+    public Worker getSelectedTutor() {
+        return selectedTutor;
     }
     
-    public Worker selectedTutor() {
-        return null;
+    public void setSelectedTutor(Worker tutor) {
+        selectedTutor = tutor;
+	System.out.println("------ SET SELECTED TUTOR -------"+ tutor);
+    }
+    
+    public void updateTutor() {
+	reg.update(selectedTutor);
     }
     
     public List<Worker> getTutors() {
-        return tutors;
+        return reg.getRange(0, reg.getCount());
     }
     
-    public void addTutor(Worker tutor) {
-        tutors.add(tutor);
+    public void onRowToggle(ToggleEvent event) {  
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,  
+                                            "Row State " + event.getVisibility(),  
+                                            "Name:" + ((Worker) event.getData()).getName());  
+          
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
     } 
 }
