@@ -17,29 +17,62 @@ and open the template in the editor.
         <ui:define name="content"> 
 	    <div id="container" style="overflow:hidden">
 	    <div id="inner" style="overflow:">
-	    <div style="float:left">
-        <h:form id="form">  
+	<h:form id="alltutors" >  
+                                <p:growl id="growl" showDetail="true" />  
+                                <p:dataTable id="tutorsTable" var="tutor" value="#{tutorBean.tutors}" style="width:600px;">  
+                                    <p:ajax event="rowToggle" listener="#{tutorBean.onRowToggle}" update=":alltutors:growl" />  
   
-    <h:panelGrid columns="1" style="margin-bottom:20px" cellpadding="5"  
-                 columnClasses="label, column" >  
+                                    <f:facet name="header">  
+                                        All tutors. Expand rows to see detailed information  
+                                    </f:facet>  
   
-        <h:outputText value="Tutors" />  
-        <p:selectOneListbox id="tutorList" value="#{tutorBean.selectedTutor}" >  
-            <f:selectItems value="#{tutorBean.tutors}" var="tutor" itemLabel="#{tutor.name}" itemValue="tutor" />
-	    
-	    <!--<p:ajax update="tutorInfo"/>-->
-        </p:selectOneListbox> 
+                                    <p:column style="width:2%">  
+                                        <p:rowToggler />  
+                                    </p:column>  
   
-    </h:panelGrid>  
-	    <!--<p:button id="submitButton" value="Submit" onclick="info;" /> -->
- 
-    <h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="applydlg.show();" title="Add Tutor" >
-	<p:commandButton value="Add" />
+                                    <p:column style="width:49%">  
+                                        <f:facet name="header">  
+                                                Name  
+                                        </f:facet>  
+                                        <h:outputText value="#{tutor.name}" />  
+                                    </p:column>  
+  
+                                    <p:column style="width:49%">  
+                                        <f:facet name="header">  
+                                                Email  
+                                        </f:facet>  
+                                        <h:outputText value="#{tutor.mail}" />  
+                                    </p:column>  
+                              
+                                    <p:rowExpansion>  
+                                        <h:panelGrid id="display" columns="2" cellpadding="4" style="width:100%;"  
+                                                        styleClass=" ui-widget-content grid">  
+                                            
+                                            <f:facet name="header">  
+                                                About #{tutor.name}
+                                            </f:facet>  
+					    
+                                            <h:outputText value="ID Number:" />  
+                                            <h:outputText value="#{tutor.idNumber}" />  
+                              
+                                            <h:outputText value="Telephone number:" />  
+                                            <h:outputText value="#{tutor.phoneNbr}"/>  
+					    
+					    <h:outputText value="Address:" />  
+                                            <h:outputText value="#{tutor.address}" />  
+                              
+                                            <h:outputText value="Salary" />  
+                                            <h:outputText value="#{tutor.salary}"/>  
+                                        </h:panelGrid>  
+                                    </p:rowExpansion>  
+                                </p:dataTable>  
+    <h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="adddlg.show();" title="Add Tutor" >
+	<p:commandButton value="Add new tutor" />
      </h:outputLink> 
     
-	    <p:growl id="growl" showDetail="true" life="3000" />  
+	    <p:growl id="growl2" showDetail="true" life="3000" />  
   
-                         <p:dialog  id="dialog" header="Add Tutor" widgetVar="applydlg" resizable="false"> 
+                         <p:dialog  id="dialog" header="Add Tutor" widgetVar="adddlg" resizable="false"> 
                             <h:panelGrid columns="2"   cellpadding="5" >  
                                 <h:outputLabel for="name" value="name:"/>  
                                 <h:inputText value="#{addTutorBean.name}"   
@@ -62,28 +95,48 @@ and open the template in the editor.
                                
               
                                 <f:facet name="footer">  
-				    <p:button id="cancelButton" value="Cancel" onclick="applydlg.hide();" />
-                                    <p:commandButton id="addButton" value="Add" update="tutorList"   
+				    <p:button id="cancelButton" value="Cancel" onclick="adddlg.hide();" />
+                                    <p:commandButton id="addButton" value="Add" update="tutorsTable"   
                                                      actionListener="#{addTutorBean.addTutor}"    
-                                    accesskey="" oncomplete="applydlg.hide();">
-					<p:resetInput target="applydlg" /> </p:commandButton>                 
+                                    accesskey="" oncomplete="adddlg.hide();">
+					<p:resetInput target="adddlg" /> </p:commandButton>                 
                                 </f:facet>  
                                
                             </h:panelGrid>  
                         </p:dialog>  
+                            </h:form>  
+<!--
+        <h:form id="form">  
+  
+    <h:panelGrid columns="1" style="margin-bottom:20px" cellpadding="5"  
+                 columnClasses="label, column" >  
+  
+        <h:outputText value="Tutors" />  
+	
+        <p:selectOneListbox id="tutorList" value="#{tutorBean.selectedTutor}" >  
+            <f:selectItems value="#{tutorBean.tutors}" var="tutor" itemLabel="#{tutor.name}" itemValue="tutor" />
+	    
+        </p:selectOneListbox> 
+
+    </h:panelGrid>  
+    <h:outputLink id="showTutorLink" value="javascript:void(0)" onclick="infodlg.show();" title="About Tutor" >
+	<p:commandButton value="Show Info" />
+     </h:outputLink>    
+-->
     
-    <!--<p:button id="addTutor" value ="Add Tutor" onclick="" /> -->
     <!--
-    <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
+    <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="infodlg">  
         <h:panelGrid columns="1" id="display">  
             
             <h:outputText value="Tutor:" /><h:outputText id="selectedNumber" value="#{tutorBean.selectedTutor}" /> 
         </h:panelGrid>  
     </p:dialog>  
     -->
-    
-    </h:form>  
+    <!--
+    </h:form> -->
+	
 	    </div>
+		<!--
 
 		<div style="float:right">
                     <h:form id="tutorInfo">  
@@ -112,14 +165,14 @@ and open the template in the editor.
                                  
                   </h:panelGrid>  
                          
-			<p:commandButton value="Save"  action="#{tutorBean.updateTutor}" ajax="false"  />  
+			<p:commandButton value="Save"  action="" ajax="false"  />  
                         
                 </p:panel>
                     
             </h:form>
-                </div>
+ -->
+                <!--</div>-->
 		
-	    </div>
 	    </div>
     </ui:define>
     </ui:composition>

@@ -5,12 +5,16 @@
 package BB;
 
 import EJB.WorkerRegistry;
+import Model.Person;
 import Model.Worker;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.event.ToggleEvent;
 
 /**
  *
@@ -47,4 +51,12 @@ public class TutorBean implements Serializable{
     public List<Worker> getTutors() {
         return reg.getRange(0, reg.getCount());
     }
+    
+    public void onRowToggle(ToggleEvent event) {  
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,  
+                                            "Row State " + event.getVisibility(),  
+                                            "Name:" + ((Worker) event.getData()).getName());  
+          
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    } 
 }
