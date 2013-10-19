@@ -157,7 +157,7 @@ public class SchoolPageBean implements Serializable {
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");
         } else {
             created = true;
-            Person newcontact = new Person(p.getName(), p.getMail(), p.getMail(), "-");
+            Person newcontact = new Person(p.getName(), p.getMail(), p.getPhoneNbr(), p.getAddress());
             System.out.println("*");
             System.out.println("* Person to add:" + newcontact);
             System.out.println("*");
