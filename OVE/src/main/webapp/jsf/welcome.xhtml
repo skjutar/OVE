@@ -20,33 +20,27 @@ and open the template in the editor.
             <title>Ove-project</title>
         </h:head>
         <h:body>
-            <header>
-                
-            </header>
                 
             <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="200"  resizable="false" closable="false" collapsible="false">
-                    <div  style="margin-left: 2em" > 
-                        <h3>Chalmers Study Project</h3>
-                    </div>
+		<div align="center" >
+		 <p:layoutUnit position="north" size="200" resizable="false" closable="false" collapsible="false">
                 </p:layoutUnit>
-                
-                <p:layoutUnit position="center" >
-
-                        
-                             <div align="center">
-                                 <h1>Welcome!</h1>
-                                 <h1>This is a bla bla bla bla</h1>
-                                 <h:graphicImage url="#{resource['img:tut.jpg']}" /> 
-                            </div>
-    
- 
+                </div> 
+                <p:layoutUnit position="center" >  
+		    <div align="center">
+			<h1>Welcome!</h1>
+			<h2>
+			    <p>This is a webpage for the Chalmers Study Project.</p>
+			    <p>Press apply to create a new account, <br></br>
+			    or login if you already have one.</p>
+			</h2>
+			<h:graphicImage url="#{resource['img:tut.jpg']}" /> 
+		   </div>
+		    
                 <h:button id="hiddenButton" outcome="Home"  style="display:none" class="button"/>
 
                 </p:layoutUnit>
-                <p:layoutUnit position="south" size="20" resizable="false" closable="false" collapsible="false">
-           
-                </p:layoutUnit>
+
                 <p:layoutUnit position="east" size="200" resizable="false" closable="false" collapsible="false">
                     <h:form id="login"> 
                         <h:outputLink id="loginLink" value="javascript:void(0)" onclick="dlg.show()" title="login" >   
