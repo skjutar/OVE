@@ -4,7 +4,9 @@
  */
 package Account;
 
+import EJB.PersonRegistry;
 import EJB.UserRegistry;
+import EJB.WorkerRegistry;
 import Mail.MailBean;
 import Model.Account;
 import Model.Person;
@@ -25,7 +27,7 @@ import org.primefaces.context.RequestContext;
 
 /**
  * Runned when a user creates an account
- * @author kristofferskjutar
+ * @author kristofferskjutar and Gustav Dahl
  */
 @RequestScoped
 @Named("createAccountBean")
@@ -36,12 +38,18 @@ public class CreateAccountBean {
    
    @EJB
    private MailBean mailBean;
+   
+   @EJB
+   private PersonRegistry personReg;
+   
+   @EJB
+   private WorkerRegistry workerReg;
     
    private String username;
    
    private String password;
    
-   private Long idNumber;
+   private String idNumber;
 
    private String name;
    
@@ -87,14 +95,14 @@ public class CreateAccountBean {
     /**
      * @return the idNumber
      */
-    public Long getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
     /**
      * @param idNumber the idNumber to set
      */
-    public void setIdNumber(Long idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
@@ -143,13 +151,20 @@ public class CreateAccountBean {
    public void create(ActionEvent event)
    {
        //model = ModelFactory.getModel("OVE_model_pu");
+       String[] idArray = this.idNumber.split("-");
+       String parsedId = idArray[0]+idArray[1];
+       Long idNumber = Long.parseLong(parsedId);
        RequestContext context = RequestContext.getCurrentInstance(); 
        FacesMessage msg = null;
        boolean created = false; 
-       if(!reg.getByName(username).isEmpty())
+       if((!reg.getByName(username).isEmpty())) //|| (!personReg.getByPNumber(idNumber).isEmpty()))
        {
            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");  
-       }       
+       }
+       else if((!personReg.getByPNumber(idNumber).isEmpty()) || (!workerReg.getByPNumber(idNumber).isEmpty()))
+       {
+           msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Personal ID is already in use");
+       } 
        else  
        {
             created=true; 

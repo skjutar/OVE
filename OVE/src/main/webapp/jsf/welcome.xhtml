@@ -104,8 +104,8 @@ and open the template in the editor.
                                      <p:ajax update="msgname" event="keyup" /> 
                                 </h:inputText>
                                 <h:outputLabel for="idNumber" value="ID number:" />  
-                                <p:inputText value="#{createAccountBean.idNumber}"   
-                                id="idNumber" required="true" label="idNumber" /> 
+                                <p:inputMask value="#{createAccountBean.idNumber}" 
+                                             mask="999999-9999" required="true" label="idNumber"/>
                                 <h:outputLabel for="email" value="Email:"/>  
                                 <h:inputText value="#{createAccountBean.emailAdress}"   
                                 id="email" required="true" label="Email" >
