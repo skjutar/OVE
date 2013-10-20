@@ -9,106 +9,102 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <head>
-        <title>Tutors</title>
-    </head>
-    <body>
-        <ui:composition template="/WEB-INF/template.xhtml">
-        <ui:define name="content"> 
-	    <div id="container" style="overflow:hidden">
-	    <div id="inner" style="overflow:">
-	<h:form id="alltutors" >  
-                                <p:growl id="growl" showDetail="true" />  
-                                <p:dataTable id="tutorsTable" var="tutor" value="#{tutorBean.tutors}" style="width:600px;">  
-                                    <p:ajax event="rowToggle" listener="#{tutorBean.onRowToggle}" update=":alltutors:growl" />  
-  
-                                    <f:facet name="header">  
-                                        All tutors. Expand rows to see detailed information  
-                                    </f:facet>  
-  
-                                    <p:column style="width:2%">  
-                                        <p:rowToggler />  
-                                    </p:column>  
-  
-                                    <p:column style="width:49%">  
-                                        <f:facet name="header">  
-                                                Name  
-                                        </f:facet>  
-                                        <h:outputText value="#{tutor.name}" />  
-                                    </p:column>  
-  
-                                    <p:column style="width:49%">  
-                                        <f:facet name="header">  
-                                                Email  
-                                        </f:facet>  
-                                        <h:outputText value="#{tutor.mail}" />  
-                                    </p:column>  
-                              
-                                    <p:rowExpansion>  
-                                        <h:panelGrid id="display" columns="2" cellpadding="4" style="width:100%;"  
-                                                        styleClass=" ui-widget-content grid">  
-                                            
-                                            <f:facet name="header">  
-                                                About #{tutor.name}
-                                            </f:facet>  
-					    
-                                            <h:outputText value="ID Number:" />  
-                                            <h:outputText value="#{tutor.idNumber}" />  
-                              
-                                            <h:outputText value="Telephone number:" />  
-                                            <h:outputText value="#{tutor.phoneNbr}"/>  
-					    
-					    <h:outputText value="Address:" />  
-                                            <h:outputText value="#{tutor.address}" />  
-                              
-                                            <h:outputText value="Salary" />  
-                                            <h:outputText value="#{tutor.salary}"/>  
-                                        </h:panelGrid>  
-                                    </p:rowExpansion>  
-                                </p:dataTable>  
-    <h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="adddlg.show();" title="Add Tutor" >
+<head>
+    <title>Tutors</title>
+</head>
+<body>
+    <ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="content"> 
+    <div id="container" style="overflow:hidden">
+    <div id="inner" style="overflow:">
+    <h:form id="alltutors" >  
+	<p:growl id="growl" showDetail="true" />  
+	<p:dataTable id="tutorsTable" var="tutor" value="#{tutorBean.tutors}" style="width:600px;">  
+	    <p:ajax event="rowToggle" listener="#{tutorBean.onRowToggle}" update=":alltutors:growl" />  
+
+	    <f:facet name="header">All tutors. Expand rows to see detailed information </f:facet>  
+
+	    <p:column style="width:2%">  
+		<p:rowToggler />  
+	    </p:column>  
+
+	    <p:column style="width:49%">  
+		<f:facet name="header"> Name </f:facet>  
+		<h:outputText value="#{tutor.name}" />  
+	    </p:column>  
+
+	    <p:column style="width:49%">  
+		<f:facet name="header">Email </f:facet>  
+		<h:outputText value="#{tutor.mail}" />  
+	    </p:column>  
+
+	    <p:rowExpansion>  
+		<h:panelGrid id="display" columns="2" cellpadding="4" style="width:100%;"  
+				styleClass=" ui-widget-content grid">  
+
+		    <f:facet name="header"> About #{tutor.name}</f:facet>  
+
+		    <h:outputText value="ID Number:" />  
+		    <h:outputText value="#{tutor.idNumber}" />  
+
+		    <h:outputText value="Telephone number:" />  
+		    <h:outputText value="#{tutor.phoneNbr}"/>  
+
+		    <h:outputText value="Address:" />  
+		    <h:outputText value="#{tutor.address}" />  
+
+		    <h:outputText value="Salary" />  
+		    <h:outputText value="#{tutor.salary}"/>  
+		    
+ 
+		</h:panelGrid>  
+
+		<p:commandButton id="deleteButton" value="Delete" update="tutorsTable"
+					 actionListener="#{tutorBean.removeTutor(tutor.id)}" />
+	    </p:rowExpansion>  
+	</p:dataTable>  
+	<h:outputLink id="addTutorLink" value="javascript:void(0)" onclick="adddlg.show();" title="Add Tutor" >
 	<p:commandButton value="Add new tutor" />
-     </h:outputLink> 
-    
-	    <p:growl id="growl2" showDetail="true" life="3000" />  
-  
-                         <p:dialog  id="dialog" header="Add Tutor" widgetVar="adddlg" resizable="false"> 
-                            <h:panelGrid columns="2"   cellpadding="5" >  
-                                <h:outputLabel for="name" value="name:"/>  
-                                <h:inputText value="#{addTutorBean.name}"   
-                                id="name" required="true" label="Name:" />
-                                <h:outputLabel for="idNumber" value="ID number:" />  
-                                <p:inputText value="#{addTutorBean.idNumber}"   
-                                id="idNumber" required="true" label="idNumber" /> 
-                                <h:outputLabel for="email" value="Email:"/>  
-                                <h:inputText value="#{addTutorBean.mail}"   
-                                id="email" required="true" label="Email" />
-                                <h:outputLabel for="telephoneNumber" value="Tele:"/>  
-                                <h:inputText value="#{addTutorBean.phoneNbr}"   
-                                id="telephoneNumber" required="true" label="Tele" />
-                                <h:outputLabel for="address" value="Address:"/>  
-                                <h:inputText value="#{addTutorBean.address}"   
-                                id="address" required="false" label="Address" />
-				<h:outputLabel for="salary" value="Salary:"/>  
-                                <h:inputText value="#{addTutorBean.salary}"   
-                                id="salary" required="true" label="Salary" />
-                               
-              
-                                <f:facet name="footer">  
-				    <p:button id="cancelButton" value="Cancel" onclick="adddlg.hide();" />
-                                    <p:commandButton id="addButton" value="Add" update="tutorsTable"   
-                                                     actionListener="#{addTutorBean.addTutor}"    
-                                    accesskey="" oncomplete="adddlg.hide();">
-					<p:resetInput target="adddlg" /> </p:commandButton>                 
-                                </f:facet>  
-                               
-                            </h:panelGrid>  
-                        </p:dialog>  
-                            </h:form>  
-	
-	    </div>		
-	    </div>
-    </ui:define>
-    </ui:composition>
-    </body>
+	</h:outputLink> 
+
+	<p:growl id="growl2" showDetail="true" life="3000" />  
+
+	<p:dialog  id="dialog" header="Add Tutor" widgetVar="adddlg" resizable="false"> 
+	    <h:panelGrid columns="2"   cellpadding="5" >  
+		<h:outputLabel for="name" value="name:"/>  
+		<h:inputText value="#{addTutorBean.name}"   
+		id="name" required="true" label="Name:" />
+		<h:outputLabel for="idNumber" value="ID number:" />  
+		<p:inputText value="#{addTutorBean.idNumber}"   
+		id="idNumber" required="true" label="idNumber" /> 
+		<h:outputLabel for="email" value="Email:"/>  
+		<h:inputText value="#{addTutorBean.mail}"   
+		id="email" required="true" label="Email" />
+		<h:outputLabel for="telephoneNumber" value="Tele:"/>  
+		<h:inputText value="#{addTutorBean.phoneNbr}"   
+		id="telephoneNumber" required="true" label="Tele" />
+		<h:outputLabel for="address" value="Address:"/>  
+		<h:inputText value="#{addTutorBean.address}"   
+		id="address" required="false" label="Address" />
+		<h:outputLabel for="salary" value="Salary:"/>  
+		<h:inputText value="#{addTutorBean.salary}"   
+		id="salary" required="true" label="Salary" />
+
+
+		<f:facet name="footer">  
+		    <p:button id="cancelButton" value="Cancel" onclick="adddlg.hide();" />
+		    <p:commandButton id="addButton" value="Add" update="tutorsTable"   
+				     actionListener="#{addTutorBean.addTutor}"    
+		     oncomplete="adddlg.hide();">
+			<p:resetInput target="adddlg" /> </p:commandButton>                 
+		</f:facet>  
+
+	    </h:panelGrid>  
+	</p:dialog>  
+    </h:form>  
+    </div>		
+    </div>
+</ui:define>
+</ui:composition>
+</body>
 </html>
