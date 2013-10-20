@@ -165,8 +165,13 @@ and open the template in the editor.
                                         id="name" required="true" label="name" />             
                                 
                                         <h:outputLabel for="email" value="Email:"/>  
-                                        <h:inputText value="#{schoolpage.person.mail}"   
-                                        id="email" required="true" label="Email" />
+                                       
+                                        
+                                        <h:inputText value="#{schoolpage.person.mail}" id="email" required="true" label="Email" >
+                                            <f:validateRegex pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" />
+                                            <p:ajax update="msgmail" event="keyup" /> 
+                                        </h:inputText>
+                                        
                                         
                                         <h:outputLabel for="telephoneNumber" value="Tele:"/>  
                                         <h:inputText value="#{schoolpage.person.phoneNbr}"   
@@ -183,8 +188,11 @@ and open the template in the editor.
                                             accesskey="" oncomplete="handleCreateRequest(xhr, status, args)"/>                 
                                         </f:facet>  
                                
+                                        
+                                        
                                     </h:panelGrid>  
-                                    <h:outputText value="You will receive an email to confirm your email adress"/>
+                                     <p:message for="email" id="msgmail" display="icon"/>
+                                    <h:outputText value="Make sure to fill out this informtion correctly."/>
                                 </p:dialog>  
                             </h:form>
                         </div>
