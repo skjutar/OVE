@@ -35,22 +35,23 @@ public class AddTutorBean implements Serializable {
     
     public void addTutor() {
         //RequestContext context = RequestContext.getCurrentInstance();  
-        FacesMessage msg;   
+	FacesMessage msg;   
+        
         Worker tutor =  reg.getTutor(idNumber);
         
         if(tutor == null){                
                 tutor = new Worker(idNumber, name, mail, phoneNbr, address, salary);
 		tutor.setPicUrl(picUrl);
                 reg.add(tutor);
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tutor added ", name); 
+		msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tutor added ", name); 
             }
         
         else{  
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "This tutor already exists");  
+	    msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "This tutor already exists");  
         }  
-        
         FacesContext.getCurrentInstance().addMessage(null, msg); 
-	RequestContext.getCurrentInstance().reset("form:panel");
+        RequestContext.getCurrentInstance().reset("form:panel");
+	
 	
     }
     
