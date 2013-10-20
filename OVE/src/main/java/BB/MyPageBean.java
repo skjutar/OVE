@@ -5,13 +5,19 @@
 package BB;
 
 import EJB.PersonRegistry;
+import EJB.SchoolRegistry;
+import EJB.SessionRegistry;
 import Model.AbstractPerson;
 import Model.Account;
 import Model.Person;
 import EJB.UserRegistry;
 import EJB.WorkerRegistry;
+import Model.Schedule;
+import Model.School;
+import Model.Session;
 import Model.Worker;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -19,6 +25,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleModel;
 
 /**
  *
@@ -37,6 +46,9 @@ public class MyPageBean implements Serializable {
    @EJB
    private PersonRegistry pReg;
    
+   @EJB
+   private SessionRegistry sesReg;
+   
    private String username;
     
    private Long idNumber;
@@ -51,8 +63,10 @@ public class MyPageBean implements Serializable {
    
    
    private String picUrl;
-    private Account a;
-    private AbstractPerson person;
+   private Account a;
+   private AbstractPerson person;
+   
+   
    
    @PostConstruct
    public void init()
@@ -68,14 +82,10 @@ public class MyPageBean implements Serializable {
        setTelephoneNumber(person.getPhoneNbr());
        setName(person.getName());
        setPicUrl(person.getPicUrl());
-       initSessionList();
        
    }
    
-   private void initSessionList()
-   {
-       
-   }
+   
    
    public String update()
    {
@@ -199,6 +209,7 @@ public class MyPageBean implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
+
     
     
     
