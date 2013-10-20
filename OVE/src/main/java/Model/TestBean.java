@@ -56,7 +56,6 @@ public class TestBean implements Serializable
     private School school;
     private Calendar time;
     
-    
     public void personRegistryTestAdd()
     {   
         int precount = pReg.getCount();
