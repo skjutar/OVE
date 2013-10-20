@@ -9,9 +9,6 @@ import Model.Worker;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
@@ -31,30 +28,20 @@ public class AddTutorBean implements Serializable {
     private String mail;
     private String phoneNbr;
     private String address;
+    private String picUrl;
     private int salary;
     
     /**
      *Adds a new tutors 
      */
     public void addTutor() {
-        //RequestContext context = RequestContext.getCurrentInstance();  
-        FacesMessage msg;   
-        Worker tutor =  reg.getTutor(idNumber);
+        Worker tutor = reg.getTutor(idNumber);
         
         if(tutor == null){                
                 tutor = new Worker(idNumber, name, mail, phoneNbr, address, salary);
+		tutor.setPicUrl(picUrl);
                 reg.add(tutor);
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tutor added ", name); 
-                //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", username);
             }
-        
-        else{  
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "This tutor already exists");  
-        }  
-        
-        FacesContext.getCurrentInstance().addMessage(null, msg); 
-	RequestContext.getCurrentInstance().reset("form:panel");
-	
     }
     
     public Long getIdNumber() {
@@ -75,6 +62,10 @@ public class AddTutorBean implements Serializable {
 
     public String getAddress() {
         return address;
+    }
+    
+    public String getPicUrl() {
+	return picUrl;
     }
 
     public int getSalary() {
@@ -101,6 +92,10 @@ public class AddTutorBean implements Serializable {
         this.address = address;
     }
 
+    public void setPicUrl(String picUrl) {
+	this.picUrl = picUrl;
+    }
+    
     public void setSalary(int salary) {
         this.salary = salary;
     }

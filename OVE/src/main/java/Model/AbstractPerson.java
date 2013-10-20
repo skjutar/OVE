@@ -14,6 +14,8 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class AbstractPerson extends AbstractEntity
 {
+    public static String DEFAULT_PIC_URL = "http://naijaticketshop.com/images/default_profile.jpg";
+    
     protected Long idNumber;
     protected String name;
     protected String mail;
@@ -31,15 +33,11 @@ public abstract class AbstractPerson extends AbstractEntity
         this.mail = mail;
         this.phoneNbr = phoneNbr;
         this.address = address;
-        this.picUrl="URL";
+        this.picUrl = DEFAULT_PIC_URL;
     }
-        public AbstractPerson(String name, String mail, String phoneNbr, String address) {
-        this.idNumber = Math.round(Math.random()*100000);
-        this.name = name;
-        this.mail = mail;
-        this.phoneNbr = phoneNbr;
-        this.address = address;
-        this.picUrl="URL";
+    
+    public AbstractPerson(String name, String mail, String phoneNbr, String address) {
+	this(Math.round(Math.random()*100000), name, mail, phoneNbr, address); 
     }
     
     public AbstractPerson(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {
@@ -49,7 +47,7 @@ public abstract class AbstractPerson extends AbstractEntity
         this.mail = mail;
         this.phoneNbr = phoneNbr;
         this.address = address;
-        this.picUrl="URL";
+        this.picUrl = DEFAULT_PIC_URL;
     }
     
 
@@ -104,7 +102,11 @@ public abstract class AbstractPerson extends AbstractEntity
      * @param picUrl the picUrl to set
      */
     public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
+	if(picUrl == null || picUrl.equals("")) {
+	    this.picUrl = DEFAULT_PIC_URL;
+	} else {
+	    this.picUrl = picUrl;
+	}
     }
 
     /**
