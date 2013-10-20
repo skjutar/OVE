@@ -26,7 +26,7 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 /**
- * Holds all info about the inlogged person. Handles login request.
+ * Holds all info about the logged in person. Handles login request.
  * @author kristofferskjutar
  */
 
@@ -73,7 +73,10 @@ public class LoginBean implements Serializable{
         this.password = password;  
     }  
    
-    
+    /**
+     * Logs in the user if the account is in the database and is activated
+     * @param actionEvent 
+     */
     public void login(ActionEvent actionEvent) {  
         RequestContext context = RequestContext.getCurrentInstance();  
         FacesMessage msg = null;  
@@ -109,6 +112,9 @@ public class LoginBean implements Serializable{
         context.addCallbackParam("loggedIn", loggedIn);  
     }  
     
+    /**
+     * Logs out the user from the current session
+     */
     public void logout()
     {      
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();   

@@ -21,7 +21,7 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 /**
- *
+ *  Creates a school
  * @author Malla
  */
 @RequestScoped
@@ -67,7 +67,10 @@ public class CreateSchoolBean implements Serializable {
     public String getCity(){
         return city;
     }
-    
+        /**
+         * Creates a school if it doesnt already exist in the database
+         * @param event 
+         */
        public void create(ActionEvent event){
            System.out.println("Kom in i create");
        RequestContext context = RequestContext.getCurrentInstance(); 

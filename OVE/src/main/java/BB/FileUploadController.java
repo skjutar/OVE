@@ -21,6 +21,10 @@ import org.primefaces.event.FileUploadEvent;
   
 import org.primefaces.model.UploadedFile;  
  
+/**
+ * uploads an image from url to be used as profil picture
+ * @author Gustav and Kristoffer Skjutar
+ */
 @Named("fileupload")
 @SessionScoped
 public class FileUploadController implements Serializable{  
@@ -35,6 +39,10 @@ public class FileUploadController implements Serializable{
         this.file = file;  
     }  
   
+    /**
+     * prints out a specific message depending on if a correct url has been set 
+     * when pushing the savebutton
+     */
     public void upload() {  
         if(file != null) { 
             FacesMessage msg = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");  
@@ -47,7 +55,10 @@ public class FileUploadController implements Serializable{
         }
     }
     
-
+    /**
+    * Handles the download of the url
+    * @param event 
+    */
     public void handleFileUpload(FileUploadEvent event) {
         try {
             File targetFolder = new File("/var/uploaded/images");

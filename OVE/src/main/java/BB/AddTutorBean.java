@@ -16,7 +16,7 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 /**
- *
+ *  Adds a new tutor
  * @author lisastenberg
  */
 @Named("addTutorBean")
@@ -33,6 +33,9 @@ public class AddTutorBean implements Serializable {
     private String address;
     private int salary;
     
+    /**
+     *Adds a new tutors 
+     */
     public void addTutor() {
         //RequestContext context = RequestContext.getCurrentInstance();  
         FacesMessage msg;   

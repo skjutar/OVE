@@ -21,7 +21,8 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ *  Displays info about the current user which the user can edit. 
+ * Also displays schedule, working hours and current salary
  * @author kristofferskjutar
  */
 @Named("mypageBean")
@@ -54,6 +55,9 @@ public class MyPageBean implements Serializable {
     private Account a;
     private AbstractPerson person;
    
+    /**
+     * Iniates all the information about the user
+     */
    @PostConstruct
    public void init()
    {
@@ -77,6 +81,10 @@ public class MyPageBean implements Serializable {
        
    }
    
+   /**
+    * updates the user information
+    * @return 
+    */
    public String update()
    {
        person.setAddress(getAdress());
@@ -86,8 +94,6 @@ public class MyPageBean implements Serializable {
        person.setPhoneNbr(getTelephoneNumber());
        person.setPicUrl(picUrl);
        
-       //Worker w = new Worker(person.getId(),getIdNumber(), getName(), getEmailAdress(), 
-       //        getTelephoneNumber(), getAdress());
        if(person instanceof Person) 
        {
            pReg.update((Person)person);

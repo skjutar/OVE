@@ -31,7 +31,12 @@ public class MailBean {
      @Resource(name = "mail/myMailSession")
      private Session mailSession;
     
-     
+     /**
+      * Sends a confirmation email
+      * @param to The account email choosed when creating account
+      * @param id The id number of the account
+      * @throws MessagingException 
+      */
      public void sendEmail(String to, Long id) throws MessagingException
      {
          // Create the message object

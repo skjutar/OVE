@@ -38,7 +38,11 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         super.setEntitymanager(em);     
     }
     
-    
+    /**
+     * returns a list of workers with a specific name
+     * @param name The name to be searched for
+     * @return the list of workers
+     */
     public List<Worker> getByName(String name) {
         List<Worker> found = new ArrayList<Worker>();
         for (Worker c : getRange(0, getCount())) {
@@ -48,7 +52,11 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         }
         return found;
     }
-    
+    /**
+     * Returns a tutor with a specific id
+     * @param id the id
+     * @return the worker
+     */
     public Worker getTutor(Long id){
         List <Worker> list =  em.createQuery("select t from Worker t WHERE "
                 + "t.id = '" + id + "'")
@@ -58,7 +66,6 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         }
         return list.get(0);
     }
-    
     public List<Worker> getLinked(Long id)
     {
         em.getTransaction().begin();
@@ -67,6 +74,13 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         return list;
     }
     
+    /**
+     * KAN EVENTUELLT TAS BORT
+     *  Goes through the database and search for a specific worker with the same 
+     *  id number
+     * @param id the id which will be seached for 
+     * @return  returns a worker with the current id
+     */
     public Worker getById(Long id)
     {
         Query q = em.createQuery("select t from Worker t where t.idNumber="+id);// WHERE t.idNumber = :id");
@@ -78,6 +92,12 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         
         return list.get(0);
     }
+    /**
+     * Goes through the register and search for a specific worker with the same 
+     * personal id number
+     * @param id The personal id number which will be seached for
+     * @return a list of all workers with that personal id number
+     */
     public List<Worker> getByPNumber(Long id) {
         List<Worker> found = new ArrayList<Worker>();
         for (Worker c : getRange(0, getCount())) {

@@ -61,7 +61,6 @@ public class CreateAccountBean {
    
    private String type="worker";
    
-   //private Model model;
    
 
     /**
@@ -147,7 +146,10 @@ public class CreateAccountBean {
     public void setEmailAdress(String emailAdress) {
         this.emailAdress = emailAdress;
     }
-   
+   /**
+    * Creates worker, account and adds admin privilege 
+    * @param event 
+    */
    public void create(ActionEvent event)
    {
        //model = ModelFactory.getModel("OVE_model_pu");

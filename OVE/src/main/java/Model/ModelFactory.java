@@ -5,7 +5,7 @@
 package Model;
 
 /**
- *
+ *  Creates a model
  * @author kristofferskjutar
  */
 public class ModelFactory {

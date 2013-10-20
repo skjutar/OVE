@@ -21,7 +21,7 @@ import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 /**
- *
+ *  Handles the salariesc for all workers
  * @author Gustav
  */
 @Named("salaryBean")
@@ -40,6 +40,9 @@ public class SetSalaryBean implements Serializable
       
     }
     
+    /**
+     * Iniates a list of all workers in the database
+     */
     @PostConstruct
     public void postConstruct()
     {
@@ -56,7 +59,10 @@ public class SetSalaryBean implements Serializable
         return workerList;    
     }
     
-    //Save salaries
+    /**
+     * Handles the user input if the admin would like to change a tutors salary
+     * @param event 
+     */
     public void onCellEdit(CellEditEvent event)
     {
         Object oldValue = event.getOldValue();
