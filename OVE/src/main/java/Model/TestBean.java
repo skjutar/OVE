@@ -52,36 +52,49 @@ public class TestBean implements Serializable
     
     public void personRegistryTestAdd()
     {
+        int precount = pReg.getCount();
+        int tests=0;
         success=0;
-        person = new Person(66666L, "Test Testsson", "test@gmail.com", "070TEST", "testVägen");
+        Long personNumber = Math.round(Math.random()*100000);
+        person = new Person(personNumber, "Test Testsson", "test@gmail.com", "070TEST", "testVägen");
         pReg.add(person);
-        if(pReg.getCount()==1)
+        precount++;
+        if(pReg.getCount()==precount)
         {
             success++;
-        }
-        if(pReg.getByName(person.getName()).size()==1)
-        {
-            success++;
+            tests++;
         }
         if(pReg.getByPNumber(person.getIdNumber()).size()==1)
         {
             success++;
+            tests++;
         }  
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Tests", "Number of success :" + success);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        postResults(tests);
     }
     
     public void personRegistryTestRemove()
     {
         success=0;
-        Person p = pReg.getByName(person.getName()).get(0);
+        int tests=0;
+        Long personNumber = Math.round(Math.random()*100000);
+        person = new Person(personNumber, "Test Testsson", "test@gmail.com", "070TEST", "testVägen");
+        pReg.add(person);    
+        int precount = pReg.getCount();
+        Person p = pReg.getByPNumber(person.getIdNumber()).get(0);
         pReg.remove(p.getId());
-        if(pReg.getCount()==0)
+        
+        if(pReg.getCount()==precount-1)
         {
             success++;
-        }
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Tests", "Number of success :" + success);
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
+            tests++;
+        }       
+        postResults(tests);  
+    }
+    
+    private void postResults(int tests)
+    {
+        FacesMessage msg = new FacesMessage("Result: "+success+" of "+ tests+ " passed");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     

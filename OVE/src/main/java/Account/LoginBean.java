@@ -52,6 +52,8 @@ public class LoginBean implements Serializable{
    
    private String picUrl;
    
+   private boolean admin;
+   
      
    
    
@@ -70,6 +72,14 @@ public class LoginBean implements Serializable{
     public void setPassword(String password) {  
         this.password = password;  
     }  
+    
+    public boolean getAdmin(){
+        return admin;
+    }
+    
+    public void setAdmin(boolean b){
+        admin=b;
+    }
    
     
     public void login(ActionEvent actionEvent) {  
@@ -90,6 +100,10 @@ public class LoginBean implements Serializable{
                 setPicUrl(p.getPicUrl());
                 if(a.getPerson().isAdmin()){
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("admin", "admin");
+                    admin =true;
+                }
+                else{
+                    admin=false;
                 }
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("id", a.getId());
             }
