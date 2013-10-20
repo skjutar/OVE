@@ -29,7 +29,7 @@ import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.*;
 
 /**
- *
+ * Backing bean for MenuBean
  * @author kristofferskjutar
  */
 @SessionScoped

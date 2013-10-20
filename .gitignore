@@ -1,5 +1,7 @@
 target/
 /OVE/nbproject/private/
 /OVE/build/
+.DS_Store
+
 
 

@@ -21,7 +21,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- *
+ * An EJB that sends confirmation emails to newly created users 
  * @author kristofferskjutar
  */
 @Stateful  // A stateless EJB

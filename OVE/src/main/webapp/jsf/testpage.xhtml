@@ -31,6 +31,10 @@ and open the template in the editor.
                          </p:growl>
                              <div align="center">
                                <h1>Super duper secret test page of Ove the runner</h1>
+                               <p:commandButton id="testAll" value="Test All!" actionListener="#{testbean.testAll()}" onclick="('pbAjax').start();" />
+                               <p:progressBar widgetVar="pbAjax" ajax="true" value="#{testbean.progress}" labelTemplate="{value}%" styleClass="animated">  
+                                <p:ajax event="complete" listener="#{progressBean.onComplete}" update="growl"/>  
+                                </p:progressBar>
                              <h:panelGrid id="testButtons" columns="5">
                                  <p:commandButton id="testWorker" value="Test Person Add" actionListener="#{testbean.personRegistryTestAdd()}" update="growl"/>
                                  <p:commandButton id="testPerson" value="Test Person Remove" actionListener="#{testbean.personRegistryTestRemove()}" update="growl"/>

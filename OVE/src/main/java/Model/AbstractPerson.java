@@ -7,11 +7,9 @@ package Model;
 import javax.persistence.*;
 
 /**
- *
- * @author Gustav
+ * 
+ * @author Kristoffer
  */
-
-//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
 public abstract class AbstractPerson extends AbstractEntity
 {

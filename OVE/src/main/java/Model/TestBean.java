@@ -49,6 +49,24 @@ public class TestBean implements Serializable
     private Person person;
     private int success;
     
+    private Integer progress;  
+    
+    public Integer getProgress() {  
+        if(progress == null || progress>100)  
+            progress = 0;
+        return progress;  
+    } 
+    
+    public void testAll()
+    {
+        personRegistryTestAdd();
+        personRegistryTestRemove();
+    }
+  
+    public void setProgress(Integer progress) {  
+        this.progress = progress;  
+    }  
+    
     
     public void personRegistryTestAdd()
     {
@@ -64,11 +82,13 @@ public class TestBean implements Serializable
             success++;
             tests++;
         }
+        progress+=33;
         if(pReg.getByPNumber(person.getIdNumber()).size()==1)
         {
             success++;
             tests++;
         }  
+        progress+=33;
         postResults(tests);
     }
     
@@ -87,7 +107,8 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
-        }       
+        }
+        progress+=34;
         postResults(tests);  
     }
     

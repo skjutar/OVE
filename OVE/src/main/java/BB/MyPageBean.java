@@ -30,7 +30,7 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleModel;
 
 /**
- *
+ * Backing bean for MyPage
  * @author kristofferskjutar
  */
 @Named("mypageBean")
