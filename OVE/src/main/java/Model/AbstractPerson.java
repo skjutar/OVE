@@ -6,11 +6,12 @@ package Model;
 
 import javax.persistence.*;
 
-/**
- *  Abstract class for worker and person
- * @author Gustav
- */
 
+
+/**
+ * 
+ * @author Kristoffer
+ */
 @MappedSuperclass
 public abstract class AbstractPerson extends AbstractEntity
 {

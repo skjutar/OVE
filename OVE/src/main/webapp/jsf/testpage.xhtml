@@ -26,35 +26,28 @@ and open the template in the editor.
                 </p:layoutUnit>
                 
                 <p:layoutUnit position="center" >
-
                     <h:form>
                     <p:growl id="growl">    
                          </p:growl>
                              <div align="center">
                                <h1>Super duper secret test page of Ove the runner</h1>
+                               <p:commandButton id="testAll" value="Test All!" actionListener="#{testbean.testAll()}" onclick="('pbAjax').start();" />
+                               <p:progressBar widgetVar="pbAjax" ajax="true" value="#{testbean.progress}" labelTemplate="{value}%" styleClass="animated">  
+                                <p:ajax event="complete" listener="#{progressBean.onComplete}" update="growl"/>  
+                                </p:progressBar>
                              <h:panelGrid id="testButtons" columns="5">
-                                 <p:commandButton id="testPersonAdd" value="Test Person Add" actionListener="#{testbean.personRegistryTestAdd()}" update="growl"/>
-                                 <p:commandButton id="testPersonremove" value="Test Person Remove" actionListener="#{testbean.personRegistryTestRemove()}" update="growl"/>
-                                 <p:commandButton id="testPersonUpdate" value="Test Person Update" actionListener="#{testbean.personRegistryTestUpdate()}" update="growl"/>
-                                 
-                                <p:commandButton id="testSchoolAdd" value="Test School Add" actionListener="#{testbean.schoolRegistryTestAdd()}" update="growl"/>
-                                <p:commandButton id="testSchoolRemove" value="Test School Remove" actionListener="#{testbean.schoolRegistryTestRemove()}" update="growl"/>
-                                <p:commandButton id="testSchoolUpdate" value="Test School Update" actionListener="#{testbean.schoolRegistryTestUpdate()}" update="growl"/>
-                                
-                                <p:commandButton id="testWorkerAdd" value="Test Worker Add" actionListener="#{testbean.workerRegistryTestAdd()}" update="growl"/>
-                                <p:commandButton id="testWorkerRemove" value="Test Worker Remove" actionListener="#{testbean.workerRegistryTestRemove()}" update="growl"/>
-                                
-                                <p:commandButton id="testUserAdd" value="Test User Add" actionListener="#{testbean.userRegistryTestAdd()}" update="growl" />
-                                <p:commandButton id="testUserRemove" value="Test User Remove" actionListener="#{testbean.userRegistryTestRemove()}" update="growl"/>
-                                
-                                <p:commandButton id="testSessionAdd" value="Test Session Add" actionListener="#{testbean.sessionRegistryTestAdd()}" update="growl"/>
-                                <p:commandButton id="testSessionRemove" value="Test Session Remove" actionListener="#{testbean.sessionRegistryTestRemove()}" update="growl"/>
+                                 <p:commandButton id="testWorker" value="Test Person Add" actionListener="#{testbean.personRegistryTestAdd()}" update="growl"/>
+                                 <p:commandButton id="testPerson" value="Test Person Remove" actionListener="#{testbean.personRegistryTestRemove()}" update="growl"/>
+                                <p:commandButton id="testSchool" value="Test School" actionListener="#{testBean.schoolRegistryTest}"/>
+                                <p:commandButton id="testUser" value="Test User" actionListener="#{testBean.userRegistryTest}" />
+                                <p:commandButton id="testSession" value="Test Session" actionListener="#{testBean.sessionRegistryTest}" />
                             </h:panelGrid>   
                             </div>
-                    </h:form>
-
+                   
+                        </h:form>
                 </p:layoutUnit>
             </p:layout>
         </h:body>
     </f:view>
 </html>
+

@@ -30,8 +30,7 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleModel;
 
 /**
- *  Displays info about the current user which the user can edit. 
- * Also displays schedule, working hours and current salary
+ * Backing bean for MyPage
  * @author kristofferskjutar
  */
 @Named("mypageBean")

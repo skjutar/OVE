@@ -10,7 +10,7 @@ import java.util.List;
 import org.primefaces.model.DefaultScheduleEvent;
 
 /**
- *  An event that can be displayed in the schedule
+ * Custom primefaces data representation in admin schedule
  * @author kristofferskjutar
  */
 public class ScheduleEvent extends DefaultScheduleEvent {

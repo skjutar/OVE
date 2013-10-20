@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * A servlet that handles all account confirmations 
  * @author kristofferskjutar
  */
 @WebServlet(name="BasicServlet",  urlPatterns={"/confirm"})

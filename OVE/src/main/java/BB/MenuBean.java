@@ -29,7 +29,7 @@ import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.*;
 
 /**
- *  Handles the the button layout in the menu 
+ * Backing bean for MenuBean
  * @author kristofferskjutar
  */
 @SessionScoped
