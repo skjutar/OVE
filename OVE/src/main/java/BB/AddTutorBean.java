@@ -9,7 +9,6 @@ import Model.Worker;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -31,6 +30,7 @@ public class AddTutorBean implements Serializable {
     private String mail;
     private String phoneNbr;
     private String address;
+    private String picUrl;
     private int salary;
     
     public void addTutor() {
@@ -40,6 +40,7 @@ public class AddTutorBean implements Serializable {
         
         if(tutor == null){                
                 tutor = new Worker(idNumber, name, mail, phoneNbr, address, salary);
+		tutor.setPicUrl(picUrl);
                 reg.add(tutor);
                 msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tutor added ", name); 
                 //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", username);
@@ -73,6 +74,10 @@ public class AddTutorBean implements Serializable {
     public String getAddress() {
         return address;
     }
+    
+    public String getPicUrl() {
+	return picUrl;
+    }
 
     public int getSalary() {
         return salary;
@@ -98,7 +103,15 @@ public class AddTutorBean implements Serializable {
         this.address = address;
     }
 
+    public void setPicUrl(String picUrl) {
+	this.picUrl = picUrl;
+    }
+    
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
+ 
+    
+ 
 }

@@ -42,8 +42,13 @@ and open the template in the editor.
 		<h:panelGrid id="display" columns="2" cellpadding="4" style="width:100%;"  
 				styleClass=" ui-widget-content grid">  
 
-		    <f:facet name="header"> About #{tutor.name}</f:facet>  
+		    <f:facet name="header"> 
+			<p:graphicImage value="#{tutor.picUrl}" width="60px"/> 
+		    </f:facet>  
 
+		    <h:outputText value="Name:" />  
+		    <h:outputText value="#{tutor.name}" />  
+		    
 		    <h:outputText value="ID Number:" />  
 		    <h:outputText value="#{tutor.idNumber}" />  
 
@@ -89,6 +94,9 @@ and open the template in the editor.
 		<h:outputLabel for="salary" value="Salary:"/>  
 		<h:inputText value="#{addTutorBean.salary}"   
 		id="salary" required="true" label="Salary" />
+		<h:outputLabel for="picUrl" value="Picture URL:"/>  
+		<h:inputText value="#{addTutorBean.picUrl}"   
+		id="picUrl" required="false" label="PicUrl" />
 
 
 		<f:facet name="footer">  
