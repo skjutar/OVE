@@ -75,7 +75,6 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
     }
     
     /**
-     * KAN EVENTUELLT TAS BORT
      *  Goes through the database and search for a specific worker with the same 
      *  id number
      * @param id the id which will be seached for 
