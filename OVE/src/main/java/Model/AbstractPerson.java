@@ -103,7 +103,6 @@ public abstract class AbstractPerson extends AbstractEntity
      * @param picUrl the picUrl to set
      */
     public void setPicUrl(String picUrl) {
-	System.out.println("::::: AP: setPicUrl: " + picUrl);
 	if(picUrl == null || picUrl.equals("")) {
 	    this.picUrl = DEFAULT_PIC_URL;
 	} else {
