@@ -176,6 +176,18 @@ public class SchoolPageBean implements Serializable {
         return "Schools";
     }
 
+    public void removeContact(Long id) {
+        System.out.println("------ REMOVING person with ID " + id);
+        Person p = persreg.find(id);
+        if (school.getContactPersons().remove(p)) {
+            System.out.println("- removed contact from school -------");
+            schoolreg.update(school);
+            persreg.remove(id);
+            System.out.println("- removed contact from db -------");
+        }
+        System.out.println("------ REMOVED TUTOR -------");
+    }
+
     /*
      * Function called, when user wants to view detailed information about a 
      * contact person to the school.

@@ -144,6 +144,12 @@ and open the template in the editor.
                                             <h:outputText value="Email:" />  
                                             <h:outputText value="#{contact.mail}"/>  
                                         </h:panelGrid>  
+                                                                       
+                                      
+                                        <p:commandButton id="deleteButton" rendered="#{loginBean.admin}" value="Delete" update="contactsTable " 
+					 actionListener="#{schoolpage.removeContact(contact.id)}" />
+                                        
+                                        
                                     </p:rowExpansion>  
                                 </p:dataTable>  
                             </h:form>  
