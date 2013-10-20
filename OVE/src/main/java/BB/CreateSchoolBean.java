@@ -22,83 +22,108 @@ import org.primefaces.context.RequestContext;
 
 /**
  *  Creates a school
+ * Bean which handles the creation of a new school
+ *
  * @author Malla
  */
 @RequestScoped
 @Named("createSchoolBean")
 public class CreateSchoolBean implements Serializable {
 
-   @EJB
-   private SchoolRegistry reg;
-    
+    @EJB
+    private SchoolRegistry reg;
     private String name;
     private String address;
     private int zip;
     private String city;
-    
-    public void setName(String s){
-        name=s;
+
+    /**
+     * Sets name
+     *
+     * @param s the name which is set
+     */
+    public void setName(String s) {
+        name = s;
     }
-    
-    public void setAddress(String s){
-        address=s;
+
+    /**
+     * Sets address
+     *
+     * @param s the address which is set
+     */
+    public void setAddress(String s) {
+        address = s;
     }
-    
-    public void setZip(int i){
-        zip=i;
+
+    /**
+     * Sets numer
+     *
+     * @param i the number which is set
+     */
+    public void setZip(int i) {
+        zip = i;
     }
-    
-    public void setCity(String s){
-        city=s;
+
+    /**
+     * Sets city
+     *
+     * @param s the city which is set
+     */
+    public void setCity(String s) {
+        city = s;
     }
-    
-    public String getName(){
+
+    /**
+     * Gets the current value of the String name.
+     */
+    public String getName() {
         return name;
     }
-    
-    public String getAddress(){
+
+    /**
+     * Gets the current value of the String address.
+     */
+    public String getAddress() {
         return address;
     }
-    
-    public int getZip(){
+
+    /**
+     * Gets the current value of the Integer zip.
+     */
+    public int getZip() {
         return zip;
     }
-    
-    public String getCity(){
+
+    /**
+     * Gets the current value of the String city.
+     */
+    public String getCity() {
         return city;
     }
-        /**
-         * Creates a school if it doesnt already exist in the database
-         * @param event 
-         */
-       public void create(ActionEvent event){
-           System.out.println("Kom in i create");
-       RequestContext context = RequestContext.getCurrentInstance(); 
-       FacesMessage msg = null;
-       boolean created = false; 
-       List<Session> sessions;
-           List<Person> contacts;
-           
-       if(!reg.getByName(name).isEmpty())
-       {
-           msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "School already exists!");  
-       }       
-       else  
-       {
 
-           sessions=new ArrayList<Session>();
-           contacts=new ArrayList<Person>();
-           contacts.add(new Person("lisa", "lisa@mail.com", "0734567890", "chabo"));
-            created=true;
-
-
+    /**
+     * Is called upon by the view when a new school is being created. Creates a
+     * school with the information given in the dialog and adds it to the
+     * SchoolRegistry, which adds it to the database, if there does not exist a
+     * school with that name already.
+     *
+     * @param event
+     */
+    public void create(ActionEvent event) {
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage msg;
+        boolean created = false;
+        if (!reg.getByName(name).isEmpty()) {
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "School already exists!");
+        } else {
+            List<Session> sessions = new ArrayList<Session>();
+            List<Person> contacts = new ArrayList<Person>();
+            created = true;
             School school = new School(name, address, zip, city, sessions, contacts);
             reg.add(school);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School created");
-       }
-       
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-        context.addCallbackParam("created", created);  
-   }
- 
+        }
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("created", created);
+    }
 }

@@ -50,7 +50,8 @@ public class MailConfirmServlet extends HttpServlet {
             out.println("<title>OVE confirm</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>You have successfully created your account with information : " + a.getPerson().getName() +"</h1>");
+            out.println("<h1>You have successfully created your account " + a.getPerson().getName() +" !</h1>");
+            out.println("<a href=http://localhost:8080/OVE/>Go to OVE</a>");
             out.println("</body>");
             out.println("</html>");
         } finally {
