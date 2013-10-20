@@ -7,8 +7,6 @@ package Account;
 
 import Model.AbstractPerson;
 import Model.Account;
-import Model.Model;
-import Model.ModelFactory;
 import Model.Person;
 import EJB.SchoolRegistry;
 import EJB.UserRegistry;
