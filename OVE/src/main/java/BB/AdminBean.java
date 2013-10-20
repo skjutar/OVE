@@ -41,7 +41,7 @@ import org.primefaces.model.DualListModel;
 import org.primefaces.model.ScheduleModel;
 
 /**
- *
+ * 
  * @author Gustav
  */
 @Named("scheduleBean")

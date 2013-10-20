@@ -52,6 +52,9 @@ public class DisplaySalaryBean implements Serializable {
         months = new ArrayList<Month>();    
     }  
     
+    /**
+     * Loads a users monthly working hours, number of events and salary
+     */
     @PostConstruct
     public void init()
     {
