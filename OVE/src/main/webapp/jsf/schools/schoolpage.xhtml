@@ -33,7 +33,7 @@ and open the template in the editor.
 
                                         <h:form id="editschool"> 
                                             <h:outputLink id="editschoolLink" value="javascript:void(0)" onclick="editschooldlg.show()" title="Edit this school" >   
-                                                <p:commandButton value="Edit this school"  type="button" />  
+                                                <p:commandButton value="Edit this school"  rendered="#{loginBean.admin}" type="button" />  
                                             </h:outputLink>  
 
 
@@ -73,7 +73,7 @@ and open the template in the editor.
                                         
                                         
                                         <h:outputLink id="deleteschoolLink" value="javascript:void(0)" onclick="deleteschooldlg.show()" title="Delete this school" >   
-                                                <p:commandButton value="Delete this school"  type="button" />  
+                                                <p:commandButton value="Delete this school"  rendered="#{loginBean.admin}" type="button" />  
                                             </h:outputLink>  
                                         <p:dialog  id="dialog" header="Delete School" widgetVar="deleteschooldlg" resizable="false"> 
                                             <h:panelGrid columns="2"   cellpadding="5" > 
