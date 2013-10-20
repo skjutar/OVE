@@ -22,6 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name="BasicServlet",  urlPatterns={"/confirm"})
 public class MailConfirmServlet extends HttpServlet {
     
+    public MailConfirmServlet()
+    {
+        super();
+    }
+    
     @EJB
     private UserRegistry reg;
     @Override

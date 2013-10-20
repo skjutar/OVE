@@ -45,7 +45,7 @@ import org.primefaces.model.ScheduleModel;
  */
 @Named("scheduleBean")
 @SessionScoped
-public class ScheduleBean implements Serializable
+public class AdminBean implements Serializable
 {
     @EJB
     private SchoolRegistry reg;
@@ -108,7 +108,7 @@ public class ScheduleBean implements Serializable
             School s = reg.getByName(event.getSchoolName()).get(0);
             event.setTitle(s.getName());
             
-            s.getSchedule().getSessions().add(new Session(event.getStartDate(), event.getEndDate(), event.getNumberOfStudents(), event.getWorkerList(), event.getNotation()));         
+            s.getSchedule().getSessions().add(new Session(s,event.getStartDate(), event.getEndDate(), event.getNumberOfStudents(), event.getWorkerList(), event.getNotation()));         
             
             s = reg.update(s);
            
@@ -127,7 +127,7 @@ public class ScheduleBean implements Serializable
         else  {
             eventModel.updateEvent(event);  
             School s = reg.getByName(event.getSchoolName()).get(0);
-            sesReg.update(new Session(event.getModelId(), event.getStartDate(), event.getEndDate(), event.getNumberOfStudents(), event.getWorkerList(), event.getNotation()));
+            sesReg.update(new Session(s,event.getModelId(), event.getStartDate(), event.getEndDate(), event.getNumberOfStudents(), event.getWorkerList(), event.getNotation()));
     
         }
         event = new ScheduleEvent(); 
