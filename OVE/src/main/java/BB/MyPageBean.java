@@ -4,6 +4,7 @@
  */
 package BB;
 
+import EJB.PersonRegistry;
 import Model.AbstractPerson;
 import Model.Account;
 import Model.Person;
@@ -33,6 +34,9 @@ public class MyPageBean implements Serializable {
    @EJB
    private WorkerRegistry wReg;
    
+   @EJB
+   private PersonRegistry pReg;
+   
    private String username;
     
    private Long idNumber;
@@ -48,7 +52,7 @@ public class MyPageBean implements Serializable {
    
    private String picUrl;
     private Account a;
-    private Worker person;
+    private AbstractPerson person;
    
    @PostConstruct
    public void init()
@@ -84,8 +88,14 @@ public class MyPageBean implements Serializable {
        
        //Worker w = new Worker(person.getId(),getIdNumber(), getName(), getEmailAdress(), 
        //        getTelephoneNumber(), getAdress());
-        
-       wReg.update(person);    
+       if(person instanceof Person) 
+       {
+           pReg.update((Person)person);
+       }
+       else if(person instanceof Worker)
+       {
+            wReg.update((Worker)person);  
+       }
        return "MyPage";
    }
    

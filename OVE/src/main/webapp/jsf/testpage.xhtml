@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <f:view contentType="text/html">
+        <h:head>
+            <meta http-equiv="refresh"/>
+       
+            <h:outputStylesheet library="css" name="normalize.css"  />
+            <h:outputStylesheet library="css" name="layout.css"  />
+            <h:outputStylesheet library="css" name="style.css"  />
+            <title>Ove-project</title>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="200"  resizable="false" closable="false" collapsible="false">
+                    <div  style="margin-left: 2em" > 
+                    </div>
+                </p:layoutUnit>
+                
+                <p:layoutUnit position="center" >
+
+                        
+                             <div align="center">
+                               <h1>Super duper secret test page of Ove the runner</h1>
+                             <h:panelGrid id="testButtons" columns="5">
+                               <p:commandButton id="testWorker" value="Test Worker" actionListener="#{testBean.workerRegistryTest}"/>
+                                <p:commandButton id="testPerson" value="Test Person" actionListener="#{testBean.personRegistryTest}"/>
+                                <p:commandButton id="testSchool" value="Test School" actionListener="#{testBean.schoolRegistryTest}"/>
+                                <p:commandButton id="testUser" value="Test User" actionListener="#{testBean.userRegistryTest}" />
+                                <p:commandButton id="testSession" value="Test Session" actionListener="#{testBean.sessionRegistryTest}" />
+                            </h:panelGrid>   
+                            </div>
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>

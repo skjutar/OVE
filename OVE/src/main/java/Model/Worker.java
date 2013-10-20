@@ -71,7 +71,7 @@ public class Worker extends AbstractPerson {
 
     @Override
     public String toString() {
-        return "Worker{" + "salary=" + salary + '}';
+        return super.toString() + "Worker{" + "salary=" + salary + '}';
     }
     
     /**

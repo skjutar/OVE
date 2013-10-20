@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author kristofferskjutar
+ * @author kristofferskjutar and Gustav Dahl
  */
 @Stateless  // A stateless EJB
 @LocalBean
@@ -56,6 +56,18 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
         em.close();
         return list;
     }
+
+    public List<Person> getByPNumber(long id)
+    {
+        List<Person> found = new ArrayList<Person>();
+        for(Person c: getRange(0,getCount())) {
+            if(c.getIdNumber().equals(id)) {
+                found.add(c);
+            }
+        }
+        return found;
+    }
+    
     
     @Override
     public String toString(){
