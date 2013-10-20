@@ -48,6 +48,8 @@ public class TestBean implements Serializable
     private List<Worker> workerList;
     private Person person;
     private int success;
+    private List<Person> contactList;
+    private School school;
     
     
     public void personRegistryTestAdd()
@@ -83,7 +85,34 @@ public class TestBean implements Serializable
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Tests", "Number of success :" + success);
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }
-    
+    public void schoolRegistryTestAdd()
+    {
+        success=0;
+        int schoolCount = schReg.getCount();
+        school = new School("Chalmers", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        schReg.add(school);
+        if(schReg.getCount()==schoolCount+1) {
+            success++;
+        }
+        if(schReg.getByName(school.getName()).size()==1) {
+            success++;
+        }
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Tests", "Number of success :" + success);
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }
+    public void schoolRegistryRemoveTest()
+    {
+        success=0;
+        int schoolCount = schReg.getCount();
+        School sch = schReg.getByName(school.getName()).get(0);
+        schReg.remove(sch.getId());
+        if(schReg.getCount()==schoolCount-1) {
+            success++;
+        }
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Tests", "Number of success :" + success);
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
+    }
+            
     
     
     
