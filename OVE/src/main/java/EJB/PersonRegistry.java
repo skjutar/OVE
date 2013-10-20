@@ -37,7 +37,11 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
         super.setEntitymanager(em);     
     }
     
-    
+    /**
+     * Returns a list of persons with a specific name
+     * @param name The Name
+     * @return The List of Persons
+     */
     public List<Person> getByName(String name) {
         List<Person> found = new ArrayList<Person>();
         for (Person c : getRange(0, getCount())) {
@@ -56,7 +60,11 @@ public class PersonRegistry  extends AbstractDAO<Person, Long>{
         em.close();
         return list;
     }
-
+    /**
+     * Returns a list of persons by searching for a specific personal id number
+     * @param id The personal id number
+     * @return a list of persons with that personal id number
+     */
     public List<Person> getByPNumber(long id)
     {
         List<Person> found = new ArrayList<Person>();

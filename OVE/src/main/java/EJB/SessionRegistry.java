@@ -37,7 +37,11 @@ public class SessionRegistry extends AbstractDAO<Session, Long> implements Seria
      public void postContruct() {
         super.setEntitymanager(em);  
      }  
-     
+     /**
+      * Returns a list of sessions for a specific worker
+      * @param workerId the worker id 
+      * @return The list of sessions for that worker
+      */
      public List<Session> getWorkersSessions(Long workerId)
      {
          List <Session> list =  em.createQuery("select s from Session s join s.tutors t where t.id ='"+workerId+"'")
@@ -45,14 +49,5 @@ public class SessionRegistry extends AbstractDAO<Session, Long> implements Seria
          return list;
      }
 
-    //public void getByInfo(Date startDate, Date endDate, int numberOfStudents, String notation) {
-    //    List <Session> list =  em.createQuery("select s from Session s where s.notation='"+notation+"' and s.numberofStudent='"+numberOfStudents+"' and ")
-    //             .getResultList();
-    //     return list;
-    //}
-     
-     
-     
-     
      
 }

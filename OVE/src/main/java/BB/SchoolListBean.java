@@ -24,8 +24,10 @@ import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 
-//import org.primefaces.examples.domain.Car;  
-//import org.primefaces.examples.view.CarDataModel;  
+/**
+ *
+ * @author Malla
+ */
 @RequestScoped
 @Named("schoollist")
 public class SchoolListBean implements Serializable {

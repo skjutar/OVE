@@ -28,12 +28,12 @@ and open the template in the editor.
 		<p:rowToggler />  
 	    </p:column>  
 
-	    <p:column style="width:49%">  
+	    <p:column style="width:40%">  
 		<f:facet name="header"> Name </f:facet>  
 		<h:outputText value="#{tutor.name}" />  
 	    </p:column>  
 
-	    <p:column style="width:49%">  
+	    <p:column style="width:58%">  
 		<f:facet name="header">Email </f:facet>  
 		<h:outputText value="#{tutor.mail}" />  
 	    </p:column>  
@@ -75,7 +75,7 @@ and open the template in the editor.
 	<p:growl id="growl2" showDetail="true" life="3000" />  
 
 	<p:dialog  id="dialog" header="Add Tutor" widgetVar="adddlg" resizable="false"> 
-	    <h:panelGrid columns="2"   cellpadding="5" >  
+	    <h:panelGrid id="panelGrid" columns="2"   cellpadding="5" >  
 		<h:outputLabel for="name" value="name:"/>  
 		<h:inputText value="#{addTutorBean.name}"   
 		id="name" required="true" label="Name:" />

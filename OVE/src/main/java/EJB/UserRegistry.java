@@ -37,7 +37,11 @@ public class UserRegistry extends AbstractDAO<Account, Long> implements Serializ
         super.setEntitymanager(em);     
     }
 
-    
+    /**
+     *  Returns an account by searching for the accountName
+     * @param name the Name which will be search for
+     * @return  the matching account or null if the account doesnt exist
+     */
     public List<Account> getByName(String name) {
         List<Account> found = new ArrayList<Account>();
         for (Account c : getRange(0, getCount())) {
@@ -48,6 +52,12 @@ public class UserRegistry extends AbstractDAO<Account, Long> implements Serializ
         return found;
     }
     
+    /**
+     * Returns an account by username and password
+     * @param username the account user name
+     * @param password  the account password
+     * @return  the account or null if the account didnt exist
+     */
     public Account getAccount(String username, String password)
     {
         List <Account> list =  em.createQuery("select t from Account t WHERE t.userName = '" +username+"' and t.passWord = '"+ password+"'")

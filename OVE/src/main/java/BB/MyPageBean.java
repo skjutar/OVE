@@ -30,7 +30,7 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleModel;
 
 /**
- *
+ * Backing bean for MyPage
  * @author kristofferskjutar
  */
 @Named("mypageBean")
@@ -66,8 +66,9 @@ public class MyPageBean implements Serializable {
    private Account a;
    private AbstractPerson person;
    
-   
-   
+    /**
+     * Iniates all the information about the user
+     */
    @PostConstruct
    public void init()
    {
@@ -81,12 +82,12 @@ public class MyPageBean implements Serializable {
        setIdNumber(person.getIdNumber());
        setTelephoneNumber(person.getPhoneNbr());
        setName(person.getName());
-       setPicUrl(person.getPicUrl());
-       
-   }
-   
-   
-   
+       setPicUrl(person.getPicUrl());      
+   } 
+   /**
+    * updates the user information
+    * @return 
+    */
    public String update()
    {
        person.setAddress(getAdress());
@@ -96,8 +97,6 @@ public class MyPageBean implements Serializable {
        person.setPhoneNbr(getTelephoneNumber());
        person.setPicUrl(picUrl);
        
-       //Worker w = new Worker(person.getId(),getIdNumber(), getName(), getEmailAdress(), 
-       //        getTelephoneNumber(), getAdress());
        if(person instanceof Person) 
        {
            pReg.update((Person)person);
@@ -209,8 +208,5 @@ public class MyPageBean implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    
-    
-    
+   
 }

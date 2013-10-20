@@ -25,6 +25,7 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.ToggleEvent;
 
 /**
+ * Bean for the schoolPage.xhtml page.
  *
  * @author Malla
  */
@@ -49,27 +50,16 @@ public class SchoolPageBean implements Serializable {
     @PostConstruct
     public void init() {
         delete = "false";
-        System.out.println("*************************************************");
-        System.out.println("**********In init() method in ScholPageBean******");
-        System.out.println("*");
         Map<String, String> params = (Map<String, String>) FacesContext.
                 getCurrentInstance().getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
         String param = params.get("school");
-        System.out.println("* name of school in URL: " + param);
-        System.out.println("* Number of schools in database :" + schoolreg.getCount());
-        List<School> skolor = schoolreg.getByName(param);
-        System.out.println("* All results when searched for " + param + ":   " + skolor);
-
         school = schoolreg.getByName(param).get(0);
         System.out.println("* Skolinfo på första obj:" + school);
         p = new Person();
         school.getContactPersons().size(); //Only have this here because otherwise the contacts are not instansiated for some reason(?).
         contacts = school.getContactPersons();
 
-        System.out.println("*");
-        System.out.println("**********Done in init() method******************");
-        System.out.println("*************************************************");
     }
 
     public School getSchool() {
@@ -80,10 +70,17 @@ public class SchoolPageBean implements Serializable {
         this.school = s;
     }
 
+    /**
+     * Had issues with this bean, as it was problematic having it both
+     * SessionScoped or RequestScoped. We therefore added the String check, for
+     * which the getter checks if the attribute School is according to the field
+     * in the URL 'school'. If not, it updates the attribute school. We know
+     * that this is smelly code, but as we had troubles no matter how we tried
+     * to fix the code in a nice way, we have this as a solution for now.
+     *
+     * @return check, which is always an empty String.
+     */
     public String getCheck() {
-        System.out.println("*************************************************");
-        System.out.println("**********CHECKING CHECKING**********************");
-        System.out.println("*");
         Map<String, String> params = (Map<String, String>) FacesContext.
                 getCurrentInstance().getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
@@ -94,14 +91,11 @@ public class SchoolPageBean implements Serializable {
             school.getContactPersons().size(); //Only have this here because otherwise the contacts are not instansiated for some reason(?).
             contacts = school.getContactPersons();
         }
-        System.out.println("*");
-        System.out.println("**********CHECKING CHECKING**********************");
-        System.out.println("*************************************************");
         return check;
     }
 
     public void setCheck(String s) {
-        this.check = s;
+        this.check = " ";
     }
 
     public List<Person> getContacts() {
@@ -137,14 +131,7 @@ public class SchoolPageBean implements Serializable {
      * @param event contains the information about the person to be added.
      */
     public void create(ActionEvent event) {
-        System.out.println("*");
-        System.out.println("*************************************");
-        System.out.println("* IN CREATE FUNCTION!               *");
-        System.out.println("*                                   *");
-        school.getContactPersons().size(); //Only have this here because otherwise the contacts are not instansiated for some reason(?).
-        System.out.println("* Schools contacts before:          *");
-        System.out.println(school.getContactPersons().toString());
-
+        school.getContactPersons().size();
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean created = false;
@@ -158,69 +145,53 @@ public class SchoolPageBean implements Serializable {
         } else {
             created = true;
             Person newcontact = new Person(p.getName(), p.getMail(), p.getPhoneNbr(), p.getAddress());
-            System.out.println("*");
-            System.out.println("* Person to add:" + newcontact);
-            System.out.println("*");
-            System.out.println("* School we add to:" + school);
-            System.out.println("*");
-            System.out.println("* Number of contacts in school:" + school.getContactPersons().size()); //HÄR initieras listan med kontaktpersoner. 
-            System.out.println("*");
-            System.out.println("* Schools contacts after:           *");
-            System.out.println(school.getContactPersons().toString());
+            school.getContactPersons().size();
             school.getContactPersons().add(newcontact);
             schoolreg.update(school);
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "Contact created");
         }
-
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("created", created);
-        System.out.println("* DONE WITH CREATE FUNCTION!        *");
-        System.out.println("*************************************");
-        System.out.println("*");
-
     }
 
+    /*
+     * Function edits the information about the school and updates the database 
+     * via the Schoolregistry
+     */
     public void edit(ActionEvent event) {
-        System.out.println("*");
-        System.out.println("*************************************");
-        System.out.println("* IN EDIT FUNCTION!               *");
-        System.out.println("*                                   *");
-        System.out.println("* Schools info now:          *");
-        System.out.println(school.toString());
-
-        //RequestContext context = RequestContext.getCurrentInstance();
-        //FacesMessage msg = null;
-        //boolean created = true;
         schoolreg.update(school);
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("schoolpage.xhtml?school=" + school.getName());
         } catch (IOException ex) {
             Logger.getLogger(SchoolListBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School Edited");
-        //FacesContext.getCurrentInstance().addMessage(null, msg);
-        //context.addCallbackParam("created", created);
-        System.out.println("* DONE WITH EDIT FUNCTION!        *");
-        System.out.println("*************************************");
-        System.out.println("*");
-
     }
 
+    /*
+     * Function removes the school from the database and redirects the user to 
+     * the page schools.xhtml via faces-config.
+     */
     public String removethis() {
-        System.out.println("*");
-        System.out.println("*************************************");
-        System.out.println("* IN DELETE FUNCTION!               *");
-        System.out.println("*                                   *");
-
         schoolreg.remove(school.getId());
-
-        System.out.println("*                                   *");
-        System.out.println("* DONE WITH DELETE FUNCTION!        *");
-        System.out.println("*************************************");
-        System.out.println("*");
         return "Schools";
     }
 
+    public void removeContact(Long id) {
+        System.out.println("------ REMOVING person with ID " + id);
+        Person p = persreg.find(id);
+        if (school.getContactPersons().remove(p)) {
+            System.out.println("- removed contact from school -------");
+            schoolreg.update(school);
+            persreg.remove(id);
+            System.out.println("- removed contact from db -------");
+        }
+        System.out.println("------ REMOVED TUTOR -------");
+    }
+
+    /*
+     * Function called, when user wants to view detailed information about a 
+     * contact person to the school.
+     */
     public void onRowToggle(ToggleEvent event) {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                 "Row State " + event.getVisibility(),

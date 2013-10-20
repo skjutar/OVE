@@ -29,7 +29,7 @@ import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.*;
 
 /**
- *
+ * Backing bean for MenuBean
  * @author kristofferskjutar
  */
 @SessionScoped
@@ -57,7 +57,10 @@ public class MenuBean implements Serializable {
                 .getExternalContext().getSessionMap().get("id");
         a = uReg.find(id);
     }
-    
+    /**
+     * returns an MenuModel with all components to added by the jsf pages
+     * @return The MenuModel
+     */
     public MenuModel getModel() {
         MenuModel model = new DefaultMenuModel();
         MenuItem menuItem = new MenuItem();

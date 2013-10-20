@@ -16,9 +16,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-  
-//import org.primefaces.examples.domain.Car;  
-
+   
+/**
+ * Creates an carousel which shows month, number of sessions for that month, 
+ *  number of houres and current salary
+ * @author Malla
+ */
 @Named("carouselBean")
 @RequestScoped
 public class DisplaySalaryBean implements Serializable {  
@@ -51,7 +54,10 @@ public class DisplaySalaryBean implements Serializable {
     public DisplaySalaryBean() {  
         months = new ArrayList<Month>();    
     }  
-    
+
+    /**
+     * Loads a users monthly working hours, number of events and salary
+     */
     @PostConstruct
     public void init()
     {

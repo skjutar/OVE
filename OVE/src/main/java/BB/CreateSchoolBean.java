@@ -21,6 +21,7 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 /**
+ *  Creates a school
  * Bean which handles the creation of a new school
  *
  * @author Malla

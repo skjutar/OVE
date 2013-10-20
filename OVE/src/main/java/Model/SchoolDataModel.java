@@ -9,7 +9,7 @@ import javax.faces.model.ListDataModel;
 import org.primefaces.model.SelectableDataModel;
 
 /**
- *
+ * Class required to populate the table in schools.xhtml
  * @author Malla
  */
 public class SchoolDataModel extends ListDataModel<School> implements SelectableDataModel<School> {

@@ -6,12 +6,12 @@ package Model;
 
 import javax.persistence.*;
 
-/**
- *
- * @author Gustav
- */
 
-//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+
+/**
+ * 
+ * @author Kristoffer
+ */
 @MappedSuperclass
 public abstract class AbstractPerson extends AbstractEntity
 {
@@ -103,7 +103,6 @@ public abstract class AbstractPerson extends AbstractEntity
      * @param picUrl the picUrl to set
      */
     public void setPicUrl(String picUrl) {
-	System.out.println("::::: AP: setPicUrl: " + picUrl);
 	if(picUrl == null || picUrl.equals("")) {
 	    this.picUrl = DEFAULT_PIC_URL;
 	} else {

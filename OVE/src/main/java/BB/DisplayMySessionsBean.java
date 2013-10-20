@@ -36,7 +36,9 @@ public class DisplayMySessionsBean {
     public DisplayMySessionsBean(){
         eventModel = new DefaultScheduleModel();
     }   
-    
+    /**
+     * Load current users event to the scheduleModel
+     */
     @PostConstruct
     public void init()
     {

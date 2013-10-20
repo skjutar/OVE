@@ -41,8 +41,8 @@ import org.primefaces.model.DualListModel;
 import org.primefaces.model.ScheduleModel;
 
 /**
- *
- * @author Gustav
+ * Backing bean for Admin page
+ * @author Gustav & kristofferskjutar
  */
 @Named("scheduleBean")
 @SessionScoped
@@ -93,7 +93,10 @@ public class AdminBean implements Serializable
     }  
     
   
-      
+    /**
+     * 
+     * @param actionEvent 
+     */  
     public void addEvent(ActionEvent actionEvent) { 
         
         ArrayList<Worker> workerList = new ArrayList<Worker>();
