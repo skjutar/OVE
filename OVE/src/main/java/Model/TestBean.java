@@ -68,6 +68,17 @@ public class TestBean implements Serializable
     {
         personRegistryTestAdd();
         personRegistryTestRemove();
+        personRegistryTestUpdate();
+        schoolRegistryTestAdd();
+        schoolRegistryTestRemove();
+        schoolRegistryTestUpdate();
+        workerRegistryTestAdd();
+        workerRegistryTestRemove();
+        userRegistryTestAdd();
+        userRegistryTestRemove();
+        sessionRegistryTestAdd();
+        sessionRegistryTestRemove();
+        
     }
   
     public void setProgress(Integer progress) {  
@@ -87,14 +98,16 @@ public class TestBean implements Serializable
         {   
             success++;
             tests++;
+            progress+=6;
         }
-        progress+=33;
+        progress+=8;
         if(pReg.getByPNumber(person.getIdNumber()).size()==1)
         {
             success++;
             tests++;
+            progress+=6;
         }  
-        progress+=33;
+    
         postResults(tests);
     }
     
@@ -113,8 +126,9 @@ public class TestBean implements Serializable
         {   
             success++;
             tests++;
+            progress+=6;
         }
-        progress+=34;
+
         postResults(tests);  
     }
     public void personRegistryTestUpdate()
@@ -131,8 +145,9 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
-            
+            progress+=6;
         }
+
         postResults(tests);
     }
     
@@ -153,10 +168,12 @@ public class TestBean implements Serializable
         if(schReg.getCount()==schoolCount+1) {
             success++;
             tests++;
+            progress+=6;
         }
         if(schReg.getByName(school.getName()).size()==1) {
             success++;
             tests++;
+            progress+=6;
         }
         postResults(tests);
     }
@@ -174,7 +191,9 @@ public class TestBean implements Serializable
         if(schReg.getCount()==schoolCount-1) {
             success++;
             tests++;
+            progress+=6;
         }
+
         postResults(tests);      
     }
     public void schoolRegistryTestUpdate()
@@ -192,6 +211,7 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
+            progress+=7;
         }
         postResults(tests);
     }
@@ -207,11 +227,13 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
+            progress+=7;
         }
         if(!reg.getByPNumber(personNumber).isEmpty())
         {
             success++;
             tests++;
+            progress+=7;
         }
         postResults(tests);
     }
@@ -229,7 +251,9 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
+            progress+=7;
         }       
+
         postResults(tests);       
     }
     public void userRegistryTestAdd()
@@ -245,6 +269,7 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
+            progress+=7;
         }
         postResults(tests);
     }
@@ -263,6 +288,7 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
+            progress+=7;
         }
         postResults(tests);
     }
@@ -282,6 +308,7 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
+           progress+=7;
         }
          postResults(tests);
     }
@@ -303,7 +330,9 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
+           progress+=7;
         }
+
         postResults(tests);
     }
             
