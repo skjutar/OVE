@@ -9,8 +9,11 @@ import EJB.SchoolRegistry;
 import Model.Person;
 import java.io.Serializable;
 import Model.School;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -36,6 +39,8 @@ public class SchoolPageBean implements Serializable {
     private School school;
     Person p;
     private List<Person> contacts;
+    private String delete;
+    private String check;
 
     /**
      * Initiates the School Page, decides which school it is to show, based on
@@ -43,6 +48,7 @@ public class SchoolPageBean implements Serializable {
      */
     @PostConstruct
     public void init() {
+        delete = "false";
         System.out.println("*************************************************");
         System.out.println("**********In init() method in ScholPageBean******");
         System.out.println("*");
@@ -74,6 +80,30 @@ public class SchoolPageBean implements Serializable {
         this.school = s;
     }
 
+    public String getCheck() {
+        System.out.println("*************************************************");
+        System.out.println("**********CHECKING CHECKING**********************");
+        System.out.println("*");
+        Map<String, String> params = (Map<String, String>) FacesContext.
+                getCurrentInstance().getCurrentInstance().
+                getExternalContext().getRequestParameterMap();
+        String param = params.get("school");
+        if (school == null || school.getName() != param) {
+            List<School> skolor = schoolreg.getByName(param);
+            school = schoolreg.getByName(param).get(0);
+            school.getContactPersons().size(); //Only have this here because otherwise the contacts are not instansiated for some reason(?).
+            contacts = school.getContactPersons();
+        }
+        System.out.println("*");
+        System.out.println("**********CHECKING CHECKING**********************");
+        System.out.println("*************************************************");
+        return check;
+    }
+
+    public void setCheck(String s) {
+        this.check = s;
+    }
+
     public List<Person> getContacts() {
         return contacts;
     }
@@ -88,6 +118,14 @@ public class SchoolPageBean implements Serializable {
 
     public void setPerson(Person p) {
         this.p = p;
+    }
+
+    public String getDelete() {
+        return delete;
+    }
+
+    public void setDelete(String b) {
+        this.delete = b;
     }
 
     /**
@@ -119,7 +157,7 @@ public class SchoolPageBean implements Serializable {
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");
         } else {
             created = true;
-            Person newcontact = new Person(p.getName(), p.getMail(), p.getMail(), "-");
+            Person newcontact = new Person(p.getName(), p.getMail(), p.getPhoneNbr(), p.getAddress());
             System.out.println("*");
             System.out.println("* Person to add:" + newcontact);
             System.out.println("*");
@@ -150,17 +188,37 @@ public class SchoolPageBean implements Serializable {
         System.out.println("* Schools info now:          *");
         System.out.println(school.toString());
 
-        RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage msg = null;
-        boolean created = true;
+        //RequestContext context = RequestContext.getCurrentInstance();
+        //FacesMessage msg = null;
+        //boolean created = true;
         schoolreg.update(school);
-        msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School Edited");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        context.addCallbackParam("created", created);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("schoolpage.xhtml?school=" + school.getName());
+        } catch (IOException ex) {
+            Logger.getLogger(SchoolListBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "School Edited");
+        //FacesContext.getCurrentInstance().addMessage(null, msg);
+        //context.addCallbackParam("created", created);
         System.out.println("* DONE WITH EDIT FUNCTION!        *");
         System.out.println("*************************************");
         System.out.println("*");
 
+    }
+
+    public String removethis() {
+        System.out.println("*");
+        System.out.println("*************************************");
+        System.out.println("* IN DELETE FUNCTION!               *");
+        System.out.println("*                                   *");
+
+        schoolreg.remove(school.getId());
+
+        System.out.println("*                                   *");
+        System.out.println("* DONE WITH DELETE FUNCTION!        *");
+        System.out.println("*************************************");
+        System.out.println("*");
+        return "Schools";
     }
 
     public void onRowToggle(ToggleEvent event) {

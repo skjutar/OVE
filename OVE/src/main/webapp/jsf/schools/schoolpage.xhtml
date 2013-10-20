@@ -20,32 +20,20 @@ and open the template in the editor.
                         <div style="float:left">
                             <h:form id="schoolpage">  
                                 <p:growl id="msgs" />  
-                               <p:panel id="pInfo" header="About #{schoolpage.school.name}" style="width: 250px">  
+                               <p:panel id="pInfo" header="About #{schoolpage.school.name} #{schoolpage.check}" style="width: 250px">  
                                     <h:panelGrid columns="2" columnClasses="column" cellpadding="5" >  
                                         <h:outputText value="Name: " style="font-weight:bold"/>
-                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.name}" /> 
+                                        <h:outputLabel value="#{schoolpage.school.name}" /> 
                                         <h:outputText value="Address: " style="font-weight:bold"/>  
-                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.address}" /> 
+                                        <h:outputLabel value="#{schoolpage.school.address}" /> 
                                         <h:outputText value="Zip Code: " style="font-weight:bold"/>  
-                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.zip}" /> 
+                                        <h:outputLabel value="#{schoolpage.school.zip}" /> 
                                         <h:outputText value="City: " style="font-weight:bold"/>  
-                                        <h:outputLabel for="schoolname" value="#{schoolpage.school.city}" /> 
-                                        <!--
-                                        <p:inputText value="#{schoolpage.school.name}"  
-                                                     required="true" label="text" />  
-                                        <h:outputText value="Address: " />  
-                                        <p:inputText value="#{schoolpage.school.address}"  
-                                                     required="true" label="text" />  
-                                        <h:outputText value="Zip Code: " />  
-                                        <p:inputText value="#{schoolpage.school.zip}"  
-                                                     required="true" label="text" />  
-                                        <h:outputText value="City: " />  
-                                        <p:inputText value="#{schoolpage.school.city}"  
-                                                     required="true" label="text" />  
-                                                                                -->
+                                        <h:outputLabel value="#{schoolpage.school.city}" /> 
+
                                         <h:form id="editschool"> 
                                             <h:outputLink id="editschoolLink" value="javascript:void(0)" onclick="editschooldlg.show()" title="Edit this school" >   
-                                                <p:commandButton value="Edit this school"  type="button" />  
+                                                <p:commandButton value="Edit this school"  rendered="#{loginBean.admin}" type="button" />  
                                             </h:outputLink>  
 
 
@@ -79,9 +67,32 @@ and open the template in the editor.
                                                     </f:facet>  
 
                                                 </h:panelGrid>  
-                                                <h:outputText value="You will receive an email to confirm your email adress"/>
+                                                <h:outputText value="Clicking 'Save changes' will overwrite the old information about this school."/>
                                             </p:dialog>  
-                                        </h:form>                                        
+                                        </h:form> 
+                                        
+                                        
+                                        <h:outputLink id="deleteschoolLink" value="javascript:void(0)" onclick="deleteschooldlg.show()" title="Delete this school" >   
+                                                <p:commandButton value="Delete this school"  rendered="#{loginBean.admin}" type="button" />  
+                                            </h:outputLink>  
+                                        <p:dialog  id="dialog" header="Delete School" widgetVar="deleteschooldlg" resizable="false"> 
+                                            <h:panelGrid columns="2"   cellpadding="5" > 
+                                                Are you sure you want to delete this school? <br>
+                                                This can not be undone. </br>
+                                                
+                                                <f:facet name="footer">  
+                                                    <p:commandButton id="cancelButton" value="Cancel" update="msgs"       
+                                                        accesskey="" onclick="deleteschooldlg.hide();">
+                                                        <p:resetInput target="deleteschooldlg" /> 
+                                                    </p:commandButton>  
+                                                    <p:commandButton id="deleteButton" value="Delete" update="msgs"   
+                                                        action="#{schoolpage.removethis}"    
+                                                        accesskey="" oncomplete="deleteschooldlg.hide();">
+                                                    </p:commandButton>                 
+                                                </f:facet>  
+
+                                            </h:panelGrid>  
+                                        </p:dialog>                                       
 
                                     </h:panelGrid> 
                                 </p:panel>
@@ -121,11 +132,6 @@ and open the template in the editor.
                                         <h:panelGrid id="display" columns="2" cellpadding="4" style="width:100%;"  
                                                         styleClass=" ui-widget-content grid">  
                                             
-                                            <f:facet name="header">  
-                                                <!--<p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/>  -->
-                                            </f:facet>  
-
-
                                             <h:outputText value="Name:" />  
                                             <h:outputText id="model" value="#{contact.name}" />  
                               
@@ -201,6 +207,13 @@ and open the template in the editor.
     if(args.created) {
         editschooldlg.hide();  
         $('#editschoolLink').fadeOut();
+    }
+    location.reload();
+    }
+            function handleDeleteRequest(xhr, status, args) {
+    if(args.created) {
+        deleteschooldlg.hide();  
+        $('#deleteschoolLink').fadeOut();
     }
     location.reload();
     }

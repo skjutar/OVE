@@ -32,12 +32,9 @@ and open the template in the editor.
                         <p:dataTable id="schools" var="school" value="#{schoollist.allSchools}" paginator="true" rows="10"  
                                      selection="#{schoollist.selectedSchool}" selectionMode="single">  
 
-                            <p:ajax event="rowSelect" listener="#{schoollist.onRowSelect}" />  
+                            <p:ajax event="rowSelect" listener="#{schoollist.onRowSelect}"/>  
+                        
 
-                            <!--
-                            <p:ajax event="rowUnselect" listener="#{schoollist.onRowUnselect}" update=":form:growl"/>  
-                            -->
-                            
                             <f:facet name="header">  
                                 Select a row to display a school  
                             </f:facet>  
@@ -63,32 +60,15 @@ and open the template in the editor.
                                   showEffect="fade" hideEffect="explode">  
 
                             <h:panelGrid id="display" columns="2" cellpadding="4">  
-                                <!--
-                                <f:facet name="header">  
-                                    <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
-                                </f:facet>  
-  
-                                <h:outputText value="Model:" />  
-                                <h:outputText value="#{tableBean.selectedCar.model}" />  
-  
-                                <h:outputText value="Year:" />  
-                                <h:outputText value="#{tableBean.selectedCar.year}" />  
-  
-                                <h:outputText value="Manufacturer:" />  
-                                <h:outputText value="#{tableBean.selectedCar.manufacturer}" />  
-  
-                                <h:outputText value="Color:" />  
-                                <h:outputText value="#{tableBean.selectedCar.color}" />
-                                -->
                             </h:panelGrid>  
                         </p:dialog>  
 
                     </h:form>
 
 
-                    <h:form id="addnewschool"> 
+                    <h:form id="addnewschool" > 
                         <h:outputLink id="addschoolLink" value="javascript:void(0)" onclick="addschooldlg.show();" title="login" >   
-                            <p:commandButton value="Add New School"  type="button" />  
+                            <p:commandButton value="Add New School"  rendered="#{loginBean.admin}" type="button" />  
                         </h:outputLink>  
 
                         <p:growl id="growl" showDetail="true" life="3000" />  
@@ -99,21 +79,29 @@ and open the template in the editor.
                                 <h:outputLabel for="name" value="School name:" />  
                                 <p:inputText value="#{createSchoolBean.name}"   
                                              id="name" required="true" label="Name" >
-                                    <f:validateRegex pattern="^[a-ö0-9_-]+$"/>
-                                    <p:ajax update="msgLowCase" event="keyup"/>
+                                    <f:validateRegex pattern="^[a-öA-Z0-9_-]+$" />
+                                    <p:ajax update="msgLowCase1"  event="keyup"/>
                                 </p:inputText>
 
                                 <h:outputLabel for="address" value="Adress:"/>  
-                                <h:inputText value="#{createSchoolBean.address}"   
-                                             id="address" required="true" label="Address" />
+                                <p:inputText value="#{createSchoolBean.address}"   
+                                             id="address" required="true" label="Address" >
+                                    <f:validateRegex pattern="^[a-öA-Z0-9_-]+$" />
+                                    <p:ajax update="msgLowCase1"  event="keyup"/>
+                                </p:inputText>
+                                
 
                                 <h:outputLabel for="zip" value="Zip Code:"/>  
-                                <h:inputText value="#{createSchoolBean.zip}"   
+                                <p:inputText value="#{createSchoolBean.zip}"   
                                              id="zip" required="true" label="Zip" />
+                                
 
                                 <h:outputLabel for="city" value="City:" />  
                                 <p:inputText value="#{createSchoolBean.city}"   
-                                             id="city" required="true" label="City" /> 
+                                             id="city" required="true" label="City" >
+                                    <f:validateRegex pattern="^[a-öA-Z]+$" />
+                                    <p:ajax update="msgLowCase1"  event="keyup"/>
+                                </p:inputText>
 
                                 <f:facet name="footer">  
                                     <p:commandButton id="addButton" value="Add School" update="growl"   
@@ -121,7 +109,10 @@ and open the template in the editor.
                                                      accesskey="" oncomplete="handleCreateRequest2(xhr, status, args)"/>                 
                                 </f:facet> 
                                 
-                                <p:message for="name" id="msgLowCase" display="icon"/>
+                                <p:message for="name" id="msgLowCase1" display="icon"/>
+                                <p:message for="name" id="msgLowCase2" display="icon"/>
+                                <p:message for="name" id="msgLowCase3" display="icon"/>
+                                <p:message for="name" id="msgLowCase4" display="icon"/>
                             </h:panelGrid>           
                         </p:dialog>  
                     </h:form>
@@ -132,8 +123,9 @@ and open the template in the editor.
                                 if (args.created) {
                                     addschooldlg.hide();
                                     $('#addschoolLink').fadeOut();
+                                    location.reload();
                                 }
-                                location.reload();
+                                
                             }
                     </script> 
                 </ui:define>
