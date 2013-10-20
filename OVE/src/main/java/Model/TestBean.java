@@ -7,6 +7,7 @@ package Model;
 import EJB.PersonRegistry;
 import EJB.SchoolRegistry;
 import EJB.SessionRegistry;
+import EJB.UserRegistry;
 import EJB.WorkerRegistry;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,6 +43,9 @@ public class TestBean implements Serializable
     @EJB
     private PersonRegistry pReg;
     
+    @EJB
+    private UserRegistry uReg;
+    
     private Worker Ove;
     private List<Session> sessions;
     private List<Session> sessions2;
@@ -50,10 +54,11 @@ public class TestBean implements Serializable
     private int success;
     private List<Person> contactList;
     private School school;
+    private Calendar time;
     
     
     public void personRegistryTestAdd()
-    {
+    {   
         int precount = pReg.getCount();
         int tests=0;
         success=0;
@@ -62,7 +67,7 @@ public class TestBean implements Serializable
         pReg.add(person);
         precount++;
         if(pReg.getCount()==precount)
-        {
+        {   
             success++;
             tests++;
         }
@@ -86,11 +91,29 @@ public class TestBean implements Serializable
         pReg.remove(p.getId());
         
         if(pReg.getCount()==precount-1)
-        {
+        {   
             success++;
             tests++;
         }       
         postResults(tests);  
+    }
+    public void personRegistryTestUpdate()
+    {
+        success=0;
+        int tests=0;
+        Long personNumber = Math.round(Math.random()*100000);
+        person = new Person(personNumber, "Test Testsson", "test@gmail.com", "070TEST", "testVägen");
+        pReg.add(person);
+        String newEmail = "newEmail@gmail.com";
+        person.setMail(newEmail);
+        pReg.update(person);
+        if(pReg.getByPNumber(personNumber).get(0).getMail().equals(newEmail))
+        {
+            success++;
+            tests++;
+            
+        }
+        postResults(tests);
     }
     
     private void postResults(int tests)
@@ -100,125 +123,170 @@ public class TestBean implements Serializable
     }
     public void schoolRegistryTestAdd()
     {
+        int tests=0;
         success=0;
+        Long idKey = Math.round(Math.random()*100000);
+        String schoolName = "Chalmers" + String.valueOf(idKey);
         int schoolCount = schReg.getCount();
-        school = new School("Chalmers", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         if(schReg.getCount()==schoolCount+1) {
             success++;
+            tests++;
         }
         if(schReg.getByName(school.getName()).size()==1) {
             success++;
+            tests++;
         }
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Tests", "Number of success :" + success);
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
+        postResults(tests);
     }
-    public void schoolRegistryRemoveTest()
+    public void schoolRegistryTestRemove()
     {
         success=0;
+        int tests = 0;
+        Long idKey = Math.round(Math.random()*100000);
+        String schoolName = "Chalmers" + String.valueOf(idKey);
+        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        schReg.add(school);
         int schoolCount = schReg.getCount();
-        School sch = schReg.getByName(school.getName()).get(0);
-        schReg.remove(sch.getId());
+        School s = schReg.getByName(school.getName()).get(0);
+        schReg.remove(s.getId());
         if(schReg.getCount()==schoolCount-1) {
             success++;
+            tests++;
         }
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Tests", "Number of success :" + success);
-        FacesContext.getCurrentInstance().addMessage(null, msg); 
+        postResults(tests);      
+    }
+    public void schoolRegistryTestUpdate()
+    {
+        success=0;
+        int tests=0;
+        Long idKey = Math.round(Math.random()*100000);
+        String schoolName = "Chalmers" + String.valueOf(idKey);
+        school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        schReg.add(school);
+        String newAddress = "slottskogen 45";
+        school.setAddress(newAddress);
+        schReg.update(school);
+        if(schReg.getByName(schoolName).get(0).getAddress().equals(newAddress))
+        {
+            success++;
+            tests++;
+        }
+        postResults(tests);
+    }
+    public void workerRegistryTestAdd()
+    {
+        success=0;
+        int tests=0;
+        int workerCount = reg.getCount();
+        Long personNumber = Math.round(Math.random()*100000);
+        Worker w = new Worker(personNumber, "Test Gunnar", "testGunnar@gmail.com", "268487", "testgatan 3", 100);
+        reg.add(w);
+        if(reg.getCount()==workerCount+1)
+        {
+            success++;
+            tests++;
+        }
+        if(!reg.getByPNumber(personNumber).isEmpty())
+        {
+            success++;
+            tests++;
+        }
+        postResults(tests);
+    }
+    public void workerRegistryTestRemove()
+    {
+        success=0;
+        int tests=0;
+        Long personNumber = Math.round(Math.random()*100000);
+        Worker w = new Worker(personNumber, "Test Gunnar", "testGunnar@gmail.com", "268487", "testgatan 3", 100);
+        reg.add(w);
+        int workerCount = reg.getCount();
+        Worker worker = reg.getByPNumber(w.getIdNumber()).get(0);
+        reg.remove(worker.getId());
+        if(reg.getCount()==workerCount-1)
+        {
+            success++;
+            tests++;
+        }       
+        postResults(tests);       
+    }
+    public void userRegistryTestAdd()
+    {
+        success=0;
+        int tests=0;
+        int userCount = uReg.getCount();
+        Long personNumber = Math.round(Math.random()*100000);
+        Worker w = new Worker(personNumber, "Test Gunnar", "testGunnar@gmail.com", "268487", "testgatan 3", 100);
+        Account a = new Account(w, "Gunnar", "losen");
+        uReg.add(a);
+        if(uReg.getCount()==userCount+1)
+        {
+            success++;
+            tests++;
+        }
+        postResults(tests);
+    }
+    public void userRegistryTestRemove()
+    {
+        success=0;
+        int tests = 0;
+        Long personNumber = Math.round(Math.random()*100000);
+        Worker w = new Worker(personNumber, "Test Gunnar", "testGunnar@gmail.com", "268487", "testgatan 3", 100);
+        Account a = new Account(w, "Gunnar", "losen");
+        uReg.add(a);
+        int userCount = uReg.getCount();
+        Account acc = uReg.getByName(a.getUserName()).get(0);
+        uReg.remove(acc.getId());
+        if(uReg.getCount()==userCount-1)
+        {
+            success++;
+            tests++;
+        }
+        postResults(tests);
+    }
+    public void sessionRegistryTestAdd()
+    {
+        success=0;
+        int tests=0;
+        time = Calendar.getInstance();
+        int sessionCount = sesReg.getCount();
+        Long idKey = Math.round(Math.random()*100000);
+        String schoolName = "Chalmers" + String.valueOf(idKey);
+        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        schReg.add(school);
+        Session ses = new Session(school, time.getTime(),time.getTime() , 10, workerList, "Barnen slog mig");
+        sesReg.add(ses);
+        if(sesReg.getCount()==sessionCount+1)
+        {
+            success++;
+            tests++;
+        }
+         postResults(tests);
+    }
+    public void sessionRegistryTestRemove()
+    {
+        success=0;
+        int tests=0;
+        time = Calendar.getInstance();
+        Long idKey = Math.round(Math.random()*100000);
+        String schoolName = "Chalmers" + String.valueOf(idKey);
+        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        schReg.add(school);
+        Session ses = new Session(school, time.getTime(),time.getTime() , 10, workerList, "Barnen slog mig");
+        sesReg.add(ses);
+        int sessionCount = sesReg.getCount();
+        Session session = sesReg.find(ses.getId());
+        sesReg.remove(session.getId());
+        if(sesReg.getCount()==sessionCount-1)
+        {
+            success++;
+            tests++;
+        }
+        postResults(tests);
     }
             
-    
-    
-    
-    public void addWorker(ActionEvent event)
-    {   
-        Ove = new Worker(1232312L,"Ove Sundberg", "ove@Sundberg.se", "34324234", "parkbänken 3");
-        reg.add(Ove);
-        FacesMessage msg = null; 
-        if(reg.getCount()==1)
-        {
-            msg = new FacesMessage("Worker added");
-        }
-        else
-        {
-            msg = new FacesMessage("Couldnt add worker");
-        }
-    }
-    /**
-     * Adds two schools to the reg
-     */
-    private void addTwoSchools()
-    {
-        List<Person> contactPersons = new ArrayList<Person>();
-        School firstSchool = new School("BackaSkolan", "34342", contactPersons);
-        School secondSchool = new School("Hvitfeldtska gymnasiet", "23341", contactPersons);
-        schReg.add(firstSchool);
-        schReg.add(secondSchool);
-    }
-    public void initTwoSchools()
-    {
-        List<Person> contactPersons = new ArrayList<Person>();
-        contactPersons.add(new Person(881003L, "Rikard Eriksson", "rikard@gmail.com", "07011111", "avenyn 5"));     
-        School school = new School("BackaSkolan", "41681", contactPersons);
-     //   School school2 = new School("Hvitfeldtska", "33232", contactPersons);
-        sessions = new ArrayList<Session>();
-        List<Worker> wList = new ArrayList<Worker>();
-        
-        //Add Ove Sundberg to two different sessions
-        wList.add(new Worker(851027L, "Ove Sundberg", "ove@gmail.com", "0702222", "ovegatan 5", 113));       
-        Session ses1 = new Session(new Date(), new Date(), 5, wList);
-        Session ses2 = new Session(new Date(), new Date(), 7, wList);
- 
-        wList = new ArrayList<Worker>();
-        //Then add a random person to a third one
-        wList.add(new Worker(821127L, "Inte Ove Sundberg", "notove@gmail.com", "0705555", "inteovegatan 5", 5));
-        Session ses3 = new Session(new Date(), new Date(), 1, wList);
-        
-        sessions.add(ses1);
-        sessions.add(ses2);
-        sessions.add(ses3);
-        Schedule schedule = new Schedule(sessions);
-        
-        school.setSchedule(schedule);
-     //   schReg.add(school2);
-        schReg.add(school);
-       // Worker oddWorker = new Worker(77777L, "oddOve", "oddOve@gmail.com", "0706666", "oddovegatan 5", 12);
-       // oddWorker.setSessions(sessions);
-       // reg.add(oddWorker);
-    }
-    
-   
-    
-    public void testAdminSchedule(ActionEvent event)
-    {
-        sessions = new ArrayList<Session>();
-        sessions2 = new ArrayList<Session>();
-        workerList = new ArrayList<Worker>();
-        Calendar time = Calendar.getInstance();
-        Ove = new Worker(1232312L,"Ove Sundberg", "ove@Sundberg.se", "34324234", 
-                "parkbänken utanför konsum");
-       
-        workerList.add(Ove);
-        Session session = new Session(new Date(time.getTimeInMillis()), new Date(time.getTimeInMillis()+10000), 45, workerList);
-        session.setNotation("DET HÄR ÄR EN NOTATION");
-        sessions.add(session);
-        Schedule schedule = new Schedule(sessions);
-        School school = new School("Chalmers", "chalmersgatan 4", 43351, "Göteborg",new ArrayList<Session>(),new ArrayList<Person>());
-
-        school.setSchedule(schedule);
-        
-   //     schReg.add(school);
-        
-        Session session2 = new Session(new Date(time.getTimeInMillis()+99999*1000), new Date(time.getTimeInMillis()+99999*1500), 23, workerList);
-        sessions2.add(session2);
-        Schedule schedule2 = new Schedule(sessions2);
-        School school2 = new School("Backaskolan", "Backavägen 64", 23311, "Hisingen",new ArrayList<Session>(),new ArrayList<Person>());
-        school2.setSchedule(schedule2);
-        
-        schReg.add(school2);
-        
-        
-        
-    }
     
     
 }
