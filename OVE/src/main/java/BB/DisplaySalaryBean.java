@@ -21,7 +21,7 @@ import javax.inject.Named;
 
 @Named("carouselBean")
 @RequestScoped
-public class CarouselBean implements Serializable {  
+public class DisplaySalaryBean implements Serializable {  
  
     private static String[] staticMonths;
         static {  
@@ -48,7 +48,7 @@ public class CarouselBean implements Serializable {
     
     private List<Month> months;
       
-    public CarouselBean() {  
+    public DisplaySalaryBean() {  
         months = new ArrayList<Month>();    
     }  
     

@@ -24,7 +24,7 @@ import javax.inject.Named;
  *
  * @author Gustav
  */
-@Named("testBean")
+@Named("testbean")
 @SessionScoped
 public class TestBean implements Serializable
 {
@@ -49,12 +49,8 @@ public class TestBean implements Serializable
     private Person person;
     private int success;
     
-    public TestBean()
-    {
-        
-    }
     
-    public void PersonRegistryTestAdd()
+    public void personRegistryTestAdd()
     {
         success=0;
         person = new Person(66666L, "Test Testsson", "test@gmail.com", "070TEST", "testVägen");
@@ -75,7 +71,7 @@ public class TestBean implements Serializable
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
-    public void PersonRegistryTestRemove()
+    public void personRegistryTestRemove()
     {
         success=0;
         Person p = pReg.getByName(person.getName()).get(0);
@@ -148,22 +144,7 @@ public class TestBean implements Serializable
        // reg.add(oddWorker);
     }
     
-    public void testSalary()
-    {
-        initTwoSchools();
-        Worker ove = reg.getByName("Ove Sundberg").get(0);
-        List<Session> oveList = sesReg.getWorkersSessions(ove.getId());
-        if(oveList.size()==2)
-        {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "TestSalary", "TestSalary passed!");     
-            FacesContext.getCurrentInstance().addMessage(null, msg);  
-        }
-        
-        schReg.remove(schReg.getByName("BackaSkolan").get(0).getId());
-        //reg.remove(reg.getByName("Ove Sundberg").get(0).getId());
-        //reg.remove(reg.getByName("Inte Ove Sundberg").get(0).getId());
-        
-    }
+   
     
     public void testAdminSchedule(ActionEvent event)
     {

@@ -11,6 +11,8 @@ import Model.Worker;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -40,6 +42,8 @@ public class Session extends AbstractEntity {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Worker> tutors;
     private String notation;
+    @ManyToOne
+    private School school;
     
     public Session() {
     }
@@ -51,7 +55,8 @@ public class Session extends AbstractEntity {
         this.tutors = tutors;
     }
     
-    public Session(Date startTime, Date endTime, int nbrOfStudents, List<Worker> tutors, String notation) {
+    public Session(School s, Date startTime, Date endTime, int nbrOfStudents, List<Worker> tutors, String notation) {
+        this.school=s;
         this.startTime = startTime;
         this.endTime = endTime;
         this.nbrOfStudents = nbrOfStudents;
@@ -59,8 +64,9 @@ public class Session extends AbstractEntity {
         this.notation=notation;
     }
     
-    public Session(Long id, Date startTime, Date endTime, int nbrOfStudents, List<Worker> tutors, String notation) {
+    public Session(School s, Long id, Date startTime, Date endTime, int nbrOfStudents, List<Worker> tutors, String notation) {
         super(id);
+        this.school=s;
         this.startTime = startTime;
         this.endTime = endTime;
         this.nbrOfStudents = nbrOfStudents;
@@ -138,5 +144,19 @@ public class Session extends AbstractEntity {
         //    return false;
        // }
        return true;
+    }
+
+    /**
+     * @return the school
+     */
+    public School getSchool() {
+        return school;
+    }
+
+    /**
+     * @param school the school to set
+     */
+    public void setSchool(School school) {
+        this.school = school;
     }
 }
