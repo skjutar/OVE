@@ -98,7 +98,7 @@ protected EntityManager getEntityManager() {
     
     public int getCount() {
         List <T> list =  em.createQuery("select t from " + clazz.getSimpleName()+ " t").getResultList();
-        System.out.println("* ABSTRACTDAO.getCount() : "+list.toString());
+        System.out.println("* ABSTRACTDAO.getCount() : " + list.size());
         return list.size();
     }
     

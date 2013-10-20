@@ -43,7 +43,6 @@ public class AddTutorBean implements Serializable {
 		tutor.setPicUrl(picUrl);
                 reg.add(tutor);
                 msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tutor added ", name); 
-                //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", username);
             }
         
         else{  
