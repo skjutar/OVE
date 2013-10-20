@@ -65,9 +65,9 @@ and open the template in the editor.
                     </h:form>
 
 
-                    <h:form id="addnewschool"> 
+                    <h:form id="addnewschool" > 
                         <h:outputLink id="addschoolLink" value="javascript:void(0)" onclick="addschooldlg.show();" title="login" >   
-                            <p:commandButton value="Add New School"  type="button" />  
+                            <p:commandButton value="Add New School"  rendered="#{loginBean.admin}" type="button" />  
                         </h:outputLink>  
 
                         <p:growl id="growl" showDetail="true" life="3000" />  
@@ -86,22 +86,20 @@ and open the template in the editor.
                                 <p:inputText value="#{createSchoolBean.address}"   
                                              id="address" required="true" label="Address" >
                                     <f:validateRegex pattern="^[a-öA-Z0-9_-]+$" />
-                                    <p:ajax update="msgLowCase2"  event="keyup"/>
+                                    <p:ajax update="msgLowCase1"  event="keyup"/>
                                 </p:inputText>
                                 
 
                                 <h:outputLabel for="zip" value="Zip Code:"/>  
                                 <p:inputText value="#{createSchoolBean.zip}"   
-                                             id="zip" required="true" label="Zip" >
-                                    <f:validateRegex pattern="^[0-9]+$" />
-                                    <p:ajax update="msgLowCase3"  event="keyup"/>
-                                </p:inputText>
+                                             id="zip" required="true" label="Zip" />
+                                
 
                                 <h:outputLabel for="city" value="City:" />  
                                 <p:inputText value="#{createSchoolBean.city}"   
                                              id="city" required="true" label="City" >
                                     <f:validateRegex pattern="^[a-öA-Z]+$" />
-                                    <p:ajax update="msgLowCase4"  event="keyup"/>
+                                    <p:ajax update="msgLowCase1"  event="keyup"/>
                                 </p:inputText>
 
                                 <f:facet name="footer">  
@@ -124,8 +122,9 @@ and open the template in the editor.
                                 if (args.created) {
                                     addschooldlg.hide();
                                     $('#addschoolLink').fadeOut();
+                                    location.reload();
                                 }
-                                location.reload();
+                                
                             }
                     </script> 
                 </ui:define>
