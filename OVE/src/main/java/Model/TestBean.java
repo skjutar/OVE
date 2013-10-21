@@ -100,7 +100,6 @@ public class TestBean implements Serializable
             tests++;
             progress+=6;
         }
-        progress+=8;
         if(pReg.getByPNumber(person.getIdNumber()).size()==1)
         {
             success++;
@@ -187,7 +186,7 @@ public class TestBean implements Serializable
         schReg.add(school);
         int schoolCount = schReg.getCount();
         School s = schReg.getByName(school.getName()).get(0);
-        schReg.remove(s.getId());
+        schReg.remove(school.getId());
         if(schReg.getCount()==schoolCount-1) {
             success++;
             tests++;
@@ -330,7 +329,7 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
-           progress+=7;
+           progress+=100-progress;
         }
 
         postResults(tests);
