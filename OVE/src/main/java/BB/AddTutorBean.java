@@ -9,11 +9,13 @@ import Model.Worker;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 /**
- *  Adds a new tutor
+ *
  * @author lisastenberg
  */
 @Named("addTutorBean")
@@ -31,17 +33,26 @@ public class AddTutorBean implements Serializable {
     private String picUrl;
     private int salary;
     
-    /**
-     *Adds a new tutors 
-     */
     public void addTutor() {
-        Worker tutor = reg.getTutor(idNumber);
+        //RequestContext context = RequestContext.getCurrentInstance();  
+	FacesMessage msg;   
+        
+        Worker tutor =  reg.getTutor(idNumber);
         
         if(tutor == null){                
                 tutor = new Worker(idNumber, name, mail, phoneNbr, address, salary);
 		tutor.setPicUrl(picUrl);
                 reg.add(tutor);
+		msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tutor added ", name); 
             }
+        
+        else{  
+	    msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "This tutor already exists");  
+        }  
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
+        RequestContext.getCurrentInstance().reset("form:panel");
+	
+	
     }
     
     public Long getIdNumber() {
@@ -99,4 +110,8 @@ public class AddTutorBean implements Serializable {
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
+ 
+    
+ 
 }
