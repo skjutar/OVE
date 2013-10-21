@@ -64,7 +64,10 @@ public class UserRegistry extends AbstractDAO<Account, Long> implements Serializ
                 found.add(c);
             }
         }
-        return found.get(0);
+	if(found.size() > 0) {
+	    return found.get(0);
+	}
+	return null;
     }
     
     /**
