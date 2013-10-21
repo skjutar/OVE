@@ -4,7 +4,9 @@
  */
 package BB;
 
+import EJB.UserRegistry;
 import EJB.WorkerRegistry;
+import Model.Account;
 import Model.Person;
 import Model.Worker;
 import java.io.Serializable;
@@ -25,12 +27,12 @@ import org.primefaces.event.ToggleEvent;
 public class TutorBean implements Serializable{
     
     @EJB
-    WorkerRegistry reg;
+    WorkerRegistry workerReg;
+    
+    @EJB
+    UserRegistry userReg;
     
     private Worker selectedTutor;
-    
-
-    
     
     public TutorBean() {
     }
@@ -46,12 +48,19 @@ public class TutorBean implements Serializable{
 
     public void removeTutor(Long id) {
 	System.out.println("REMOVING " + id);
-	reg.remove(id);
+	Account account = userReg.getAccountRelatedToPerson(id);
+	System.out.println("Account: " + account);
+	if(account != null) {
+	    userReg.remove(account.getId());
+	    System.out.print("::::: Remove id in userReg");
+	}
+	System.out.println("::: userreg" + userReg.getRange(0, userReg.getCount()));
+	workerReg.remove(id);
 	System.out.println("------ REMOVED TUTOR -------"+ id);
     }
     
     public List<Worker> getTutors() {
-        return reg.getRange(0, reg.getCount());
+        return workerReg.getRange(0, workerReg.getCount());
     }
     
     public void onRowToggle(ToggleEvent event) {  

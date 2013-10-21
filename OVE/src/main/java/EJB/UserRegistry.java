@@ -39,17 +39,32 @@ public class UserRegistry extends AbstractDAO<Account, Long> implements Serializ
 
     /**
      *  Returns an account by searching for the accountName
-     * @param name the Name which will be search for
+     * @param userName the Name which will be search for
      * @return  the matching account or null if the account doesnt exist
      */
-    public List<Account> getByName(String name) {
+    public List<Account> getByName(String userName) {
         List<Account> found = new ArrayList<Account>();
         for (Account c : getRange(0, getCount())) {
-            if (c.getUserName().equals(name)) {
+            if (c.getUserName().equals(userName)) {
                 found.add(c);
             }
         }
         return found;
+    }
+    
+    /**
+     * Returns the accounts related to a specific person
+     * @param personId The id of the person
+     * @return A list of accounts
+     */
+    public Account getAccountRelatedToPerson(Long personId) {
+	List<Account> found = new ArrayList<Account>();
+        for (Account c : getRange(0, getCount())) {
+            if (c.getPerson().getId().equals(personId)) {
+                found.add(c);
+            }
+        }
+        return found.get(0);
     }
     
     /**
@@ -62,9 +77,9 @@ public class UserRegistry extends AbstractDAO<Account, Long> implements Serializ
     {
         List <Account> list =  em.createQuery("select t from Account t WHERE t.userName = '" +username+"' and t.passWord = '"+ password+"'")
         .getResultList();
-        if(list.isEmpty())
+        if(list.isEmpty()) {
             return null;
-        
+	}
         return list.get(0);
     }
     
