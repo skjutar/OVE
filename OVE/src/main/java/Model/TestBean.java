@@ -162,7 +162,7 @@ public class TestBean implements Serializable
         Long idKey = Math.round(Math.random()*100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
         int schoolCount = schReg.getCount();
-        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         if(schReg.getCount()==schoolCount+1) {
             success++;
@@ -172,7 +172,7 @@ public class TestBean implements Serializable
         if(schReg.getByName(school.getName()).size()==1) {
             success++;
             tests++;
-            progress+=6;
+            progress+=7;
         }
         postResults(tests);
     }
@@ -182,7 +182,7 @@ public class TestBean implements Serializable
         int tests = 0;
         Long idKey = Math.round(Math.random()*100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
-        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         int schoolCount = schReg.getCount();
         School s = schReg.getByName(school.getName()).get(0);
@@ -190,7 +190,7 @@ public class TestBean implements Serializable
         if(schReg.getCount()==schoolCount-1) {
             success++;
             tests++;
-            progress+=6;
+            progress+=7;
         }
 
         postResults(tests);      
@@ -299,7 +299,7 @@ public class TestBean implements Serializable
         int sessionCount = sesReg.getCount();
         Long idKey = Math.round(Math.random()*100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
-        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         Session ses = new Session(school, time.getTime(),time.getTime() , 10, workerList, "Barnen slog mig");
         sesReg.add(ses);
@@ -318,7 +318,7 @@ public class TestBean implements Serializable
         time = Calendar.getInstance();
         Long idKey = Math.round(Math.random()*100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
-        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         Session ses = new Session(school, time.getTime(),time.getTime() , 10, workerList, "Barnen slog mig");
         sesReg.add(ses);
@@ -329,10 +329,14 @@ public class TestBean implements Serializable
         {
             success++;
             tests++;
-           progress+=100-progress;
+           progress+=7;
         }
 
         postResults(tests);
+    }
+    public void clearProgressBar()
+    {
+        progress=0;
     }
             
     
