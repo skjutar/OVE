@@ -105,7 +105,6 @@ public class AdminBean implements Serializable
           
             Worker w = workReg.getByPNumber(Long.parseLong(s.split(" ")[2])).get(0);
             workerList.add(w);
-           // workerList.add(workReg.getById(Long.parseLong(s.split(" ")[2])));
         }
  
         event.setWorkerList(workerList);
