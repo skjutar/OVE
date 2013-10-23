@@ -31,29 +31,33 @@ and open the template in the editor.
                          </p:growl>
                              <div align="center">
                                <h1>Super duper secret test page of Ove the runner</h1>
-                               <p:commandButton id="testAll" value="Test All!" actionListener="#{testbean.testAll()}" onclick="('pbAjax').start();" />
+                               <h:panelGrid id="testMenu" columns="2">
+                                    <p:commandButton id="testAll" value="Test All!" actionListener="#{testbean.testAll()}" onclick="('pbAjax').start();" />
+                                    <p:commandButton id="clearProgress" value="Clear Progress" actionListener="#{testbean.clearProgressBar()}" onclick="('pbAjax').start();" />
+                               </h:panelGrid>
+                              
                                <p:progressBar widgetVar="pbAjax" ajax="true" value="#{testbean.progress}" labelTemplate="{value}%" styleClass="animated">  
                                 <p:ajax event="complete" listener="#{progressBean.onComplete}" update="growl"/>  
                                 </p:progressBar>
-                             <h:panelGrid id="testButtons" columns="5">
-                                 <p:commandButton id="testPersonAdd" value="Test Person Add" actionListener="#{testbean.personRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testPersonUpdate" value="Test Person Update" action="#{testbean.personRegistryTestUpdate()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testPersonRemove" value="Test Person Remove" actionListener="#{testbean.personRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testSchoolAdd" value="Test School Add" actionListener="#{testbean.schoolRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testSchoolUpdate" value="Test School Update" actionListener="#{testbean.schoolRegistryTestUpdate()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testSchoolRemove" value="Test School Remove" actionListener="#{testbean.schoolRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testWorkerAdd" value="Test Worker Add" actionListener="#{testbean.workerRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testWorkerRemove" value="Test Worker Remove" actionListener="#{testbean.workerRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testUserAdd" value="Test User Add" actionListener="#{testbean.userRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testUserRemove" value="Test User Remove" actionListener="#{testbean.userRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>        
-                                 <p:commandButton id="testSessionAdd" value="Test Session Add" actionListener="#{testbean.sessionRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p:commandButton id="testSessionRemove" value="Test Session Remove" actionListener="#{testbean.sessionRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>
-                                 <p></p>
-                                 <p></p>
-                                 <p:commandButton id="clearProgress" value="Clear Progress" actionListener="#{testbean.clearProgressBar()}" onclick="('pbAjax').start();" />
-                            </h:panelGrid>   
-                            </div>
-                   
+                               <h:panelGrid id="testButtonsGrid" columns="5">
+                                   <p:commandButton id="testPersonAdd" value="Test Person Add" actionListener="#{testbean.personRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
+                                   <p:commandButton id="testSchoolAdd" value="Test School Add" actionListener="#{testbean.schoolRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
+                                   <p:commandButton id="testWorkerAdd" value="Test Worker Add" actionListener="#{testbean.workerRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
+                                    <p:commandButton id="testUserAdd" value="Test User Add" actionListener="#{testbean.userRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
+                                   <p:commandButton id="testSessionAdd" value="Test Session Add" actionListener="#{testbean.sessionRegistryTestAdd()}" update="growl" onclick="('pbAjax').start();"/>
+                               
+                                   <p:commandButton id="testPersonRemove" value="Test Person Remove" actionListener="#{testbean.personRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>
+                                   <p:commandButton id="testSchoolRemove" value="Test School Remove" actionListener="#{testbean.schoolRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>
+                                   <p:commandButton id="testWorkerRemove" value="Test Worker Remove" actionListener="#{testbean.workerRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>
+                                   <p:commandButton id="testUserRemove" value="Test User Remove" actionListener="#{testbean.userRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>        
+                                   <p:commandButton id="testSessionRemove" value="Test Session Remove" actionListener="#{testbean.sessionRegistryTestRemove()}" update="growl" onclick="('pbAjax').start();"/>
+                                   
+                                   <p:commandButton id="testPersonUpdate" value="Test Person Update" action="#{testbean.personRegistryTestUpdate()}" update="growl" onclick="('pbAjax').start();"/>
+                                   <p:commandButton id="testSchoolUpdate" value="Test School Update" actionListener="#{testbean.schoolRegistryTestUpdate()}" update="growl" onclick="('pbAjax').start();"/>
+
+                                    
+                               </h:panelGrid>                           
+                            </div>                   
                         </h:form>
                 </p:layoutUnit>
             </p:layout>
