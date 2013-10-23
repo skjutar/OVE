@@ -100,14 +100,13 @@ public class TestBean implements Serializable
             tests++;
             progress+=6;
         }
-        progress+=8;
         if(pReg.getByPNumber(person.getIdNumber()).size()==1)
         {
             success++;
             tests++;
             progress+=6;
         }  
-    
+        pReg.remove(person.getId());
         postResults(tests);
     }
     
@@ -147,7 +146,7 @@ public class TestBean implements Serializable
             tests++;
             progress+=6;
         }
-
+        pReg.remove(person.getId());
         postResults(tests);
     }
     
@@ -163,7 +162,7 @@ public class TestBean implements Serializable
         Long idKey = Math.round(Math.random()*100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
         int schoolCount = schReg.getCount();
-        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         if(schReg.getCount()==schoolCount+1) {
             success++;
@@ -173,8 +172,10 @@ public class TestBean implements Serializable
         if(schReg.getByName(school.getName()).size()==1) {
             success++;
             tests++;
-            progress+=6;
+            progress+=7;
         }
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+        schReg.remove(schoolId);
         postResults(tests);
     }
     public void schoolRegistryTestRemove()
@@ -183,15 +184,16 @@ public class TestBean implements Serializable
         int tests = 0;
         Long idKey = Math.round(Math.random()*100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
-        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         int schoolCount = schReg.getCount();
         School s = schReg.getByName(school.getName()).get(0);
-        schReg.remove(s.getId());
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+        schReg.remove(schoolId);
         if(schReg.getCount()==schoolCount-1) {
             success++;
             tests++;
-            progress+=6;
+            progress+=7;
         }
 
         postResults(tests);      
@@ -213,6 +215,8 @@ public class TestBean implements Serializable
             tests++;
             progress+=7;
         }
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+        schReg.remove(schoolId);
         postResults(tests);
     }
     public void workerRegistryTestAdd()
@@ -235,6 +239,7 @@ public class TestBean implements Serializable
             tests++;
             progress+=7;
         }
+        reg.remove(w.getId());
         postResults(tests);
     }
     public void workerRegistryTestRemove()
@@ -271,6 +276,7 @@ public class TestBean implements Serializable
             tests++;
             progress+=7;
         }
+        uReg.remove(a.getId());
         postResults(tests);
     }
     public void userRegistryTestRemove()
@@ -300,7 +306,7 @@ public class TestBean implements Serializable
         int sessionCount = sesReg.getCount();
         Long idKey = Math.round(Math.random()*100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
-        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         Session ses = new Session(school, time.getTime(),time.getTime() , 10, workerList, "Barnen slog mig");
         sesReg.add(ses);
@@ -310,6 +316,9 @@ public class TestBean implements Serializable
             tests++;
            progress+=7;
         }
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+         sesReg.remove(ses.getId());
+         schReg.remove(schoolId);
          postResults(tests);
     }
     public void sessionRegistryTestRemove()
@@ -319,7 +328,7 @@ public class TestBean implements Serializable
         time = Calendar.getInstance();
         Long idKey = Math.round(Math.random()*100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
-        school = new School("schoolName", "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
+        school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         Session ses = new Session(school, time.getTime(),time.getTime() , 10, workerList, "Barnen slog mig");
         sesReg.add(ses);
@@ -332,8 +341,13 @@ public class TestBean implements Serializable
             tests++;
            progress+=7;
         }
-
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+        schReg.remove(schoolId);
         postResults(tests);
+    }
+    public void clearProgressBar()
+    {
+        progress=0;
     }
             
     

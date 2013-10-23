@@ -102,8 +102,10 @@ public class AdminBean implements Serializable
         
         ArrayList<Worker> workerList = new ArrayList<Worker>();
         for(String s : workerModel.getTarget())
-        {            
-            workerList.add(workReg.getByPNumber(Long.parseLong(s.split(" ")[2])).get(0));
+        {     
+          
+            Worker w = workReg.getByPNumber(Long.parseLong(s.split(" ")[2])).get(0);
+            workerList.add(w);
         }
  
         event.setWorkerList(workerList);
