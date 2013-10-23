@@ -106,7 +106,7 @@ public class TestBean implements Serializable
             tests++;
             progress+=6;
         }  
-    
+        pReg.remove(person.getId());
         postResults(tests);
     }
     
@@ -146,7 +146,7 @@ public class TestBean implements Serializable
             tests++;
             progress+=6;
         }
-
+        pReg.remove(person.getId());
         postResults(tests);
     }
     
@@ -174,6 +174,8 @@ public class TestBean implements Serializable
             tests++;
             progress+=7;
         }
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+        schReg.remove(schoolId);
         postResults(tests);
     }
     public void schoolRegistryTestRemove()
@@ -186,7 +188,8 @@ public class TestBean implements Serializable
         schReg.add(school);
         int schoolCount = schReg.getCount();
         School s = schReg.getByName(school.getName()).get(0);
-        schReg.remove(school.getId());
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+        schReg.remove(schoolId);
         if(schReg.getCount()==schoolCount-1) {
             success++;
             tests++;
@@ -212,6 +215,8 @@ public class TestBean implements Serializable
             tests++;
             progress+=7;
         }
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+        schReg.remove(schoolId);
         postResults(tests);
     }
     public void workerRegistryTestAdd()
@@ -234,6 +239,7 @@ public class TestBean implements Serializable
             tests++;
             progress+=7;
         }
+        reg.remove(w.getId());
         postResults(tests);
     }
     public void workerRegistryTestRemove()
@@ -270,6 +276,7 @@ public class TestBean implements Serializable
             tests++;
             progress+=7;
         }
+        uReg.remove(a.getId());
         postResults(tests);
     }
     public void userRegistryTestRemove()
@@ -309,6 +316,9 @@ public class TestBean implements Serializable
             tests++;
            progress+=7;
         }
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+         sesReg.remove(ses.getId());
+         schReg.remove(schoolId);
          postResults(tests);
     }
     public void sessionRegistryTestRemove()
@@ -331,7 +341,8 @@ public class TestBean implements Serializable
             tests++;
            progress+=7;
         }
-
+        Long schoolId = schReg.getByName(schoolName).get(0).getId();
+        schReg.remove(schoolId);
         postResults(tests);
     }
     public void clearProgressBar()
