@@ -59,7 +59,7 @@ and open the template in the editor.
                         </div>
                         
                         <div style="float: right">
-                            <p:carousel id="basicCarousel" value="#{carouselBean.months}" var="monthly" itemStyleClass="monthlyItem">  
+                            <p:carousel id="basicCarousel" value="#{displaySalaryBean.months}" var="monthly" itemStyleClass="monthlyItem">  
                     <f:facet name="header">  
                             Work per month.  
                     </f:facet>  
@@ -80,7 +80,7 @@ and open the template in the editor.
                         
                 </div>
                 </div>
-                <p:schedule value="#{sessionSchedule.eventModel}" timeZone="GMT+1" timeFormat="" />  
+                <p:schedule value="#{mySessionsSchedule.eventModel}" timeZone="GMT+1" timeFormat="" />  
                 
             </ui:define>
         </ui:composition>

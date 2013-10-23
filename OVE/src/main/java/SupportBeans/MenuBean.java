@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BB;
+package SupportBeans;
 
 
 import Model.Account;
@@ -30,6 +30,10 @@ import org.primefaces.model.*;
 
 /**
  * Backing bean for MenuBean
+ * 
+ * Though this could be done purely in XHTML, we initaly thought we maybe
+ * would need dropdowns with dynamic contents, therefore we implemented this
+ * class
  * @author kristofferskjutar
  */
 @SessionScoped

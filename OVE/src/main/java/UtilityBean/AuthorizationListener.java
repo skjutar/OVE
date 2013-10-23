@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Account;
+package UtilityBean;
 
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;

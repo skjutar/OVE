@@ -7,12 +7,10 @@ package Model;
 
 import java.util.List;
 import javax.persistence.Entity;
-import Model.Worker;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**

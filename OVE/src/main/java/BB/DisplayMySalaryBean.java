@@ -22,9 +22,9 @@ import javax.inject.Named;
  *  number of houres and current salary
  * @author Malla
  */
-@Named("carouselBean")
+@Named("displaySalaryBean")
 @RequestScoped
-public class DisplaySalaryBean implements Serializable {  
+public class DisplayMySalaryBean implements Serializable {  
  
     private static String[] staticMonths;
         static {  
@@ -51,7 +51,7 @@ public class DisplaySalaryBean implements Serializable {
     
     private List<Month> months;
       
-    public DisplaySalaryBean() {  
+    public DisplayMySalaryBean() {  
         months = new ArrayList<Month>();    
     }  
 

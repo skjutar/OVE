@@ -2,7 +2,7 @@ package BB;
 
 import EJB.SchoolRegistry;
 import Model.School;
-import Model.SchoolDataModel;
+import CustomPrimefaceModel.SchoolDataModel;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;

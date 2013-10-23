@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Account;
+package BB;
 
 import EJB.PersonRegistry;
 import EJB.UserRegistry;
@@ -152,25 +152,24 @@ public class CreateAccountBean {
     */
    public void create(ActionEvent event)
    {
-       //model = ModelFactory.getModel("OVE_model_pu");
        String[] idArray = this.idNumber.split("-");
-       String parsedId = idArray[0]+idArray[1];
-       Long idNumber = Long.parseLong(parsedId);
+       String parsedId = idArray[0]+idArray[1]; //set together the personalNumber
+       Long personalNumber = Long.parseLong(parsedId);
        RequestContext context = RequestContext.getCurrentInstance(); 
        FacesMessage msg = null;
        boolean created = false; 
-       if((!reg.getByName(username).isEmpty())) //|| (!personReg.getByPNumber(idNumber).isEmpty()))
+       if((!reg.getByName(username).isEmpty())) 
        {
            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");  
        }
-       else if((!personReg.getByPNumber(idNumber).isEmpty()) || (!workerReg.getByPNumber(idNumber).isEmpty()))
+       else if((!personReg.getByPNumber(personalNumber).isEmpty()) || (!workerReg.getByPNumber(personalNumber).isEmpty()))
        {
            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Personal ID is already in use");
        } 
        else  
        {
             created=true; 
-            Worker p = new Worker(idNumber, name, emailAdress, telephoneNumber, adress);
+            Worker p = new Worker(personalNumber, name, emailAdress, telephoneNumber, adress);
             if(getType().equals("admin")){
                 p.setAdmin(true);
             }
@@ -182,7 +181,6 @@ public class CreateAccountBean {
            try {
                mailBean.sendEmail(emailAdress, a.getId());
            } catch (MessagingException ex) {
-               Logger.getLogger(CreateAccountBean.class.getName()).log(Level.SEVERE, null, ex);
            }
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "Account created");
        }

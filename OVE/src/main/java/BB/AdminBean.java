@@ -9,7 +9,7 @@ import Model.School;
 import EJB.SchoolRegistry;
 import EJB.SessionRegistry;
 import EJB.WorkerRegistry;
-import Model.ScheduleEvent;
+import CustomPrimefaceModel.ScheduleEvent;
 import Model.Session;
 import Model.Worker;
 import java.io.Serializable;
@@ -61,14 +61,13 @@ public class AdminBean implements Serializable
     private List<School> schoolList;
 
       
-    //Overide this to handle events,   comments and time 
     private ScheduleEvent event = new ScheduleEvent();
     private ArrayList<String> target;
     private ArrayList<String> source;
     private DualListModel<String> workerModel;
     private boolean showDelete=true;
    
-    //Create all sessions for all schools in this list
+   
    @PostConstruct
    public void init()
    {
@@ -102,8 +101,7 @@ public class AdminBean implements Serializable
         
         ArrayList<Worker> workerList = new ArrayList<Worker>();
         for(String s : workerModel.getTarget())
-        {     
-          
+        {               
             Worker w = workReg.getByPNumber(Long.parseLong(s.split(" ")[2])).get(0);
             workerList.add(w);
         }

@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package CustomPrimefaceModel;
 
-import java.util.ArrayList;
+import Model.Worker;
 import java.util.Date;
 import java.util.List;
 import org.primefaces.model.DefaultScheduleEvent;
