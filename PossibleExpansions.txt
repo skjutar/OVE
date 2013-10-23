@@ -1,0 +1,11 @@
+- The admin could be able see and edit a schedule regarding a specific tutor.
+
+- The admin could be able to edit information about a tutor.
+
+- An admin account could only be able to be created by the admin of the web app.
+
+- The tutor could be able to fill in when he is able to work
+
+- The tutor could be able to call in sick through the app.
+
+- The admin could be able to announce available work sessions that the tutors then could register for.
