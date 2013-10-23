@@ -74,23 +74,8 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         return list;
     }
     
-    /**
-     *  Goes through the database and search for a specific worker with the same 
-     *  id number
-     * @param id the id which will be seached for 
-     * @return  returns a worker with the current id
-     */
-    public Worker getById(Long id)
-    {
-        Query q = em.createQuery("select t from Worker t where t.idNumber="+id);// WHERE t.idNumber = :id");
-        //q.setParameter("id", id);
-       
-        List <Worker> list = q.getResultList();
-        if(list.isEmpty())
-            return null;
-        
-        return list.get(0);
-    }
+   
+   
     /**
      * Goes through the register and search for a specific worker with the same 
      * personal id number
