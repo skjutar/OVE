@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
@@ -143,7 +144,16 @@ public class AdminBean implements Serializable
     public void deleteEvent(ActionEvent actionEvent)
     {
        School s = reg.getByName(event.getSchoolName()).get(0);
-       s.getSchedule().getSessions().remove(sesReg.find(event.getModelId()));
+       System.out.println(s.getSchedule().getSessions().size());
+       Iterator<Session> it = s.getSchedule().getSessions().iterator();
+       while(it.hasNext())
+       {
+           Session ses = it.next();
+           if(ses.getId() == event.getModelId()){
+               it.remove();
+           }
+           
+       }
        reg.update(s);
        sesReg.remove(event.getModelId());
        eventModel.deleteEvent(event);

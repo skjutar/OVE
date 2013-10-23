@@ -38,7 +38,6 @@ public class Session extends AbstractEntity {
 
     private int nbrOfStudents;
     
-    //@ManyToMany(cascade= CascadeType.PERSIST)
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Worker> tutors;
     private String notation;

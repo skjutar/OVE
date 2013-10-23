@@ -39,6 +39,8 @@ public class MailConfirmServlet extends HttpServlet {
         throws ServletException, IOException {  
         String token = request.getParameter("token");
         Account a = reg.find(Long.parseLong(token));
+        if(a!=null)
+        {
         a.setActivated(true);
         reg.update(a);
         
@@ -56,6 +58,23 @@ public class MailConfirmServlet extends HttpServlet {
             out.println("</html>");
         } finally {
             out.close();
+        }
+        }
+        else 
+        {
+            PrintWriter out = response.getWriter();
+        try {
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>OVE confirm</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>This email has no associated account!</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {
+            out.close();
+        }
         }
     }
     
