@@ -22,7 +22,7 @@ import org.primefaces.model.DefaultScheduleModel;
  * @author kristofferskjutar
  */
 @RequestScoped
-@Named("mySessionsSchedule")
+@Named("SessionsSchedule")
 public class DisplayMySessionsBean {
     
     @EJB

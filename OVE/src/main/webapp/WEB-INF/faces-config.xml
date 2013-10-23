@@ -50,7 +50,7 @@
     </navigation-rule>
     
     <lifecycle>
-<phase-listener>Account.AuthorizationListener</phase-listener>
+<phase-listener>UtilityBean.AuthorizationListener</phase-listener>
 </lifecycle>
     
 </faces-config>
