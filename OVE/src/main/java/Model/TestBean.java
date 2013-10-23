@@ -24,25 +24,18 @@ import javax.inject.Named;
  */
 @Named("testbean")
 @SessionScoped
-public class TestBean implements Serializable
-{
-  
-    
+public class TestBean implements Serializable {
+
     @EJB
     private WorkerRegistry reg;
-    
     @EJB
     private SchoolRegistry schReg;
-    
     @EJB
     private SessionRegistry sesReg;
-    
     @EJB
     private PersonRegistry pReg;
-    
     @EJB
     private UserRegistry uReg;
-    
     private Worker Ove;
     private List<Session> sessions;
     private List<Session> sessions2;
@@ -52,17 +45,16 @@ public class TestBean implements Serializable
     private List<Person> contactList;
     private School school;
     private Calendar time;
+    private Integer progress;
 
-    private Integer progress;  
-    
-    public Integer getProgress() {  
-        if(progress == null || progress>100)  
+    public Integer getProgress() {
+        if (progress == null || progress > 100) {
             progress = 0;
-        return progress;  
-    } 
-    
-    public void testAll()
-    {
+        }
+        return progress;
+    }
+
+    public void testAll() {
         personRegistryTestAdd();
         personRegistryTestRemove();
         personRegistryTestUpdate();
@@ -75,111 +67,104 @@ public class TestBean implements Serializable
         userRegistryTestRemove();
         sessionRegistryTestAdd();
         sessionRegistryTestRemove();
-        
+
     }
-  
-    public void setProgress(Integer progress) {  
-        this.progress = progress;  
-    }  
-    
-    public void personRegistryTestAdd()
-    {   
+
+    public void setProgress(Integer progress) {
+        this.progress = progress;
+    }
+
+    public void personRegistryTestAdd() {
         int precount = pReg.getCount();
-        int tests=0;
-        success=0;
-        Long personNumber = Math.round(Math.random()*100000);
+        int tests = 0;
+        success = 0;
+        Long personNumber = Math.round(Math.random() * 100000);
         person = new Person(personNumber, "Test Testsson", "test@gmail.com", "070TEST", "testVägen");
         pReg.add(person);
         precount++;
-        if(pReg.getCount()==precount)
-        {   
+        if (pReg.getCount() == precount) {
             success++;
             tests++;
-            progress+=6;
+            progress += 6;
         }
-        if(pReg.getByPNumber(person.getIdNumber()).size()==1)
-        {
+        if (pReg.getByPNumber(person.getIdNumber()).size() == 1) {
             success++;
             tests++;
-            progress+=6;
-        }  
+            progress += 6;
+        }
         pReg.remove(person.getId());
         postResults(tests);
     }
-    
-    public void personRegistryTestRemove()
-    {
-        success=0;
-        int tests=0;
-        Long personNumber = Math.round(Math.random()*100000);
+
+    public void personRegistryTestRemove() {
+        success = 0;
+        int tests = 0;
+        Long personNumber = Math.round(Math.random() * 100000);
         person = new Person(personNumber, "Test Testsson", "test@gmail.com", "070TEST", "testVägen");
-        pReg.add(person);    
+        pReg.add(person);
         int precount = pReg.getCount();
         Person p = pReg.getByPNumber(person.getIdNumber()).get(0);
         pReg.remove(p.getId());
-        
-        if(pReg.getCount()==precount-1)
-        {   
+
+        if (pReg.getCount() == precount - 1) {
             success++;
             tests++;
-            progress+=6;
+            progress += 6;
         }
 
-        postResults(tests);  
+        postResults(tests);
     }
-    public void personRegistryTestUpdate()
-    {
-        success=0;
-        int tests=0;
-        Long personNumber = Math.round(Math.random()*100000);
+
+    public void personRegistryTestUpdate() {
+        success = 0;
+        int tests = 0;
+        Long personNumber = Math.round(Math.random() * 100000);
         person = new Person(personNumber, "Test Testsson", "test@gmail.com", "070TEST", "testVägen");
         pReg.add(person);
         String newEmail = "newEmail@gmail.com";
         person.setMail(newEmail);
         pReg.update(person);
-        if(pReg.getByPNumber(personNumber).get(0).getMail().equals(newEmail))
-        {
+        if (pReg.getByPNumber(personNumber).get(0).getMail().equals(newEmail)) {
             success++;
             tests++;
-            progress+=6;
+            progress += 6;
         }
         pReg.remove(person.getId());
         postResults(tests);
     }
-    
-    private void postResults(int tests)
-    {
-        FacesMessage msg = new FacesMessage("Result: "+success+" of "+ tests+ " passed");
+
+    private void postResults(int tests) {
+        FacesMessage msg = new FacesMessage("Result: " + success + " of " + tests + " passed");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    public void schoolRegistryTestAdd()
-    {
-        int tests=0;
-        success=0;
-        Long idKey = Math.round(Math.random()*100000);
+
+    public void schoolRegistryTestAdd() {
+        int tests = 0;
+        success = 0;
+        Long idKey = Math.round(Math.random() * 100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
         int schoolCount = schReg.getCount();
         school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
-        if(schReg.getCount()==schoolCount+1) {
+        if (schReg.getCount() == schoolCount + 1) {
             success++;
             tests++;
-            progress+=6;
+            progress += 6;
         }
-        if(schReg.getByName(school.getName()).size()==1) {
+        if (schReg.getByName(school.getName()).size() == 1) {
             success++;
             tests++;
-            progress+=7;
+            progress += 7;
         }
         Long schoolId = schReg.getByName(schoolName).get(0).getId();
         schReg.remove(schoolId);
         postResults(tests);
     }
-    public void schoolRegistryTestRemove()
-    {
-        success=0;
+
+    public void schoolRegistryTestRemove() {
+        success = 0;
         int tests = 0;
-        Long idKey = Math.round(Math.random()*100000);
+        Long idKey = Math.round(Math.random() * 100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
         school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
@@ -187,166 +172,155 @@ public class TestBean implements Serializable
         School s = schReg.getByName(school.getName()).get(0);
         Long schoolId = schReg.getByName(schoolName).get(0).getId();
         schReg.remove(schoolId);
-        if(schReg.getCount()==schoolCount-1) {
+        if (schReg.getCount() == schoolCount - 1) {
             success++;
             tests++;
-            progress+=7;
+            progress += 7;
         }
 
-        postResults(tests);      
+        postResults(tests);
     }
-    public void schoolRegistryTestUpdate()
-    {
-        success=0;
-        int tests=0;
-        Long idKey = Math.round(Math.random()*100000);
+
+    public void schoolRegistryTestUpdate() {
+        success = 0;
+        int tests = 0;
+        Long idKey = Math.round(Math.random() * 100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
         school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
         String newAddress = "slottskogen 45";
         school.setAddress(newAddress);
         schReg.update(school);
-        if(schReg.getByName(schoolName).get(0).getAddress().equals(newAddress))
-        {
+        if (schReg.getByName(schoolName).get(0).getAddress().equals(newAddress)) {
             success++;
             tests++;
-            progress+=7;
+            progress += 7;
         }
         Long schoolId = schReg.getByName(schoolName).get(0).getId();
         schReg.remove(schoolId);
         postResults(tests);
     }
-    public void workerRegistryTestAdd()
-    {
-        success=0;
-        int tests=0;
+
+    public void workerRegistryTestAdd() {
+        success = 0;
+        int tests = 0;
         int workerCount = reg.getCount();
-        Long personNumber = Math.round(Math.random()*100000);
+        Long personNumber = Math.round(Math.random() * 100000);
         Worker w = new Worker(personNumber, "Test Gunnar", "testGunnar@gmail.com", "268487", "testgatan 3", 100);
         reg.add(w);
-        if(reg.getCount()==workerCount+1)
-        {
+        if (reg.getCount() == workerCount + 1) {
             success++;
             tests++;
-            progress+=7;
+            progress += 7;
         }
-        if(!reg.getByPNumber(personNumber).isEmpty())
-        {
+        if (!reg.getByPNumber(personNumber).isEmpty()) {
             success++;
             tests++;
-            progress+=7;
+            progress += 7;
         }
         reg.remove(w.getId());
         postResults(tests);
     }
-    public void workerRegistryTestRemove()
-    {
-        success=0;
-        int tests=0;
-        Long personNumber = Math.round(Math.random()*100000);
+
+    public void workerRegistryTestRemove() {
+        success = 0;
+        int tests = 0;
+        Long personNumber = Math.round(Math.random() * 100000);
         Worker w = new Worker(personNumber, "Test Gunnar", "testGunnar@gmail.com", "268487", "testgatan 3", 100);
         reg.add(w);
         int workerCount = reg.getCount();
         Worker worker = reg.getByPNumber(w.getIdNumber()).get(0);
         reg.remove(worker.getId());
-        if(reg.getCount()==workerCount-1)
-        {
+        if (reg.getCount() == workerCount - 1) {
             success++;
             tests++;
-            progress+=7;
-        }       
+            progress += 7;
+        }
 
-        postResults(tests);       
+        postResults(tests);
     }
-    public void userRegistryTestAdd()
-    {
-        success=0;
-        int tests=0;
+
+    public void userRegistryTestAdd() {
+        success = 0;
+        int tests = 0;
         int userCount = uReg.getCount();
-        Long personNumber = Math.round(Math.random()*100000);
+        Long personNumber = Math.round(Math.random() * 100000);
         Worker w = new Worker(personNumber, "Test Gunnar", "testGunnar@gmail.com", "268487", "testgatan 3", 100);
         Account a = new Account(w, "Gunnar", "losen");
         uReg.add(a);
-        if(uReg.getCount()==userCount+1)
-        {
+        if (uReg.getCount() == userCount + 1) {
             success++;
             tests++;
-            progress+=7;
+            progress += 7;
         }
         uReg.remove(a.getId());
         postResults(tests);
     }
-    public void userRegistryTestRemove()
-    {
-        success=0;
+
+    public void userRegistryTestRemove() {
+        success = 0;
         int tests = 0;
-        Long personNumber = Math.round(Math.random()*100000);
+        Long personNumber = Math.round(Math.random() * 100000);
         Worker w = new Worker(personNumber, "Test Gunnar", "testGunnar@gmail.com", "268487", "testgatan 3", 100);
         Account a = new Account(w, "Gunnar", "losen");
         uReg.add(a);
         int userCount = uReg.getCount();
         Account acc = uReg.getByName(a.getUserName()).get(0);
         uReg.remove(acc.getId());
-        if(uReg.getCount()==userCount-1)
-        {
+        if (uReg.getCount() == userCount - 1) {
             success++;
             tests++;
-            progress+=7;
+            progress += 7;
         }
         postResults(tests);
     }
-    public void sessionRegistryTestAdd()
-    {
-        success=0;
-        int tests=0;
+
+    public void sessionRegistryTestAdd() {
+        success = 0;
+        int tests = 0;
         time = Calendar.getInstance();
         int sessionCount = sesReg.getCount();
-        Long idKey = Math.round(Math.random()*100000);
+        Long idKey = Math.round(Math.random() * 100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
         school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
-        Session ses = new Session(school, time.getTime(),time.getTime() , 10, workerList, "Barnen slog mig");
+        Session ses = new Session(school, time.getTime(), time.getTime(), 10, workerList, "Barnen slog mig");
         sesReg.add(ses);
-        if(sesReg.getCount()==sessionCount+1)
-        {
+        if (sesReg.getCount() == sessionCount + 1) {
             success++;
             tests++;
-           progress+=7;
+            progress += 7;
         }
         Long schoolId = schReg.getByName(schoolName).get(0).getId();
-         sesReg.remove(ses.getId());
-         schReg.remove(schoolId);
-         postResults(tests);
+        sesReg.remove(ses.getId());
+        schReg.remove(schoolId);
+        postResults(tests);
     }
-    public void sessionRegistryTestRemove()
-    {
-        success=0;
-        int tests=0;
+
+    public void sessionRegistryTestRemove() {
+        success = 0;
+        int tests = 0;
         time = Calendar.getInstance();
-        Long idKey = Math.round(Math.random()*100000);
+        Long idKey = Math.round(Math.random() * 100000);
         String schoolName = "Chalmers" + String.valueOf(idKey);
         school = new School(schoolName, "Gibraltargatan 3", 43351, "Göteborg", sessions, contactList);
         schReg.add(school);
-        Session ses = new Session(school, time.getTime(),time.getTime() , 10, workerList, "Barnen slog mig");
+        Session ses = new Session(school, time.getTime(), time.getTime(), 10, workerList, "Barnen slog mig");
         sesReg.add(ses);
         int sessionCount = sesReg.getCount();
         Session session = sesReg.find(ses.getId());
         sesReg.remove(session.getId());
-        if(sesReg.getCount()==sessionCount-1)
-        {
+        if (sesReg.getCount() == sessionCount - 1) {
             success++;
             tests++;
-           progress+=7;
+            progress += 7;
         }
         Long schoolId = schReg.getByName(schoolName).get(0).getId();
         schReg.remove(schoolId);
         postResults(tests);
     }
-    public void clearProgressBar()
-    {
-        progress=0;
+
+    public void clearProgressBar() {
+        progress = 0;
     }
-            
-    
-    
 }

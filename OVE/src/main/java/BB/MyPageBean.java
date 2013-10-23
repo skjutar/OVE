@@ -5,111 +5,85 @@
 package BB;
 
 import EJB.PersonRegistry;
-import EJB.SchoolRegistry;
 import EJB.SessionRegistry;
 import Model.AbstractPerson;
 import Model.Account;
 import Model.Person;
 import EJB.UserRegistry;
 import EJB.WorkerRegistry;
-import Model.Schedule;
-import Model.School;
-import Model.Session;
 import Model.Worker;
 import java.io.Serializable;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
-import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.DefaultScheduleModel;
-import org.primefaces.model.ScheduleModel;
 
 /**
  * Backing bean for MyPage
+ *
  * @author kristofferskjutar
  */
 @Named("mypageBean")
 @SessionScoped
 public class MyPageBean implements Serializable {
-    
-   @EJB
-   private UserRegistry reg;
-   
-   @EJB
-   private WorkerRegistry wReg;
-   
-   @EJB
-   private PersonRegistry pReg;
-   
-   @EJB
-   private SessionRegistry sesReg;
-   
-   private String username;
-    
-   private Long idNumber;
-   
-   private String name;
-   
-   private String adress;
-   
-   private String telephoneNumber;
-   
-   private String emailAdress;
-   
-   
-   private String picUrl;
-   private Account a;
-   private AbstractPerson person;
-   
+
+    @EJB
+    private UserRegistry reg;
+    @EJB
+    private WorkerRegistry wReg;
+    @EJB
+    private PersonRegistry pReg;
+    @EJB
+    private SessionRegistry sesReg;
+    private String username;
+    private Long idNumber;
+    private String name;
+    private String adress;
+    private String telephoneNumber;
+    private String emailAdress;
+    private String picUrl;
+    private Account a;
+    private AbstractPerson person;
+
     /**
      * Iniates all the information about the user
      */
-   @PostConstruct
-   public void init()
-   {
-       Long modelId =  (Long)FacesContext.getCurrentInstance()
+    @PostConstruct
+    public void init() {
+        Long modelId = (Long) FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("id");
-       a = reg.find(modelId);
-       person = a.getPerson();
-       setUsername(a.getUserName());
-       setAdress(person.getAddress());
-       setEmailAdress(person.getMail());
-       setIdNumber(person.getIdNumber());
-       setTelephoneNumber(person.getPhoneNbr());
-       setName(person.getName());
-       setPicUrl(person.getPicUrl());      
-   } 
-   /**
-    * updates the user information
-    * @return 
-    */
-   public String update()
-   {
-       person.setAddress(getAdress());
-       person.setIdNumber(getIdNumber());
-       person.setMail(getEmailAdress());
-       person.setName(getName());
-       person.setPhoneNbr(getTelephoneNumber());
-       person.setPicUrl(picUrl);
-       
-       if(person instanceof Person) 
-       {
-           pReg.update((Person)person);
-       }
-       else if(person instanceof Worker)
-       {
-            wReg.update((Worker)person);  
-       }
-       return "MyPage";
-   }
-   
-   
-   
+        a = reg.find(modelId);
+        person = a.getPerson();
+        setUsername(a.getUserName());
+        setAdress(person.getAddress());
+        setEmailAdress(person.getMail());
+        setIdNumber(person.getIdNumber());
+        setTelephoneNumber(person.getPhoneNbr());
+        setName(person.getName());
+        setPicUrl(person.getPicUrl());
+    }
+
+    /**
+     * updates the user information
+     *
+     * @return
+     */
+    public String update() {
+        person.setAddress(getAdress());
+        person.setIdNumber(getIdNumber());
+        person.setMail(getEmailAdress());
+        person.setName(getName());
+        person.setPhoneNbr(getTelephoneNumber());
+        person.setPicUrl(picUrl);
+
+        if (person instanceof Person) {
+            pReg.update((Person) person);
+        } else if (person instanceof Worker) {
+            wReg.update((Worker) person);
+        }
+        return "MyPage";
+    }
 
     /**
      * @return the idNumber
@@ -208,5 +182,4 @@ public class MyPageBean implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-   
 }

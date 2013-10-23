@@ -55,7 +55,6 @@ public class SchoolPageBean implements Serializable {
                 getExternalContext().getRequestParameterMap();
         String param = params.get("school");
         school = schoolreg.getByName(param).get(0);
-        System.out.println("* Skolinfo på första obj:" + school);
         p = new Person();
         school.getContactPersons().size(); //Only have this here because otherwise the contacts are not instansiated for some reason(?).
         contacts = school.getContactPersons();
@@ -177,20 +176,16 @@ public class SchoolPageBean implements Serializable {
     }
 
     public void removeContact(Long id) {
-        System.out.println("------ REMOVING person with ID " + id);
         Person p = persreg.find(id);
         if (school.getContactPersons().remove(p)) {
-            System.out.println("- removed contact from school -------");
             schoolreg.update(school);
             persreg.remove(id);
-            System.out.println("- removed contact from db -------");
         }
-        System.out.println("------ REMOVED TUTOR -------");
     }
 
     /*
      * Function called, when user wants to view detailed information about a 
-     * contact person to the school.
+     * contact person to the school. Facemessage made visible. 
      */
     public void onRowToggle(ToggleEvent event) {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,

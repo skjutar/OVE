@@ -86,14 +86,14 @@ public class SchoolRegistry extends AbstractDAO<School, Long> implements Seriali
         }
         return name;
     }
+
     /**
      * Adds a acontact to a school
+     *
      * @param s The school
      * @param p The contact person
      */
     public void addContact(School s, Person p) {
-        System.out.println("***School before:" + s);
         s.getContactPersons().add(p);
-        System.out.println("***School now:" + s);
     }
 }

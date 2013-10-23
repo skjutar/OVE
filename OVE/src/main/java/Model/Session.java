@@ -4,7 +4,6 @@
  */
 package Model;
 
-
 import java.util.List;
 import javax.persistence.Entity;
 import java.util.Date;
@@ -14,34 +13,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
- * A class representing a Session. 
- * 
- * A Session has a starttime and an endtime. It also have one or more tutors,
- * a number of students and possible a notation.
- * 
+ * A class representing a Session.
+ *
+ * A Session has a starttime and an endtime. It also have one or more tutors, a
+ * number of students and possible a notation.
+ *
  * @author lisastenberg
  */
 //@Embeddable
 @Entity
 public class Session extends AbstractEntity {
-    
-   // private GregorianCalendar startTime;
 
-  //  private GregorianCalendar endTime;
+    // private GregorianCalendar startTime;
+    //  private GregorianCalendar endTime;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date startTime;
-    
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date endTime;
-
     private int nbrOfStudents;
-    
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Worker> tutors;
     private String notation;
     @ManyToOne
     private School school;
-    
+
     public Session() {
     }
 
@@ -51,27 +46,25 @@ public class Session extends AbstractEntity {
         this.nbrOfStudents = nbrOfStudents;
         this.tutors = tutors;
     }
-    
+
     public Session(School s, Date startTime, Date endTime, int nbrOfStudents, List<Worker> tutors, String notation) {
-        this.school=s;
+        this.school = s;
         this.startTime = startTime;
         this.endTime = endTime;
         this.nbrOfStudents = nbrOfStudents;
         this.tutors = tutors;
-        this.notation=notation;
+        this.notation = notation;
     }
-    
+
     public Session(School s, Long id, Date startTime, Date endTime, int nbrOfStudents, List<Worker> tutors, String notation) {
         super(id);
-        this.school=s;
+        this.school = s;
         this.startTime = startTime;
         this.endTime = endTime;
         this.nbrOfStudents = nbrOfStudents;
         this.tutors = tutors;
-        this.notation=notation;
+        this.notation = notation;
     }
-    
-    
 
     public Date getStartTime() {
         return startTime;
@@ -88,7 +81,7 @@ public class Session extends AbstractEntity {
     public List<Worker> getTutors() {
         return tutors;
     }
-    
+
     public String getNotation() {
         return notation;
     }
@@ -108,7 +101,7 @@ public class Session extends AbstractEntity {
     public void setTutors(List<Worker> tutors) {
         this.tutors = tutors;
     }
-    
+
     public void setNotation(String notation) {
         this.notation = notation;
     }
@@ -116,9 +109,9 @@ public class Session extends AbstractEntity {
     @Override
     public int hashCode() {
         int hash = 7;
-       // hash = 53 * hash + Objects.hashCode(this.startTime);
-       // hash = 53 * hash + Objects.hashCode(this.endTime);
-       // hash = 53 * hash + Objects.hashCode(this.tutors);
+        // hash = 53 * hash + Objects.hashCode(this.startTime);
+        // hash = 53 * hash + Objects.hashCode(this.endTime);
+        // hash = 53 * hash + Objects.hashCode(this.tutors);
         return hash;
     }
 
@@ -131,16 +124,8 @@ public class Session extends AbstractEntity {
             return false;
         }
         final Session other = (Session) obj;
-       // if (!Objects.equals(this.startTime, other.startTime)) {
-        //    return false;
-       // }
-       // if (!Objects.equals(this.endTime, other.endTime)) {
-        //    return false;
-       // }
-       // if (!Objects.equals(this.tutors, other.tutors)) {
-        //    return false;
-       // }
-       return true;
+
+        return true;
     }
 
     /**

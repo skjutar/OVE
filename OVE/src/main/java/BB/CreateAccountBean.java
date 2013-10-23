@@ -9,10 +9,7 @@ import EJB.UserRegistry;
 import EJB.WorkerRegistry;
 import Mail.MailBean;
 import Model.Account;
-import Model.Person;
 import Model.Worker;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -20,48 +17,33 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.mail.MessagingException;
-import javax.validation.Valid;
-import javax.validation.Validation;
-import javax.validation.constraints.Pattern;
 import org.primefaces.context.RequestContext;
 
 /**
  * Runned when a user creates an account
+ *
  * @author kristofferskjutar and Gustav Dahl
  */
 @RequestScoped
 @Named("createAccountBean")
 public class CreateAccountBean {
 
-   @EJB
-   private UserRegistry reg;
-   
-   @EJB
-   private MailBean mailBean;
-   
-   @EJB
-   private PersonRegistry personReg;
-   
-   @EJB
-   private WorkerRegistry workerReg;
-    
-   private String username;
-   
-   private String password;
-   
-   private String idNumber;
-
-   private String name;
-   
-   private String adress;
-   
-   private String telephoneNumber;
-   
-   private String emailAdress;
-   
-   private String type="worker";
-   
-   
+    @EJB
+    private UserRegistry reg;
+    @EJB
+    private MailBean mailBean;
+    @EJB
+    private PersonRegistry personReg;
+    @EJB
+    private WorkerRegistry workerReg;
+    private String username;
+    private String password;
+    private String idNumber;
+    private String name;
+    private String adress;
+    private String telephoneNumber;
+    private String emailAdress;
+    private String type = "worker";
 
     /**
      * @return the username
@@ -146,48 +128,43 @@ public class CreateAccountBean {
     public void setEmailAdress(String emailAdress) {
         this.emailAdress = emailAdress;
     }
-   /**
-    * Creates worker, account and adds admin privilege 
-    * @param event 
-    */
-   public void create(ActionEvent event)
-   {
-       String[] idArray = this.idNumber.split("-");
-       String parsedId = idArray[0]+idArray[1]; //set together the personalNumber
-       Long personalNumber = Long.parseLong(parsedId);
-       RequestContext context = RequestContext.getCurrentInstance(); 
-       FacesMessage msg = null;
-       boolean created = false; 
-       if((!reg.getByName(username).isEmpty())) 
-       {
-           msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");  
-       }
-       else if((!personReg.getByPNumber(personalNumber).isEmpty()) || (!workerReg.getByPNumber(personalNumber).isEmpty()))
-       {
-           msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Personal ID is already in use");
-       } 
-       else  
-       {
-            created=true; 
+
+    /**
+     * Creates worker, account and adds admin privilege
+     *
+     * @param event
+     */
+    public void create(ActionEvent event) {
+        String[] idArray = this.idNumber.split("-");
+        String parsedId = idArray[0] + idArray[1]; //set together the personalNumber
+        Long personalNumber = Long.parseLong(parsedId);
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage msg = null;
+        boolean created = false;
+        if ((!reg.getByName(username).isEmpty())) {
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Username already exists!");
+        } else if ((!personReg.getByPNumber(personalNumber).isEmpty()) || (!workerReg.getByPNumber(personalNumber).isEmpty())) {
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Creation Error", "Personal ID is already in use");
+        } else {
+            created = true;
             Worker p = new Worker(personalNumber, name, emailAdress, telephoneNumber, adress);
-            if(getType().equals("admin")){
+            if (getType().equals("admin")) {
                 p.setAdmin(true);
-            }
-            else {
+            } else {
                 p.setAdmin(false);
-            }          
+            }
             Account a = new Account(p, username, password);
             reg.add(a);
-           try {
-               mailBean.sendEmail(emailAdress, a.getId());
-           } catch (MessagingException ex) {
-           }
+            try {
+                mailBean.sendEmail(emailAdress, a.getId());
+            } catch (MessagingException ex) {
+            }
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Success", "Account created");
-       }
-       
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-        context.addCallbackParam("created", created);  
-   }
+        }
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("created", created);
+    }
 
     /**
      * @return the name
@@ -216,5 +193,4 @@ public class CreateAccountBean {
     public void setType(String type) {
         this.type = type;
     }
-
 }

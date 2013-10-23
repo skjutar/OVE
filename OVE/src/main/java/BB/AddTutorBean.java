@@ -21,10 +21,9 @@ import org.primefaces.context.RequestContext;
 @Named("addTutorBean")
 @RequestScoped
 public class AddTutorBean implements Serializable {
-    
+
     @EJB
     private WorkerRegistry reg;
-    
     private Long idNumber;
     private String name;
     private String mail;
@@ -32,29 +31,26 @@ public class AddTutorBean implements Serializable {
     private String address;
     private String picUrl;
     private int salary;
-    
+
     public void addTutor() {
-        //RequestContext context = RequestContext.getCurrentInstance();  
-	FacesMessage msg;   
-        
-        Worker tutor =  reg.getTutor(idNumber);
-        
-        if(tutor == null){                
-                tutor = new Worker(idNumber, name, mail, phoneNbr, address, salary);
-		tutor.setPicUrl(picUrl);
-                reg.add(tutor);
-		msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tutor added ", name); 
-            }
-        
-        else{  
-	    msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "This tutor already exists");  
-        }  
-        FacesContext.getCurrentInstance().addMessage(null, msg); 
+        FacesMessage msg;
+
+        Worker tutor = reg.getTutor(idNumber);
+
+        if (tutor == null) {
+            tutor = new Worker(idNumber, name, mail, phoneNbr, address, salary);
+            tutor.setPicUrl(picUrl);
+            reg.add(tutor);
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tutor added ", name);
+        } else {
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "This tutor already exists");
+        }
+        FacesContext.getCurrentInstance().addMessage(null, msg);
         RequestContext.getCurrentInstance().reset("form:panel");
-	
-	
+
+
     }
-    
+
     public Long getIdNumber() {
         return idNumber;
     }
@@ -74,9 +70,9 @@ public class AddTutorBean implements Serializable {
     public String getAddress() {
         return address;
     }
-    
+
     public String getPicUrl() {
-	return picUrl;
+        return picUrl;
     }
 
     public int getSalary() {
@@ -104,14 +100,10 @@ public class AddTutorBean implements Serializable {
     }
 
     public void setPicUrl(String picUrl) {
-	this.picUrl = picUrl;
+        this.picUrl = picUrl;
     }
-    
+
     public void setSalary(int salary) {
         this.salary = salary;
     }
-
- 
-    
- 
 }

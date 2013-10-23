@@ -6,21 +6,14 @@ import CustomPrimefaceModel.SchoolDataModel;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Named;
-
 import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 
@@ -43,7 +36,6 @@ public class SchoolListBean implements Serializable {
     public void init() {
         schoolsforList = new ArrayList<School>();
 
-        //populateRandomCars(schoolsforList, 50);  
         schoolsforList = registry.getRange(0, registry.getCount());
 
         allSchools = new SchoolDataModel(schoolsforList);
@@ -69,23 +61,12 @@ public class SchoolListBean implements Serializable {
      * @param event has the object from which the method can decide which school
      */
     public void onRowSelect(SelectEvent event) {
-        System.out.println("*************************************************");
-        System.out.println("*****In onRowSelect in SchoolListBean************");
-        System.out.println("*************************************************");
-        FacesMessage msg = new FacesMessage("School Selected", ((School) event.getObject()).getName());
         String name = ((School) event.getObject()).getName();
-        System.out.println("*School chosen is: "+name);
-
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("schoolpage.xhtml?school=" + name);
         } catch (IOException ex) {
             Logger.getLogger(SchoolListBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("*************************************************");
-        System.out.println("*****Done in onRowSelect in SchoolListBean*******");
-        System.out.println("*************************************************");
-        System.out.println(" ");
-        
     }
 
     /**
@@ -119,16 +100,5 @@ public class SchoolListBean implements Serializable {
                 schoolNames.add(s.getName());
             }
         }
-    }
-
-    /**
-     * KAN TROLIGTVIS TAS BORT
-     *
-     * @param event
-     */
-    public void onRowUnselect(UnselectEvent event) {
-        FacesMessage msg = new FacesMessage("Car Unselected", ((School) event.getObject()).getName());
-
-        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 }

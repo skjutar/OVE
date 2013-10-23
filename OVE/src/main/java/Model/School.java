@@ -13,21 +13,21 @@ import javax.persistence.OneToOne;
 
 /**
  * A class representing a School.
- * 
- * The name of a school and the adress of a school is a unique pair. 
+ *
+ * The name of a school and the adress of a school is a unique pair.
  *
  * @author lisastenberg
  */
 @Entity
 public class School extends AbstractEntity {
-    
+
     private String name;
     private String address;
     private int zip;
     private String city;
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Person> contacts;
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Schedule schedule;
 
     public School() {
@@ -38,10 +38,9 @@ public class School extends AbstractEntity {
         this.address = address;
         this.zip = zip;
         this.city = city;
-        this.contacts=contacts;
-        this.schedule= new Schedule(sessions);
+        this.contacts = contacts;
+        this.schedule = new Schedule(sessions);
     }
-
 
     public School(String name, String address, List<Person> contacts) {
         this.name = name;
@@ -56,12 +55,12 @@ public class School extends AbstractEntity {
     public String getAddress() {
         return address;
     }
-    
-    public int getZip(){
+
+    public int getZip() {
         return zip;
     }
-    
-    public String getCity(){
+
+    public String getCity() {
         return city;
     }
 
@@ -81,10 +80,10 @@ public class School extends AbstractEntity {
         this.city = city;
     }
 
-    public void setZip(int  zip) {
+    public void setZip(int zip) {
         this.zip = zip;
     }
-    
+
     public void setAddress(String address) {
         this.address = address;
     }
@@ -125,7 +124,6 @@ public class School extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "School{" + "name=" + name + ", address=" + address + "Contacts:"+contacts+'}';
+        return "School{" + "name=" + name + ", address=" + address + "Contacts:" + contacts + '}';
     }
-    
 }

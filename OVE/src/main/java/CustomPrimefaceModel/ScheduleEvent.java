@@ -11,9 +11,11 @@ import org.primefaces.model.DefaultScheduleEvent;
 
 /**
  * Custom primefaces data representation in admin schedule
+ *
  * @author kristofferskjutar
  */
 public class ScheduleEvent extends DefaultScheduleEvent {
+
     public String notation;
     public List<Worker> workerList;
     public String SchoolName;
@@ -21,10 +23,10 @@ public class ScheduleEvent extends DefaultScheduleEvent {
     private Long modelId;
 
     public ScheduleEvent(String string, Date date, Date date0) {
-         super(string, date, date0);        
+        super(string, date, date0);
     }
-    public ScheduleEvent()
-    {
+
+    public ScheduleEvent() {
         super();
     }
 
@@ -48,7 +50,6 @@ public class ScheduleEvent extends DefaultScheduleEvent {
     public List<Worker> getWorkerList() {
         return workerList;
     }
-    
 
     /**
      * @param workerList the workerList to set
@@ -98,7 +99,4 @@ public class ScheduleEvent extends DefaultScheduleEvent {
     public void setModelId(Long modelId) {
         this.modelId = modelId;
     }
-    
-    
-    
 }

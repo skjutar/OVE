@@ -12,21 +12,22 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 /**
- * A class representing a schedule, which is several sessions for a specific school. 
- * 
+ * A class representing a schedule, which is several sessions for a specific
+ * school.
+ *
  * @author lisastenberg
  */
 @Entity
-public class Schedule extends AbstractEntity{
-    
-      //  @JoinColumn
+public class Schedule extends AbstractEntity {
+
+    //  @JoinColumn
     @OneToMany(cascade = CascadeType.ALL)
     private List<Session> sessions;
 
     public Schedule() {
         sessions = new LinkedList();
     }
-    
+
     public Schedule(List<Session> sessions) {
         this.sessions = sessions;
     }
@@ -65,5 +66,4 @@ public class Schedule extends AbstractEntity{
     public String toString() {
         return "Schedule{" + "sessions=" + sessions + '}';
     }
-    
 }

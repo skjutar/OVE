@@ -6,41 +6,41 @@ package Model;
 
 import java.util.Objects;
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 /**
- * A class representing a User. 
- * 
+ * A class representing a User.
+ *
  * A User is a person with a userName and a password. The username is unique.
- * 
+ *
  * @author lisastenberg
  */
 @Entity
 public class Account extends AbstractEntity {
-    @OneToOne (cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Worker person;
     private String userName;
     private String passWord;
     private Boolean activated;
+
     public Account() {
     }
-    
+
     public Account(Worker person, String userName, String passWord) {
         this.person = person;
         this.userName = userName;
         this.passWord = passWord;
-        this.activated=false;
+        this.activated = false;
     }
+
     public Account(Long id, Worker person, String userName, String passWord) {
         super(id);
         this.person = person;
         this.userName = userName;
         this.passWord = passWord;
-        this.activated=false;
+        this.activated = false;
     }
 
     public Worker getPerson() {

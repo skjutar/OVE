@@ -7,7 +7,6 @@ package BB;
 import EJB.UserRegistry;
 import EJB.WorkerRegistry;
 import Model.Account;
-import Model.Person;
 import Model.Worker;
 import java.io.Serializable;
 import java.util.List;
@@ -24,50 +23,42 @@ import org.primefaces.event.ToggleEvent;
  */
 @Named("tutorBean")
 @SessionScoped
-public class TutorBean implements Serializable{
-    
+public class TutorBean implements Serializable {
+
     @EJB
     WorkerRegistry workerReg;
-    
     @EJB
     UserRegistry userReg;
-    
     private Worker selectedTutor;
-    
+
     public TutorBean() {
     }
 
     public Worker getSelectedTutor() {
         return selectedTutor;
     }
-    
+
     public void setSelectedTutor(Worker tutor) {
         selectedTutor = tutor;
-	System.out.println("------ SET SELECTED TUTOR -------"+ tutor);
     }
 
     public void removeTutor(Long id) {
-	System.out.println("REMOVING " + id);
-	Account account = userReg.getAccountRelatedToPerson(id);
-	System.out.println("Account: " + account);
-	if(account != null) {
-	    userReg.remove(account.getId());
-	    System.out.print("::::: Remove id in userReg");
-	}
-	System.out.println("::: userreg" + userReg.getRange(0, userReg.getCount()));
-	workerReg.remove(id);
-	System.out.println("------ REMOVED TUTOR -------"+ id);
+        Account account = userReg.getAccountRelatedToPerson(id);
+        if (account != null) {
+            userReg.remove(account.getId());
+        }
+        workerReg.remove(id);
     }
-    
+
     public List<Worker> getTutors() {
         return workerReg.getRange(0, workerReg.getCount());
     }
-    
-    public void onRowToggle(ToggleEvent event) {  
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,  
-                                            "Row State " + event.getVisibility(),  
-                                            "Name:" + ((Worker) event.getData()).getName());  
-          
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-    } 
+
+    public void onRowToggle(ToggleEvent event) {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Row State " + event.getVisibility(),
+                "Name:" + ((Worker) event.getData()).getName());
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 }

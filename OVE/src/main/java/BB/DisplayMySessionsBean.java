@@ -24,33 +24,30 @@ import org.primefaces.model.DefaultScheduleModel;
 @RequestScoped
 @Named("SessionsSchedule")
 public class DisplayMySessionsBean {
-    
+
     @EJB
     private SessionRegistry sesReg;
-    
     @EJB
     private UserRegistry userReg;
-    
     private DefaultScheduleModel eventModel;
-    
-    public DisplayMySessionsBean(){
+
+    public DisplayMySessionsBean() {
         eventModel = new DefaultScheduleModel();
-    }   
+    }
+
     /**
      * Load current users event to the scheduleModel
      */
     @PostConstruct
-    public void init()
-    {
-         Long modelId =  (Long)FacesContext.getCurrentInstance()
+    public void init() {
+        Long modelId = (Long) FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("id");
-       Account a = userReg.find(modelId);
-       List<Session> sesList = sesReg.getWorkersSessions(a.getPerson().getId());     
-     
-       for(Session s : sesList)
-       {
-            getEventModel().addEvent(new DefaultScheduleEvent(s.getSchool().getName() + "\n"+s.getStartTime()+ "\n"+ s.getEndTime(), s.getStartTime(), s.getEndTime()));
-       }
+        Account a = userReg.find(modelId);
+        List<Session> sesList = sesReg.getWorkersSessions(a.getPerson().getId());
+
+        for (Session s : sesList) {
+            getEventModel().addEvent(new DefaultScheduleEvent(s.getSchool().getName() + "\n" + s.getStartTime() + "\n" + s.getEndTime(), s.getStartTime(), s.getEndTime()));
+        }
     }
 
     /**

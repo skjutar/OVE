@@ -11,29 +11,27 @@ import javax.persistence.ManyToMany;
 
 /**
  * A class representing a Worker.
- * 
- * A worker is a person with a salary. 
- * 
+ *
+ * A worker is a person with a salary.
+ *
  * @author lisastenberg
  */
 @Entity
 public class Worker extends AbstractPerson {
 
     private int salary;
-    @ManyToMany(mappedBy = "tutors", cascade= CascadeType.ALL)   
+    @ManyToMany(mappedBy = "tutors", cascade = CascadeType.ALL)
     private List<Session> sessions;
-    
 
-    public Worker()
-    {
+    public Worker() {
         super();
     }
-    
+
     public Worker(Long idNumber, String name, String mail, String phoneNbr, String address) {
         super(idNumber, name, mail, phoneNbr, address);
     }
-    
-    public Worker(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {      
+
+    public Worker(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {
         super(id, idNumber, name, mail, phoneNbr, address);
     }
 
@@ -41,7 +39,6 @@ public class Worker extends AbstractPerson {
         super(idNumber, name, mail, phoneNbr, address);
         this.salary = salary;
     }
- 
 
     public int getSalary() {
         return salary;
@@ -73,7 +70,7 @@ public class Worker extends AbstractPerson {
     public String toString() {
         return super.toString() + "Worker{" + "salary=" + salary + '}';
     }
-    
+
     /**
      * @return the sessions
      */
@@ -87,6 +84,4 @@ public class Worker extends AbstractPerson {
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
     }
-
-    
 }

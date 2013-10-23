@@ -16,78 +16,75 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * A servlet that handles all account confirmations 
+ * A servlet that handles all account confirmations
+ *
  * @author kristofferskjutar
  */
-@WebServlet(name="BasicServlet",  urlPatterns={"/confirm"})
+@WebServlet(name = "BasicServlet", urlPatterns = {"/confirm"})
 public class MailConfirmServlet extends HttpServlet {
-    
-    public MailConfirmServlet()
-    {
+
+    public MailConfirmServlet() {
         super();
     }
-    
     @EJB
     private UserRegistry reg;
+
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)  
-        throws ServletException, IOException {  
-        doPost(request, response);  
-    }  
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
+    }
+
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)   
-        throws ServletException, IOException {  
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String token = request.getParameter("token");
         Account a = reg.find(Long.parseLong(token));
-        if(a!=null)
-        {
-        a.setActivated(true);
-        reg.update(a);
-        
-         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>OVE confirm</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>You have successfully created your account " + a.getPerson().getName() +" !</h1>");
-            out.println("<a href=http://localhost:8080/OVE/>Go to OVE</a>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
-        }
-        else 
-        {
+        if (a != null) {
+            a.setActivated(true);
+            reg.update(a);
+
+            response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-        try {
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>OVE confirm</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>This email has no associated account!</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
+            try {
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>OVE confirm</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>You have successfully created your account " + a.getPerson().getName() + " !</h1>");
+                out.println("<a href=http://localhost:8080/OVE/>Go to OVE</a>");
+                out.println("</body>");
+                out.println("</html>");
+            } finally {
+                out.close();
+            }
+        } else {
+            PrintWriter out = response.getWriter();
+            try {
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>OVE confirm</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>This email has no associated account!</h1>");
+                out.println("</body>");
+                out.println("</html>");
+            } finally {
+                out.close();
+            }
         }
     }
-    
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 
         String token = request.getParameter("token");
         Account a = reg.find(Long.parseLong(token));
         a.setActivated(true);
         reg.update(a);
-        
-         response.setContentType("text/html;charset=UTF-8");
+
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             out.println("<html>");
@@ -102,5 +99,4 @@ public class MailConfirmServlet extends HttpServlet {
             out.close();
         }
     }
-    
 }

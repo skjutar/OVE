@@ -12,7 +12,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
@@ -20,26 +19,25 @@ import javax.persistence.Query;
  */
 @Stateless  // A stateless EJB
 @LocalBean
-public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
-    
-     private static final String PU = "database_pu";
-     // This is JTA see persistence.xml
-     @PersistenceContext(unitName = PU)
-     private EntityManager em;
+public class WorkerRegistry extends AbstractDAO<Worker, Long> {
 
-    
-    public WorkerRegistry()
-    {
+    private static final String PU = "database_pu";
+    // This is JTA see persistence.xml
+    @PersistenceContext(unitName = PU)
+    private EntityManager em;
+
+    public WorkerRegistry() {
         super(Worker.class);
     }
-    
+
     @PostConstruct
     public void postContruct() {
-        super.setEntitymanager(em);     
+        super.setEntitymanager(em);
     }
-    
+
     /**
      * returns a list of workers with a specific name
+     *
      * @param name The name to be searched for
      * @return the list of workers
      */
@@ -52,33 +50,34 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
         }
         return found;
     }
+
     /**
      * Returns a tutor with a specific id
+     *
      * @param id the id
      * @return the worker
      */
-    public Worker getTutor(Long id){
-        List <Worker> list =  em.createQuery("select t from Worker t WHERE "
+    public Worker getTutor(Long id) {
+        List<Worker> list = em.createQuery("select t from Worker t WHERE "
                 + "t.id = '" + id + "'")
-        .getResultList();
-        if(list.isEmpty()) {
+                .getResultList();
+        if (list.isEmpty()) {
             return null;
         }
         return list.get(0);
     }
-    public List<Worker> getLinked(Long id)
-    {
+
+    public List<Worker> getLinked(Long id) {
         em.getTransaction().begin();
-        List <Worker> list =  em.createQuery("select t from Worker t where t.Worker_ID = "+id).getResultList();
+        List<Worker> list = em.createQuery("select t from Worker t where t.Worker_ID = " + id).getResultList();
         em.close();
         return list;
     }
-    
-   
-   
+
     /**
-     * Goes through the register and search for a specific worker with the same 
+     * Goes through the register and search for a specific worker with the same
      * personal id number
+     *
      * @param id The personal id number which will be seached for
      * @return a list of all workers with that personal id number
      */
@@ -90,8 +89,5 @@ public class WorkerRegistry  extends AbstractDAO<Worker, Long>{
             }
         }
         return found;
-    } 
-    
-
+    }
 }
-

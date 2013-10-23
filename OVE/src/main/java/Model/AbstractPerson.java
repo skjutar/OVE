@@ -6,17 +6,14 @@ package Model;
 
 import javax.persistence.*;
 
-
-
 /**
- * 
+ *
  * @author Kristoffer
  */
 @MappedSuperclass
-public abstract class AbstractPerson extends AbstractEntity
-{
+public abstract class AbstractPerson extends AbstractEntity {
+
     public static String DEFAULT_PIC_URL = "http://naijaticketshop.com/images/default_profile.jpg";
-    
     protected Long idNumber;
     protected String name;
     protected String mail;
@@ -27,7 +24,7 @@ public abstract class AbstractPerson extends AbstractEntity
 
     public AbstractPerson() {
     }
-    
+
     public AbstractPerson(Long idNumber, String name, String mail, String phoneNbr, String address) {
         this.idNumber = idNumber;
         this.name = name;
@@ -36,11 +33,11 @@ public abstract class AbstractPerson extends AbstractEntity
         this.address = address;
         this.picUrl = DEFAULT_PIC_URL;
     }
-    
+
     public AbstractPerson(String name, String mail, String phoneNbr, String address) {
-	this(Math.round(Math.random()*100000), name, mail, phoneNbr, address); 
+        this(Math.round(Math.random() * 100000), name, mail, phoneNbr, address);
     }
-    
+
     public AbstractPerson(Long id, Long idNumber, String name, String mail, String phoneNbr, String address) {
         super(id);
         this.idNumber = idNumber;
@@ -50,7 +47,6 @@ public abstract class AbstractPerson extends AbstractEntity
         this.address = address;
         this.picUrl = DEFAULT_PIC_URL;
     }
-    
 
     public Long getIdNumber() {
         return idNumber;
@@ -71,7 +67,7 @@ public abstract class AbstractPerson extends AbstractEntity
     public String getAddress() {
         return address;
     }
-    
+
     public void setIdNumber(Long idNumber) {
         this.idNumber = idNumber;
     }
@@ -103,11 +99,11 @@ public abstract class AbstractPerson extends AbstractEntity
      * @param picUrl the picUrl to set
      */
     public void setPicUrl(String picUrl) {
-	if(picUrl == null || picUrl.equals("")) {
-	    this.picUrl = DEFAULT_PIC_URL;
-	} else {
-	    this.picUrl = picUrl;
-	}
+        if (picUrl == null || picUrl.equals("")) {
+            this.picUrl = DEFAULT_PIC_URL;
+        } else {
+            this.picUrl = picUrl;
+        }
     }
 
     /**
@@ -126,8 +122,8 @@ public abstract class AbstractPerson extends AbstractEntity
 
     @Override
     public String toString() {
-	return "AbstractPerson + {id=" + idNumber + ", name=" + name + ", mail="
-	+ mail + ", phoneNbr=" + phoneNbr + ", address=" + address + ", isAdmin= " 
-	+ isAdmin + "}";
+        return "AbstractPerson + {id=" + idNumber + ", name=" + name + ", mail="
+                + mail + ", phoneNbr=" + phoneNbr + ", address=" + address + ", isAdmin= "
+                + isAdmin + "}";
     }
 }

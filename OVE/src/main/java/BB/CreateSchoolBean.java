@@ -8,7 +8,6 @@ import Model.School;
 import EJB.SchoolRegistry;
 import Model.Person;
 import Model.Session;
-import java.beans.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,7 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 /**
- *  Creates a school
- * Bean which handles the creation of a new school
+ * Creates a school Bean which handles the creation of a new school
  *
  * @author Malla
  */
